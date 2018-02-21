@@ -8,5 +8,6 @@
     <string name="motorista">Motorista</string>
     <string name="adm">Administrador</string>
     <string name="resp">Responsável</string>
+    <string name="logar">Entrar</string>
 
 </resources>

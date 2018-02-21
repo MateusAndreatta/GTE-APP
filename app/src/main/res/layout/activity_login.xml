@@ -9,12 +9,13 @@
     android:padding="20dp"
     android:background="@color/branco">
 
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/gte_sigla" />
+        android:padding="30dp"
+        android:visibility="visible"
+        android:src="@drawable/gte_sigla" />
 
     <EditText
         android:textSize="20dp"
@@ -31,6 +32,24 @@
         android:layout_height="wrap_content"
         android:hint="@string/senha"
         android:layout_marginTop="20dp"
-        android:background="@drawable/input_style"/>
+        android:background="@drawable/input_style"
+        android:inputType="textPassword"/>
 
+    <Button
+        android:textColor="@color/branco"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logar"
+        android:background="@drawable/btn_login"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/não_lembro"
+        android:textSize="17sp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
 </LinearLayout>
