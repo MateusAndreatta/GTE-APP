@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">GTE</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="não_lembro">Esqueceu seu senha?</string>
+    <string name="monitora">Monitora</string>
+    <string name="motorista">Motorista</string>
+    <string name="adm">Administrador</string>
+    <string name="resp">Responsável</string>
+
+</resources>
