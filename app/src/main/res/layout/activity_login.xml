@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/gte_sigla" />
 
     <EditText
-        android:textSize="20dp"
+        android:textSize="21dp"
         android:id="@+id/input_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
