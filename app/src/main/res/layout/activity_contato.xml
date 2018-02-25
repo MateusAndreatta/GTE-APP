@@ -4,22 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.sistemagte.gte.Login"
-    android:background="@color/branco">
+    tools:context="xyz.sistemagte.gte.Contato">
 
     <LinearLayout
+        android:id="@+id/Contato_Layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp">
 
-        <ImageView
-            android:id="@+id/imgLogo"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/contatoTela1"
+            android:textSize="20sp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:textSize="20sp"
+            android:id="@+id/input_nome"
+            android:inputType="textPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
-            android:visibility="visible"
-            android:src="@drawable/gte_sigla" />
+            android:hint="@string/nome"
+            android:background="@drawable/input_style" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <EditText
             android:textSize="20sp"
@@ -30,35 +45,18 @@
             android:hint="@string/email"
             android:background="@drawable/input_style" />
 
-        <EditText
-            android:textSize="20sp"
-            android:id="@+id/input_senha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/senha"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/input_style"
-            android:inputType="textPassword"/>
-
         <Button
             android:textColor="@color/branco"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/logar"
+            android:text="@string/proximo"
             android:background="@drawable/btn_login"
+            android:drawableRight="@drawable/ic_seta_direita_branco"
+            android:onClick="irProximoContato"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/não_lembro"
-            android:textSize="17sp"
-            android:padding="10dp"
-            android:onClick="irSenha"
-            android:gravity="center"
-            android:layout_gravity="center"/>
-
     </LinearLayout>
+
 
 </ScrollView>

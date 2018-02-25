@@ -1,4 +1,5 @@
 <resources>
+    <!-- Genericos -->
     <string name="app_name">GTE</string>
     <string name="email">E-mail</string>
     <string name="senha">Senha</string>
@@ -9,5 +10,8 @@
     <string name="adm">Administrador</string>
     <string name="resp">Responsável</string>
     <string name="logar">Entrar</string>
-
+    <string name="nome">Nome</string>
+    <string name="proximo">Próximo</string>
+    <!--Contato 1-->
+    <string name="contatoTela1">Olá, para entrar em contato conosco, vamor precisar de algumas informações suas, por favor digite seu nome e seu e-mail abaixo:</string>
 </resources>
