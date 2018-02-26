@@ -12,6 +12,14 @@
     <string name="logar">Entrar</string>
     <string name="nome">Nome</string>
     <string name="proximo">Próximo</string>
+    <string name="msg">Mensagem</string>
     <!--Contato 1-->
     <string name="contatoTela1">Olá, para entrar em contato conosco, vamor precisar de algumas informações suas, por favor digite seu nome e seu e-mail abaixo:</string>
+    <string-array name="assuntosContato">
+        <item>Tenho uma dúvida</item>
+        <item>Tenho uma sugestão</item>
+        <item>Quero contratar</item>
+        <item>Achei um erro</item>
+        <item>Outros</item>
+    </string-array>
 </resources>

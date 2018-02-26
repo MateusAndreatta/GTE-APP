@@ -7,56 +7,124 @@
     tools:context="xyz.sistemagte.gte.Contato">
 
     <LinearLayout
-        android:id="@+id/Contato_Layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/contatoTela1"
-            android:textSize="20sp"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <EditText
-            android:textSize="20sp"
-            android:id="@+id/input_nome"
-            android:inputType="textPersonName"
+        <!-- PRIMEIRA TELA DO CONTATO -->
+        <LinearLayout
+            android:id="@+id/Contato_Layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nome"
-            android:background="@drawable/input_style" />
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:visibility="gone">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/contatoTela1"
+                android:textSize="20sp"/>
 
-        <EditText
-            android:textSize="20sp"
-            android:id="@+id/input_email"
-            android:inputType="textEmailAddress"
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:textSize="20sp"
+                android:id="@+id/input_nome"
+                android:inputType="textPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nome"
+                android:background="@drawable/input_style" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:textSize="20sp"
+                android:id="@+id/input_email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:background="@drawable/input_style" />
+
+            <Button
+                android:textColor="@color/branco"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/proximo"
+                android:background="@drawable/btn_login"
+                android:drawableRight="@drawable/ic_seta_direita_branco"
+                android:onClick="irProximoContato"
+                />
+
+        </LinearLayout>
+
+
+        <!-- SEGUNDA TELA DO CONTATO -->
+        <LinearLayout
+            android:id="@+id/Contato_Layout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:background="@drawable/input_style" />
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:visibility="visible">
 
-        <Button
-            android:textColor="@color/branco"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/proximo"
-            android:background="@drawable/btn_login"
-            android:drawableRight="@drawable/ic_seta_direita_branco"
-            android:onClick="irProximoContato"
-            />
+            <TextView
+                android:id="@+id/textViewContatoT2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <Spinner
+                android:id="@+id/spinnerAssuntosContato"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="54dp"
+                android:entries="@array/assuntosContato"
+                android:background="@drawable/input_style"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:id="@+id/input_mensagem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_style"
+                android:hint="@string/msg"
+                android:inputType="textEmailAddress"
+                android:textSize="20sp" />
+
+            <Button
+                android:textColor="@color/branco"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/proximo"
+                android:background="@drawable/btn_login"
+                android:drawableRight="@drawable/ic_seta_direita_branco"
+                android:onClick="irProximoContato"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
+
+
 
 
 </ScrollView>
