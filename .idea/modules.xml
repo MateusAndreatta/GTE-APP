@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/../../../Fabio/AndroidStudioProjects/GTE APP2.0/GTE-APP/GTE.iml" filepath="$PROJECT_DIR$/../../../Fabio/AndroidStudioProjects/GTE APP2.0/GTE-APP/GTE.iml" />
       <module fileurl="file://$PROJECT_DIR$/GTE-APP.iml" filepath="$PROJECT_DIR$/GTE-APP.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../../Fabio/AndroidStudioProjects/GTE APP2.0/GTE-APP/app/app.iml" filepath="$PROJECT_DIR$/../../../Fabio/AndroidStudioProjects/GTE APP2.0/GTE-APP/app/app.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/GTE-APP.iml" filepath="$PROJECT_DIR$/GTE-APP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+>>>>>>> cb504f3263ad66fb68fb811e038c0755abbc8d9e
     </modules>
   </component>
 </project>
