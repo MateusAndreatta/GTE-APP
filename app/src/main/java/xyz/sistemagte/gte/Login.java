@@ -15,8 +15,10 @@ public class Login extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
     }
+    //TODO: criar o btn de contato
 
     public void irSenha (View v){
+        //TODO: trocar o intent para a de esqueci minha senha
         Intent Tela = new Intent(this, Contato.class);
         startActivity(Tela);
     }

@@ -13,7 +13,7 @@
     <string name="nome">Nome</string>
     <string name="proximo">Próximo</string>
     <string name="msg">Mensagem</string>
-    <!--Contato 1-->
+    <!--Contato-->
     <string name="contatoTela1">Olá, para entrar em contato conosco, vamor precisar de algumas informações suas, por favor digite seu nome e seu e-mail abaixo:</string>
     <string-array name="assuntosContato">
         <item>Tenho uma dúvida</item>
@@ -22,4 +22,7 @@
         <item>Achei um erro</item>
         <item>Outros</item>
     </string-array>
+    <string name="ola">Olá </string>
+    <string name="continuarContato">, para entrar em contato, por favor selecione o assunto e escreva sua mensagem abaixo:</string>
+    <string name="enviar">Enviar</string>
 </resources>

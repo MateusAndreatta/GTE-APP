@@ -10,18 +10,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Contato extends AppCompatActivity {
 
-   // LinearLayout layout1 = (LinearLayout) findViewById(R.id.Contato_Layout1);
-   // LinearLayout layout2 = (LinearLayout) findViewById(R.id.Contato_Layout2);
-   // EditText campoEmail = (EditText)findViewById(R.id.input_email);
-   // EditText campoNome = (EditText)findViewById(R.id.input_nome);
-   // TextView txtT2 = (TextView)findViewById(R.id.textViewContatoT2);
-//
-   // String email;
-   // String nome;
-   // String msg;
+    //TODO: Personalizar o Spinner com a seta e um "escolha o assunto"
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,19 +46,31 @@ public class Contato extends AppCompatActivity {
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
     }
-/*
-   VISIBLE    // Fica visivel
-   INVISIBLE  // Fica invisivel (mas está lá)
-   GONE       // Fica invisivel (e some do layout)
-*/
+
+
     public void irProximoContato(View view) {
-     //   email = campoEmail.getText().toString();
-     //   nome = campoNome.getText().toString();
-     //   layout1.setVisibility(View.GONE);
-     //   layout2.setVisibility(View.VISIBLE);
-       // txtT2.setText(getResources("@string/nome"));
-        //String textoT2;
-        //textoT2 = "@string/nome";
-        //txtT2 = textoT2;
+//TODO: verificar se todos os campos foram preenchidos
+        LinearLayout layout1 = (LinearLayout) findViewById(R.id.Contato_Layout1);
+        LinearLayout layout2 = (LinearLayout) findViewById(R.id.Contato_Layout2);
+        EditText campoEmail = (EditText)findViewById(R.id.input_email);
+        EditText campoNome = (EditText)findViewById(R.id.input_nome);
+        TextView txtT2 = (TextView)findViewById(R.id.textViewContatoT2);
+
+        String email;
+        String nome;
+
+        email = campoEmail.getText().toString();
+        nome = campoNome.getText().toString();
+        layout1.setVisibility(View.GONE);
+        layout2.setVisibility(View.VISIBLE);
+
+        String str1 = getResources().getString(R.string.ola);
+        String str2 = getResources().getString(R.string.continuarContato);
+
+        txtT2.setText(str1 + nome.substring(0,1).toUpperCase().concat(nome.substring(1)) + str2);
+    }
+
+    public void EnviarMsg (View v){
+
     }
 }
