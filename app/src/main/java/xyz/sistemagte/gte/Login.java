@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class Login extends Activity {
 
@@ -22,4 +24,15 @@ public class Login extends Activity {
         Intent Tela = new Intent(this, Contato.class);
         startActivity(Tela);
     }
+
+    public void Logar(View view) {
+        EditText campoEmail = (EditText)findViewById(R.id.input_email);
+        EditText campoSenha = (EditText)findViewById(R.id.input_senha);
+        if(campoEmail.getText().length() == 0 || campoSenha.getText().length() == 0){
+            Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
+        }else {
+
+        }
+    }
 }
+

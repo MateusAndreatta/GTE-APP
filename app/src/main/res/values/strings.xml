@@ -22,7 +22,8 @@
         <item>Achei um erro</item>
         <item>Outros</item>
     </string-array>
-    <string name="ola">Olá </string>
+    <string name="ola">Olá</string>
     <string name="continuarContato">, para entrar em contato, por favor selecione o assunto e escreva sua mensagem abaixo:</string>
     <string name="enviar">Enviar</string>
+    <string name="verificarCampos">Preencha todos os campos</string>
 </resources>

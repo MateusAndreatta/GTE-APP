@@ -49,25 +49,29 @@ public class Contato extends AppCompatActivity {
 
 
     public void irProximoContato(View view) {
-//TODO: verificar se todos os campos foram preenchidos
-        LinearLayout layout1 = (LinearLayout) findViewById(R.id.Contato_Layout1);
-        LinearLayout layout2 = (LinearLayout) findViewById(R.id.Contato_Layout2);
         EditText campoEmail = (EditText)findViewById(R.id.input_email);
         EditText campoNome = (EditText)findViewById(R.id.input_nome);
-        TextView txtT2 = (TextView)findViewById(R.id.textViewContatoT2);
+        if(campoEmail.getText().length() == 0 || campoNome.getText().length() == 0){
+            Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
+        }else{
+            LinearLayout layout2 = (LinearLayout) findViewById(R.id.Contato_Layout2);
+            LinearLayout layout1 = (LinearLayout) findViewById(R.id.Contato_Layout1);
+            TextView txtT2 = (TextView)findViewById(R.id.textViewContatoT2);
 
-        String email;
-        String nome;
+            String email;
+            String nome;
 
-        email = campoEmail.getText().toString();
-        nome = campoNome.getText().toString();
-        layout1.setVisibility(View.GONE);
-        layout2.setVisibility(View.VISIBLE);
+            email = campoEmail.getText().toString();
+            nome = campoNome.getText().toString();
+            layout1.setVisibility(View.GONE);
+            layout2.setVisibility(View.VISIBLE);
 
-        String str1 = getResources().getString(R.string.ola);
-        String str2 = getResources().getString(R.string.continuarContato);
+            String str1 = getResources().getString(R.string.ola);
+            String str2 = getResources().getString(R.string.continuarContato);
 
-        txtT2.setText(str1 + nome.substring(0,1).toUpperCase().concat(nome.substring(1)) + str2);
+            txtT2.setText(str1 + " " + nome.substring(0,1).toUpperCase().concat(nome.substring(1)) + str2);
+        }
+
     }
 
     public void EnviarMsg (View v){
