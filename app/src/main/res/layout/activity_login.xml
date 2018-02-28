@@ -50,6 +50,8 @@
             android:onClick="Logar"
             />
 
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,14 +62,16 @@
             android:gravity="center"
             android:layout_gravity="center"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+   <!--     <android.support.design.widget.FloatingActionButton
+            android:id="@+id/idFabContato"
+            android:onClick="Contato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:src="@android:drawable" />
-
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:src="@android:drawable/ic_dialog_email" />
+-->
     </LinearLayout>
 
 
