@@ -62,7 +62,7 @@
             android:gravity="center"
             android:layout_gravity="center"/>
 
-   <!--     <android.support.design.widget.FloatingActionButton
+      <!--  <android.support.design.widget.FloatingActionButton
             android:id="@+id/idFabContato"
             android:onClick="Contato"
             android:layout_width="wrap_content"
@@ -71,7 +71,33 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="10dp"
             android:src="@android:drawable/ic_dialog_email" />
--->
+
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/desing_botton_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                app:bahavior_hideable="true"
+                app:behavior_peekHeight="50dp"
+                app:elevation="4dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="puxa ai"
+                    android:textColor="#FFF"/>
+
+            </RelativeLayout>
+
+
+        </android.support.design.widget.CoordinatorLayout>
+
+ -->
+
     </LinearLayout>
 
 
