@@ -1,106 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="xyz.sistemagte.gte.Login"
-    android:background="@color/branco">
+    android:background="@color/branco"
+    android:orientation="vertical">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:visibility="visible"
+                android:src="@drawable/gte_sigla" />
+
+            <EditText
+                android:textSize="20sp"
+                android:id="@+id/input_email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:background="@drawable/input_style" />
+
+            <EditText
+                android:textSize="20sp"
+                android:id="@+id/input_senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/senha"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_style"
+                android:inputType="textPassword"/>
+
+            <Button
+                android:textColor="@color/branco"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/logar"
+                android:background="@drawable/btn_login"
+                android:onClick="Logar"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/não_lembro"
+                android:textSize="17sp"
+                android:padding="10dp"
+                android:onClick="irSenha"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imgLogo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="30dp"
-            android:visibility="visible"
-            android:src="@drawable/gte_sigla" />
-
-        <EditText
-            android:textSize="20sp"
-            android:id="@+id/input_email"
-            android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:background="@drawable/input_style" />
-
-        <EditText
-            android:textSize="20sp"
-            android:id="@+id/input_senha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/senha"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/input_style"
-            android:inputType="textPassword"/>
-
-        <Button
-            android:textColor="@color/branco"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/logar"
-            android:background="@drawable/btn_login"
-            android:onClick="Logar"
-            />
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/não_lembro"
-            android:textSize="17sp"
-            android:padding="10dp"
-            android:onClick="irSenha"
-            android:gravity="center"
-            android:layout_gravity="center"/>
-
-      <!--  <android.support.design.widget.FloatingActionButton
-            android:id="@+id/idFabContato"
-            android:onClick="Contato"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="10dp"
-            android:src="@android:drawable/ic_dialog_email" />
-
-
+        <!-- include bottom sheet -->
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:id="@+id/desing_botton_sheet"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                app:bahavior_hideable="true"
-                app:behavior_peekHeight="50dp"
-                app:elevation="4dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="puxa ai"
-                    android:textColor="#FFF"/>
 
-            </RelativeLayout>
+            <include layout="@layout/sobre_bottom_sheet"/>
 
 
         </android.support.design.widget.CoordinatorLayout>
 
- -->
 
     </LinearLayout>
 
-    <!-- include bottom sheet -->
-    <include layout="@layout/sobre_bottom_sheet" />
 
-</ScrollView>
+
+</LinearLayout>
