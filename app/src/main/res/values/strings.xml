@@ -3,6 +3,7 @@
     <string name="app_name">GTE</string>
     <string name="email">E-mail</string>
     <string name="senha">Senha</string>
+    <string name="conf_senha">Confirmar senha</string>
     <string name="cadastro">Cadastro</string>
     <string name="não_lembro">Esqueceu seu senha?</string>
     <string name="monitora">Monitora</string>
@@ -26,4 +27,41 @@
     <string name="continuarContato">, para entrar em contato, por favor selecione o assunto e escreva sua mensagem abaixo:</string>
     <string name="enviar">Enviar</string>
     <string name="verificarCampos">Preencha todos os campos</string>
+
+
+    <string-array name="tipousuario">
+        <item>Escolha...</item>
+        <item>Motorista</item>
+        <item>Monitora</item>
+        <item>Responsável</item>
+    </string-array>
+
+
+    <string name="sx">Sexo</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="mensagem">Mensagem</string>
+    <string name="cadastrar">Não possuo cadastro</string>
+    <string name="title_activity_usuario">Usuario</string>
+    <string name="cadastro_motorista">Cadastro do Motorista</string>
+    <string name="cadastro_resp">Cadastro do Responsavel</string>
+    <string name="cadastro_monitora">Cadastro da Monitora</string>
+    <string name="telefone">Telefone</string>
+    <string name="rg">CPF</string>
+    <string name="cpf">RG</string>
+    <string name="datanascimento">Data de nascimento</string>
+    <string name="salario">Salário </string>
+    <string name="cidade">Cidade</string>
+    <string name="estado">Estado</string>
+    <string name="endereco">Endereço</string>
+    <string name="end_escola">Endereço da escola</string>
+    <string name="n_escola">Nome da escola</string>
+    <string name="cnh">Informações do CNH:</string>
+    <string name="info_crianca">Informações da criança:</string>
+    <string name="habilitacao">Data da 1° habilitação</string>
+    <string name="validade">Validade</string>
+    <string name="registro">N° do registro</string>
+    <string name="carteira">Categoria da carteira</string>
+    <string name="data_admissao">Data de admissão</string>
+    <string name="h_saida">Hora de saida</string>
+    <string name="h_entrada">Hora de entrada</string>
 </resources>

@@ -57,5 +57,10 @@ public class Login extends AppCompatActivity {
         startActivity(Tela);
     }
 
+    public void irCadastro(View view){
+        Intent Tela = new Intent(this, Cadastro.class);
+        startActivity(Tela);
+    }
+
 }
 

@@ -67,9 +67,18 @@
                 android:gravity="center"
                 android:layout_gravity="center"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cadastro"
+                android:textSize="17sp"
+                android:padding="10dp"
+                android:onClick="irCadastro"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+
 
         </LinearLayout>
-
 
 
     </ScrollView>
@@ -77,7 +86,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <!-- include bottom sheet -->
         <android.support.design.widget.CoordinatorLayout
@@ -92,7 +102,6 @@
 
 
     </LinearLayout>
-
 
 
 </LinearLayout>
