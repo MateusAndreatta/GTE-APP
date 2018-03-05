@@ -36,6 +36,18 @@
         <item>Responsável</item>
     </string-array>
 
+    <string-array name="categoria">
+        <item>Cat. CNH</item>
+        <item>Categoria D</item>
+        <item>Categoria E</item>
+    </string-array>
+
+    <string-array name="sx">
+        <item>Sexo</item>
+        <item>Masculino</item>
+        <item>Feminino</item>
+    </string-array>
+
 
     <string name="sx">Sexo</string>
     <string name="sobrenome">Sobrenome</string>
@@ -64,4 +76,46 @@
     <string name="data_admissao">Data de admissão</string>
     <string name="h_saida">Hora de saida</string>
     <string name="h_entrada">Hora de entrada</string>
+    <string name="cep">CEP</string>
+    <string name="rua">Rua</string>
+    <string name="num">Número</string>
+    <string name="validadeCnh">Validade da CNH</string>
+    <string name="data_habilitacao">Data da 1ª habilitação</string>
+    <string name="complemento">Complemento</string>
+    <string name="horaEntrada">Hora de Entrada</string>
+    <string name="horaSaida">Hora da Saída</string>
+
+
+    <string-array name="estados">
+        <item>Escolha o seu estado</item>
+        <item>Acre</item>
+        <item>Alagoas</item>
+        <item>Amapá</item>
+        <item>Amazonas</item>
+        <item>Bahia</item>
+        <item>Ceará</item>
+        <item>Distrito Federal</item>
+        <item>Espírito Santo</item>
+        <item>Goiás</item>
+        <item>Maranhão</item>
+        <item>Mato Grosso</item>
+        <item>Mato Grosso do Sul</item>
+        <item>Minas Gerais</item>
+        <item>Pará</item>
+        <item>Paraíba</item>
+        <item>Paraná</item>
+        <item>Pernambuco</item>
+        <item>Piauí</item>
+        <item>Rio de Janeiro</item>
+        <item>Rio Grande do Norte</item>
+        <item>Rio Grande do Sul</item>
+        <item>Rondônia</item>
+        <item>Roraima</item>
+        <item>Santa Catarina</item>
+        <item>São Paulo</item>
+        <item>Sergipe</item>
+        <item>Tocantins</item>
+    </string-array>
+    <string name="title_activity_cad_monitora">cad_monitora</string>
+
 </resources>
