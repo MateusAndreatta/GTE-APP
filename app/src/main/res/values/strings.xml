@@ -117,5 +117,12 @@
         <item>Tocantins</item>
     </string-array>
     <string name="title_activity_cad_monitora">cad_monitora</string>
+    <string name="title_activity_cad_van">CadVanActivity</string>
 
+
+    <string name="capacidade">Capacidade</string>
+    <string name="modelo">Modelo</string>
+    <string name="placa">Placa</string>
+    <string name="anoFab">Ano de fabricação</string>
+    <string name="marca">Marca</string>
 </resources>
