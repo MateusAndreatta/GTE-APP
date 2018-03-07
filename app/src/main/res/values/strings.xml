@@ -125,4 +125,8 @@
     <string name="placa">Placa</string>
     <string name="anoFab">Ano de fabricação</string>
     <string name="marca">Marca</string>
+
+
+
+    <string name="listaCriancas">Listagem de crianças</string>
 </resources>

@@ -26,4 +26,8 @@ public class CadVanActivity extends AppCompatActivity {
         });
     }
 
+    public void Cadastrar_motorista(View view) {
+
+
+    }
 }

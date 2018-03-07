@@ -48,7 +48,8 @@ public class Login extends AppCompatActivity {
         if(campoEmail.getText().length() == 0 || campoSenha.getText().length() == 0){
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
         }else {
-
+            Intent Tela = new Intent(this, Listagem.class);
+            startActivity(Tela);
         }
     }
 

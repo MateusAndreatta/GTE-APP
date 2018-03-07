@@ -29,7 +29,8 @@
         <activity
             android:name=".CadVanActivity"
             android:label="@string/title_activity_cad_van"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Listagem"></activity>
     </application>
 
 </manifest>
