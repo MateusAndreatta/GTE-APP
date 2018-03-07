@@ -1,6 +1,7 @@
 package xyz.sistemagte.gte;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Cadastro extends AppCompatActivity {
 
@@ -88,19 +90,26 @@ public class Cadastro extends AppCompatActivity {
     }
 
     public void Cadastrar(View view) {
-        //TODO: Criar as telas ou layout para cada um desses cadastros
         if(ProximaTela == 1){
-          //  Intent intent = new Intent(Cadastro.this, cadMotorista.class);
-            //startActivity(intent);
+          Intent intent = new Intent(Cadastro.this, cad_motorista.class);
+          startActivity(intent);
         }
         if(ProximaTela == 2){
-            //Intent intent = new Intent(Cadastro.this, cadMonitora.class);
-            //startActivity(intent);
+            Intent intent = new Intent(Cadastro.this, cad_monitora.class);
+            startActivity(intent);
         }
         if(ProximaTela == 3){
-            //Intent intent = new Intent(Cadastro.this, cadResponsavel.class);
-            //startActivity(intent);
+     //     SQLiteDatabase db;
+     //      db = openOrCreateDatabase( "siste370_bd", SQLiteDatabase.OPEN_READWRITE, null);
+     //      try {
+     //          String sql =
+     //"INSERT or replace INTO tbl_Contain (DESCRIPTION, expirydate, AMOUNT, TRNS,isdefault) VALUES('this is','03/04/2005','5000','tran','y')" ;
+     //          db.execSQL(sql);
+     //      }
+     //      catch (Exception e) {
+     //          Toast.makeText(this, "ERROR "+e.toString(), Toast.LENGTH_LONG).show();
+     //      }
         }
-
     }
+
 }
