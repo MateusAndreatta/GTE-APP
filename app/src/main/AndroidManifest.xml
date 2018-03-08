@@ -34,7 +34,8 @@
         <activity android:name=".Painelzinho" />
         <activity android:name=".CRUD" />
         <activity android:name=".CRUD_editar" />
-        <activity android:name=".CRUD_deletar"></activity>
+        <activity android:name=".CRUD_deletar" />
+        <activity android:name=".Painel_adm"></activity>
     </application>
 
 </manifest>
