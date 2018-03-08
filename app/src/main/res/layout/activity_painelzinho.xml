@@ -21,10 +21,31 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CRUD"
+        android:text="Cadastrar"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="57dp"
         android:onClick="irCad"
         />
 
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="57dp"
+        android:onClick="irEdit"
+        />
+
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deletar"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="57dp"
+        android:onClick="irDel"
+        />
 </LinearLayout>

@@ -32,7 +32,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Listagem" />
         <activity android:name=".Painelzinho" />
-        <activity android:name=".CRUD"></activity>
+        <activity android:name=".CRUD" />
+        <activity android:name=".CRUD_editar" />
+        <activity android:name=".CRUD_deletar"></activity>
     </application>
 
 </manifest>

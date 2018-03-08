@@ -22,4 +22,13 @@ public class Painelzinho extends AppCompatActivity {
         Intent tela = new Intent(this, CRUD.class);
         startActivity(tela);
     }
+    public void irEdit(View view){
+        Intent tela = new Intent(this, CRUD_editar.class);
+        startActivity(tela);
+    }
+
+    public void irDel(View view) {
+        Intent tela = new Intent(this, CRUD_deletar.class);
+        startActivity(tela);
+    }
 }
