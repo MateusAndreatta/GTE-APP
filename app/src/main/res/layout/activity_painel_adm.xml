@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,142 +10,77 @@
     android:background="#eeeeee">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        >
+        android:weightSum="5">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/funcionarios"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        card_view:cardCornerRadius="7dp"
-        card_view:cardBackgroundColor="@color/cinza"
-        android:elevation="5dp"
-        android:layout_marginRight="7.5dp">
-
-
-        <ImageView
-            android:layout_marginTop="15dp"
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/funcionarios"
             android:layout_width="match_parent"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:src="@drawable/funcionario"/>
+            card_view:cardCornerRadius="7dp"
+            card_view:cardBackgroundColor="@color/cinza"
+            android:onClick="irFuncionarios"
+            android:layout_marginRight="5dp">
 
-    </android.support.v7.widget.CardView>
-
-
-
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/criancas"
-                android:layout_width="200dp"
-                android:layout_height="140dp"
-                card_view:cardCornerRadius="7dp"
-                card_view:cardBackgroundColor="@color/cinza"
-                android:layout_marginLeft="7.5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="13dp">
 
                 <ImageView
-                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/crianca"/>
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/funcionario" />
 
-            </android.support.v7.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Funcionários"
+                    android:textSize="17sp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/funcionarios2"
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="7dp"
+            card_view:cardBackgroundColor="@color/cinza"
+            android:onClick="irFuncionarios2"
+            android:layout_marginLeft="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="13dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/funcionario" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Funcionários"
+                    android:textSize="17sp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        >
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/van"
-            android:layout_width="200dp"
-            android:layout_height="140dp"
-            card_view:cardCornerRadius="7dp"
-            card_view:cardBackgroundColor="@color/cinza"
-            android:elevation="5dp"
-            android:layout_marginRight="7.5dp">
-
-
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/van"/>
-
-        </android.support.v7.widget.CardView>
-
-
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/money"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            card_view:cardCornerRadius="7dp"
-            card_view:cardBackgroundColor="@color/cinza"
-            android:layout_marginLeft="7.5dp">
-
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/money"/>
-
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        >
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/acessos"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            card_view:cardCornerRadius="7dp"
-            card_view:cardBackgroundColor="@color/cinza"
-            android:elevation="5dp"
-            android:layout_marginRight="7.5dp">
-
-
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/acesso"/>
-
-        </android.support.v7.widget.CardView>
-
-
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/graficos"
-            android:layout_width="200dp"
-            android:layout_height="140dp"
-            card_view:cardCornerRadius="7dp"
-            card_view:cardBackgroundColor="@color/cinza"
-            android:layout_marginLeft="7.5dp">
-
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/graficos"/>
-
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>

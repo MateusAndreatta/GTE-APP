@@ -18,14 +18,13 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
-       // edittext.clearFocus();
+
         try{
             CoordinatorLayout llBottomSheet = findViewById(R.id.bottom_sheet);
             BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
@@ -37,7 +36,7 @@ public class Login extends AppCompatActivity {
            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
        }
     }
-    //TODO: criar o btn de contato
+    //TODO: criar o btn de contato no bottom sheet
 
     public void irSenha (View v){
         //TODO: trocar o intent para a de esqueci minha senha
@@ -52,7 +51,7 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
         }else {
             //TODO: fazer a comparação do login com o banco
-            Intent Tela = new Intent(this, Painelzinho.class);
+            Intent Tela = new Intent(this, Painel_adm.class);
             startActivity(Tela);
         }
     }
