@@ -11,242 +11,268 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
-        <!-- Barra de card 1 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5">
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
 
-            <!-- CARD funcionario -->
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/funcionarios"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                card_view:cardCornerRadius="7dp"
-                card_view:cardBackgroundColor="@color/cinza"
-                android:onClick="irFuncionarios"
-                android:layout_marginRight="5dp">
+                android:text="@string/ola"
+                android:textSize="25sp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="13dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/funcionario" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/funcionario"
-                        android:textSize="17sp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <!-- CARD funcionario -->
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/funcionarios2"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
-                card_view:cardCornerRadius="7dp"
-                card_view:cardBackgroundColor="@color/cinza"
-                android:onClick="irCriancas"
-                android:layout_marginLeft="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="13dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/crianca" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/crianca"
-                        android:textSize="17sp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
+                android:text="@string/painel"
+                android:textSize="20sp"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:layout_marginTop="10dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <!-- CARD funcionario -->
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/van"
+            <!-- Barra de card 1 -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
-                card_view:cardCornerRadius="7dp"
-                card_view:cardBackgroundColor="@color/cinza"
-                android:onClick="irVan"
-                android:layout_marginRight="5dp">
+                android:orientation="horizontal"
+                android:weightSum="5">
 
-                <LinearLayout
+                <!-- CARD funcionario -->
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/funcionarios"
                     android:layout_width="match_parent"
+                    android:layout_weight="3"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="13dp">
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardBackgroundColor="@color/cinza"
+                    android:onClick="irFuncionarios"
+                    android:layout_marginRight="5dp">
 
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/van" />
+                        android:orientation="vertical"
+                        android:padding="13dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/van"
-                        android:textSize="17sp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/funcionario" />
 
-            </android.support.v7.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/funcionario"
+                            android:textSize="17sp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
 
-            <!-- CARD funcionario -->
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/mensalidade"
-                android:layout_width="match_parent"
-                android:layout_weight="3"
-                android:layout_height="wrap_content"
-                card_view:cardCornerRadius="7dp"
-                card_view:cardBackgroundColor="@color/cinza"
-                android:onClick="irMensalidade"
-                android:layout_marginLeft="5dp">
+                </android.support.v7.widget.CardView>
 
-                <LinearLayout
+                <!-- CARD funcionario -->
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/funcionarios2"
                     android:layout_width="match_parent"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="13dp">
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardBackgroundColor="@color/cinza"
+                    android:onClick="irCriancas"
+                    android:layout_marginLeft="5dp">
 
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/money" />
+                        android:orientation="vertical"
+                        android:padding="13dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/money"
-                        android:textSize="17sp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/crianca" />
 
-            </android.support.v7.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/crianca"
+                            android:textSize="17sp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
 
-        </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:layout_marginTop="10dp">
+            </LinearLayout>
 
-            <!-- CARD funcionario -->
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/acesso"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                card_view:cardCornerRadius="7dp"
-                card_view:cardBackgroundColor="@color/cinza"
-                android:onClick="irAcessos"
-                android:layout_marginRight="5dp">
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="10dp">
 
-                <LinearLayout
+                <!-- CARD funcionario -->
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/van"
                     android:layout_width="match_parent"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="13dp">
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardBackgroundColor="@color/cinza"
+                    android:onClick="irVan"
+                    android:layout_marginRight="5dp">
 
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/acesso" />
+                        android:orientation="vertical"
+                        android:padding="13dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/acesso"
-                        android:textSize="17sp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/van" />
 
-            </android.support.v7.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/van"
+                            android:textSize="17sp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
 
-            <!-- CARD funcionario -->
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/graficos"
-                android:layout_width="match_parent"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                card_view:cardCornerRadius="7dp"
-                card_view:cardBackgroundColor="@color/cinza"
-                android:onClick="irGraficos"
-                android:layout_marginLeft="5dp">
+                </android.support.v7.widget.CardView>
 
-                <LinearLayout
+                <!-- CARD funcionario -->
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/mensalidade"
                     android:layout_width="match_parent"
+                    android:layout_weight="3"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="13dp">
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardBackgroundColor="@color/cinza"
+                    android:onClick="irMensalidade"
+                    android:layout_marginLeft="5dp">
 
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/graficos" />
+                        android:orientation="vertical"
+                        android:padding="13dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/money" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/money"
+                            android:textSize="17sp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="10dp">
+
+                <!-- CARD funcionario -->
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/acesso"
+                    android:layout_width="match_parent"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardBackgroundColor="@color/cinza"
+                    android:onClick="irAcessos"
+                    android:layout_marginRight="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/grafico"
-                        android:textSize="17sp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="13dp">
 
-            </android.support.v7.widget.CardView>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/acesso" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/acesso"
+                            android:textSize="17sp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <!-- CARD funcionario -->
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/graficos"
+                    android:layout_width="match_parent"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardBackgroundColor="@color/cinza"
+                    android:onClick="irGraficos"
+                    android:layout_marginLeft="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="13dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/graficos" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/grafico"
+                            android:textSize="17sp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </ScrollView>

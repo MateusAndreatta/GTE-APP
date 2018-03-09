@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity {
             CoordinatorLayout llBottomSheet = findViewById(R.id.bottom_sheet);
             BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            bottomSheetBehavior.setPeekHeight(110);// altura que vem como padrao
+            bottomSheetBehavior.setPeekHeight(100);// altura que vem como padrao
             bottomSheetBehavior.setHideable(false);// true: ele vem em modo escondido
 
        }catch (Exception ex){

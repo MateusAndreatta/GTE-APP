@@ -22,7 +22,7 @@
     <string name="acesso">Acesso</string>
     <string name="funcionario">Funcionários</string>
 
-
+    <string name="painel">O que deseja fazer?</string>
 
     <!-- Bottom sheet do login -->
     <string name="maisOpcoes">Mais opções</string>
