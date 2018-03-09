@@ -15,6 +15,10 @@
     <string name="nome">Nome</string>
     <string name="proximo">Próximo</string>
     <string name="msg">Mensagem</string>
+
+    <!-- Bottom sheet do login -->
+    <string name="maisOpcoes">Mais opções</string>
+
     <!--Contato-->
     <string name="contatoTela1">Olá, para entrar em contato conosco, vamor precisar de algumas informações suas, por favor digite seu nome e seu e-mail abaixo:</string>
     <string-array name="assuntosContato">

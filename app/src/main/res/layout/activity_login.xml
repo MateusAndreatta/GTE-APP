@@ -1,107 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.sistemagte.gte.Login"
-    android:background="@color/branco"
-    android:orientation="vertical">
+    android:background="#efefef"
+    tools:context="xyz.sistemagte.gte.Login">
 
-
-
-    <ScrollView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <ImageView
-                android:id="@+id/imgLogo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="30dp"
-                android:visibility="visible"
-                android:src="@drawable/gte_sigla" />
-
-            <EditText
-                android:textSize="20sp"
-                android:id="@+id/input_email"
-                android:inputType="textEmailAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:background="@drawable/input_style" />
-
-            <EditText
-                android:textSize="20sp"
-                android:id="@+id/input_senha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/senha"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/input_style"
-                android:inputType="textPassword"/>
-
-            <Button
-                android:textColor="@color/branco"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/logar"
-                android:background="@drawable/btn_login"
-                android:onClick="Logar"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/não_lembro"
-                android:textSize="17sp"
-                android:padding="10dp"
-                android:onClick="irSenha"
-                android:gravity="center"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cadastro"
-                android:textSize="17sp"
-                android:padding="10dp"
-                android:onClick="irCadastro"
-                android:gravity="center"
-                android:layout_gravity="center"/>
-
-
-        </LinearLayout>
-
-
-    </ScrollView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/branco"
         android:orientation="vertical">
 
-        <!-- include bottom sheet -->
-        <android.support.design.widget.CoordinatorLayout
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-            <include layout="@layout/sobre_bottom_sheet"/>
+                <ImageView
+                    android:id="@+id/imgLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="30dp"
+                    android:visibility="visible"
+                    android:src="@drawable/gte_sigla" />
+
+                <EditText
+                    android:textSize="20sp"
+                    android:id="@+id/input_email"
+                    android:inputType="textEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:background="@drawable/input_style" />
+
+                <EditText
+                    android:textSize="20sp"
+                    android:id="@+id/input_senha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/senha"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/input_style"
+                    android:inputType="textPassword"/>
+
+                <Button
+                    android:textColor="@color/branco"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/logar"
+                    android:background="@drawable/btn_login"
+                    android:onClick="Logar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/não_lembro"
+                    android:textSize="17sp"
+                    android:padding="10dp"
+                    android:onClick="irSenha"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
 
 
-        </android.support.design.widget.CoordinatorLayout>
 
+
+            </LinearLayout>
+
+
+        </ScrollView>
 
     </LinearLayout>
 
+    <!-- Adding bottom sheet after main content -->
+    <include layout="@layout/sobre_bottom_sheet" />
 
-</LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>

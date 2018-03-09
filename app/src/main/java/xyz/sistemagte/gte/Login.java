@@ -1,9 +1,11 @@
 package xyz.sistemagte.gte;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,23 +18,24 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-
+        getSupportActionBar().hide();
+       // edittext.clearFocus();
         try{
-            LinearLayout llBottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
+            CoordinatorLayout llBottomSheet = findViewById(R.id.bottom_sheet);
             BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            bottomSheetBehavior.setPeekHeight(200);// altura que vem como padrao
+            bottomSheetBehavior.setPeekHeight(110);// altura que vem como padrao
             bottomSheetBehavior.setHideable(false);// true: ele vem em modo escondido
-        }catch (Exception ex){
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
 
-        }
-
+       }catch (Exception ex){
+           Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
+       }
     }
     //TODO: criar o btn de contato
 

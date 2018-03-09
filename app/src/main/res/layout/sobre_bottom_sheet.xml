@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="340dp"
-    android:background="@android:color/darker_gray"
+    android:background="@color/colorPrimaryLight"
     android:orientation="vertical"
     app:behavior_hideable="true"
     app:behavior_peekHeight="80dp"
@@ -12,17 +13,34 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="40dp"
         android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="Telinha"
+        android:text="@string/maisOpcoes"
         android:textColor="@android:color/white" />
 
+    <!--todo: fazer a 'telona', o texto do sobre com o btn do cadastro -->
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="Telona"
         android:textColor="@android:color/white" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:onClick="irCadastro"
+        android:padding="10dp"
+        android:text="@string/cadastro"
+        android:textColor="@color/branco"
+        android:textSize="17sp"
+        app:layout_anchor="@+id/textView2"
+        app:layout_anchorGravity="bottom|center"
+        tools:layout_editor_absoluteX="118dp" />
+
+
+</android.support.design.widget.CoordinatorLayout>
