@@ -12,6 +12,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Contato extends AppCompatActivity {
 
     //TODO: Personalizar o Spinner com a seta e um "escolha o assunto"
@@ -24,6 +34,9 @@ public class Contato extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle("Contato GTE");     //Titulo para ser exibido na sua Action Bar em frente à seta
 
+        EditText Email = findViewById(R.id.input_email);
+        EditText Msg = findViewById(R.id.input_mensagem);
+        EditText Nome = findViewById(R.id.input_nome);
 
     }
     //este é para o da navbar (seta)
@@ -76,5 +89,27 @@ public class Contato extends AppCompatActivity {
 
     public void EnviarMsg (View v){
 
+        StringRequest strreq = new StringRequest(Request.Method.POST,
+                "https://sistemagte.xyz/PagProcessamento/RecebeContato.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String Response) {
+                        // get response
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                e.printStackTrace();
+            }
+        }){@Override
+        public Map<String, String> getParams(){
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("nomeAPP", "nome");
+            params.put("emailAPP", email);
+            return params;
+        }
+        };
+        RequestQueue rq = Volley.newRequestQueue(this);
+        rq.add(strreq);
     }
 }
