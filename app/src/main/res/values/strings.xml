@@ -15,6 +15,14 @@
     <string name="nome">Nome</string>
     <string name="proximo">Próximo</string>
     <string name="msg">Mensagem</string>
+    <string name="crianca">Crianças</string>
+    <string name="grafico">Gráficos</string>
+    <string name="money">Mensalidade</string>
+    <string name="van">Vans</string>
+    <string name="acesso">Acesso</string>
+    <string name="funcionario">Funcionários</string>
+
+
 
     <!-- Bottom sheet do login -->
     <string name="maisOpcoes">Mais opções</string>
