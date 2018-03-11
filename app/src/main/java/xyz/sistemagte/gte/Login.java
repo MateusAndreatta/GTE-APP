@@ -11,9 +11,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.webkit.ConsoleMessage;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import java.io.Console;
+
+import xyz.sistemagte.gte.Threads.Thread_bottomSheetIcon;
 
 
 public class Login extends AppCompatActivity {
@@ -35,7 +40,14 @@ public class Login extends AppCompatActivity {
        }catch (Exception ex){
            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
        }
+
+        System.out.println("Console is: " + System.console());
+
+
+        //TODO: Criar um thread para poder trocar o icone da seta no bottom sheet
     }
+
+
     //TODO: criar o btn de contato no bottom sheet
 
     public void irSenha (View v){
@@ -65,6 +77,8 @@ public class Login extends AppCompatActivity {
         Intent Tela = new Intent(this, Cadastro.class);
         startActivity(Tela);
     }
+
+
 
 }
 
