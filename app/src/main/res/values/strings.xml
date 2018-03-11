@@ -28,7 +28,7 @@
     <string name="maisOpcoes">Mais opções</string>
 
     <!--Contato-->
-    <string name="contatoTela1">Olá, para entrar em contato conosco, vamor precisar de algumas informações suas, por favor digite seu nome e seu e-mail abaixo:</string>
+    <string name="contatoTela1">Olá, para entrar em contato conosco, vamos precisar de algumas informações suas, por favor digite seu nome e seu e-mail abaixo:</string>
     <string-array name="assuntosContato">
         <item>Tenho uma dúvida</item>
         <item>Tenho uma sugestão</item>
@@ -40,6 +40,7 @@
     <string name="continuarContato">, para entrar em contato, por favor selecione o assunto e escreva sua mensagem abaixo:</string>
     <string name="enviar">Enviar</string>
     <string name="verificarCampos">Preencha todos os campos</string>
+    <string name="loadingMsg">Enviando sua mensagem.</string>
 
 
     <string-array name="tipousuario">

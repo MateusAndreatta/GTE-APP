@@ -57,7 +57,7 @@ public class CRUD extends AppCompatActivity {
 
         // Adding click listener to button.
         InsertButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+                @Override
             public void onClick(View view) {
 
                 // Showing progress dialog at user registration time.

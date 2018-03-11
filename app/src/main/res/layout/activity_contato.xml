@@ -112,6 +112,7 @@
 
 
             <Button
+                android:id="@+id/btnEnviarMsg"
                 android:textColor="@color/branco"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
@@ -119,7 +120,6 @@
                 android:text="@string/enviar"
                 android:background="@drawable/btn_login"
                 android:drawableRight="@drawable/ic_seta_direita_branco"
-                android:onClick="EnviarMsg"
                 />
 
         </LinearLayout>
