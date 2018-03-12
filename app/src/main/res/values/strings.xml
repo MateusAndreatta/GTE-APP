@@ -142,4 +142,5 @@
 
 
     <string name="listaCriancas">Listagem de crianças</string>
+    <string name="title_activity_listagem_func_adm">Listagem_func_adm</string>
 </resources>

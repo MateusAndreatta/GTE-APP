@@ -35,7 +35,11 @@
         <activity android:name=".CRUD" />
         <activity android:name=".CRUD_editar" />
         <activity android:name=".CRUD_deletar" />
-        <activity android:name=".Painel_adm"></activity>
+        <activity android:name=".Painel_adm" />
+        <activity
+            android:name=".Listagem_func_adm"
+            android:label="@string/title_activity_listagem_func_adm"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

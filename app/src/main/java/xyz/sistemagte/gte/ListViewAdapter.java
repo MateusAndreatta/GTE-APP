@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by Fabio on 06/03/2018.
+ * Created by Andreatta on 06/03/2018.
  */
 
 public class ListViewAdapter extends ArrayAdapter<Hero> {

@@ -40,7 +40,8 @@ public class Painel_adm extends AppCompatActivity {
     }
 
     public void irFuncionarios(View view) {
-
+        Intent Tela = new Intent(this, Listagem_func_adm.class);
+        startActivity(Tela);
     }
 
     public void irCriancas(View view) {
