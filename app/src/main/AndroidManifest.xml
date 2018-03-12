@@ -20,7 +20,6 @@
         </activity>
         <activity android:name=".Contato" />
         <activity android:name=".Cadastro" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".cad_motorista" />
         <activity
             android:name=".cad_monitora"

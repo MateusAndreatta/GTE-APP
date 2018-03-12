@@ -8,10 +8,30 @@ public class Funcionario {
     String Nome,Sobrenome,Sexo,Tipo;
     Double Salario;
 
-    public Funcionario(String nome, String sobrenome, String sexo, String tipo) {
+
+
+    public Funcionario(String nome, String sobrenome) {
         this.Nome = nome;
         this.Sobrenome = sobrenome;
-        this.Sexo = sexo;
-        this.Tipo = tipo;
+    }
+
+    public String getNome() {
+        return Nome;
+    }
+
+    public String getSobrenome() {
+        return Sobrenome;
+    }
+
+    public String getSexo() {
+        return Sexo;
+    }
+
+    public String getTipo() {
+        return Tipo;
+    }
+
+    public Double getSalario() {
+        return Salario;
     }
 }
