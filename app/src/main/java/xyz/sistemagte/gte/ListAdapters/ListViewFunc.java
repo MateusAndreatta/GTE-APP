@@ -9,48 +9,41 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import xyz.sistemagte.gte.Construtoras.Funcionario;
+import xyz.sistemagte.gte.Construtoras.FuncConst;
 import xyz.sistemagte.gte.R;
 
 /**
  * Created by Andreatta on 14/03/2018.
  */
 
-public class Funcionario_ListView_Adapter extends ArrayAdapter<Funcionario> {
+public class ListViewFunc extends ArrayAdapter<FuncConst>{
 
-    private List<Funcionario> funcList;
-
+    private List<FuncConst> funcList;
 
     private Context mCtx;
 
-
-    public Funcionario_ListView_Adapter(List<Funcionario> heroList, Context mCtx) {
-        super(mCtx, R.layout.list_items, heroList);
-        this.funcList = heroList;
+    public ListViewFunc(List<FuncConst> funcList, Context mCtx){
+        super(mCtx, R.layout.list_view_func, funcList);
+        this.funcList = funcList;
         this.mCtx = mCtx;
     }
 
-
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent){
 
         LayoutInflater inflater = LayoutInflater.from(mCtx);
 
-
-        View listViewItem = inflater.inflate(R.layout.list_items, null, true);
-
+        View listViewItem = inflater.inflate(R.layout.list_view_func, null, true);
 
         TextView txtid = listViewItem.findViewById(R.id.txtID);
         TextView txtName = listViewItem.findViewById(R.id.txtName);
 
+        FuncConst funcConst = funcList.get(position);
 
-        Funcionario func = funcList.get(position);
-
-
-        txtid.setText(func.getNome());
-        txtName.setText(func.getSobrenome());
-
+        txtid.setText(funcConst.getNome());
+        txtName.setText(funcConst.getSobrenome());
 
         return listViewItem;
     }
+
 }

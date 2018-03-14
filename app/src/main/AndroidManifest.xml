@@ -29,16 +29,11 @@
             android:name=".CadVanActivity"
             android:label="@string/title_activity_cad_van"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Listagem" />
-        <activity android:name=".Painelzinho" />
         <activity android:name=".CRUD" />
         <activity android:name=".CRUD_editar" />
         <activity android:name=".CRUD_deletar" />
         <activity android:name=".Painel_adm" />
-        <activity
-            android:name=".Listagem_func_adm"
-            android:label="@string/title_activity_listagem_func_adm"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Funcionario"></activity>
     </application>
 
 </manifest>

@@ -19,70 +19,51 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Listagem extends AppCompatActivity {
+import xyz.sistemagte.gte.Construtoras.FuncConst;
+import xyz.sistemagte.gte.ListAdapters.ListViewFunc;
 
 
-    private static final String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
+public class Funcionario extends AppCompatActivity {
 
+    private static final String JSON_URL = "https://sistemagte.xyz/json/adm/ListarFuncionarios.php";
 
     ListView listView;
 
-
-    List<Hero> heroList;
+    List<FuncConst> funcList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listagem);
+        setContentView(R.layout.activity_funcionario);
 
-        listView = (ListView) findViewById(R.id.listView);
-        heroList = new ArrayList<>();
+        listView = (ListView)findViewById(R.id.listView);
+        funcList = new ArrayList<>();
 
+        loadFuncList();
 
-        loadHeroList();
     }
 
-    private void loadHeroList() {
-
-        //final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-
-        //progressBar.setVisibility(View.VISIBLE);
-
+    private void loadFuncList(){
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        //progressBar.setVisibility(View.INVISIBLE);
-
-
                         try {
-
                             JSONObject obj = new JSONObject(response);
 
+                            JSONArray funcArray = obj.getJSONArray("nome");
 
-                            JSONArray heroArray = obj.getJSONArray("nome");
+                            for (int i = 0; i < funcArray.length(); i++) {
+                                JSONObject funcObject = funcArray.getJSONObject(i);
+                                FuncConst funcConst = new FuncConst(funcObject.getString("nome"),funcObject.getString("sobrenome"));
 
-
-                            for (int i = 0; i < heroArray.length(); i++) {
-
-                                JSONObject heroObject = heroArray.getJSONObject(i);
-
-
-                                Hero hero = new Hero(heroObject.getString("nome"), heroObject.getString("sobrenome"));
-
-
-                                heroList.add(hero);
+                                funcList.add(funcConst);
                             }
 
-
-                            ListViewAdapter adapter = new ListViewAdapter(heroList, getApplicationContext());
-
+                            ListViewFunc adapter = new ListViewFunc(funcList, getApplicationContext());
 
                             listView.setAdapter(adapter);
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -91,15 +72,14 @@ public class Listagem extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Funcionario.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-
         requestQueue.add(stringRequest);
+
     }
+
 }
