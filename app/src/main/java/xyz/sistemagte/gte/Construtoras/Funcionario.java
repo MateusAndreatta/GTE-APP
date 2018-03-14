@@ -5,9 +5,10 @@ package xyz.sistemagte.gte.Construtoras;
  */
 
 public class Funcionario {
-    String Nome,Sobrenome,Sexo,Tipo;
-    Double Salario;
+    //String Nome,Sobrenome,Sexo,Tipo;
+    //Double Salario;
 
+    String Nome,Sobrenome;
 
 
     public Funcionario(String nome, String sobrenome) {
@@ -23,15 +24,15 @@ public class Funcionario {
         return Sobrenome;
     }
 
-    public String getSexo() {
-        return Sexo;
-    }
+   //public String getSexo() {
+   //    return Sexo;
+   //}
 
-    public String getTipo() {
-        return Tipo;
-    }
+   //public String getTipo() {
+   //    return Tipo;
+   //}
 
-    public Double getSalario() {
-        return Salario;
-    }
+   //public Double getSalario() {
+   //    return Salario;
+   //}
 }
