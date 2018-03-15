@@ -21,6 +21,8 @@
     <string name="van">Vans</string>
     <string name="acesso">Acesso</string>
     <string name="funcionario">Funcionários</string>
+    <string name="listaFunc">Listagem de Funcionários</string>
+
 
     <string name="painel">O que deseja fazer?</string>
 
