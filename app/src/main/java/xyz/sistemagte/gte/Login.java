@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
 
     public void irSenha (View v){
         //TODO: trocar o intent para a de esqueci minha senha
-        Intent Tela = new Intent(this, Contato.class);
+        Intent Tela = new Intent(this, RecuperarSenha.class);
         startActivity(Tela);
     }
 
@@ -68,7 +68,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    public void Contato(View view) {
+    public void irContato(View view) {
         Intent Tela = new Intent(this, Contato.class);
         startActivity(Tela);
     }
