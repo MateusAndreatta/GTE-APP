@@ -1,27 +1,23 @@
 package xyz.sistemagte.gte;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.webkit.ConsoleMessage;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.Console;
-
-import xyz.sistemagte.gte.Threads.Thread_bottomSheetIcon;
 
 
 public class Login extends AppCompatActivity {
+
+    float offsetY;
+    TextView txtBottomSheet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +37,14 @@ public class Login extends AppCompatActivity {
            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
        }
 
-        System.out.println("Console is: " + System.console());
+        txtBottomSheet = findViewById(R.id.txtBottomSheet1);
 
 
         //TODO: Criar um thread para poder trocar o icone da seta no bottom sheet
     }
 
 
-    //TODO: criar o btn de contato no bottom sheet
-
     public void irSenha (View v){
-        //TODO: trocar o intent para a de esqueci minha senha
         Intent Tela = new Intent(this, RecuperarSenha.class);
         startActivity(Tela);
     }
@@ -79,6 +72,46 @@ public class Login extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.init();
+    }
+
+    private void init() {
+
+        offsetY = 0;
+        View bottomSheet = findViewById(R.id.bottom_sheet);
+        BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+                if (offsetY < slideOffset) {
+                    //Fazendo o slide pra cima
+                    Drawable imagem = getResources().getDrawable(R.drawable.ic_expand_more_white_24dp);
+                    imagem.setBounds( 0, 0, 60, 60 );
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                        txtBottomSheet.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, imagem, null);
+                    }
+                } else if (offsetY > slideOffset) {
+                    //Fazendo o slide pra baixo
+                    Drawable imagem = getResources().getDrawable(R.drawable.ic_expand_less_white_24dp);
+                    imagem.setBounds( 0, 0, 60, 60 );
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                        txtBottomSheet.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, imagem, null);
+                    }
+                }
+                offsetY = slideOffset;
+            }
+        });
+
+
+    }
 
 }
 

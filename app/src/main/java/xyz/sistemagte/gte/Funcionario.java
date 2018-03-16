@@ -61,7 +61,6 @@ public class Funcionario extends AppCompatActivity {
         });
 
         loadFuncList();
-
     }
 
     @Override
