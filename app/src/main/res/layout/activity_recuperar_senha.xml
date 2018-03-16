@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xyz.sistemagte.gte.RecuperarSenha"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:srcCompat="@android:drawable/ic_lock_lock"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/userEsqueceuSenha"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:paddingBottom="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/userRecuperarSenha"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        />
+
+    <EditText
+        android:textSize="20sp"
+        android:id="@+id/input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/input_style"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="15dp"/>
+
+    <Button
+        android:textColor="@color/branco"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recuperarSenha"
+        android:background="@drawable/btn_login"
+        android:onClick="recuperar"
+        android:drawableEnd="@drawable/ic_seta_direita_branco"
+        android:drawableRight="@drawable/ic_seta_direita_branco" />
+
+
+</LinearLayout>
+

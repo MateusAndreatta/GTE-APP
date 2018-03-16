@@ -33,7 +33,8 @@
         <activity android:name=".CRUD_editar" />
         <activity android:name=".CRUD_deletar" />
         <activity android:name=".Painel_adm" />
-        <activity android:name=".Funcionario"></activity>
+        <activity android:name=".Funcionario" />
+        <activity android:name=".RecuperarSenha"></activity>
     </application>
 
 </manifest>

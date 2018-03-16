@@ -5,17 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-public class Painel_adm extends AppCompatActivity {
+public class RecuperarSenha extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_painel_adm);
+        setContentView(R.layout.activity_recuperar_senha);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle("Painel");     //Titulo para ser exibido na sua Action Bar em frente à seta
+        getSupportActionBar().setTitle(getResources().getString(R.string.recuperarSenha));     //Titulo para ser exibido na sua Action Bar em frente à seta
     }
+
     //este é para o da navbar (seta)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -37,28 +40,7 @@ public class Painel_adm extends AppCompatActivity {
         return;
     }
 
-    public void irFuncionarios(View view) {
-        Intent Tela = new Intent(this, Funcionario.class);
-        startActivity(Tela);
-    }
-
-    public void irCriancas(View view) {
-
-    }
-
-    public void irVan(View view) {
-
-    }
-
-    public void irMensalidade(View view) {
-
-    }
-
-    public void irAcessos(View view) {
-
-    }
-
-    public void irGraficos(View view) {
-
+    public void recuperar(View view) {
+        Toast.makeText(this, "Não disponivel no momento", Toast.LENGTH_SHORT).show();
     }
 }
