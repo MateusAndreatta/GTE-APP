@@ -28,6 +28,10 @@
 
     <!-- Bottom sheet do login -->
     <string name="maisOpcoes">Mais opções</string>
+    <string name="txtSobre">GTE é uma plataforma que tem o intuito de auxiliar motorista e monitores de vans escolares. Auxiliar também os responsáveis a ter maior controle do transporte diário de seus filhos.</string>
+    <string name="cadastrarSe">Cadastrar-se</string>
+    <string name="contato">Contato</string>
+
 
     <!--Contato-->
     <string name="contatoTela1">Olá, para entrar em contato conosco, vamos precisar de algumas informações suas, por favor digite seu nome e seu e-mail abaixo:</string>

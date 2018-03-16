@@ -30,30 +30,55 @@
 
     </LinearLayout>
 
-
-
-    <!--todo: fazer a 'telona', o texto do sobre com o btn do cadastro -->
-    <TextView
-        android:id="@+id/textView2"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Telona"
-        android:textColor="@android:color/white" />
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:padding="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:gravity="center"
-        android:onClick="irCadastro"
-        android:padding="10dp"
-        android:text="@string/cadastro"
-        android:textColor="@color/branco"
-        android:textSize="17sp"
-        app:layout_anchor="@+id/textView2"
-        app:layout_anchorGravity="bottom|center"
-        tools:layout_editor_absoluteX="118dp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:lineSpacingExtra="5sp"
+            android:textSize="20sp"
+            android:text="@string/txtSobre"
+            android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:layout_weight="1"
+                android:text="@string/contato"
+                android:textColor="@android:color/white"
+                android:onClick="irContato"/>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/cadastrarSe"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:onClick="irCadastro"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
