@@ -9,6 +9,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,10 @@ public class Login extends AppCompatActivity {
 
     float offsetY;
     TextView txtBottomSheet;
+    Button btnLogin;
+    EditText inputSenha;
+    EditText inputEmail;
+    TextView labelRecuperarSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +41,11 @@ public class Login extends AppCompatActivity {
        }catch (Exception ex){
            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
        }
-
+        labelRecuperarSenha = findViewById(R.id.labelRecuperarSenha);
+        inputEmail = findViewById(R.id.input_email);
+        inputSenha = findViewById(R.id.input_senha);
         txtBottomSheet = findViewById(R.id.txtBottomSheet1);
-
+        btnLogin = findViewById(R.id.btnLogin);
 
         //TODO: Criar um thread para poder trocar o icone da seta no bottom sheet
     }
@@ -90,7 +97,7 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
+                //Trocar o icone
                 if (offsetY < slideOffset) {
                     //Fazendo o slide pra cima
                     Drawable imagem = getResources().getDrawable(R.drawable.ic_expand_more_white_24dp);
@@ -98,6 +105,10 @@ public class Login extends AppCompatActivity {
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                         txtBottomSheet.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, imagem, null);
                     }
+                    btnLogin.setEnabled(false);
+                    inputSenha.setEnabled(false);
+                    inputEmail.setEnabled(false);
+                    labelRecuperarSenha.setEnabled(false);
                 } else if (offsetY > slideOffset) {
                     //Fazendo o slide pra baixo
                     Drawable imagem = getResources().getDrawable(R.drawable.ic_expand_less_white_24dp);
@@ -105,6 +116,10 @@ public class Login extends AppCompatActivity {
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                         txtBottomSheet.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, imagem, null);
                     }
+                    btnLogin.setEnabled(true);
+                    inputSenha.setEnabled(true);
+                    inputEmail.setEnabled(true);
+                    labelRecuperarSenha.setEnabled(true);
                 }
                 offsetY = slideOffset;
             }
