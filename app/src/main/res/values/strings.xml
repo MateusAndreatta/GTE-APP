@@ -25,6 +25,9 @@
     <string name="recuperarSenha">Recuperar Senha</string>
     <string name="userEsqueceuSenha">Esqueceu sua\n senha?</string>
     <string name="userRecuperarSenha">Ajudaremos você a recuperar sua senha, para isso preencha seu e-mail abaixo:</string>
+    <string name="titleContextMenu">Ações</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
 
     <string name="painel">O que deseja fazer?</string>
 

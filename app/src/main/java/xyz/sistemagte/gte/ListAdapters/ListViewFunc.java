@@ -35,13 +35,13 @@ public class ListViewFunc extends ArrayAdapter<FuncConst>{
 
         View listViewItem = inflater.inflate(R.layout.list_view_func, null, true);
 
-        TextView txtid = listViewItem.findViewById(R.id.txtID);
-        TextView txtName = listViewItem.findViewById(R.id.txtName);
+        TextView txtid = listViewItem.findViewById(R.id.txtNome);
+        TextView txtTipo = listViewItem.findViewById(R.id.txtTipo);
 
         FuncConst funcConst = funcList.get(position);
 
         txtid.setText(funcConst.getNome());
-        txtName.setText(funcConst.getSobrenome());
+        txtTipo.setText(funcConst.getTipo());
 
         return listViewItem;
     }

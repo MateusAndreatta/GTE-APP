@@ -5,8 +5,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,11 +43,13 @@ public class Funcionario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funcionario);
 
-        listView = (ListView)findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
         funcList = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.listaFunc));     //Titulo para ser exibido na sua Action Bar em frente à seta
+
+        registerForContextMenu(listView);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +62,23 @@ public class Funcionario extends AppCompatActivity {
 
         loadFuncList();
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle(getResources().getString(R.string.titleContextMenu));
+        menu.add(0,v.getId(), 0, getResources().getString(R.string.editar));
+        menu.add(0,v.getId(), 0, getResources().getString(R.string.excluir));
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        if(item.getTitle() == getResources().getString(R.string.editar)){
+            Toast.makeText(this, "Editar", Toast.LENGTH_SHORT).show();
+        }else if(item.getTitle() == getResources().getString(R.string.excluir)){
+            Toast.makeText(this, "Deletar", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 
     //este é para o da navbar (seta)
@@ -94,7 +115,7 @@ public class Funcionario extends AppCompatActivity {
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                FuncConst funcConst = new FuncConst(funcObject.getString("nome"),funcObject.getString("sobrenome"));
+                                FuncConst funcConst = new FuncConst(funcObject.getString("nome"),funcObject.getString("sobrenome"),funcObject.getString("descricao"));
 
                                 funcList.add(funcConst);
                             }

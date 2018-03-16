@@ -6,13 +6,13 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txtID"
+        android:id="@+id/txtNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/txtName"
+        android:id="@+id/txtTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
