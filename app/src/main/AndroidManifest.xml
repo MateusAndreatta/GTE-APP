@@ -21,6 +21,7 @@
         <activity android:name=".Contato" />
         <activity android:name=".Cadastro" />
         <activity android:name=".cad_motorista" />
+        <activity android:name=".cad_escola" />
         <activity
             android:name=".cad_monitora"
             android:label="@string/title_activity_cad_monitora"
