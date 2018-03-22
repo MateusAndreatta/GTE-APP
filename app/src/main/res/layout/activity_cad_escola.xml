@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.sistemagte.gte.cad_escola"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    tools:context="xyz.sistemagte.gte.cad_escola">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cadastro_escola"
+        android:text="@string/cadastro"
         android:textSize="40sp"
         android:gravity="center"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,70 +33,90 @@
                 android:hint="@string/nome"
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
-
             <EditText
-                android:id="@+id/cad_cep"
+                android:id="@+id/cad_sobrenome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="@string/sobrenome"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/cad_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/cad_senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="@string/senha"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/cad_conf_senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="@string/conf_senha"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/cad_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="phone"
+                android:hint="@string/telefone"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/cad_cpf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="number"
-                android:hint="@string/cep"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <Spinner
-                android:id="@+id/cad_estado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/estados"
-                android:layout_weight="1"
-                android:background="@drawable/input_style"
-                />
-            <EditText
-                android:id="@+id/cad_cidade"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/cidade"
+                android:hint="@string/cpf"
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
             <EditText
-                android:id="@+id/cad_rua"
+                android:id="@+id/cad_rg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/rua"
+                android:inputType="number"
+                android:hint="@string/rg"
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
             <EditText
-                android:id="@+id/cad_num"
+                android:id="@+id/cad_datanascimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/num"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"
-                android:inputType="number"/>
-            <EditText
-                android:id="@+id/cad_complemento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/complemento"
+                android:inputType="date"
+                android:hint="@string/datanascimento"
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
-            <Spinner
-                android:id="@+id/cad_id_crianca"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/estados"
-                android:layout_weight="1"
-                android:background="@drawable/input_style"
-                />
-        </LinearLayout>
-        <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/cad_tipousuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/tipousuario"
+                    android:layout_weight="1"
+                    android:background="@drawable/input_style"
+                    />
                 <!-- TODO: personalizar esse btn -->
                 <Button
                     android:layout_width="match_parent"
@@ -103,8 +124,9 @@
                     android:layout_weight="1"
                     android:text="@string/enviar"
                     android:id="@+id/cadastro"
-
                     />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
+
