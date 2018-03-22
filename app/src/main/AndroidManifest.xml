@@ -34,7 +34,9 @@
         <activity android:name=".CRUD_deletar" />
         <activity android:name=".Painel_adm" />
         <activity android:name=".Funcionario" />
-        <activity android:name=".RecuperarSenha"></activity>
+        <activity android:name=".RecuperarSenha" />
+        <activity android:name=".cad_crianca" />
+        <activity android:name=".cad_escola"></activity>
     </application>
 
 </manifest>
