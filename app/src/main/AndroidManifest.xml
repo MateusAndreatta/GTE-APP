@@ -35,7 +35,8 @@
         <activity android:name=".Painel_adm" />
         <activity android:name=".Funcionario" />
         <activity android:name=".RecuperarSenha" />
-        <activity android:name=".Painel_motorista"></activity>
+        <activity android:name=".Painel_motorista" />
+        <activity android:name=".Painel_monitora"></activity>
     </application>
 
 </manifest>
