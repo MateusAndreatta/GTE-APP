@@ -156,4 +156,6 @@
     <string name="cadastro_crianca">Cadastro da Criança</string>
     <string name="cadastro_escola">Cadastro da Escola</string>
     <string name="title_activity_listagem_func_adm">Listagem_func_adm</string>
+    <string name="editar_perfil">Editar perfil</string>>
+    <string name="editar_endereco">Editar endereço</string>>
 </resources>

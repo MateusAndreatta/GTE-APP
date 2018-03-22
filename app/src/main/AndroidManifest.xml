@@ -35,8 +35,12 @@
         <activity android:name=".Painel_adm" />
         <activity android:name=".Funcionario" />
         <activity android:name=".RecuperarSenha" />
+<<<<<<< HEAD
         <activity android:name=".cad_crianca" />
         <activity android:name=".cad_escola"></activity>
+=======
+        <activity android:name=".Painel_motorista"></activity>
+>>>>>>> 9cb370d7c2ce8c2c76ab9dab44f1c5b83c263ca0
     </application>
 
 </manifest>
