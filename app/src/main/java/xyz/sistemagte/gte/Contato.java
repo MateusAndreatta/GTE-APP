@@ -27,9 +27,20 @@ import java.util.Map;
 
 public class Contato extends AppCompatActivity {
 
-    String email,nome,msg,assunto;
+    // Creating EditText.
+    EditText Nome, Email,Mensagem ;
+    Spinner Assunto;
+    // Creating Volley RequestQueue.
+    RequestQueue requestQueue;
 
-   // ProgressDialog progressDialog;
+    // Create string variable to hold the EditText Value.
+    String NomeHolder, EmailHolder, MensagemHolder , AssuntoHolder;
+
+    // Creating Progress dialog.
+    ProgressDialog progressDialog;
+
+    // Storing server url into String variable.
+    String HttpUrl = "https://sistemagte.xyz/PagProcessamento/RecebeContato.php";
 
     //TODO: Personalizar o Spinner com a seta e um "escolha o assunto"
     @Override
@@ -40,66 +51,89 @@ public class Contato extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle("Contato GTE");     //Titulo para ser exibido na sua Action Bar em frente à seta
+
+        Nome     = findViewById(R.id.input_nome);
+        Email    = findViewById(R.id.input_email);
+        Mensagem = findViewById(R.id.input_mensagem);
+        Assunto  = findViewById(R.id.spinnerAssuntosContato);
+
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        progressDialog = new ProgressDialog(Contato.this);
+
+
         Button btn = findViewById(R.id.btnEnviarMsg);
         btn.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View view) {
-                                       Toast.makeText(Contato.this, "Opa escutei isso!", Toast.LENGTH_SHORT).show();
 
-                                       EditText campoMsg = findViewById(R.id.input_mensagem);
-                                       msg = campoMsg.getText().toString();
+                                       // Showing progress dialog at user registration time.
+                                       progressDialog.setMessage("Please Wait, We are Inserting Your Data on Server");
+                                       progressDialog.show();
 
-                                       Spinner spinner = findViewById(R.id.spinnerAssuntosContato);
-                                       assunto = spinner.getSelectedItem().toString();
+                                       // Calling method to get value from EditText.
+                                       GetValueFromEditText();
 
-//        progressDialog = new ProgressDialog(Contato.this);
-
-                                       // Feedback de enviando msg
-                                       // progressDialog.setMessage("Enviando sua mensagem.");
-                                       // progressDialog.show();
-
-
-                                       StringRequest strreq = new StringRequest(Request.Method.POST,
-                                               "https://sistemagte.xyz/PagProcessamento/RecebeContato.php",
+                                       // Creating string request with post method.
+                                       StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl,
                                                new Response.Listener<String>() {
                                                    @Override
-                                                   public void onResponse(String Response) {
+                                                   public void onResponse(String ServerResponse) {
 
-                                                       //    progressDialog.dismiss();
+                                                       // Hiding the progress dialog after all task complete.
+                                                       progressDialog.dismiss();
 
                                                        // Showing response message coming from server.
-                                                       Toast.makeText(Contato.this, Response, Toast.LENGTH_LONG).show();
+                                                       Toast.makeText(Contato.this, ServerResponse, Toast.LENGTH_LONG).show();
                                                    }
-                                               }, new Response.ErrorListener() {
-                                           @Override
-                                           public void onErrorResponse(VolleyError e) {
-                                               e.printStackTrace();
-                                               // Hiding the progress dialog after all task complete.
-                                               //  progressDialog.dismiss();
+                                               },
+                                               new Response.ErrorListener() {
+                                                   @Override
+                                                   public void onErrorResponse(VolleyError volleyError) {
 
-                                               // Showing error message if something goes wrong.
-                                               Toast.makeText(Contato.this, e.toString(), Toast.LENGTH_LONG).show();
+                                                       // Hiding the progress dialog after all task complete.
+                                                       progressDialog.dismiss();
+
+                                                       // Showing error message if something goes wrong.
+                                                       Toast.makeText(Contato.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                                                   }
+                                               }) {
+                                           @Override
+                                           protected Map<String, String> getParams() {
+
+                                               // Creating Map String Params.
+                                               Map<String, String> params = new HashMap<String, String>();
+
+                                               // Adding All values to Params.
+                                               params.put("nomeAPP", NomeHolder);
+                                               params.put("emailAPP", EmailHolder);
+                                               params.put("msgAPP", MensagemHolder);
+                                               params.put("assuntoAPP", AssuntoHolder);
+
+                                               return params;
                                            }
-                                       }){@Override
-                                       public Map<String, String> getParams(){
-                                           Map<String, String> params = new HashMap<>();
-                                           params.put("nomeAPP", nome);
-                                           params.put("emailAPP", email);
-                                           params.put("msgAPP", msg);
-                                           params.put("assuntoAPP",assunto);
-                                           return params;
-                                       }
+
                                        };
 
-                                       RequestQueue rq = Volley.newRequestQueue(Contato.this);
-                                       rq.add(strreq);
+                                       requestQueue.getCache().clear();
+                                       requestQueue.add(stringRequest);
+
                                    }
                                }
         );
     }
 
 
+    // Creating method to get value from EditText.
+    public void GetValueFromEditText(){
 
+        NomeHolder = Nome.getText().toString().trim();
+        EmailHolder = Email.getText().toString().trim();
+        MensagemHolder = Mensagem.getText().toString();
+        AssuntoHolder = Assunto.getSelectedItem().toString();
+
+    }
 
     //este é para o da navbar (seta)
     @Override
@@ -134,99 +168,16 @@ public class Contato extends AppCompatActivity {
             TextView txtT2 = (TextView)findViewById(R.id.textViewContatoT2);
 
 
-
-            email = campoEmail.getText().toString();
-            nome = campoNome.getText().toString();
+            String nomeP = campoNome.getText().toString();
             layout1.setVisibility(View.GONE);
             layout2.setVisibility(View.VISIBLE);
 
             String str1 = getResources().getString(R.string.ola);
             String str2 = getResources().getString(R.string.continuarContato);
 
-            txtT2.setText(str1 + " " + nome.substring(0,1).toUpperCase().concat(nome.substring(1)) + str2);
+            txtT2.setText(str1 + " " + nomeP.substring(0,1).toUpperCase().concat(nomeP.substring(1)) + str2);
         }
 
     }
 
-  /*  public void EnviarMsg (View view){
-
-        EditText campoMsg = findViewById(R.id.input_mensagem);
-        msg = campoMsg.getText().toString();
-
-        Spinner spinner = findViewById(R.id.spinnerAssuntosContato);
-        assunto = spinner.getSelectedItem().toString();
-
-//        progressDialog = new ProgressDialog(Contato.this);
-
-        // Feedback de enviando msg
-       // progressDialog.setMessage("Enviando sua mensagem.");
-       // progressDialog.show();
-
-
-        StringRequest strreq = new StringRequest(Request.Method.POST,
-                "https://sistemagte.xyz/PagProcessamento/RecebeContato.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String Response) {
-
-                    //    progressDialog.dismiss();
-
-                        // Showing response message coming from server.
-                        //Toast.makeText(Contato.this, Response, Toast.LENGTH_LONG).show();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError e) {
-                e.printStackTrace();
-                // Hiding the progress dialog after all task complete.
-             //  progressDialog.dismiss();
-
-                // Showing error message if something goes wrong.
-                Toast.makeText(Contato.this, e.toString(), Toast.LENGTH_LONG).show();
-            }
-        }){@Override
-        public Map<String, String> getParams(){
-            Map<String, String> params = new HashMap<>();
-            params.put("nomeAPP", nome);
-            params.put("emailAPP", email);
-            params.put("msgAPP", msg);
-            params.put("assuntoAPP",assunto);
-            return params;
-        }
-        };
-
-        RequestQueue rq = Volley.newRequestQueue(this);
-        rq.add(strreq);
-    }
-
-    public void inserir(View v){
-        StringRequest request = new StringRequest(Request.Method.POST, "https://sistemagte.xyz/PagProcessamento/RecebeContato.php", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(response.equals("sucesso")){
-                    //SUCESSO;
-                }else{
-                    //FALHA
-                }
-            }
-        }, new Response.ErrorListener(){
-            public void onErrorResponse(VolleyError error) {
-                // error
-
-            }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  params = new HashMap<>();
-                params.put("nomeAPP", nome);
-                params.put("emailAPP", email);
-                params.put("msgAPP", msg);
-                params.put("assuntoAPP",assunto);
-
-                return params;
-            }
-        };
-        RequestQueue fila = Volley.newRequestQueue(this);
-        fila.add(request);
-    }*/
 }
