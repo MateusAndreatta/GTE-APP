@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.sistemagte.gte.Painel_adm"
+    tools:context="xyz.sistemagte.gte.Painel_monitora"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="15dp"
     android:background="#eeeeee">
@@ -12,8 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,13 +49,13 @@
                 <!-- CARD funcionario -->
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/funcionarios"
+                    android:id="@+id/editar_perfil"
                     android:layout_width="match_parent"
                     android:layout_weight="3"
                     android:layout_height="wrap_content"
                     card_view:cardCornerRadius="7dp"
                     card_view:cardBackgroundColor="@color/cinza"
-                    android:onClick="irFuncionarios"
+                    android:onClick="irEditar_perfil"
                     android:layout_marginRight="5dp">
 
                     <LinearLayout
@@ -68,12 +68,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/funcionario" />
+                            android:src="@drawable/edit" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/funcionario"
+                            android:text="@string/editar_perfil"
                             android:textSize="17sp"
                             android:layout_gravity="center"/>
                     </LinearLayout>
@@ -126,13 +126,13 @@
                 <!-- CARD funcionario -->
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/van"
+                    android:id="@+id/editar_endereco"
                     android:layout_width="match_parent"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     card_view:cardCornerRadius="7dp"
                     card_view:cardBackgroundColor="@color/cinza"
-                    android:onClick="irVan"
+                    android:onClick="irEditar_endereco"
                     android:layout_marginRight="5dp">
 
                     <LinearLayout
@@ -145,134 +145,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/van" />
+                            android:src="@drawable/editar_endereco" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/van"
+                            android:text="@string/editar_endereco"
                             android:textSize="17sp"
                             android:layout_gravity="center"/>
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
-
-                <!-- CARD funcionario -->
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/mensalidade"
-                    android:layout_width="match_parent"
-                    android:layout_weight="3"
-                    android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="7dp"
-                    card_view:cardBackgroundColor="@color/cinza"
-                    android:onClick="irMensalidade"
-                    android:layout_marginLeft="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="13dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:src="@drawable/money" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/money"
-                            android:textSize="17sp"
-                            android:layout_gravity="center"/>
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="5"
-                android:layout_marginTop="10dp">
-
-                <!-- CARD funcionario -->
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/acesso"
-                    android:layout_width="match_parent"
-                    android:layout_weight="3"
-                    android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="7dp"
-                    card_view:cardBackgroundColor="@color/cinza"
-                    android:onClick="irAcessos"
-                    android:layout_marginRight="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="13dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:src="@drawable/acesso" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/acesso"
-                            android:textSize="17sp"
-                            android:layout_gravity="center"/>
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <!-- CARD funcionario -->
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/graficos"
-                    android:layout_width="match_parent"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="7dp"
-                    card_view:cardBackgroundColor="@color/cinza"
-                    android:onClick="irGraficos"
-                    android:layout_marginLeft="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="13dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:src="@drawable/graficos" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/grafico"
-                            android:textSize="17sp"
-                            android:layout_gravity="center"/>
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
             </LinearLayout>
 
         </LinearLayout>
-
     </LinearLayout>
-
 
 </ScrollView>

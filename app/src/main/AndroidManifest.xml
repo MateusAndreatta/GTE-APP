@@ -21,6 +21,7 @@
         <activity android:name=".Contato" />
         <activity android:name=".Cadastro" />
         <activity android:name=".cad_motorista" />
+        <activity android:name=".cad_escola" />
         <activity
             android:name=".cad_monitora"
             android:label="@string/title_activity_cad_monitora"
@@ -34,7 +35,13 @@
         <activity android:name=".CRUD_deletar" />
         <activity android:name=".Painel_adm" />
         <activity android:name=".Funcionario" />
-        <activity android:name=".RecuperarSenha"></activity>
+        <activity android:name=".RecuperarSenha" />
+
+        <activity android:name=".Painel_motorista" />
+        <activity android:name=".Painel_monitora"></activity>
+
+
+        <activity android:name=".cad_crianca"/>
     </application>
 
 </manifest>
