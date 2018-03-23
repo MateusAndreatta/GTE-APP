@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -27,19 +28,15 @@ import java.util.Map;
 
 public class Contato extends AppCompatActivity {
 
-    // Creating EditText.
     EditText Nome, Email,Mensagem ;
     Spinner Assunto;
-    // Creating Volley RequestQueue.
+
     RequestQueue requestQueue;
 
-    // Create string variable to hold the EditText Value.
     String NomeHolder, EmailHolder, MensagemHolder , AssuntoHolder;
 
-    // Creating Progress dialog.
     ProgressDialog progressDialog;
 
-    // Storing server url into String variable.
     String HttpUrl = "https://sistemagte.xyz/PagProcessamento/RecebeContato.php";
 
     //TODO: Personalizar o Spinner com a seta e um "escolha o assunto"
@@ -69,7 +66,7 @@ public class Contato extends AppCompatActivity {
                                    public void onClick(View view) {
 
                                        // Showing progress dialog at user registration time.
-                                       progressDialog.setMessage("Please Wait, We are Inserting Your Data on Server");
+                                       progressDialog.setMessage(getResources().getString(R.string.loadingMsg));
                                        progressDialog.show();
 
                                        // Calling method to get value from EditText.
@@ -85,7 +82,7 @@ public class Contato extends AppCompatActivity {
                                                        progressDialog.dismiss();
 
                                                        // Showing response message coming from server.
-                                                       Toast.makeText(Contato.this, ServerResponse, Toast.LENGTH_LONG).show();
+                                                       Toast.makeText(Contato.this, getResources().getString(R.string.MsgSucesso), Toast.LENGTH_LONG).show();
                                                    }
                                                },
                                                new Response.ErrorListener() {
@@ -118,6 +115,8 @@ public class Contato extends AppCompatActivity {
 
                                        requestQueue.getCache().clear();
                                        requestQueue.add(stringRequest);
+
+                                       VoltarLogin();
 
                                    }
                                }
@@ -178,6 +177,11 @@ public class Contato extends AppCompatActivity {
             txtT2.setText(str1 + " " + nomeP.substring(0,1).toUpperCase().concat(nomeP.substring(1)) + str2);
         }
 
+    }
+
+    public void VoltarLogin(){
+        Intent Tela = new Intent(this, Login.class);
+        startActivity(Tela);
     }
 
 }
