@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GTE-APP.iml" filepath="$PROJECT_DIR$/GTE-APP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GTE.iml" filepath="$PROJECT_DIR$/GTE.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
