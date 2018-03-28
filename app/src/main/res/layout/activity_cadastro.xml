@@ -8,12 +8,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     tools:context="xyz.sistemagte.gte.Cadastro">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cadastro"
-        android:textSize="40sp"
-        android:gravity="center"/>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,6 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cadastro"
+                android:textSize="40sp"
+                android:gravity="center"/>
+
             <EditText
                 android:id="@+id/cad_nome"
                 android:layout_width="match_parent"
@@ -109,6 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+                <!-- TODO: personalizar esse spiinner -->
                 <Spinner
                     android:id="@+id/cad_tipousuario"
                     android:layout_width="match_parent"

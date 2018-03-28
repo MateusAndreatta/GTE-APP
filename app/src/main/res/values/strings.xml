@@ -86,8 +86,8 @@
     <string name="cadastro_resp">Cadastro do Responsavel</string>
     <string name="cadastro_monitora">Cadastro da Monitora</string>
     <string name="telefone">Telefone</string>
-    <string name="rg">CPF</string>
-    <string name="cpf">RG</string>
+    <string name="rg">RG</string>
+    <string name="cpf">CPF</string>
     <string name="datanascimento">Data de nascimento</string>
     <string name="salario">Salário </string>
     <string name="cidade">Cidade</string>

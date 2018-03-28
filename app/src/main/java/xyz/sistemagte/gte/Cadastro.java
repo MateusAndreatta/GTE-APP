@@ -1,5 +1,6 @@
 package xyz.sistemagte.gte;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +10,25 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+
 public class Cadastro extends AppCompatActivity {
 
+    EditText campo_nome,campo_sobrenome,campo_email,campo_senha,campo_confSenha,campo_telefone,campo_rg,campo_cpf,campo_dataNasc;
+
+    Spinner tipoUser;
+
+    RequestQueue requestQueue;
+
+    String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder;
+
+    ProgressDialog progressDialog;
+
+    String HttpUrl = "https://sistemagte.xyz/PagProcessamento/RecebeCadastro.php";
 
     int ProximaTela;
     @Override
@@ -24,8 +39,19 @@ public class Cadastro extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle("Cadastro GTE");     //Titulo para ser exibido na sua Action Bar em frente à seta
 
-        final Button cadastrar = (Button) findViewById(R.id.cadastro);
-        Spinner sp1      = (Spinner) findViewById(R.id.cad_tipousuario);
+        //Declarações
+        campo_nome = findViewById(R.id.cad_nome);
+        campo_sobrenome = findViewById(R.id.cad_sobrenome);
+        campo_email = findViewById(R.id.cad_email);
+        campo_senha = findViewById(R.id.cad_senha);
+        campo_confSenha = findViewById(R.id.cad_conf_senha);
+        campo_telefone = findViewById(R.id.cad_tel);
+        campo_rg = findViewById(R.id.cad_rg);
+        campo_cpf = findViewById(R.id.cad_cpf);
+        campo_dataNasc = findViewById(R.id.cad_datanascimento);
+
+        final Button cadastrar = findViewById(R.id.cadastro);
+        tipoUser = findViewById(R.id.cad_tipousuario);
 
 
         /**
@@ -36,8 +62,8 @@ public class Cadastro extends AppCompatActivity {
         //Array do spinner tipo Usuario
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipousuario, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp1.setAdapter(adapter);
-        sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        tipoUser.setAdapter(adapter);
+        tipoUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> spinner, View arg1, int pos, long id) {
                 switch(pos){
@@ -89,6 +115,24 @@ public class Cadastro extends AppCompatActivity {
         return true;
     }
 
+    private boolean ValidarCampos(){
+        //TODO: Fazer 2 if, um para verificar se todos os campos estao preenchidos, e um pra verificar a senha.
+        return true;
+    }
+
+    public void GetValueFromEditText(){
+
+        NomeHolder      = campo_nome.getText().toString().trim();
+        SobrenomeHolder = campo_sobrenome.getText().toString().trim();
+        EmailHolder     = campo_email.getText().toString().trim();
+        SenhaHolder     = campo_senha.getText().toString();
+        TelefoneHolder  = campo_telefone.getText().toString().trim();
+        RgHolder        = campo_rg.getText().toString().trim();
+        CpfHolder       = campo_cpf.getText().toString().trim();
+        DtNascHolder    = campo_dataNasc.getText().toString().trim();
+
+    }
+
     public void Cadastrar(View view) {
         if(ProximaTela == 1){
           Intent intent = new Intent(Cadastro.this, cad_motorista.class);
@@ -99,16 +143,7 @@ public class Cadastro extends AppCompatActivity {
             startActivity(intent);
         }
         if(ProximaTela == 3){
-     //     SQLiteDatabase db;
-     //      db = openOrCreateDatabase( "siste370_bd", SQLiteDatabase.OPEN_READWRITE, null);
-     //      try {
-     //          String sql =
-     //"INSERT or replace INTO tbl_Contain (DESCRIPTION, expirydate, AMOUNT, TRNS,isdefault) VALUES('this is','03/04/2005','5000','tran','y')" ;
-     //          db.execSQL(sql);
-     //      }
-     //      catch (Exception e) {
-     //          Toast.makeText(this, "ERROR "+e.toString(), Toast.LENGTH_LONG).show();
-     //      }
+
         }
     }
 
