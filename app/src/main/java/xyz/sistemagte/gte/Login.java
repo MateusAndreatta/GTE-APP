@@ -46,8 +46,6 @@ public class Login extends AppCompatActivity {
         inputSenha = findViewById(R.id.input_senha);
         txtBottomSheet = findViewById(R.id.txtBottomSheet1);
         btnLogin = findViewById(R.id.btnLogin);
-
-        //TODO: Criar um thread para poder trocar o icone da seta no bottom sheet
     }
 
 
@@ -57,8 +55,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void Logar(View view) {
-        EditText campoEmail = (EditText)findViewById(R.id.input_email);
-        EditText campoSenha = (EditText)findViewById(R.id.input_senha);
+        EditText campoEmail = findViewById(R.id.input_email);
+        EditText campoSenha = findViewById(R.id.input_senha);
         if(campoEmail.getText().length() == 0 || campoSenha.getText().length() == 0){
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
         }else {

@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -44,16 +43,15 @@
         android:layout_marginBottom="15dp"/>
 
     <Button
+        android:id="@+id/btnRecuperSenha"
         android:textColor="@color/branco"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/recuperarSenha"
         android:background="@drawable/btn_login"
-        android:onClick="recuperar"
         android:drawableEnd="@drawable/ic_seta_direita_branco"
         android:drawableRight="@drawable/ic_seta_direita_branco" />
-
 
 </LinearLayout>
 

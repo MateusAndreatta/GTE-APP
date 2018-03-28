@@ -52,6 +52,8 @@
     <string name="enviar">Enviar</string>
     <string name="verificarCampos">Preencha todos os campos</string>
     <string name="loadingMsg">Enviando sua mensagem.</string>
+    <string name="loadingDados">Enviando dados</string>
+    <string name="RecuperarSenhaSucessoProgress">Um e-mail foi enviado para você redefinir sua senha</string>
     <string name="MsgSucesso">Mensagem enviada com sucesso.</string>
 
 
