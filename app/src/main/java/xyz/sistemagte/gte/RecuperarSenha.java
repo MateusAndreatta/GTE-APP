@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +41,12 @@ public class RecuperarSenha extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.recuperarSenha));     //Titulo para ser exibido na sua Action Bar em frente à seta
+
+        EmailRecuperarCampo = findViewById(R.id.input_email);
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        progressDialog = new ProgressDialog(RecuperarSenha.this);
 
         Button btn = findViewById(R.id.btnRecuperSenha);
         btn.setOnClickListener(new View.OnClickListener() {
