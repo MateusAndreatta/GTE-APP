@@ -109,9 +109,7 @@ public class Cadastro extends AppCompatActivity {
          * */
         Validacoes validacoes = new Validacoes();
         if(ValidarCampos()){
-            if(!validacoes.ValidarSenhas(campo_senha.getText().toString(),campo_confSenha.getText().toString())){
-                Toast.makeText(this, getResources().getString(R.string.senhasDiferentes), Toast.LENGTH_SHORT).show();
-            }else{
+            if(validacoes.ValidarSenhas(this,campo_senha.getText().toString(),campo_confSenha.getText().toString())){
                 String tipo = String.valueOf(tipoUser.getSelectedItemPosition());
                 switch (tipo){
                     case("0"):
