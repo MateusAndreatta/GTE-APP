@@ -29,7 +29,10 @@
     <string name="editar">Editar</string>
     <string name="excluir">Excluir</string>
 
+    <!-- validação de senhas -->
     <string name="senhasDiferentes">Senhas diferentes!</string>
+    <string name="senhasMenor">Senha precisam ser maiores que 8 caracteres!</string>
+    <string name="senhasMaior">Senhas precisam ser menores que 12 caracteres!</string>
 
     <string name="painel">O que deseja fazer?</string>
 
