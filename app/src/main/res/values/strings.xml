@@ -29,6 +29,8 @@
     <string name="editar">Editar</string>
     <string name="excluir">Excluir</string>
 
+    <string name="senhasDiferentes">Senhas diferentes!</string>
+
     <string name="painel">O que deseja fazer?</string>
 
     <!-- Bottom sheet do login -->
@@ -76,6 +78,8 @@
         <item>Feminino</item>
     </string-array>
 
+
+    <string name="tipoUserFeedback">Selecione o seu tipo de usuario.</string>
 
     <string name="sx">Sexo</string>
     <string name="sobrenome">Sobrenome</string>
