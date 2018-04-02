@@ -1,5 +1,6 @@
 package xyz.sistemagte.gte;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -11,8 +12,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Login extends AppCompatActivity {
@@ -24,6 +38,13 @@ public class Login extends AppCompatActivity {
     EditText inputEmail;
     TextView labelRecuperarSenha;
 
+    RequestQueue requestQueue;
+
+    String EmailHolder, SenhaHolder;
+
+    ProgressDialog progressDialog;
+
+    String HttpUrl = "https://sistemagte.xyz/android/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +52,16 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
+
+        requestQueue = Volley.newRequestQueue(this);
+        progressDialog = new ProgressDialog(Login.this);
+
         try{
             CoordinatorLayout llBottomSheet = findViewById(R.id.bottom_sheet);
             BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             bottomSheetBehavior.setPeekHeight(100);// altura que vem como padrao
             bottomSheetBehavior.setHideable(false);// true: ele vem em modo escondido
-
        }catch (Exception ex){
            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
        }
@@ -61,8 +85,9 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
         }else {
             //TODO: fazer a comparação do login com o banco
-            Intent Tela = new Intent(this, Painel_adm.class);
-            startActivity(Tela);
+            enviarEmailSenhaBD();
+          //  Intent Tela = new Intent(this, Painel_adm.class);
+          //  startActivity(Tela);
         }
     }
 
@@ -76,7 +101,73 @@ public class Login extends AppCompatActivity {
         startActivity(Tela);
     }
 
+    private void enviarEmailSenhaBD(){
+        // Showing progress dialog at user registration time.
+        progressDialog.setMessage(getResources().getString(R.string.loadingLogin));
+        progressDialog.show();
 
+        // Calling method to get value from EditText.
+        GetValueFromEditText();
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        if(ServerResponse.equals("erroEmailSenha")){
+                            Toast.makeText(Login.this, "Email ou senha incorretos!", Toast.LENGTH_SHORT).show();
+                        }else if(ServerResponse.equals("UsuarioSemPermicao")){
+                            Toast.makeText(Login.this, "Usuario sem permissão", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(Login.this, ServerResponse, Toast.LENGTH_SHORT).show();
+                            /*try{
+                                JSONObject jsonObject = new JSONObject(ServerResponse);
+                                Toast.makeText(Login.this, jsonObject.getString("nome"), Toast.LENGTH_LONG).show();
+                            }catch (Exception ex){
+                                Toast.makeText(Login.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                            }*/
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+
+                        // Showing error message if something goes wrong.
+                        Toast.makeText(Login.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // Adding All values to Params.
+                params.put("emailAPP", EmailHolder);
+                params.put("senhaAPP", SenhaHolder);
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
+
+    public void GetValueFromEditText(){
+        SenhaHolder = inputSenha.getText().toString();
+        EmailHolder = inputEmail.getText().toString().trim();
+    }
+
+    //Bottom sheet
     @Override
     protected void onResume() {
         super.onResume();
@@ -122,6 +213,7 @@ public class Login extends AppCompatActivity {
                 offsetY = slideOffset;
             }
         });
+
 
 
     }
