@@ -1,5 +1,8 @@
 package xyz.sistemagte.gte.Construtoras;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Created by Andreatta on 24/03/2018.
  */
@@ -15,6 +18,12 @@ public class Usuario {
         this.sobrenome = sobrenome;
         this.idEmpresa = idEmpresa;
         this.email = email;
+    }
+
+    public Usuario(JSONObject jsonObject) {
+        JSONObject jsonObject1 = new JSONObject(jsonObject);
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.getJSONObject(0);
     }
 
     public int getUserId() {

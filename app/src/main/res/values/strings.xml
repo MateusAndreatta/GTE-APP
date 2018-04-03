@@ -97,6 +97,7 @@
     <string name="cadastro_motorista">Cadastro do Motorista</string>
     <string name="cadastro_resp">Cadastro do Responsavel</string>
     <string name="cadastro_monitora">Cadastro da Monitora</string>
+    <string name="cadastro_van">Cadastro van</string>
     <string name="telefone">Telefone</string>
     <string name="rg">RG</string>
     <string name="cpf">CPF</string>

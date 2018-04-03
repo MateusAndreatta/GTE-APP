@@ -1,33 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.sistemagte.gte.CadVanActivity">
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="xyz.sistemagte.gte.cad_van">
 
-    <android.support.design.widget.AppBarLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:gravity="center"
+        android:text="@string/cadastro_van"
+        android:textSize="40sp" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/cad_form"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </android.support.design.widget.AppBarLayout>
+            <EditText
+                android:id="@+id/cad_cep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/capacidade"
+                android:inputType="number" />
 
-    <include layout="@layout/content_cad_van" />
+            <EditText
+                android:id="@+id/cad_cidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/modelo" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+            <EditText
+                android:id="@+id/cad_complemento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/placa" />
 
-</android.support.design.widget.CoordinatorLayout>
+            <EditText
+                android:id="@+id/hora_entrada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/anoFab"
+                android:inputType="time" />
+
+            <EditText
+                android:id="@+id/hora_saida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/marca"
+                android:inputType="time" />
+            <!-- todo: Personalizar o btn -->
+            <Button
+                android:id="@+id/cadastro_motorista"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="cadastrarVan"
+                android:text="@string/enviar" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -28,6 +28,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import xyz.sistemagte.gte.Construtoras.Usuario;
+
 
 public class Login extends AppCompatActivity {
 
@@ -133,6 +135,7 @@ public class Login extends AppCompatActivity {
                             try{
                                 JSONObject jsonObject = new JSONObject(ServerResponse);
                                 Toast.makeText(Login.this, jsonObject.getString("nome"), Toast.LENGTH_LONG).show();
+                                new Usuario(jsonObject);
                             }catch (Exception ex){
                                 Toast.makeText(Login.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -224,8 +227,6 @@ public class Login extends AppCompatActivity {
                 offsetY = slideOffset;
             }
         });
-
-
 
     }
 

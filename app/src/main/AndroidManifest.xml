@@ -23,22 +23,17 @@
         <activity android:name=".cad_motorista" />
         <activity android:name=".cad_escola" />
         <activity
-            android:name=".cad_monitora"
-            android:label="@string/title_activity_cad_monitora"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".CadVanActivity"
             android:label="@string/title_activity_cad_van"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Painel_adm" />
         <activity android:name=".Funcionario" />
         <activity android:name=".RecuperarSenha" />
-
         <activity android:name=".Painel_motorista" />
-        <activity android:name=".Painel_monitora"></activity>
-
-
-        <activity android:name=".cad_crianca"/>
+        <activity android:name=".Painel_monitora" />
+        <activity android:name=".cad_crianca" />
+        <activity android:name=".cad_monitor" />
+        <activity android:name=".cad_van"></activity>
     </application>
 
 </manifest>
