@@ -117,8 +117,7 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-
-                        switch (ServerResponse){
+                        switch (ServerResponse.trim()){
                             case "UsuarioNaoCadastrado":
                                 Toast.makeText(Login.this, getResources().getString(R.string.LoginEmailNaoCadastrado), Toast.LENGTH_SHORT).show();
                                 break;
@@ -139,7 +138,6 @@ public class Login extends AppCompatActivity {
 
                                 try{
                                     JSONObject jsonObject = new JSONObject(ServerResponse);
-                                    //Toast.makeText(Login.this, jsonObject.getString("nome"), Toast.LENGTH_LONG).show();
                                     JSONObject jsonArray = jsonObject.getJSONObject("nome");
                                     String id = jsonArray.getString("id");
                                     String tipo = jsonArray.getString("tipo");
@@ -179,11 +177,8 @@ public class Login extends AppCompatActivity {
                                         default:
                                             Toast.makeText(Login.this, getResources().getString(R.string.LoginPermissao), Toast.LENGTH_SHORT).show();
                                             break;
-
                                     }
                                 }catch (Exception ex){
-                                    //quando tenta recuperar um erro especifico ele cai no catch
-                                    Toast.makeText(Login.this, "Erro Catch", Toast.LENGTH_SHORT).show();
                                     Toast.makeText(Login.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                                 break;
