@@ -75,7 +75,6 @@ public class Cadastro extends AppCompatActivity {
     }
 
     private boolean ValidarCampos(){
-        //TODO: Fazer 2 if, um para verificar se todos os campos estao preenchidos, e um pra verificar a senha.
         if(campo_nome.getText().length() == 0 || campo_sobrenome.getText().length() == 0 || campo_email.getText().length() == 0
                 || campo_senha.getText().length() == 0 || campo_confSenha.getText().length() == 0 || campo_telefone.getText().length() == 0
                 || campo_rg.getText().length() == 0 || campo_cpf.getText().length() == 0 || campo_dataNasc.getText().length() == 0) {
