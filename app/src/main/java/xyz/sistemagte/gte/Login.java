@@ -114,20 +114,31 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                        if(ServerResponse.equals("erroEmailSenha")){
-                            Toast.makeText(Login.this, "Email ou senha incorretos!", Toast.LENGTH_SHORT).show();
-                        }else if(ServerResponse.equals("UsuarioSemPermicao")){
-                            Toast.makeText(Login.this, "Usuario sem permissão", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(Login.this, ServerResponse, Toast.LENGTH_SHORT).show();
-                            /*try{
+
+                        switch (ServerResponse){
+                            case "UsuarioNaoCadastrado":
+                                Toast.makeText(Login.this, getResources().getString(R.string.LoginEmailNaoCadastrado), Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case "SenhaIncoreta":
+                                Toast.makeText(Login.this, getResources().getString(R.string.LoginSenhaIncorreta), Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case "UsuarioSemPermicao":
+                                Toast.makeText(Login.this, getResources().getString(R.string.LoginPermissao), Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                            //nenhum erro
+
+                            try{
                                 JSONObject jsonObject = new JSONObject(ServerResponse);
                                 Toast.makeText(Login.this, jsonObject.getString("nome"), Toast.LENGTH_LONG).show();
                             }catch (Exception ex){
                                 Toast.makeText(Login.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-                            }*/
-                        }
+                            }
 
+                                break;
+                        }
                         progressDialog.dismiss();
                     }
                 },

@@ -34,6 +34,10 @@
     <string name="senhasMenor">Senha precisam ser maiores que 8 caracteres!</string>
     <string name="senhasMaior">Senhas precisam ser menores que 12 caracteres!</string>
 
+    <!--Validação de login -->
+    <string name="LoginSenhaIncorreta">Senha incorreta</string>
+    <string name="LoginEmailNaoCadastrado">E-mail não cadastrado</string>
+    <string name="LoginPermissao">Permissão negada</string>
     <string name="painel">O que deseja fazer?</string>
 
     <!-- Bottom sheet do login -->
