@@ -5,8 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import xyz.sistemagte.gte.Construtoras.Usuario;
 
 public class Painel_adm extends AppCompatActivity {
+
+    TextView Label;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +19,14 @@ public class Painel_adm extends AppCompatActivity {
         setContentView(R.layout.activity_painel_adm);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle("Painel");     //Titulo para ser exibido na sua Action Bar em frente à seta
+        getSupportActionBar().setTitle(getResources().getString(R.string.AppBarPainel));     //Titulo para ser exibido na sua Action Bar em frente à seta
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        String UserNome = bundle.getString("BundleUserNome");
+
+        Label = findViewById(R.id.LabelOlaPainel);
+        Label.setText(Label.getText() + " " + UserNome);
     }
     //este é para o da navbar (seta)
     @Override

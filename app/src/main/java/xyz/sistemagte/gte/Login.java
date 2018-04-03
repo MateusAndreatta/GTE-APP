@@ -23,10 +23,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import xyz.sistemagte.gte.Construtoras.Usuario;
 
@@ -86,7 +88,6 @@ public class Login extends AppCompatActivity {
         if(campoEmail.getText().length() == 0 || campoSenha.getText().length() == 0){
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
         }else {
-            //TODO: fazer a comparação do login com o banco
             enviarEmailSenhaBD();
           //  Intent Tela = new Intent(this, Painel_adm.class);
           //  startActivity(Tela);
@@ -116,8 +117,7 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-
-                        switch (ServerResponse){
+                        switch (ServerResponse.trim()){
                             case "UsuarioNaoCadastrado":
                                 Toast.makeText(Login.this, getResources().getString(R.string.LoginEmailNaoCadastrado), Toast.LENGTH_SHORT).show();
                                 break;
@@ -132,18 +132,59 @@ public class Login extends AppCompatActivity {
                             default:
                             //nenhum erro
 
-                            try{
-                                JSONObject jsonObject = new JSONObject(ServerResponse);
-                                Toast.makeText(Login.this, jsonObject.getString("nome"), Toast.LENGTH_LONG).show();
-                                new Usuario(jsonObject);
-                            }catch (Exception ex){
-                                Toast.makeText(Login.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
+                                if(Objects.equals(ServerResponse, "UsuarioNaoCadastrado")){
+                                    Toast.makeText(Login.this, "Caiu no if", Toast.LENGTH_SHORT).show();
+                                }
 
+                                try{
+                                    JSONObject jsonObject = new JSONObject(ServerResponse);
+                                    JSONObject jsonArray = jsonObject.getJSONObject("nome");
+                                    String id = jsonArray.getString("id");
+                                    String tipo = jsonArray.getString("tipo");
+                                    String nome = jsonArray.getString("nome");
+                                    String sobrenome = jsonArray.getString("Sobrenome");
+                                    String empresa = jsonArray.getString("id empresa");
+                                    String email = jsonArray.getString("email");
+
+                                    Usuario usuario = new Usuario(Integer.parseInt(id),Integer.parseInt(tipo),Integer.parseInt(empresa),nome,sobrenome,email);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("BundleUserNome", usuario.getUserNome());
+                                    bundle.putString("BundleUserSobrenome", usuario.getUserSobrenome());
+                                    bundle.putString("BundleUserEmail", usuario.getUserEmail());
+                                    bundle.putString("BundleUserId", String.valueOf(usuario.getUserId()));
+                                    bundle.putString("BundleUserIdEmpresa", String.valueOf(usuario.getUserIdEmpresa()));
+                                    bundle.putString("BundleUserTipo", String.valueOf(usuario.getUserTipoUser()));
+                                     switch (tipo){
+                                        case("1"):
+                                            Intent telaMotorista = new Intent(Login.this, Painel_motorista.class);
+                                            telaMotorista.putExtras(bundle);
+                                            startActivity(telaMotorista);
+                                            break;
+                                        case ("2"):
+                                            //Intent telaResponsavel = new Intent(Login.this, Painel_responsavel.class);
+                                            //startActivity(telaResponsavel);
+                                            break;
+                                        case ("3"):
+                                            Intent telaMonitora = new Intent(Login.this, Painel_monitora.class);
+                                            telaMonitora.putExtras(bundle);
+                                            startActivity(telaMonitora);
+                                            break;
+                                        case ("4"):
+                                            Intent telaAdm = new Intent(Login.this, Painel_adm.class);
+                                            telaAdm.putExtras(bundle);
+                                            startActivity(telaAdm);
+                                            break;
+                                        default:
+                                            Toast.makeText(Login.this, getResources().getString(R.string.LoginPermissao), Toast.LENGTH_SHORT).show();
+                                            break;
+                                    }
+                                }catch (Exception ex){
+                                    Toast.makeText(Login.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                                 break;
-                        }
+                        }//fechamento do switch
                         progressDialog.dismiss();
-                    }
+                    }//onresponse
                 },
                 new Response.ErrorListener() {
                     @Override

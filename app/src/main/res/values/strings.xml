@@ -39,6 +39,7 @@
     <string name="LoginEmailNaoCadastrado">E-mail não cadastrado</string>
     <string name="LoginPermissao">Permissão negada</string>
     <string name="painel">O que deseja fazer?</string>
+    <string name="AppBarPainel">Painel</string>
 
     <!-- Bottom sheet do login -->
     <string name="maisOpcoes">Mais opções</string>

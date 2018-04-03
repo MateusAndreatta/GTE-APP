@@ -123,7 +123,7 @@ public class Cadastro extends AppCompatActivity {
                         break;
                     case("2"):
                         //Monitora
-                        Intent telaMonitora = new Intent(Cadastro.this, cad_monitora.class);
+                        Intent telaMonitora = new Intent(Cadastro.this, cad_monitor.class);
                         startActivity(telaMonitora);
                         break;
                     case ("3"):
