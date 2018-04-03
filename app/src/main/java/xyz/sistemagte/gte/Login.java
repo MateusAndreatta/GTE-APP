@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -86,7 +87,6 @@ public class Login extends AppCompatActivity {
         if(campoEmail.getText().length() == 0 || campoSenha.getText().length() == 0){
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
         }else {
-            //TODO: fazer a comparação do login com o banco
             enviarEmailSenhaBD();
           //  Intent Tela = new Intent(this, Painel_adm.class);
           //  startActivity(Tela);
@@ -134,8 +134,37 @@ public class Login extends AppCompatActivity {
 
                             try{
                                 JSONObject jsonObject = new JSONObject(ServerResponse);
-                                Toast.makeText(Login.this, jsonObject.getString("nome"), Toast.LENGTH_LONG).show();
-                                new Usuario(jsonObject);
+                                //Toast.makeText(Login.this, jsonObject.getString("nome"), Toast.LENGTH_LONG).show();
+                                JSONObject jsonArray = jsonObject.getJSONObject("nome");
+                                String id = jsonArray.getString("id");
+                                String tipo = jsonArray.getString("tipo");
+                                String nome = jsonArray.getString("nome");
+                                String sobrenome = jsonArray.getString("Sobrenome");
+                                String empresa = jsonArray.getString("id empresa");
+                                String email = jsonArray.getString("email");
+
+                                new Usuario(Integer.parseInt(id),Integer.parseInt(tipo),Integer.parseInt(empresa),nome,sobrenome,email);
+                                switch (tipo){
+                                    case("1"):
+                                        Intent telaMotorista = new Intent(Login.this, Painel_motorista.class);
+                                        startActivity(telaMotorista);
+                                        break;
+                                    case ("2"):
+                                        //Intent telaResponsavel = new Intent(Login.this, Painel_responsavel.class);
+                                        //startActivity(telaResponsavel);
+                                        break;
+                                    case ("3"):
+                                        Intent telaMonitora = new Intent(Login.this, Painel_monitora.class);
+                                        startActivity(telaMonitora);
+                                        break;
+                                    case ("4"):
+                                        Intent telaAdm = new Intent(Login.this, Painel_adm.class);
+                                        startActivity(telaAdm);
+                                        break;
+                                    default:
+                                        Toast.makeText(Login.this, getResources().getString(R.string.LoginPermissao), Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
                             }catch (Exception ex){
                                 Toast.makeText(Login.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                             }

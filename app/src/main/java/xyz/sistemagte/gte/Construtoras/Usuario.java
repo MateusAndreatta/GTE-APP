@@ -20,11 +20,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public Usuario(JSONObject jsonObject) {
-        JSONObject jsonObject1 = new JSONObject(jsonObject);
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.getJSONObject(0);
-    }
 
     public int getUserId() {
         return id;
