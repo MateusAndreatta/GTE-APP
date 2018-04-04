@@ -25,14 +25,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.FuncConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewFunc;
 
 
 public class Funcionario extends AppCompatActivity {
 
-    private static final String JSON_URL = "https://sistemagte.xyz/json/adm/ListarFuncionarios.php";
-
+    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarFuncionarios.php?id=8";
     ListView listView;
 
     List<FuncConst> funcList;
@@ -41,6 +41,8 @@ public class Funcionario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funcionario);
+
+        //TODO: Enviar a id da empresa como parametro por volley
 
         listView = findViewById(R.id.listView);
         funcList = new ArrayList<>();
