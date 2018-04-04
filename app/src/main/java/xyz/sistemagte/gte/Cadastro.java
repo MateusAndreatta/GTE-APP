@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.ConsoleMessage;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +14,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 
-import xyz.sistemagte.gte.metodos.Validacoes;
+import xyz.sistemagte.gte.Auxiliares.Validacoes;
 
 public class Cadastro extends AppCompatActivity {
 

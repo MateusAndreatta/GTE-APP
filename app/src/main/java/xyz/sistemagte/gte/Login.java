@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,17 +22,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import xyz.sistemagte.gte.Construtoras.Usuario;
+import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 
 public class Login extends AppCompatActivity {
+
+
 
     float offsetY;
     TextView txtBottomSheet;
@@ -146,18 +146,17 @@ public class Login extends AppCompatActivity {
                                     String empresa = jsonArray.getString("id empresa");
                                     String email = jsonArray.getString("email");
 
-                                    Usuario usuario = new Usuario(Integer.parseInt(id),Integer.parseInt(tipo),Integer.parseInt(empresa),nome,sobrenome,email);
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("BundleUserNome", usuario.getUserNome());
-                                    bundle.putString("BundleUserSobrenome", usuario.getUserSobrenome());
-                                    bundle.putString("BundleUserEmail", usuario.getUserEmail());
-                                    bundle.putString("BundleUserId", String.valueOf(usuario.getUserId()));
-                                    bundle.putString("BundleUserIdEmpresa", String.valueOf(usuario.getUserIdEmpresa()));
-                                    bundle.putString("BundleUserTipo", String.valueOf(usuario.getUserTipoUser()));
+                                    GlobalUser global =(GlobalUser)getApplication();
+                                    global.setGlobalUserID(Integer.parseInt(id));
+                                    global.setGlobalUserTipoUser(Integer.parseInt(tipo));
+                                    global.setGlobalUserIdEmpresa(Integer.parseInt(empresa));
+                                    global.setGlobalUserNome(nome);
+                                    global.setGlobalUserSobrenome(sobrenome);
+                                    global.setGlobalUserEmail(email);
+
                                      switch (tipo){
                                         case("1"):
                                             Intent telaMotorista = new Intent(Login.this, Painel_motorista.class);
-                                            telaMotorista.putExtras(bundle);
                                             startActivity(telaMotorista);
                                             break;
                                         case ("2"):
@@ -166,12 +165,10 @@ public class Login extends AppCompatActivity {
                                             break;
                                         case ("3"):
                                             Intent telaMonitora = new Intent(Login.this, Painel_monitora.class);
-                                            telaMonitora.putExtras(bundle);
                                             startActivity(telaMonitora);
                                             break;
                                         case ("4"):
                                             Intent telaAdm = new Intent(Login.this, Painel_adm.class);
-                                            telaAdm.putExtras(bundle);
                                             startActivity(telaAdm);
                                             break;
                                         default:

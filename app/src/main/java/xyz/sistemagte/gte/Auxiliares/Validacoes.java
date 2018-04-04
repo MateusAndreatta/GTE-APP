@@ -1,4 +1,4 @@
-package xyz.sistemagte.gte.metodos;
+package xyz.sistemagte.gte.Auxiliares;
 
 import android.content.Context;
 import android.widget.Toast;
