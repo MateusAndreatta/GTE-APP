@@ -24,14 +24,15 @@
         <activity android:name=".cad_motorista" />
         <activity android:name=".cad_escola" />
         <activity android:name=".Painel_adm" />
-        <activity android:name=".Funcionario" />
+        <activity android:name=".Funcionario_adm" />
         <activity android:name=".RecuperarSenha" />
         <activity android:name=".Painel_motorista" />
         <activity android:name=".Painel_monitora" />
         <activity android:name=".cad_crianca" />
         <activity android:name=".cad_monitor" />
         <activity android:name=".cad_van" />
-        <activity android:name=".Painel_responsavel"></activity>
+        <activity android:name=".Painel_responsavel" />
+        <activity android:name=".Crianca_adm"></activity>
     </application>
 
 </manifest>

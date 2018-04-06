@@ -47,7 +47,7 @@ public class Painel_adm extends AppCompatActivity {
     }
 
     public void irFuncionarios(View view) {
-        Intent Tela = new Intent(this, Funcionario.class);
+        Intent Tela = new Intent(this, Funcionario_adm.class);
         startActivity(Tela);
     }
 
