@@ -6,4 +6,5 @@
     <color name="colorAccent">#424242</color>
     <color name="branco">#FFF</color>
     <color name="cinza">#FEFEFE</color>
+    <color name="cinzaClaro">#e0e0e0</color>
 </resources>
