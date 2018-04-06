@@ -28,6 +28,7 @@
     <string name="titleContextMenu">Ações</string>
     <string name="editar">Editar</string>
     <string name="excluir">Excluir</string>
+    <string name="enquete">Enquete</string>
 
     <!-- validação de senhas -->
     <string name="senhasDiferentes">Senhas diferentes!</string>
