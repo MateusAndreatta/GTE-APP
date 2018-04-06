@@ -72,14 +72,16 @@
                 android:ems="10"
                 android:hint="@string/marca"
                 android:inputType="time" />
-            <!-- todo: Personalizar o btn -->
+
             <Button
                 android:id="@+id/cadastro_motorista"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="cadastrarVan"
-                android:text="@string/enviar" />
+                android:text="@string/enviar"
+                android:textColor="@color/branco"
+                android:background="@drawable/btn_padrao"/>
 
         </LinearLayout>
 
