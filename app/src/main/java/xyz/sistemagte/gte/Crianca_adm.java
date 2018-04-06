@@ -76,7 +76,7 @@ public class Crianca_adm extends AppCompatActivity {
             }
         });
 
-        //loadCriancaList();
+        loadCriancaList();
     }
 
     //este é para o da navbar (seta)

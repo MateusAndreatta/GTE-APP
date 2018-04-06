@@ -29,6 +29,7 @@
     <string name="editar">Editar</string>
     <string name="excluir">Excluir</string>
     <string name="enquete">Enquete</string>
+    <string name="responsavel">Responsavel</string>
 
     <!-- validação de senhas -->
     <string name="senhasDiferentes">Senhas diferentes!</string>

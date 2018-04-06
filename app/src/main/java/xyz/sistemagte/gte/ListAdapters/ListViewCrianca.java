@@ -40,8 +40,8 @@ public class ListViewCrianca extends ArrayAdapter<CriancaConst>{
 
         CriancaConst criancaConst = criancaList.get(position);
 
-        txtNome.setText(criancaConst.getNomeCrianca() + " " + criancaConst.getSobrenomeCrianca());
-        txtResp.setText(criancaConst.getResponsavelCrianca());
+        txtNome.setText(criancaConst.getNomeCrianca().substring(0,1).toUpperCase().concat(criancaConst.getNomeCrianca().substring(1)) + " " + criancaConst.getSobrenomeCrianca().substring(0,1).toUpperCase().concat(criancaConst.getSobrenomeCrianca().substring(1)));
+        txtResp.setText(mCtx.getResources().getString(R.string.responsavel)+ ": "+ criancaConst.getResponsavelCrianca());
 
         return listViewItem;
     }
