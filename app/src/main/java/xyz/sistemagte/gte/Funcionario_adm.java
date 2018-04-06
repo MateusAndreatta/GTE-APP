@@ -48,7 +48,6 @@ public class Funcionario_adm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funcionario);
 
-        //TODO: Enviar a id da empresa como parametro por volley
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
 

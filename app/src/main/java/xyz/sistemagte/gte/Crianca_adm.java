@@ -28,7 +28,9 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.Construtoras.FuncConst;
+import xyz.sistemagte.gte.ListAdapters.ListViewCrianca;
 import xyz.sistemagte.gte.ListAdapters.ListViewFunc;
 
 public class Crianca_adm extends AppCompatActivity {
@@ -37,7 +39,7 @@ public class Crianca_adm extends AppCompatActivity {
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
     ListView listView;
     private int idEmpresa;
-    List<FuncConst> funcList;
+    List<CriancaConst> criancaList;
 
 
     ProgressDialog progressDialog;
@@ -53,7 +55,7 @@ public class Crianca_adm extends AppCompatActivity {
         idEmpresa = global.getGlobalUserIdEmpresa();
 
         listView = findViewById(R.id.listView);
-        funcList = new ArrayList<>();
+        criancaList = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.listaCriancas));     //Titulo para ser exibido na sua Action Bar em frente à seta
@@ -74,7 +76,7 @@ public class Crianca_adm extends AppCompatActivity {
             }
         });
 
-        loadCriancaList();
+        //loadCriancaList();
     }
 
     //este é para o da navbar (seta)
@@ -121,12 +123,12 @@ public class Crianca_adm extends AppCompatActivity {
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                FuncConst funcConst = new FuncConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("descricao"));
+                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("responsavel"));
 
-                                funcList.add(funcConst);
+                                criancaList.add(funcConst);
                             }
 
-                            ListViewFunc adapter = new ListViewFunc(funcList, getApplicationContext());
+                            ListViewCrianca adapter = new ListViewCrianca(criancaList, getApplicationContext());
 
                             listView.setAdapter(adapter);
                         } catch (JSONException e) {

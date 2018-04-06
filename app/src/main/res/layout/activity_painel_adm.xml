@@ -80,7 +80,7 @@
 
                 </android.support.v7.widget.CardView>
 
-                <!-- CARD funcionario -->
+                <!-- CARD criança -->
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/criancas"
@@ -123,17 +123,52 @@
                 android:weightSum="5"
                 android:layout_marginTop="10dp">
 
-                <!-- CARD funcionario -->
+                <!-- CARD mensalidades -->
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/van"
+                    android:id="@+id/mensalidade"
                     android:layout_width="match_parent"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     card_view:cardCornerRadius="7dp"
                     card_view:cardBackgroundColor="@color/cinza"
-                    android:onClick="irVan"
+                    android:onClick="irMensalidade"
                     android:layout_marginRight="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="13dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/money" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/money"
+                            android:textSize="17sp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <!-- CARD vans -->
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/van"
+                    android:layout_width="match_parent"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    card_view:cardCornerRadius="7dp"
+                    card_view:cardBackgroundColor="@color/cinza"
+                    android:onClick="irVan"
+                    android:layout_marginLeft="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -151,40 +186,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/van"
-                            android:textSize="17sp"
-                            android:layout_gravity="center"/>
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <!-- CARD funcionario -->
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/mensalidade"
-                    android:layout_width="match_parent"
-                    android:layout_weight="3"
-                    android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="7dp"
-                    card_view:cardBackgroundColor="@color/cinza"
-                    android:onClick="irMensalidade"
-                    android:layout_marginLeft="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="13dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:src="@drawable/money" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/money"
                             android:textSize="17sp"
                             android:layout_gravity="center"/>
                     </LinearLayout>
