@@ -1,20 +1,25 @@
 package xyz.sistemagte.gte.Construtoras;
 
 /**
- * Created by Aluno on 06/04/2018.
+ * Created by Andreatta on 06/04/2018.
  */
 
 public class AcessosConst {
-    String nome, data, tipo;
+    String nome,sobrenome, data, tipo;
 
-    public AcessosConst(String nome, String data, String tipo) {
+    public AcessosConst(String nome, String sobrenome,String tipo, String data) {
         this.nome = nome;
+        this.sobrenome = sobrenome;
         this.data = data;
         this.tipo = tipo;
     }
 
     public String getNomeAcessos() {
         return nome;
+    }
+
+    public String getSobrenomeAcessos() {
+        return sobrenome;
     }
 
     public String getDataAcessos() {

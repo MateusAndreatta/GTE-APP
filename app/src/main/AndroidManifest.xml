@@ -32,7 +32,8 @@
         <activity android:name=".cad_monitor" />
         <activity android:name=".cad_van" />
         <activity android:name=".Painel_responsavel" />
-        <activity android:name=".Crianca_adm"></activity>
+        <activity android:name=".Crianca_adm" />
+        <activity android:name=".Acessos"></activity>
     </application>
 
 </manifest>

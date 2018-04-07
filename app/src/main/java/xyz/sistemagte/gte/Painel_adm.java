@@ -65,7 +65,8 @@ public class Painel_adm extends AppCompatActivity {
     }
 
     public void irAcessos(View view) {
-
+        Intent Tela = new Intent(this, Acessos.class);
+        startActivity(Tela);
     }
 
     public void irGraficos(View view) {

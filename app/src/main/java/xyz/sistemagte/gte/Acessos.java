@@ -28,18 +28,16 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
-import xyz.sistemagte.gte.Construtoras.CriancaConst;
-import xyz.sistemagte.gte.Construtoras.FuncConst;
-import xyz.sistemagte.gte.ListAdapters.ListViewCrianca;
-import xyz.sistemagte.gte.ListAdapters.ListViewFunc;
+import xyz.sistemagte.gte.Construtoras.AcessosConst;
+import xyz.sistemagte.gte.ListAdapters.ListViewAcessos;
 
-public class Crianca_adm extends AppCompatActivity {
+public class Acessos extends AppCompatActivity {
 
 
-    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
+    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarAcessos.php";
     ListView listView;
     private int idEmpresa;
-    List<CriancaConst> criancaList;
+    List<AcessosConst> acessoList;
 
 
     ProgressDialog progressDialog;
@@ -48,34 +46,34 @@ public class Crianca_adm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crianca_adm);
+        setContentView(R.layout.activity_acessos);
 
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
 
         listView = findViewById(R.id.listView);
-        criancaList = new ArrayList<>();
+        acessoList = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle(getResources().getString(R.string.listaCriancas));     //Titulo para ser exibido na sua Action Bar em frente à seta
+        getSupportActionBar().setTitle(getResources().getString(R.string.listaAcessos));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
         registerForContextMenu(listView);
 
         requestQueue = Volley.newRequestQueue(this);
 
-        progressDialog = new ProgressDialog(Crianca_adm.this);
+        progressDialog = new ProgressDialog(Acessos.this);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Cadastro de criança indisponível no momento", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Filtragem de Acessos não disponivel no momento", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
 
-        loadCriancaList();
+        loadAcessoList();
     }
 
     //este é para o da navbar (seta)
@@ -99,7 +97,7 @@ public class Crianca_adm extends AppCompatActivity {
         return;
     }
 
-    private void loadCriancaList() {
+    private void loadAcessoList() {
 
 
         // Showing progress dialog at user registration time.
@@ -111,7 +109,6 @@ public class Crianca_adm extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
 
@@ -122,12 +119,13 @@ public class Crianca_adm extends AppCompatActivity {
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("responsavel"));
-
-                                criancaList.add(funcConst);
+                                AcessosConst acessosConst = new AcessosConst(funcObject.getString("nome"), funcObject.getString("sobrenome"),
+                                        funcObject.getString("tipo"), funcObject.getString("data"));
+                                //TODO: converter a data e hora de acesso do app para o padrao brasileiro
+                                acessoList.add(acessosConst);
                             }
 
-                            ListViewCrianca adapter = new ListViewCrianca(criancaList, getApplicationContext());
+                            ListViewAcessos adapter = new ListViewAcessos(acessoList, getApplicationContext());
 
                             listView.setAdapter(adapter);
                         } catch (JSONException e) {
@@ -143,7 +141,7 @@ public class Crianca_adm extends AppCompatActivity {
                         progressDialog.dismiss();
 
                         // Showing error message if something goes wrong.
-                        Toast.makeText(Crianca_adm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Acessos.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
