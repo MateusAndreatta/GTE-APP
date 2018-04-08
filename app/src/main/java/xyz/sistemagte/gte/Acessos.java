@@ -116,12 +116,12 @@ public class Acessos extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
 
                             JSONArray funcArray = obj.getJSONArray("nome");
-
+                            //TODO: converter a data e hora de acesso do app para o padrao brasileiro
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
                                 AcessosConst acessosConst = new AcessosConst(funcObject.getString("nome"), funcObject.getString("sobrenome"),
                                         funcObject.getString("tipo"), funcObject.getString("data"));
-                                //TODO: converter a data e hora de acesso do app para o padrao brasileiro
+
                                 acessoList.add(acessosConst);
                             }
 
