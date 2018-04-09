@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
@@ -62,7 +63,12 @@ public class Painel_adm extends AppCompatActivity {
     }
 
     public void irMensalidade(View view) {
-
+        try {
+            Intent Tela = new Intent(this, vans.class);
+            startActivity(Tela);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void irAcessos(View view) {
@@ -71,6 +77,6 @@ public class Painel_adm extends AppCompatActivity {
     }
 
     public void irGraficos(View view) {
-
+        Toast.makeText(this, "Gráficos indisponível no momento", Toast.LENGTH_SHORT).show();
     }
 }
