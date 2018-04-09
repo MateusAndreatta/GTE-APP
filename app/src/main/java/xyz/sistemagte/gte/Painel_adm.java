@@ -57,7 +57,8 @@ public class Painel_adm extends AppCompatActivity {
     }
 
     public void irVan(View view) {
-
+        Intent Tela = new Intent(this, vans.class);
+        startActivity(Tela);
     }
 
     public void irMensalidade(View view) {

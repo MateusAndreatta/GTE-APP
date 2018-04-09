@@ -35,13 +35,15 @@ public class ListViewVans extends ArrayAdapter<VansConstr>{
 
         View listViewItem = inflater.inflate(R.layout.list_view_vans, null, true);
 
-        TextView txtid = listViewItem.findViewById(R.id.txtNome);
-        TextView txtTipo = listViewItem.findViewById(R.id.txtTipo);
+        TextView modeloMarca = listViewItem.findViewById(R.id.txtModeloMarca);
+        TextView capacidade = listViewItem.findViewById(R.id.txtCapacidade);
+        TextView placaAno = listViewItem.findViewById(R.id.txtPlacaAno);
 
-        VansConstr funcConst = vansList.get(position);
+        VansConstr vansConstr = vansList.get(position);
 
-        txtid.setText(funcConst.getNome());
-        txtTipo.setText(funcConst.getTipo());
+        modeloMarca.setText(vansConstr.getModeloVans() + " • " + vansConstr.getMarcaVans());
+        placaAno.setText(vansConstr.getPlacaVans() + " • " + vansConstr.getAnoVans());
+        capacidade.setText(mCtx.getResources().getString(R.string.capacidade) +": " +  vansConstr.getCapacidadeVans());
 
         return listViewItem;
     }

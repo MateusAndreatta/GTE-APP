@@ -36,7 +36,7 @@ import xyz.sistemagte.gte.ListAdapters.ListViewVans;
 public class vans extends AppCompatActivity {
 
 
-    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
+    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarVan.php";
     ListView listView;
     private int idEmpresa;
     List<VansConstr> vansList;
@@ -110,7 +110,6 @@ public class vans extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
 
@@ -120,8 +119,9 @@ public class vans extends AppCompatActivity {
                             JSONArray funcArray = obj.getJSONArray("nome");
 
                             for (int i = 0; i < funcArray.length(); i++) {
-                                JSONObject funcObject = funcArray.getJSONObject(i);
-                                VansConstr vansConstr  = new VansConstr(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("responsavel"));
+                                JSONObject jsonObject = funcArray.getJSONObject(i);
+                                VansConstr vansConstr  = new VansConstr(jsonObject.getString("modelo"), jsonObject.getString("marca"), jsonObject.getString("placa"),
+                                        Integer.parseInt(jsonObject.getString("ano")),Integer.parseInt(jsonObject.getString("capacidade")),jsonObject.getString("motorista") );
 
                                 vansList.add(vansConstr);
                             }
