@@ -28,9 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
-import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.Construtoras.VansConstr;
-import xyz.sistemagte.gte.ListAdapters.ListViewCrianca;
 import xyz.sistemagte.gte.ListAdapters.ListViewVans;
 
 public class vans extends AppCompatActivity {

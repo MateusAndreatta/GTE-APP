@@ -16,13 +16,13 @@ import xyz.sistemagte.gte.R;
  * Created by Andreatta on 06/04/2018.
  */
 
-public class ListViewCrianca extends ArrayAdapter<CriancaConst>{
+public class ListViewCriancaAdm extends ArrayAdapter<CriancaConst>{
 
     private List<CriancaConst> criancaList;
 
     private Context mCtx;
 
-    public ListViewCrianca(List<CriancaConst> criancaList, Context mCtx){
+    public ListViewCriancaAdm(List<CriancaConst> criancaList, Context mCtx){
         super(mCtx, R.layout.list_view_crianca, criancaList);
         this.criancaList = criancaList;
         this.mCtx = mCtx;

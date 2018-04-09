@@ -29,11 +29,9 @@ import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
-import xyz.sistemagte.gte.Construtoras.FuncConst;
-import xyz.sistemagte.gte.ListAdapters.ListViewCrianca;
-import xyz.sistemagte.gte.ListAdapters.ListViewFunc;
+import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 
-public class Crianca_adm extends AppCompatActivity {
+public class CriancaListagem extends AppCompatActivity {
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
@@ -63,7 +61,7 @@ public class Crianca_adm extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
-        progressDialog = new ProgressDialog(Crianca_adm.this);
+        progressDialog = new ProgressDialog(CriancaListagem.this);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -127,7 +125,7 @@ public class Crianca_adm extends AppCompatActivity {
                                 criancaList.add(funcConst);
                             }
 
-                            ListViewCrianca adapter = new ListViewCrianca(criancaList, getApplicationContext());
+                            ListViewCriancaAdm adapter = new ListViewCriancaAdm(criancaList, getApplicationContext());
 
                             listView.setAdapter(adapter);
                         } catch (JSONException e) {
@@ -143,7 +141,7 @@ public class Crianca_adm extends AppCompatActivity {
                         progressDialog.dismiss();
 
                         // Showing error message if something goes wrong.
-                        Toast.makeText(Crianca_adm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CriancaListagem.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

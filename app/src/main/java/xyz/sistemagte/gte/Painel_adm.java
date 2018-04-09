@@ -53,7 +53,7 @@ public class Painel_adm extends AppCompatActivity {
     }
 
     public void irCriancas(View view) {
-        Intent Tela = new Intent(this, Crianca_adm.class);
+        Intent Tela = new Intent(this, CriancaListagem.class);
         startActivity(Tela);
     }
 

@@ -29,7 +29,7 @@ import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
-import xyz.sistemagte.gte.ListAdapters.ListViewCrianca;
+import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 
 public class Mensalidades_adm extends AppCompatActivity {
 
@@ -126,7 +126,7 @@ public class Mensalidades_adm extends AppCompatActivity {
                                 criancaList.add(funcConst);
                             }
 
-                            ListViewCrianca adapter = new ListViewCrianca(criancaList, getApplicationContext());
+                            ListViewCriancaAdm adapter = new ListViewCriancaAdm(criancaList, getApplicationContext());
 
                             listView.setAdapter(adapter);
                         } catch (JSONException e) {
