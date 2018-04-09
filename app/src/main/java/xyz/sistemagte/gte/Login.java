@@ -158,8 +158,8 @@ public class Login extends AppCompatActivity {
                                             startActivity(telaMotorista);
                                             break;
                                         case ("2"):
-                                            //Intent telaResponsavel = new Intent(Login.this, Painel_responsavel.class);
-                                            //startActivity(telaResponsavel);
+                                            Intent telaResponsavel = new Intent(Login.this, Painel_responsavel.class);
+                                            startActivity(telaResponsavel);
                                             break;
                                         case ("3"):
                                             Intent telaMonitora = new Intent(Login.this, Painel_monitora.class);

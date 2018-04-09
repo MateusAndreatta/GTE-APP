@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+
 public class Painel_monitora extends AppCompatActivity {
     TextView Label;
     @Override
@@ -14,14 +16,11 @@ public class Painel_monitora extends AppCompatActivity {
         setContentView(R.layout.activity_painel_monitora);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle(getResources().getString(R.string.AppBarPainel));
-
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        String UserNome = bundle.getString("BundleUserNome");
+        getSupportActionBar().setTitle(getResources().getString(R.string.AppBarPainel));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
         Label = findViewById(R.id.LabelOlaPainel);
-        Label.setText(Label.getText() + " " + UserNome);
+        GlobalUser global =(GlobalUser)getApplication();
+        Label.setText(Label.getText() + " " + global.getGlobalUserNome());
     }
 
     //este é para o da navbar (seta)
