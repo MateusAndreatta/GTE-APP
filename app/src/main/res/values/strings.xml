@@ -32,6 +32,12 @@
     <string name="enquete">Enquete</string>
     <string name="responsavel">Responsavel</string>
 
+    <!--DIALOG -->
+    <string name="opcoesDialog">Opções</string>
+    <string name="textoDialog">Edite ou exclua esse registro, ou clique fora para cancelar</string>
+    <string name="excluirDialog">Excluir</string>
+    <string name="editarDialog">Editar</string>
+
     <!-- validação de senhas -->
     <string name="senhasDiferentes">Senhas diferentes!</string>
     <string name="senhasMenor">Senha precisam ser maiores que 8 caracteres!</string>
