@@ -35,6 +35,7 @@
     <string name="salvar">Salvar</string>
     <string name="editarMotorista">Editar Motorista</string>
     <string name="editarInfo">Editar suas informações</string>
+    <string name="informacoesSalvasSucesso">Informações Salvas com sucesso!</string>
 
 
     <!--DIALOG -->
