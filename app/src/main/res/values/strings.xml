@@ -33,6 +33,8 @@
     <string name="responsavel">Responsavel</string>
     <string name="editarResponsavel">Editar Responsável</string>
     <string name="salvar">Salvar</string>
+    <string name="editarMotorista">Editar Motorista</string>
+    <string name="editarInfo">Editar suas informações</string>
 
 
     <!--DIALOG -->
