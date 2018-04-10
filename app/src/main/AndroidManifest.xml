@@ -37,7 +37,8 @@
         <activity android:name=".vans" />
         <activity android:name=".Mensalidades_adm" />
         <activity android:name=".Editar_perfil_resp" />
-        <activity android:name=".editarMotorista"></activity>
+        <activity android:name=".editarMotorista" />
+        <activity android:name=".editarMonitora"></activity>
     </application>
 
 </manifest>
