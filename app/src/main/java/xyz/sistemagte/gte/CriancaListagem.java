@@ -1,6 +1,8 @@
 package xyz.sistemagte.gte;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -38,7 +41,7 @@ public class CriancaListagem extends AppCompatActivity {
     ListView listView;
     private int idEmpresa;
     List<CriancaConst> criancaList;
-
+    AlertDialog alerta;
 
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
@@ -57,8 +60,6 @@ public class CriancaListagem extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.listaCriancas));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
-        registerForContextMenu(listView);
-
         requestQueue = Volley.newRequestQueue(this);
 
         progressDialog = new ProgressDialog(CriancaListagem.this);
@@ -74,6 +75,34 @@ public class CriancaListagem extends AppCompatActivity {
         });
 
         loadCriancaList();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+
+                //Alert de confirmação do excluir
+                AlertDialog.Builder builder = new AlertDialog.Builder(CriancaListagem.this);
+                builder.setTitle(getResources().getString(R.string.opcoesDialog));
+                builder.setMessage(getResources().getString(R.string.textoDialog));
+                builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+                builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+
+                //cria o AlertDialog
+                alerta = builder.create();
+                //Exibe
+                alerta.show();
+
+            }
+        });
     }
 
     //este é para o da navbar (seta)
