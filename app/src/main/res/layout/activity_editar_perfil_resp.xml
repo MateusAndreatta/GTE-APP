@@ -22,8 +22,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/editarResponsavel"
-                android:textSize="40sp"
+                android:text="@string/editarInfo"
+                android:textSize="35sp"
                 android:gravity="center"/>
 
             <EditText
@@ -96,7 +96,10 @@
                 android:onClick="salvarEdicao"
                 android:background="@drawable/btn_padrao"
                 />
+
         </LinearLayout>
+
     </ScrollView>
+
 </LinearLayout>
 
