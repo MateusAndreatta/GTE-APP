@@ -35,7 +35,8 @@
         <activity android:name=".CriancaListagem" />
         <activity android:name=".Acessos" />
         <activity android:name=".vans" />
-        <activity android:name=".Mensalidades_adm"></activity>
+        <activity android:name=".Mensalidades_adm" />
+        <activity android:name=".Editar_perfil_resp"></activity>
     </application>
 
 </manifest>
