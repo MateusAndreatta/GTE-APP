@@ -31,6 +31,9 @@
     <string name="excluir">Excluir</string>
     <string name="enquete">Enquete</string>
     <string name="responsavel">Responsavel</string>
+    <string name="editarResponsavel">Editar Responsável</string>
+    <string name="salvar">Salvar</string>
+
 
     <!--DIALOG -->
     <string name="opcoesDialog">Opções</string>
