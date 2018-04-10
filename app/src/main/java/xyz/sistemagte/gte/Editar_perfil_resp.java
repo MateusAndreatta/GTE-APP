@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
@@ -35,12 +36,16 @@ public class Editar_perfil_resp extends AppCompatActivity {
     EditText Nome,Sobrenome, Email,DataNasc,Cpf,Rg ;
 
     RequestQueue requestQueue;
+    RequestQueue requestQueue2;
 
     String NomeHolder,SobrenomeHolder, EmailHolder,DataNascHolder,CpfHolder,RgHolder;
 
     ProgressDialog progressDialog;
+    ProgressDialog progressDialog2;
 
     String HttpUrl = "https://sistemagte.xyz/android/editar/editarResponsavel.php";
+
+    private static String JSON_URL = "https://sistemagte.xyz/json/responsavel/ListarResponsavel.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,9 @@ public class Editar_perfil_resp extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.editar_perfil));     //Titulo para ser exibido na sua Action Bar em frente à seta
+
+            loadDados();
+
     }
 
     //este é para o da navbar (seta)
@@ -85,7 +93,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
 
 
 
-    public void salvarEdicao(View view) {
+ /*   public void salvarEdicao(View view) {
 
         // Showing progress dialog at user registration time.
         progressDialog.setMessage(getResources().getString(R.string.loadingMsg));
@@ -142,6 +150,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
         requestQueue.add(stringRequest);
         Toast.makeText(this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
     }
+    */
 
     // Creating method to get value from EditText.
     public void GetValueFromEditText(){
@@ -154,11 +163,9 @@ public class Editar_perfil_resp extends AppCompatActivity {
     }
 
     private void loadDados() {
-
-
         // Showing progress dialog at user registration time.
-        progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
-        progressDialog.show();
+        progressDialog2.setMessage(getResources().getString(R.string.loadingRegistros));
+        progressDialog2.show();
 
         // Creating string request with post method.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
@@ -167,7 +174,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
+                        progressDialog2.dismiss();
 
                         try {
                             JSONObject obj = new JSONObject(response);
@@ -175,7 +182,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
                             JSONArray funcArray = obj.getJSONArray("nome");
                             JSONObject funcObject = funcArray.getJSONObject(0);
 
-                              //  CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("cpf"));
+                            Nome.setText(funcObject.getString("nome"));
 
 
                         } catch (JSONException e) {
@@ -188,7 +195,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
                     public void onErrorResponse(VolleyError volleyError) {
 
                         // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
+                        progressDialog2.dismiss();
 
                         // Showing error message if something goes wrong.
                         Toast.makeText(Editar_perfil_resp.this, volleyError.toString(), Toast.LENGTH_LONG).show();
@@ -201,15 +208,15 @@ public class Editar_perfil_resp extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 // Adding All values to Params.
-                params.put("id", String.valueOf(idEmpresa));
+                params.put("id", String.valueOf(idUsuario));
 
                 return params;
             }
 
         };
 
-        requestQueue.getCache().clear();
-        requestQueue.add(stringRequest);
+        requestQueue2.getCache().clear();
+        requestQueue2.add(stringRequest);
     }
 
 }
