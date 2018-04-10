@@ -34,7 +34,7 @@ import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 
-public class CriancaListagem extends AppCompatActivity {
+public class CriancaListagemAdm extends AppCompatActivity {
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
@@ -62,7 +62,7 @@ public class CriancaListagem extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
-        progressDialog = new ProgressDialog(CriancaListagem.this);
+        progressDialog = new ProgressDialog(CriancaListagemAdm.this);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -82,7 +82,7 @@ public class CriancaListagem extends AppCompatActivity {
 
 
                 //Alert de confirmação do excluir
-                AlertDialog.Builder builder = new AlertDialog.Builder(CriancaListagem.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(CriancaListagemAdm.this);
                 builder.setTitle(getResources().getString(R.string.opcoesDialog));
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
@@ -170,7 +170,7 @@ public class CriancaListagem extends AppCompatActivity {
                         progressDialog.dismiss();
 
                         // Showing error message if something goes wrong.
-                        Toast.makeText(CriancaListagem.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CriancaListagemAdm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

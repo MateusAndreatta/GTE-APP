@@ -46,7 +46,7 @@ public class Painel_responsavel extends AppCompatActivity {
     }
 
     public void irCriancas(View view) {
-        Intent tela = new Intent(this, CriancaListagem.class);
+        Intent tela = new Intent(this, CriancaListagemAdm.class);
         startActivity(tela);
     }
 }

@@ -32,13 +32,13 @@
         <activity android:name=".cad_monitor" />
         <activity android:name=".cad_van" />
         <activity android:name=".Painel_responsavel" />
-        <activity android:name=".CriancaListagem" />
+        <activity android:name=".CriancaListagemAdm" />
         <activity android:name=".Acessos" />
         <activity android:name=".vans" />
         <activity android:name=".Mensalidades_adm" />
         <activity android:name=".Editar_perfil_resp" />
         <activity android:name=".editarMotorista" />
-        <activity android:name=".editarMonitora"></activity>
+        <activity android:name=".editarMonitora" />
     </application>
 
 </manifest>
