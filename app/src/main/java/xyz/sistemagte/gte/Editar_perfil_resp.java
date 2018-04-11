@@ -15,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +60,13 @@ public class Editar_perfil_resp extends AppCompatActivity {
         Cpf   = findViewById(R.id.editar_cpf);
         Rg   = findViewById(R.id.editar_rg);
 
+
+        requestQueue = Volley.newRequestQueue(this);
+        requestQueue2 = Volley.newRequestQueue(this);
+
+        progressDialog = new ProgressDialog(Editar_perfil_resp.this);
+        progressDialog2 = new ProgressDialog(Editar_perfil_resp.this);
+
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
         idUsuario = global.getGlobalUserID();
@@ -66,7 +74,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.editar_perfil));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
-            loadDados();
+        loadDados();
 
     }
 
@@ -75,7 +83,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
-                startActivity(new Intent(this, Painel_adm.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                startActivity(new Intent(this, Painel_responsavel.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
             default:break;
@@ -86,14 +94,14 @@ public class Editar_perfil_resp extends AppCompatActivity {
     //O botao padrao do android
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(this, Painel_adm.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        startActivity(new Intent(this, Painel_responsavel.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
     }
 
 
 
- /*   public void salvarEdicao(View view) {
+    public void salvarEdicao(View view) {
 
         // Showing progress dialog at user registration time.
         progressDialog.setMessage(getResources().getString(R.string.loadingMsg));
@@ -130,7 +138,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
             protected Map<String, String> getParams() {
 
                 // Creating Map String Params.
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
 
                 // Adding All values to Params.
                 params.put("id", String.valueOf(idUsuario));
@@ -150,7 +158,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
         requestQueue.add(stringRequest);
         Toast.makeText(this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
     }
-    */
+
 
     // Creating method to get value from EditText.
     public void GetValueFromEditText(){
@@ -183,6 +191,11 @@ public class Editar_perfil_resp extends AppCompatActivity {
                             JSONObject funcObject = funcArray.getJSONObject(0);
 
                             Nome.setText(funcObject.getString("nome"));
+                            Sobrenome.setText(funcObject.getString("sobrenome"));
+                            Email.setText(funcObject.getString("email"));
+                            DataNasc.setText(funcObject.getString("dt_nasc"));
+                            Cpf.setText(funcObject.getString("cpf"));
+                            Rg.setText(funcObject.getString("rg"));
 
 
                         } catch (JSONException e) {
