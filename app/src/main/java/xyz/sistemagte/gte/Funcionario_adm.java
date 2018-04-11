@@ -68,8 +68,8 @@ public class Funcionario_adm extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Cadastro de funcionários indisponível no momento", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent Cad_funcionario = new Intent(Funcionario_adm.this, Cad_funcionario.class);
+                startActivity(Cad_funcionario);
             }
         });
 
