@@ -68,7 +68,6 @@ public class Editar_perfil_resp extends AppCompatActivity {
         progressDialog2 = new ProgressDialog(Editar_perfil_resp.this);
 
         GlobalUser global =(GlobalUser)getApplication();
-        idEmpresa = global.getGlobalUserIdEmpresa();
         idUsuario = global.getGlobalUserID();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão

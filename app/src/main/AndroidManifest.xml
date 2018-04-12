@@ -28,7 +28,7 @@
         <activity android:name=".RecuperarSenha" />
         <activity android:name=".Painel_motorista" />
         <activity android:name=".Painel_monitora" />
-        <activity android:name=".cad_crianca" />
+        <activity android:name=".Cad_crianca" />
         <activity android:name=".cad_monitor" />
         <activity android:name=".cad_van" />
         <activity android:name=".Painel_responsavel" />

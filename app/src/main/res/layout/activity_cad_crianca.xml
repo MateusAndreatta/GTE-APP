@@ -4,27 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.sistemagte.gte.cad_crianca"
+    tools:context="xyz.sistemagte.gte.Cad_crianca"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="20dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cadastro_crianca"
-        android:textSize="40sp"
-        android:gravity="center"/>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <LinearLayout
             android:id="@+id/cad_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cadastro_crianca"
+                android:textSize="40sp"
+                android:gravity="center"/>
+
             <EditText
                 android:id="@+id/cad_nome"
                 android:layout_width="match_parent"
@@ -104,23 +108,36 @@
                 android:hint="@string/rua"
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_num"
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/num"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"
-                android:inputType="number"/>
-            <EditText
-                android:id="@+id/cad_complemento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/complemento"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
+                android:layout_weight="10">
+
+                <EditText
+                    android:id="@+id/cad_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/num"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="number"
+                    android:layout_weight="5"/>
+                <EditText
+                    android:id="@+id/cad_complemento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/complemento"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -69,8 +69,8 @@ public class CriancaListagemAdm extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Cadastro de criança indisponível no momento", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent tela = new Intent(CriancaListagemAdm.this, Cad_crianca.class);
+                startActivity(tela);
             }
         });
 
