@@ -68,8 +68,8 @@ public class Funcionario_adm extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent Cad_funcionario = new Intent(Funcionario_adm.this, Cad_funcionario.class);
-                startActivity(Cad_funcionario);
+                Intent tela = new Intent(Funcionario_adm.this, Cad_funcionario.class);
+                startActivity(tela);
             }
         });
 
@@ -86,6 +86,7 @@ public class Funcionario_adm extends AppCompatActivity {
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
+
 
                     }
                 });
