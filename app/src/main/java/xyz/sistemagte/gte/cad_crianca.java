@@ -28,13 +28,13 @@ public class cad_crianca extends AppCompatActivity {
 
     private int idEmpresa,idUsuario;
 
-    EditText Nome,Sobrenome,Telefone, CEP,DataNasc,Cpf,Rg,Cidade, Rua,Numero, Complemento;
+    EditText Nome,Sobrenome,Telefone, CEP,DataNasc,Cpf,Rg,Cidade, Rua, Numero, Complemento;
     Spinner Estado;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
 
-    String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder,RgHolder, CidadeHolder,CEPHolder,TelefoneHolder,RGHolder,Numero;
+    String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder,RgHolder, CidadeHolder,CEPHolder,TelefoneHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
 
     String HttpUrl = "https://sistemagte.xyz/android/cadastro/CadCrianca.php";
 
@@ -74,10 +74,16 @@ public class cad_crianca extends AppCompatActivity {
     public void GetValueFromEditText(){
         NomeHolder = Nome.getText().toString().trim();
         SobrenomeHolder = Sobrenome.getText().toString().trim();
-        EmailHolder = Email.getText().toString().trim();
+        TelefoneHolder = Telefone.getText().toString().trim();
+        CEPHolder = CEP.getText().toString().trim();
         DataNascHolder = DataNasc.getText().toString().trim();
         CpfHolder = Cpf.getText().toString().trim();
         RgHolder = Rg.getText().toString().trim();
+        CidadeHolder = Cidade.getText().toString();
+        RuaHolder = Rua.getText().toString();
+        NumeroHolder = Numero.getText().toString();
+        ComplementoHolder = Complemento.getText().toString();
+        EstadoHolder = Estado.getSelectedItem().toString();
     }
 
     public void Cadastrar(View view) {
@@ -99,7 +105,7 @@ public class cad_crianca extends AppCompatActivity {
                         progressDialog.dismiss();
 
                         // Showing response message coming from server.
-                        Toast.makeText(Cad_crianca.this, getResources().getString(R.string.MsgSucesso), Toast.LENGTH_LONG).show();
+                        Toast.makeText(cad_crianca.this, getResources().getString(R.string.MsgSucesso), Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -110,7 +116,7 @@ public class cad_crianca extends AppCompatActivity {
                         progressDialog.dismiss();
 
                         // Showing error message if something goes wrong.
-                        Toast.makeText(Cad_crianca.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(cad_crianca.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -123,7 +129,6 @@ public class cad_crianca extends AppCompatActivity {
                 params.put("id", String.valueOf(idUsuario));
                 params.put("nome", NomeHolder);
                 params.put("sobrenome", SobrenomeHolder);
-                params.put("email", EmailHolder);
                 params.put("data", DataNascHolder);
                 params.put("cpf", CpfHolder);
                 params.put("rg", RgHolder);
