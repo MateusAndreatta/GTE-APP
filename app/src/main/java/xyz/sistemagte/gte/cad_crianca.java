@@ -24,7 +24,7 @@ import java.util.Map;
 
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
 
-public class Cad_crianca extends AppCompatActivity {
+public class cad_crianca extends AppCompatActivity {
 
     private int idEmpresa,idUsuario;
 
