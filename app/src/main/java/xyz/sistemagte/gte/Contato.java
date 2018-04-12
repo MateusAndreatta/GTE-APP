@@ -47,7 +47,7 @@ public class Contato extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle("Contato GTE");     //Titulo para ser exibido na sua Action Bar em frente à seta
+        getSupportActionBar().setTitle(getResources().getString(R.string.contato));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
         Nome     = findViewById(R.id.input_nome);
         Email    = findViewById(R.id.input_email);
