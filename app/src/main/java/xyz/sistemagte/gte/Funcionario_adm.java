@@ -56,6 +56,7 @@ public class Funcionario_adm extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         funcList = new ArrayList<>();
+        //seta de appbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.listaFunc));     //Titulo para ser exibido na sua Action Bar em frente à seta
