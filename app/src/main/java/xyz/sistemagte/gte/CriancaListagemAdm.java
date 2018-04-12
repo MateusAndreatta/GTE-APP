@@ -69,7 +69,7 @@ public class CriancaListagemAdm extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent tela = new Intent(CriancaListagemAdm.this, Cad_crianca.class);
+                Intent tela = new Intent(CriancaListagemAdm.this, cad_crianca.class);
                 startActivity(tela);
             }
         });

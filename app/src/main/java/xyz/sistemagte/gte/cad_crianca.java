@@ -36,7 +36,7 @@ public class cad_crianca extends AppCompatActivity {
 
     String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder,RgHolder, CidadeHolder,CEPHolder,TelefoneHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
 
-    String HttpUrl = "https://sistemagte.xyz/android/cadastro/CadCrianca.php";
+    String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadCrianca.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +132,13 @@ public class cad_crianca extends AppCompatActivity {
                 params.put("data", DataNascHolder);
                 params.put("cpf", CpfHolder);
                 params.put("rg", RgHolder);
+                params.put("tel", TelefoneHolder);
+                params.put("cep", CEPHolder);
+                params.put("cidade", CidadeHolder);
+                params.put("rua", RuaHolder);
+                params.put("numero", NumeroHolder);
+                params.put("complemento", ComplementoHolder);
+                params.put("estado", EstadoHolder);
 
                 return params;
             }
