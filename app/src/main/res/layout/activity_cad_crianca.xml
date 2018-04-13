@@ -75,6 +75,15 @@
                 android:hint="@string/datanascimento"
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
+
+            <Spinner
+                android:id="@+id/escolas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:array="@string/selecionarEscola"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                />
             <EditText
                 android:id="@+id/cad_cep"
                 android:layout_width="match_parent"
