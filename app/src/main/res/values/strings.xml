@@ -33,6 +33,7 @@
     <string name="responsavel">Responsavel</string>
     <string name="editarResponsavel">Editar Responsável</string>
     <string name="salvar">Salvar</string>
+    <string name="editarCrianca">Editar Criança</string>
     <string name="editarMotorista">Editar Motorista</string>
     <string name="editarInfo">Editar suas informações</string>
     <string name="cadastroFunc">Cadastrar funcionário</string>

@@ -40,7 +40,8 @@
         <activity android:name=".editarMotorista" />
         <activity android:name=".editarMonitora" />
         <activity android:name=".Crianca_resp" />
-        <activity android:name=".Cad_funcionario"></activity>
+        <activity android:name=".Cad_funcionario" />
+        <activity android:name=".EditarCrianca"></activity>
     </application>
 
 </manifest>
