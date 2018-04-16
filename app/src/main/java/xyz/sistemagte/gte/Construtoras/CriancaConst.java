@@ -5,19 +5,21 @@ package xyz.sistemagte.gte.Construtoras;
  */
 
 public class CriancaConst {
-    String nome, sobrenome, responsavel,cpf;
+    String nome, sobrenome, responsavel,cpf,idCrianca;
 
-    public CriancaConst(String nome, String sobrenome, String responsavel, String cpf) {
+    public CriancaConst(String nome, String sobrenome, String responsavel, String cpf, String idC) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.responsavel = responsavel;
         this.cpf = cpf;
+        this.idCrianca = idC;
     }
 
-    public CriancaConst(String nome, String sobrenome, String responsavel) {
+    public CriancaConst(String nome, String sobrenome, String responsavel,String idC) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.responsavel = responsavel;
+        this.idCrianca = idC;
     }
 
     public String getNomeCrianca() {

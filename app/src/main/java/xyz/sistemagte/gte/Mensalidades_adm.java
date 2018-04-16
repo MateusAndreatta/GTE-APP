@@ -32,6 +32,7 @@ import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
+import xyz.sistemagte.gte.Construtoras.FuncConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 
 public class Mensalidades_adm extends AppCompatActivity {
@@ -150,7 +151,7 @@ public class Mensalidades_adm extends AppCompatActivity {
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("responsavel"));
+                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("responsavel"), funcObject.getString("id_crianca"));
 
                                 criancaList.add(funcConst);
                             }

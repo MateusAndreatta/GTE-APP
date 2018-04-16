@@ -38,6 +38,7 @@ public class Crianca_resp extends AppCompatActivity {
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
+    private static String URL_Editar = "https://sistemagte.xyz/android/editar/CriancaResp.php";
     ListView listView;
     private int idEmpresa;
     List<CriancaConst> criancaList;
@@ -149,7 +150,8 @@ public class Crianca_resp extends AppCompatActivity {
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("cpf"));
+                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"),
+                                        funcObject.getString("cpf"), funcObject.getString(("id_crianca")));
 
                                 criancaList.add(funcConst);
                             }
@@ -190,4 +192,68 @@ public class Crianca_resp extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
     }
+
+  /*  private void EnviarIdCriancaParaEditar(int id_Crianca){
+        // Showing progress dialog at user registration time.
+        progressDialog.setMessage(getResources().getString(R.string.loadingDados));
+        progressDialog.show();
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_Editar,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray funcArray = obj.getJSONArray("nome");
+
+                            for (int i = 0; i < funcArray.length(); i++) {
+                                JSONObject funcObject = funcArray.getJSONObject(i);
+                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("cpf"));
+
+                                criancaList.add(funcConst);
+                            }
+
+                            ListViewCriancaAdm adapter = new ListViewCriancaAdm(criancaList, getApplicationContext());
+
+                            listView.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+
+                        // Showing error message if something goes wrong.
+                        Toast.makeText(Crianca_resp.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(id_Crianca));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+    */
 }
