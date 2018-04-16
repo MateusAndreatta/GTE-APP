@@ -39,10 +39,12 @@ public class Crianca_resp extends AppCompatActivity {
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
     private static String URL_Editar = "https://sistemagte.xyz/android/editar/CriancaResp.php";
+    private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirCrianca.php";
     ListView listView;
     private int idEmpresa;
     List<CriancaConst> criancaList;
     AlertDialog alerta;
+    private int idCrianca;
 
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
@@ -80,7 +82,8 @@ public class Crianca_resp extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
+                CriancaConst crianca = criancaList.get(position);
+                idCrianca = Integer.parseInt(crianca.getIdCrianca());
 
                 //Alert de confirmação do excluir
                 AlertDialog.Builder builder = new AlertDialog.Builder(Crianca_resp.this);
@@ -88,12 +91,12 @@ public class Crianca_resp extends AppCompatActivity {
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                      //EnviarIdCriancaParaEditar(position);
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        ExcluirCrianca(idCrianca);
                     }
                 });
 
@@ -128,7 +131,7 @@ public class Crianca_resp extends AppCompatActivity {
     }
 
     private void loadCriancaList() {
-
+        criancaList.clear();
 
         // Showing progress dialog at user registration time.
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
@@ -192,8 +195,8 @@ public class Crianca_resp extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
     }
-
-  /*  private void EnviarIdCriancaParaEditar(int id_Crianca){
+/*
+   private void EnviarIdCriancaParaEditar(int position){
         // Showing progress dialog at user registration time.
         progressDialog.setMessage(getResources().getString(R.string.loadingDados));
         progressDialog.show();
@@ -203,28 +206,9 @@ public class Crianca_resp extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-
-                        try {
-                            JSONObject obj = new JSONObject(response);
-
-                            JSONArray funcArray = obj.getJSONArray("nome");
-
-                            for (int i = 0; i < funcArray.length(); i++) {
-                                JSONObject funcObject = funcArray.getJSONObject(i);
-                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("cpf"));
-
-                                criancaList.add(funcConst);
-                            }
-
-                            ListViewCriancaAdm adapter = new ListViewCriancaAdm(criancaList, getApplicationContext());
-
-                            listView.setAdapter(adapter);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(Crianca_resp.this, response, Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -245,7 +229,7 @@ public class Crianca_resp extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 // Adding All values to Params.
-                params.put("id", String.valueOf(id_Crianca));
+                params.put("id", String.valueOf(position));
 
                 return params;
             }
@@ -255,5 +239,53 @@ public class Crianca_resp extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
     }
-    */
+*/
+    private void ExcluirCrianca(int id){
+
+        // Showing progress dialog at user registration time.
+        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+        progressDialog.show();
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_Excluir,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+                        Toast.makeText(Crianca_resp.this, getResources().getString(R.string.excluidoComSucesso), Toast.LENGTH_SHORT).show();
+
+                        loadCriancaList();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+
+                        // Showing error message if something goes wrong.
+                        Toast.makeText(Crianca_resp.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(idCrianca));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+
+    }
 }

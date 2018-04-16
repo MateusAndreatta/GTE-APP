@@ -46,6 +46,7 @@
     <string name="textoDialog">Edite ou exclua esse registro, ou clique fora para cancelar</string>
     <string name="excluirDialog">Excluir</string>
     <string name="editarDialog">Editar</string>
+    <string name="excluidoComSucesso">Excluido com sucesso.</string>
 
     <!-- validação de senhas -->
     <string name="senhasDiferentes">Senhas diferentes!</string>
@@ -83,6 +84,7 @@
     <string name="loadingDados">Enviando dados</string>
     <string name="loadingLogin">Entrando</string>
     <string name="loadingRegistros">Carregando os registros</string>
+    <string name="loadingExcluindo">Excluindo</string>
     <string name="RecuperarSenhaSucessoProgress">Um e-mail foi enviado para você redefinir sua senha</string>
     <string name="MsgSucesso">Mensagem enviada com sucesso.</string>
 

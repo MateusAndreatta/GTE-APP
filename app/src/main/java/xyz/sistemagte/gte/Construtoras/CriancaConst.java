@@ -37,4 +37,8 @@ public class CriancaConst {
     public String getCpfCrianca(){
         return cpf;
     }
+
+    public String getIdCrianca() {
+        return idCrianca;
+    }
 }
