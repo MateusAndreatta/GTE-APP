@@ -69,8 +69,14 @@ public class CriancaListagemAdm extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent tela = new Intent(CriancaListagemAdm.this, cad_crianca.class);
-                startActivity(tela);
+                try {
+                    Intent tela = new Intent(CriancaListagemAdm.this, cad_crianca.class);
+                    startActivity(tela);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(CriancaListagemAdm.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
