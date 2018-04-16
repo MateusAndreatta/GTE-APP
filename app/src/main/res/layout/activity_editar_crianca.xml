@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.sistemagte.gte.cad_crianca"
+    tools:context="xyz.sistemagte.gte.EditarCrianca"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="20dp">
@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cadastro_crianca"
+                android:text="@string/editarCrianca"
                 android:textSize="40sp"
                 android:gravity="center"/>
 
@@ -58,24 +58,6 @@
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
 
-            <EditText
-                android:id="@+id/cad_tel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone"
-                android:hint="@string/telefone"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_rg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:hint="@string/rg"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
             <EditText
                 android:id="@+id/cad_datanascimento"
                 android:layout_width="match_parent"
