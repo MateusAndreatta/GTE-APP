@@ -25,13 +25,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ola"
-                android:textSize="25sp"/>
+                android:textSize="25sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/painel"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColor="@color/secundaria"/>
         </LinearLayout>
 
         <LinearLayout
@@ -68,7 +70,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/funcionario" />
+                            android:src="@drawable/funcionario"
+                            android:tint="@color/secundariaimg"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -102,7 +105,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/crianca" />
+                            android:src="@drawable/crianca"
+                            android:tint="@color/secundariaimg"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -145,7 +149,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/money" />
+                            android:src="@drawable/money"
+                            android:tint="@color/secundariaimg"/>
 
 
                         <TextView
@@ -153,7 +158,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/money"
                             android:textSize="17sp"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center" />
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
@@ -180,7 +185,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/van" />
+                            android:src="@drawable/van"
+                            android:tint="@color/secundariaimg"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -223,7 +229,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/acesso" />
+                            android:src="@drawable/acesso"
+                            android:tint="@color/secundariaimg"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -257,7 +264,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/graficos" />
+                            android:src="@drawable/graficos"
+                            android:tint="@color/secundariaimg"/>
 
                         <TextView
                             android:layout_width="wrap_content"

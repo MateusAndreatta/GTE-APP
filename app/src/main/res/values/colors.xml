@@ -5,6 +5,8 @@
     <color name="colorPrimaryLight">#757575</color>
     <color name="colorAccent">#424242</color>
     <color name="branco">#FFF</color>
+    <color name="secundaria">#0d47a1</color>
+    <color name="secundariaimg">#424242</color>
     <color name="cinza">#FEFEFE</color>
     <color name="cinzaClaro">#e0e0e0</color>
 </resources>
