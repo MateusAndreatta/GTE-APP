@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -19,6 +20,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +45,14 @@ public class cad_crianca extends AppCompatActivity {
     String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder,RgHolder, CidadeHolder,CEPHolder,TelefoneHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
 
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadCriancaResp.php";
+    String HttpUrlSpinner = "https://sistemagte.xyz/json/ListarEscolasIdEmpresa.php";
 
+    ArrayList<String> EscolasListSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_crianca);
-
+        Estado = findViewById(R.id.escolas);
         requestQueue = Volley.newRequestQueue(this);
 
         progressDialog = new ProgressDialog(cad_crianca.this);
@@ -58,6 +66,48 @@ public class cad_crianca extends AppCompatActivity {
         idEmpresa = global.getGlobalUserIdEmpresa();
 
         //TODO: preencher o spinner escolas com as escolas cadastradas no banco referente a uma devida empresa do usuario
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrlSpinner,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+
+                        try{
+                            JSONObject jsonObject=new JSONObject(ServerResponse);
+                                JSONArray jsonArray=jsonObject.getJSONArray("nome");
+                                for(int i=0;i<jsonArray.length();i++){
+                                    JSONObject jsonObject1=jsonArray.getJSONObject(i);
+                                    String escola = jsonObject1.getString("nome_escola");
+                                    EscolasListSpinner.add(escola);
+                                }
+                            Estado.setAdapter(new ArrayAdapter<String>(cad_crianca.this, android.R.layout.simple_spinner_dropdown_item, EscolasListSpinner));
+                        }catch (JSONException e){e.printStackTrace();}
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        // Showing error message if something goes wrong.
+                        Toast.makeText(cad_crianca.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(idEmpresa));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
     }
 
     //este é para o da navbar (seta)
