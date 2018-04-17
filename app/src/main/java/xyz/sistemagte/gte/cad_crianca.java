@@ -31,13 +31,14 @@ import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
+import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 
 public class cad_crianca extends AppCompatActivity {
 
     private int idEmpresa,idUsuario;
 
     EditText Nome,Sobrenome,Telefone, CEP,DataNasc,Cpf,Rg,Cidade, Rua, Numero, Complemento;
-    Spinner Estado;
+    Spinner Estado, EscolaSpinner;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
@@ -47,14 +48,15 @@ public class cad_crianca extends AppCompatActivity {
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadCriancaResp.php";
     String HttpUrlSpinner = "https://sistemagte.xyz/json/ListarEscolasIdEmpresa.php";
 
-    ArrayList<String> EscolasListSpinner;
+    ArrayAdapter<String> EscolasListSpinner;
+    ArrayList<EscolasConstr> EscolasListConst;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_crianca);
-        Estado = findViewById(R.id.escolas);
+        EscolaSpinner = findViewById(R.id.escolas);
         requestQueue = Volley.newRequestQueue(this);
-
+        EscolasListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
         progressDialog = new ProgressDialog(cad_crianca.this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
@@ -71,7 +73,7 @@ public class cad_crianca extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-
+                        //Toast.makeText(cad_crianca.this, ServerResponse, Toast.LENGTH_SHORT).show();
                         try{
                             JSONObject jsonObject=new JSONObject(ServerResponse);
                                 JSONArray jsonArray=jsonObject.getJSONArray("nome");
@@ -79,8 +81,9 @@ public class cad_crianca extends AppCompatActivity {
                                     JSONObject jsonObject1=jsonArray.getJSONObject(i);
                                     String escola = jsonObject1.getString("nome_escola");
                                     EscolasListSpinner.add(escola);
+                                    EscolasListConst(jsonObject.getString(""),);
                                 }
-                            Estado.setAdapter(new ArrayAdapter<String>(cad_crianca.this, android.R.layout.simple_spinner_dropdown_item, EscolasListSpinner));
+                            EscolaSpinner.setAdapter(EscolasListSpinner);
                         }catch (JSONException e){e.printStackTrace();}
                     }
                 },
@@ -152,6 +155,9 @@ public class cad_crianca extends AppCompatActivity {
         if(VerificarCampos()) {
 
 
+            int spinnerPos = EscolaSpinner.getSelectedItemPosition();
+            EscolasConstr escolasConstr = EscolasListConst.get(spinnerPos);
+            escolasConstr.getIdEscola();//pegar a id da escola
             // Showing progress dialog at user registration time.
             progressDialog.setMessage(getResources().getString(R.string.loadingMsg));
             progressDialog.show();
