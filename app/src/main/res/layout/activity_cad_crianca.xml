@@ -102,7 +102,7 @@
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
             <Spinner
-                android:id="@+id/cad_estado"
+                android:id="@+id/spinnerEstado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/estados"

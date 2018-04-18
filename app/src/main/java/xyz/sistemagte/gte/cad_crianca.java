@@ -44,7 +44,7 @@ public class cad_crianca extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder,RgHolder, CidadeHolder,CEPHolder,TelefoneHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
-
+    int idEscolaHolder;
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadCriancaResp.php";
     String HttpUrlSpinner = "https://sistemagte.xyz/json/ListarEscolasIdEmpresa.php";
 
@@ -55,8 +55,23 @@ public class cad_crianca extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_crianca);
         EscolaSpinner = findViewById(R.id.escolas);
+        Estado = findViewById(R.id.spinnerEstado);
+
+        Nome = findViewById(R.id.cad_nome);
+        Sobrenome = findViewById(R.id.cad_sobrenome);
+        Telefone = findViewById(R.id.cad_tel);
+        CEP = findViewById(R.id.cad_cep);
+        DataNasc = findViewById(R.id.cad_datanascimento);
+        Cpf = findViewById(R.id.cad_cpf);
+        Rg = findViewById(R.id.cad_rg);
+        Cidade = findViewById(R.id.cad_cidade);
+        Rua = findViewById(R.id.cad_rua);
+        Numero = findViewById(R.id.cad_num);
+        Complemento = findViewById(R.id.cad_complemento);
+
         requestQueue = Volley.newRequestQueue(this);
         EscolasListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
+        EscolasListConst = new ArrayList<>();
         progressDialog = new ProgressDialog(cad_crianca.this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
@@ -66,8 +81,6 @@ public class cad_crianca extends AppCompatActivity {
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
         idEmpresa = global.getGlobalUserIdEmpresa();
-
-        //TODO: preencher o spinner escolas com as escolas cadastradas no banco referente a uma devida empresa do usuario
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrlSpinner,
                 new Response.Listener<String>() {
@@ -79,9 +92,10 @@ public class cad_crianca extends AppCompatActivity {
                                 JSONArray jsonArray=jsonObject.getJSONArray("nome");
                                 for(int i=0;i<jsonArray.length();i++){
                                     JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                                    String escola = jsonObject1.getString("nome_escola");
+                                    String escola = jsonObject1.getString("nome");
                                     EscolasListSpinner.add(escola);
-                                    EscolasListConst(jsonObject.getString(""),);
+                                    EscolasConstr escolasConstr = new EscolasConstr(jsonObject1.getString("nome"),jsonObject1.getString("cep"),jsonObject1.getString("rua"),jsonObject1.getString("numero"),jsonObject1.getString("complemento"),jsonObject1.getString("estado"),jsonObject1.getString("cidade"),jsonObject1.getInt("idEscola"),jsonObject1.getInt("idEnderecoEscola"));
+                                    EscolasListConst.add(escolasConstr);
                                 }
                             EscolaSpinner.setAdapter(EscolasListSpinner);
                         }catch (JSONException e){e.printStackTrace();}
@@ -136,28 +150,36 @@ public class cad_crianca extends AppCompatActivity {
 
     // Creating method to get value from EditText.
     public void GetValueFromEditText(){
-        NomeHolder = Nome.getText().toString().trim();
-        SobrenomeHolder = Sobrenome.getText().toString().trim();
-        TelefoneHolder = Telefone.getText().toString().trim();
-        CEPHolder = CEP.getText().toString().trim();
-        DataNascHolder = DataNasc.getText().toString().trim();
-        CpfHolder = Cpf.getText().toString().trim();
-        RgHolder = Rg.getText().toString().trim();
-        CidadeHolder = Cidade.getText().toString();
-        RuaHolder = Rua.getText().toString();
-        NumeroHolder = Numero.getText().toString();
-        ComplementoHolder = Complemento.getText().toString();
-        EstadoHolder = Estado.getSelectedItem().toString();
-    }
 
-    public void Cadastrar(View view) {
-
-        if(VerificarCampos()) {
+        try {
+            NomeHolder = Nome.getText().toString().trim();
+            SobrenomeHolder = Sobrenome.getText().toString().trim();
+            TelefoneHolder = Telefone.getText().toString().trim();
+            CEPHolder = CEP.getText().toString().trim();
+            DataNascHolder = DataNasc.getText().toString().trim();
+            CpfHolder = Cpf.getText().toString().trim();
+            RgHolder = Rg.getText().toString().trim();
+            CidadeHolder = Cidade.getText().toString();
+            RuaHolder = Rua.getText().toString();
+            NumeroHolder = Numero.getText().toString();
+            ComplementoHolder = Complemento.getText().toString();
+            EstadoHolder = Estado.getSelectedItem().toString();
 
 
             int spinnerPos = EscolaSpinner.getSelectedItemPosition();
             EscolasConstr escolasConstr = EscolasListConst.get(spinnerPos);
-            escolasConstr.getIdEscola();//pegar a id da escola
+            idEscolaHolder = escolasConstr.getIdEscola();//pegar a id da escola
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void Cadastrar(View view) {
+
+
+        if(VerificarCampos()) {
             // Showing progress dialog at user registration time.
             progressDialog.setMessage(getResources().getString(R.string.loadingMsg));
             progressDialog.show();
@@ -209,6 +231,7 @@ public class cad_crianca extends AppCompatActivity {
                     params.put("numero", NumeroHolder);
                     params.put("complemento", ComplementoHolder);
                     params.put("estado", EstadoHolder);
+                    params.put("idEscola", String.valueOf(idEscolaHolder));
 
                     return params;
                 }
@@ -221,18 +244,16 @@ public class cad_crianca extends AppCompatActivity {
     }
 
     private boolean VerificarCampos(){
-    //EditText Nome,Sobrenome,Telefone, CEP,DataNasc,Cpf,Rg,Cidade, Rua, Numero, Complemento;
-        //        Spinner Estado;
-        //TODO: Verificar o spiner tbm
-        //lembrando q tem 2 o das escolas e dos estados
-        if(Nome.getText().length() == 0 || Sobrenome.getText().length() == 0 || Telefone.getText().length() == 0 || CEP.getText().length() == 0
+     /*   if(Nome.getText().length() == 0 || Sobrenome.getText().length() == 0 || Telefone.getText().length() == 0 || CEP.getText().length() == 0
                 || DataNasc.getText().length() == 0 || Cpf.getText().length() == 0 || Rg.getText().length() == 0 || Cidade.getText().length() == 0
-                || Rua.getText().length() == 0 || Numero.getText().length() == 0){
+                || Rua.getText().length() == 0 || Numero.getText().length() == 0 || Estado.getSelectedItemPosition() == 0){
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
             return false;
         }else
         {
             return true;
         }
+        */
+        return true;
     }
 }
