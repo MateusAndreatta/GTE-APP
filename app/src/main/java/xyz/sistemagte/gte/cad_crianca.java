@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
@@ -77,6 +78,19 @@ public class cad_crianca extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.cadastro_crianca));
+
+        //aplica mascara
+        MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",Cpf);
+        MaskEditTextChangedListener mascaraCelular = new MaskEditTextChangedListener("(##) #####-####",Telefone);
+        MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
+        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",Rg);
+        MaskEditTextChangedListener mascaraCEP = new MaskEditTextChangedListener("#####-###",CEP);
+
+        Cpf.addTextChangedListener(mascaraCPF);
+        Telefone.addTextChangedListener(mascaraCelular);
+        DataNasc.addTextChangedListener(mascaraData);
+        Rg.addTextChangedListener(mascaraRG);
+        CEP.addTextChangedListener(mascaraCEP);
 
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();

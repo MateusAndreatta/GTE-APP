@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.Validacoes;
 
 public class Cadastro extends AppCompatActivity {
@@ -58,6 +59,18 @@ public class Cadastro extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipousuario, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tipoUser.setAdapter(adapter);
+
+
+        //aplica mascara
+        MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",campo_cpf);
+       MaskEditTextChangedListener mascaraCelular = new MaskEditTextChangedListener("(##) #####-####",campo_telefone);
+       MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",campo_dataNasc);
+       MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",campo_rg);
+
+        campo_cpf.addTextChangedListener(mascaraCPF);
+        campo_telefone.addTextChangedListener(mascaraCelular);
+        campo_dataNasc.addTextChangedListener(mascaraData);
+        campo_rg.addTextChangedListener(mascaraRG);
     }
     //este é para o da navbar (seta)
     @Override
