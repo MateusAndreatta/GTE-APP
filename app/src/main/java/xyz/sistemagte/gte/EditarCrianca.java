@@ -364,7 +364,7 @@ public class EditarCrianca extends AppCompatActivity {
                             Numero.setText(jo.getString("num"));
                             Complemento.setText(jo.getString("complemento"));
 
-                            switch(EstadoBD.trim()){
+                            switch(EstadoBD){
                                 case "AC"://acre
                                     Estado.setSelection(1);
                                     break;
