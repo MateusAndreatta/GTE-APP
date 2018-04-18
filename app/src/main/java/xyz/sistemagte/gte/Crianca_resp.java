@@ -38,7 +38,6 @@ public class Crianca_resp extends AppCompatActivity {
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
-    private static String URL_Editar = "https://sistemagte.xyz/android/editar/CriancaResp.php";
     private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirCrianca.php";
     ListView listView;
     private int idEmpresa;
@@ -96,7 +95,9 @@ public class Crianca_resp extends AppCompatActivity {
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                      //EnviarIdCriancaParaEditar(position);
+                      Intent tela = new Intent(Crianca_resp.this, EditarCrianca.class);
+                      tela.putExtra("idC",String.valueOf(idCrianca));
+                      startActivity(tela);
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
@@ -200,51 +201,7 @@ public class Crianca_resp extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
     }
-/*
-   private void EnviarIdCriancaParaEditar(int position){
-        // Showing progress dialog at user registration time.
-        progressDialog.setMessage(getResources().getString(R.string.loadingDados));
-        progressDialog.show();
 
-        // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_Editar,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        Toast.makeText(Crianca_resp.this, response, Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-
-                        // Showing error message if something goes wrong.
-                        Toast.makeText(Crianca_resp.this, volleyError.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                // Creating Map String Params.
-                Map<String, String> params = new HashMap<String, String>();
-
-                // Adding All values to Params.
-                params.put("id", String.valueOf(position));
-
-                return params;
-            }
-
-        };
-
-        requestQueue.getCache().clear();
-        requestQueue.add(stringRequest);
-    }
-*/
     private void ExcluirCrianca(int id){
 
         // Showing progress dialog at user registration time.
