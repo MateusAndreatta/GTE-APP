@@ -38,8 +38,10 @@ public class CriancaListagemAdm extends AppCompatActivity {
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
+    private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirCrianca.php";
     ListView listView;
     private int idEmpresa;
+    private int idCrianca;
     List<CriancaConst> criancaList;
     AlertDialog alerta;
 
@@ -85,6 +87,8 @@ public class CriancaListagemAdm extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                CriancaConst crianca = criancaList.get(position);
+                idCrianca = Integer.parseInt(crianca.getIdCrianca());
 
 
                 //Alert de confirmação do excluir
@@ -98,7 +102,7 @@ public class CriancaListagemAdm extends AppCompatActivity {
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        ExcluirCrianca(idCrianca);
                     }
                 });
 
@@ -195,5 +199,54 @@ public class CriancaListagemAdm extends AppCompatActivity {
 
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
+    }
+
+    private void ExcluirCrianca(int id){
+
+        // Showing progress dialog at user registration time.
+        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+        progressDialog.show();
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_Excluir,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+                        Toast.makeText(CriancaListagemAdm.this, getResources().getString(R.string.excluidoComSucesso), Toast.LENGTH_SHORT).show();
+
+                        loadCriancaList();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+
+                        // Showing error message if something goes wrong.
+                        Toast.makeText(CriancaListagemAdm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(idCrianca));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+
     }
 }
