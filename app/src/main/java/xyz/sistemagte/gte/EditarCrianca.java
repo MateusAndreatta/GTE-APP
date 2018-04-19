@@ -105,8 +105,6 @@ public class EditarCrianca extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
-                        // Showing error message if something goes wrong.
                         Toast.makeText(EditarCrianca.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
