@@ -20,7 +20,7 @@ public class Painel_motorista extends AppCompatActivity {
 
         Label = findViewById(R.id.LabelOlaPainel);
         GlobalUser global =(GlobalUser)getApplication();
-        Label.setText(Label.getText() + " " + global.getGlobalUserNome());
+        Label.setText(Label.getText() + ", " + global.getGlobalUserNome());
     }
 
     //este é para o da navbar (seta)
