@@ -74,7 +74,7 @@ public class cad_crianca extends AppCompatActivity {
         EscolasListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
         EscolasListConst = new ArrayList<>();
         progressDialog = new ProgressDialog(cad_crianca.this);
-
+        //botão
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.cadastro_crianca));
