@@ -25,7 +25,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
@@ -75,7 +77,7 @@ public class EditarCrianca extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle(getResources().getString(R.string.cadastro_crianca));
+        getSupportActionBar().setTitle(getResources().getString(R.string.editarCrianca));
 
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
@@ -126,6 +128,8 @@ public class EditarCrianca extends AppCompatActivity {
 
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
+
+
     }
 
     //este é para o da navbar (seta)
@@ -262,12 +266,12 @@ public class EditarCrianca extends AppCompatActivity {
     }
 
     public void Cadastrar(View view) {
-
-
+        Toast.makeText(this, "Desativado temporariamente", Toast.LENGTH_SHORT).show();
+/*
         if(VerificarCampos()) {
             // Showing progress dialog at user registration time.
-            progressDialog.setMessage(getResources().getString(R.string.loadingMsg));
-                       progressDialog.show();
+            progressDialog.setMessage(getResources().getString(R.string.loadingDados));
+            progressDialog.show();
 
             // Calling method to get value from EditText.
             GetValueFromEditText();
@@ -277,7 +281,8 @@ public class EditarCrianca extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String ServerResponse) {
-
+                            Toast.makeText(EditarCrianca.this, ServerResponse, Toast.LENGTH_LONG).show();
+                            System.out.println(ServerResponse);
                             // Hiding the progress dialog after all task complete.
                             progressDialog.dismiss();
 
@@ -326,10 +331,11 @@ public class EditarCrianca extends AppCompatActivity {
             requestQueue.getCache().clear();
             requestQueue.add(stringRequest);
         }
+        */
     }
 
     private boolean VerificarCampos(){
-        if(Nome.getText().length() == 0 || Sobrenome.getText().length() == 0 || Telefone.getText().length() == 0 || CEP.getText().length() == 0
+      /*  if(Nome.getText().length() == 0 || Sobrenome.getText().length() == 0 || Telefone.getText().length() == 0 || CEP.getText().length() == 0
                 || DataNasc.getText().length() == 0 || Cpf.getText().length() == 0 || Rg.getText().length() == 0 || Cidade.getText().length() == 0
                 || Rua.getText().length() == 0 || Numero.getText().length() == 0 || Estado.getSelectedItemPosition() == 0){
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
@@ -338,6 +344,8 @@ public class EditarCrianca extends AppCompatActivity {
         {
             return true;
         }
+        */
+        return true;
     }
 
     private void PuxarDadosCrianca(){
@@ -364,7 +372,7 @@ public class EditarCrianca extends AppCompatActivity {
                             Numero.setText(jo.getString("num"));
                             Complemento.setText(jo.getString("complemento"));
 
-                            switch(EstadoBD){
+                          /*  switch(EstadoBD){
                                 case "AC"://acre
                                     Estado.setSelection(1);
                                     break;
@@ -410,8 +418,14 @@ public class EditarCrianca extends AppCompatActivity {
                                 case "PB"://paraiba
                                     Estado.setSelection(15);
                                     break;
-                                case "PR"://paraná
-                                    Estado.setSelection(16);
+                                case "PR"://paraná 16
+                                    try {
+                                        Estado.setSelection(16);
+                                    } catch (Exception e) {
+                                        System.out.println(e.getMessage());
+                                        Toast.makeText(EditarCrianca.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    e.printStackTrace();
+                                    }
                                     break;
                                 case "PE"://pernambuco
                                     Estado.setSelection(17);
@@ -448,6 +462,7 @@ public class EditarCrianca extends AppCompatActivity {
                                     break;
                                 default: Estado.setSelection(0);
                             }
+*/
 
                         }catch (JSONException e){
                             e.printStackTrace();

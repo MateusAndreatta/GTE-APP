@@ -279,7 +279,7 @@ public class cad_crianca extends AppCompatActivity {
 
         if(VerificarCampos()) {
             // Showing progress dialog at user registration time.
-            progressDialog.setMessage(getResources().getString(R.string.loadingMsg));
+            progressDialog.setMessage(getResources().getString(R.string.loadingDados));
             progressDialog.show();
 
             // Calling method to get value from EditText.
@@ -290,7 +290,7 @@ public class cad_crianca extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String ServerResponse) {
-                            Toast.makeText(cad_crianca.this, ServerResponse, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(cad_crianca.this, ServerResponse, Toast.LENGTH_LONG).show();
                             System.out.println(ServerResponse);
                             // Hiding the progress dialog after all task complete.
                             progressDialog.dismiss();
