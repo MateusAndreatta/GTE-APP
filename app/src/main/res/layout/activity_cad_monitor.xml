@@ -125,7 +125,6 @@
                     android:text="@string/enviar"
                     android:textColor="@color/branco"
                     android:id="@+id/cadastro_motorista"
-                    android:onClick="Cadastrar_motorista"
                     android:background="@drawable/btn_padrao"
                     />
 
