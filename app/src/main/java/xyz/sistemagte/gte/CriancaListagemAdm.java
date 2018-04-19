@@ -72,7 +72,7 @@ public class CriancaListagemAdm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    Intent tela = new Intent(CriancaListagemAdm.this, cad_crianca.class);
+                    Intent tela = new Intent(CriancaListagemAdm.this, Cad_crianca_Adm.class);
                     startActivity(tela);
                 } catch (Exception e) {
                     e.printStackTrace();
