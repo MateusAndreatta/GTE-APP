@@ -54,4 +54,10 @@ public class Painel_responsavel extends AppCompatActivity {
         Intent tela = new Intent(this,Editar_perfil_resp.class);
         startActivity(tela);
     }
+
+    public void irMensalidade(View view) {
+    }
+
+    public void irEnquete(View view) {
+    }
 }

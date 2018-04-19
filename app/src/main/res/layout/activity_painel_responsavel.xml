@@ -160,13 +160,13 @@
                 <!-- CARD funcionario -->
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/van"
+                    android:id="@+id/enquete"
                     android:layout_width="match_parent"
                     android:layout_weight="3"
                     android:layout_height="wrap_content"
                     card_view:cardCornerRadius="7dp"
                     card_view:cardBackgroundColor="@color/cinza"
-                    android:onClick="irVan"
+                    android:onClick="irEnquete"
                     android:layout_marginRight="5dp">
 
                     <LinearLayout
