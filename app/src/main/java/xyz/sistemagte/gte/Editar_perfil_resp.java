@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
@@ -60,6 +61,15 @@ public class Editar_perfil_resp extends AppCompatActivity {
         Cpf   = findViewById(R.id.editar_cpf);
         Rg   = findViewById(R.id.editar_rg);
 
+
+        //aplica mascara
+        MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",Cpf);
+        //MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
+        //MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",Rg);
+
+        Cpf.addTextChangedListener(mascaraCPF);
+        //DataNasc.addTextChangedListener(mascaraData);
+        //Rg.addTextChangedListener(mascaraRG);
 
         requestQueue = Volley.newRequestQueue(this);
         requestQueue2 = Volley.newRequestQueue(this);
