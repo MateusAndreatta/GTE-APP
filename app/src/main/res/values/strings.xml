@@ -33,6 +33,8 @@
     <string name="responsavel">Responsavel</string>
     <string name="editarResponsavel">Editar Responsável</string>
     <string name="salvar">Salvar</string>
+    <string name="escolas">Escolas</string>
+    <string name="responsaveis">Responsaveis</string>
     <string name="cepInvalido">CEP inválido</string>
     <string name="editarCrianca">Editar Criança</string>
     <string name="editarMotorista">Editar Motorista</string>
