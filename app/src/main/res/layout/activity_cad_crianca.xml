@@ -57,24 +57,6 @@
                 android:layout_marginBottom="5dp"/>
 
             <EditText
-                android:id="@+id/cad_tel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone"
-                android:hint="@string/telefone"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_rg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:hint="@string/rg"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
                 android:id="@+id/cad_datanascimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
