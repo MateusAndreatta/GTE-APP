@@ -29,25 +29,28 @@ import java.util.Map;
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
+import xyz.sistemagte.gte.Construtoras.ResponsavelConstr;
 
 public class Cad_crianca_Adm extends AppCompatActivity {
 
     private int idEmpresa,idUsuario;
 
     EditText Nome,Sobrenome, CEP,DataNasc,Cpf,Cidade, Rua, Numero, Complemento;
-    Spinner Estado, EscolaSpinner;
+    Spinner Estado, EscolaSpinner,RespSpinner;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
 
     String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder, CidadeHolder,CEPHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
-    int idEscolaHolder;
+    int idEscolaHolder,IdRespHolder;
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadCriancaResp.php";
     String HttpUrlSpinner = "https://sistemagte.xyz/json/ListarEscolasIdEmpresa.php";
-    String JsonUrlResponsaveis = "https://sistemagte.xyz/json/ListarResponsaveisEmpresa.php";
+    String JsonUrlResponsaveis = "https://sistemagte.xyz/json/adm/ListarResponsaveis.php";
 
     ArrayAdapter<String> EscolasListSpinner;
+    ArrayAdapter<String> RespListSpinner;
     ArrayList<EscolasConstr> EscolasListConst;
+    ArrayList<ResponsavelConstr> ResponsavelConstrList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +59,23 @@ public class Cad_crianca_Adm extends AppCompatActivity {
         EscolaSpinner = findViewById(R.id.escolas);
         Estado = findViewById(R.id.spinnerEstado);
 
-        Nome = findViewById(R.id.cad_nome);
-        Sobrenome = findViewById(R.id.cad_sobrenome);
-        CEP = findViewById(R.id.cad_cep);
-        DataNasc = findViewById(R.id.cad_datanascimento);
-        Cpf = findViewById(R.id.cad_cpf);
-        Cidade = findViewById(R.id.cad_cidade);
-        Rua = findViewById(R.id.cad_rua);
-        Numero = findViewById(R.id.cad_num);
+        Nome        = findViewById(R.id.cad_nome);
+        Sobrenome   = findViewById(R.id.cad_sobrenome);
+        CEP         = findViewById(R.id.cad_cep);
+        DataNasc    = findViewById(R.id.cad_datanascimento);
+        Cpf         = findViewById(R.id.cad_cpf);
+        Cidade      = findViewById(R.id.cad_cidade);
+        Rua         = findViewById(R.id.cad_rua);
+        Numero      = findViewById(R.id.cad_num);
         Complemento = findViewById(R.id.cad_complemento);
+        RespSpinner = findViewById(R.id.responsavelSpinner);
+
 
         requestQueue = Volley.newRequestQueue(this);
         EscolasListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
+        RespListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
         EscolasListConst = new ArrayList<>();
+        ResponsavelConstrList = new ArrayList<>();
         progressDialog = new ProgressDialog(Cad_crianca_Adm.this);
         //botão
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
@@ -87,7 +94,6 @@ public class Cad_crianca_Adm extends AppCompatActivity {
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
         idEmpresa = global.getGlobalUserIdEmpresa();
-
         CarregarResponsaveis();
         CarregarEscolas();
     }
@@ -212,7 +218,9 @@ public class Cad_crianca_Adm extends AppCompatActivity {
                     break;
             }
 
-
+            int spinnerPos2 = RespSpinner.getSelectedItemPosition();
+            ResponsavelConstr responsavelConstr = ResponsavelConstrList.get(spinnerPos2);
+            IdRespHolder = responsavelConstr.getIdResp();//pegar a id da escola
             int spinnerPos = EscolaSpinner.getSelectedItemPosition();
             EscolasConstr escolasConstr = EscolasListConst.get(spinnerPos);
             idEscolaHolder = escolasConstr.getIdEscola();//pegar a id da escola
@@ -266,7 +274,7 @@ public class Cad_crianca_Adm extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
 
                     // Adding All values to Params.
-                    params.put("id", String.valueOf(idUsuario));
+                    params.put("id", String.valueOf(IdRespHolder));
                     params.put("nome", NomeHolder);
                     params.put("sobrenome", SobrenomeHolder);
                     params.put("data", DataNascHolder);
@@ -350,18 +358,19 @@ public class Cad_crianca_Adm extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                        //Toast.makeText(cad_crianca.this, ServerResponse, Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(Cad_crianca_Adm.this, ServerResponse, Toast.LENGTH_SHORT).show();
                         try{
                             JSONObject jsonObject=new JSONObject(ServerResponse);
                             JSONArray jsonArray=jsonObject.getJSONArray("nome");
                             for(int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                                String escola = jsonObject1.getString("nome");
-                                EscolasListSpinner.add(escola);
-                                EscolasConstr escolasConstr = new EscolasConstr(jsonObject1.getString("nome"),jsonObject1.getString("cep"),jsonObject1.getString("rua"),jsonObject1.getString("numero"),jsonObject1.getString("complemento"),jsonObject1.getString("estado"),jsonObject1.getString("cidade"),jsonObject1.getInt("idEscola"),jsonObject1.getInt("idEnderecoEscola"));
-                                EscolasListConst.add(escolasConstr);
+                                JSONObject jsonObject1 =jsonArray.getJSONObject(i);
+                                String resp = jsonObject1.getString("nome") + " " + jsonObject1.getString("sobrenome");
+                                RespListSpinner.add(resp);
+                                ResponsavelConstr responsavelConstr = new ResponsavelConstr(jsonObject1.getString("nome"),jsonObject1.getString("sobrenome"),jsonObject1.getString("email"),jsonObject1.getString("cpf"),jsonObject1.getString("rg"),jsonObject1.getString("dt_nasc"),Integer.parseInt(jsonObject1.getString("id_usuario")),Integer.parseInt(jsonObject1.getString("id_empresa")));
+                                ResponsavelConstrList.add(responsavelConstr);
                             }
-                            EscolaSpinner.setAdapter(EscolasListSpinner);
+                            RespSpinner.setAdapter(RespListSpinner);
                         }catch (JSONException e){e.printStackTrace();}
                     }
                 },
@@ -373,13 +382,8 @@ public class Cad_crianca_Adm extends AppCompatActivity {
                 }) {
             @Override
             protected Map<String, String> getParams() {
-
-                // Creating Map String Params.
                 Map<String, String> params = new HashMap<>();
-
-                // Adding All values to Params.
                 params.put("id", String.valueOf(idEmpresa));
-
                 return params;
             }
 
