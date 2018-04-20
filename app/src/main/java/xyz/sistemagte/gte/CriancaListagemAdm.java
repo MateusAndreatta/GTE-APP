@@ -138,7 +138,7 @@ public class CriancaListagemAdm extends AppCompatActivity {
 
     private void loadCriancaList() {
 
-
+        criancaList.clear();
         // Showing progress dialog at user registration time.
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
         progressDialog.show();
