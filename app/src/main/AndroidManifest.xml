@@ -44,7 +44,8 @@
         <activity android:name=".Crianca_resp" />
         <activity android:name=".Cad_funcionario" />
         <activity android:name=".EditarCrianca" />
-        <activity android:name=".Cad_crianca_Adm"></activity>
+        <activity android:name=".Cad_crianca_Adm" />
+        <activity android:name=".EditarCriancaAdm"></activity>
     </application>
 
 </manifest>
