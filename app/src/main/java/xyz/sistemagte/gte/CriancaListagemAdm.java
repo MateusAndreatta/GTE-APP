@@ -97,7 +97,9 @@ public class CriancaListagemAdm extends AppCompatActivity {
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        Intent tela = new Intent(CriancaListagemAdm.this, EditarCriancaAdm.class);
+                        tela.putExtra("idC",String.valueOf(idCrianca));
+                        startActivity(tela);
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {

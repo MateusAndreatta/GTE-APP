@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="#eee"
     android:orientation="vertical"
-    android:padding="15dp"
     tools:context="xyz.sistemagte.gte.Painel_adm">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"

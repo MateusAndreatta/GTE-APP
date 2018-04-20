@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 import xyz.sistemagte.gte.Construtoras.ResponsavelConstr;
@@ -42,7 +43,7 @@ public class EditarCriancaAdm extends AppCompatActivity {
 
     String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder, CidadeHolder,CEPHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
     int idEscolaHolder,IdRespHolder;
-    String HttpUrl = "https://sistemagte.xyz/android/editar/editarCriancaResp.php";
+    String HttpUrl = "https://sistemagte.xyz/android/editar/editarCriancaAdm.php";
     String HttpUrlSpinner = "https://sistemagte.xyz/json/ListarEscolasIdEmpresa.php";
     String JsonURLCrianca = "https://sistemagte.xyz/json/ListarDadosCriancaId.php";
     String JsonUrlResponsaveis = "https://sistemagte.xyz/json/adm/ListarResponsaveis.php";
@@ -58,7 +59,8 @@ public class EditarCriancaAdm extends AppCompatActivity {
         setContentView(R.layout.activity_editar_crianca_adm);
 
         EscolaSpinner = findViewById(R.id.escolas);
-        Estado = findViewById(R.id.cad_estado);
+        Estado = findViewById(R.id.spinnerEstado);
+        RespSpinner = findViewById(R.id.responsavelSpinner);
 
         Nome = findViewById(R.id.cad_nome);
         Sobrenome = findViewById(R.id.cad_sobrenome);
@@ -72,12 +74,141 @@ public class EditarCriancaAdm extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
         EscolasListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
+        RespListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
         EscolasListConst = new ArrayList<>();
+        ResponsavelConstrList = new ArrayList<>(0);
         progressDialog = new ProgressDialog(EditarCriancaAdm.this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.editarCrianca));
+
+        //aplica mascara
+        MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",Cpf);
+        MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
+        MaskEditTextChangedListener mascaraCEP = new MaskEditTextChangedListener("#####-###",CEP);
+
+
+        Cpf.addTextChangedListener(mascaraCPF);
+        DataNasc.addTextChangedListener(mascaraData);
+        CEP.addTextChangedListener(mascaraCEP);
+
+        CEP.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    String sendCep = CEP.getText().toString();
+                    sendCep = sendCep.replace(".", "");
+                    sendCep = sendCep.replace("-", "");
+                    String url = "https://viacep.com.br/ws/" + sendCep + "/json/unicode/";
+                    StringRequest sr = new StringRequest(url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject objeto = new JSONObject(response);
+                                String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade");
+                                Rua.setText(enderecoO);
+                                Cidade.setText(cidadeO);
+                                switch(objeto.getString("uf")){
+                                    case "AC"://acre
+                                        Estado.setSelection(1); // este numero é o numero do item,
+                                        break;
+                                    case "AL"://alagoas
+                                        Estado.setSelection(2);
+                                        break;
+                                    case "AP"://amapa
+                                        Estado.setSelection(3);
+                                        break;
+                                    case"AM"://amazonas
+                                        Estado.setSelection(4);
+                                        break;
+                                    case"BA"://Bahia
+                                        Estado.setSelection(5);
+                                        break;
+                                    case "CE"://ceara
+                                        Estado.setSelection(6); // este numero é o numero do item,
+                                        break;
+                                    case "DF"://distrito federal
+                                        Estado.setSelection(7); // este numero é o numero do item,
+                                        break;
+                                    case "ES"://espirito santo
+                                        Estado.setSelection(8); // este numero é o numero do item,
+                                        break;
+                                    case "GO"://goias
+                                        Estado.setSelection(9); // este numero é o numero do item,
+                                        break;
+                                    case "MA"://maranhão
+                                        Estado.setSelection(10); // este numero é o numero do item,
+                                        break;
+                                    case "MT"://mato grosso
+                                        Estado.setSelection(11); // este numero é o numero do item,
+                                        break;
+                                    case "MS"://mato grosso do sul
+                                        Estado.setSelection(12); // este numero é o numero do item,
+                                        break;
+                                    case "MG"://Minas gerais
+                                        Estado.setSelection(13); // este numero é o numero do item,
+                                        break;
+                                    case "PA"://pará
+                                        Estado.setSelection(14); // este numero é o numero do item,
+                                        break;
+                                    case "PB"://paraiba
+                                        Estado.setSelection(15); // este numero é o numero do item,
+                                        break;
+                                    case "PR"://paraná
+                                        Estado.setSelection(16); // este numero é o numero do item,
+                                        break;
+                                    case "PE"://pernambuco
+                                        Estado.setSelection(17); // este numero é o numero do item,
+                                        break;
+                                    case "PI"://piaui
+                                        Estado.setSelection(18); // este numero é o numero do item,
+                                        break;
+                                    case "RJ"://rio de janeiro
+                                        Estado.setSelection(19); // este numero é o numero do item,
+                                        break;
+                                    case "RN"://rio grande do norte
+                                        Estado.setSelection(20); // este numero é o numero do item,
+                                        break;
+                                    case "RS"://rio grande do sul
+                                        Estado.setSelection(21); // este numero é o numero do item,
+                                        break;
+                                    case "RO"://rondonia
+                                        Estado.setSelection(22); // este numero é o numero do item,
+                                        break;
+                                    case "RR"://roraima
+                                        Estado.setSelection(23); // este numero é o numero do item,
+                                        break;
+                                    case "SC"://santa catarina
+                                        Estado.setSelection(24); // este numero é o numero do item,
+                                        break;
+                                    case "SP"://são paulo
+                                        Estado.setSelection(25); // este numero é o numero do item,
+                                        break;
+                                    case "SE"://sergipe
+                                        Estado.setSelection(26); // este numero é o numero do item,
+                                        break;
+                                    case "TO"://tocantins
+                                        Estado.setSelection(1); // este numero é o numero do item,
+                                        break;
+
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(EditarCriancaAdm.this, (getResources().getString(R.string.cepInvalido)), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    RequestQueue rq = Volley.newRequestQueue(EditarCriancaAdm.this);
+                    rq.add(sr);
+                }
+            }
+        });
 
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
@@ -126,10 +257,8 @@ public class EditarCriancaAdm extends AppCompatActivity {
 
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
-
+        CarregarResponsaveis();
     }
-
-
 
     //este é para o da navbar (seta)
     @Override
@@ -167,13 +296,13 @@ public class EditarCriancaAdm extends AppCompatActivity {
             EstadoHolder = Estado.getSelectedItem().toString();
 
             switch (Estado.getSelectedItem().toString()) {//pega o nome do item ali em cima
-                case "Acre": //este nome deve ser igual ao item ali de cima
+                case "Acre":
                     EstadoHolder = "AC";
                     break;
-                case "Alagoas": //este nome deve ser igual ao item ali de cima
+                case "Alagoas":
                     EstadoHolder = "AL";
                     break;
-                case "Amapá": //este nome deve ser igual ao item ali de cima
+                case "Amapá":
                     EstadoHolder = "AP";
                     break;
                 case "Amazonas": //este nome deve ser igual ao item ali de cima
@@ -417,7 +546,8 @@ public class EditarCriancaAdm extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String ServerResponse) {
-                            //Toast.makeText(cad_crianca.this, ServerResponse, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(EditarCriancaAdm.this, ServerResponse, Toast.LENGTH_LONG).show();
+
                             System.out.println(ServerResponse);
                             // Hiding the progress dialog after all task complete.
                             progressDialog.dismiss();
@@ -444,7 +574,7 @@ public class EditarCriancaAdm extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
 
                     // Adding All values to Params.
-                    params.put("id", String.valueOf(IdRespHolder));
+                    params.put("id", String.valueOf(idCrianca));
                     params.put("nome", NomeHolder);
                     params.put("sobrenome", SobrenomeHolder);
                     params.put("data", DataNascHolder);
@@ -456,6 +586,7 @@ public class EditarCriancaAdm extends AppCompatActivity {
                     params.put("complemento", ComplementoHolder);
                     params.put("estado", EstadoHolder);
                     params.put("idEscola", String.valueOf(idEscolaHolder));
+                    params.put("idResp", String.valueOf(IdRespHolder));
 
                     return params;
                 }
@@ -479,49 +610,6 @@ public class EditarCriancaAdm extends AppCompatActivity {
         }
     }
 
-    private void CarregarEscolas(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrlSpinner,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        //Toast.makeText(cad_crianca.this, ServerResponse, Toast.LENGTH_SHORT).show();
-                        try{
-                            JSONObject jsonObject=new JSONObject(ServerResponse);
-                            JSONArray jsonArray=jsonObject.getJSONArray("nome");
-                            for(int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                                String escola = jsonObject1.getString("nome");
-                                EscolasListSpinner.add(escola);
-                                EscolasConstr escolasConstr = new EscolasConstr(jsonObject1.getString("nome"),jsonObject1.getString("cep"),jsonObject1.getString("rua"),jsonObject1.getString("numero"),jsonObject1.getString("complemento"),jsonObject1.getString("estado"),jsonObject1.getString("cidade"),jsonObject1.getInt("idEscola"),jsonObject1.getInt("idEnderecoEscola"));
-                                EscolasListConst.add(escolasConstr);
-                            }
-                            EscolaSpinner.setAdapter(EscolasListSpinner);
-                        }catch (JSONException e){e.printStackTrace();}
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(EditarCriancaAdm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                // Creating Map String Params.
-                Map<String, String> params = new HashMap<>();
-
-                // Adding All values to Params.
-                params.put("id", String.valueOf(idEmpresa));
-
-                return params;
-            }
-
-        };
-
-        requestQueue.getCache().clear();
-        requestQueue.add(stringRequest);
-    }
 
     private void CarregarResponsaveis(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JsonUrlResponsaveis,
