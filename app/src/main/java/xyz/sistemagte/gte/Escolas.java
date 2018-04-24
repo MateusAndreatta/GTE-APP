@@ -37,11 +37,11 @@ import xyz.sistemagte.gte.ListAdapters.ListViewEscolas;
 
 public class Escolas extends AppCompatActivity {
 
-    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarEscolas.php";
-    private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirCrianca.php";
+    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarEscola.php";
+    private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirEscola.php";
     ListView listView;
-    private int idEmpresa;
     private int idEscola;
+    private int idEmpresa;
     List<EscolasConstr> escolasList;
     AlertDialog alerta;
 
@@ -52,6 +52,9 @@ public class Escolas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escolas);
+
+        GlobalUser global =(GlobalUser)getApplication();
+        idEmpresa = global.getGlobalUserIdEmpresa();
 
         listView = findViewById(R.id.listView);
         escolasList = new ArrayList<>();
@@ -84,7 +87,7 @@ public class Escolas extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                EscolasConstr escola = Escolas.get(position);
+                EscolasConstr escola = escolasList.get(position);
                 idEscola = escola.getIdEscola();
 
 
@@ -147,10 +150,9 @@ public class Escolas extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-
+                        System.out.println(response);
                         try {
                             JSONObject obj = new JSONObject(response);
 
@@ -158,7 +160,7 @@ public class Escolas extends AppCompatActivity {
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                EscolasConstr funcConst = new EscolasConstr(funcObject.getString("nome_escola"),funcObject.getString("cep"),funcObject.getString("rua"),funcObject.getString("num"),funcObject.getString("complemento"),funcObject.getString("estado"),funcObject.getString("cidade"),funcObject.getInt("id_escola"),funcObject.getInt("id_endereco_escola"));
+                                EscolasConstr funcConst = new EscolasConstr(funcObject.getString("nome_escola"),funcObject.getString("cep"),funcObject.getString("rua"),funcObject.getString("num"),funcObject.getString("complemento"),funcObject.getString("estado"),funcObject.getString("cidade"),Integer.parseInt(funcObject.getString("id_escola")),Integer.parseInt(funcObject.getString("id_endereco_esc")));
                                 escolasList.add(funcConst);
                             }
 
@@ -186,6 +188,8 @@ public class Escolas extends AppCompatActivity {
 
                 // Creating Map String Params.
                 Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id", String.valueOf(idEmpresa));
                 return params;
             }
 

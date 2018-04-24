@@ -84,5 +84,7 @@ public class Painel_adm extends AppCompatActivity {
     }
 
     public void irEscolas(View view) {
+        Intent tela = new Intent(this, Escolas.class);
+        startActivity(tela);
     }
 }
