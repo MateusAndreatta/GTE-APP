@@ -42,6 +42,10 @@ public class Painel_adm extends AppCompatActivity {
                 startActivity(new Intent(this, Login.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
+            case R.id.menu_Sair:
+                startActivity(new Intent(this, Login.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
             default:break;
         }
         return true;
