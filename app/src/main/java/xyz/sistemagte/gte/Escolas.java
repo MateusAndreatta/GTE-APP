@@ -158,7 +158,7 @@ public class Escolas extends AppCompatActivity {
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                EscolasConstr funcConst = new EscolasConstr(funcObject.getString("nome"),funcObject.getString("cep"));
+                                EscolasConstr funcConst = new EscolasConstr(funcObject.getString("nome_escola"),funcObject.getString("cep"),funcObject.getString("rua"),funcObject.getString("num"),funcObject.getString("complemento"),funcObject.getString("estado"),funcObject.getString("cidade"),funcObject.getInt("id_escola"),funcObject.getInt("id_endereco_escola"));
                                 escolasList.add(funcConst);
                             }
 
