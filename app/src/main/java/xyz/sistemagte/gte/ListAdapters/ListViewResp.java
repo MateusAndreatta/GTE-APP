@@ -42,7 +42,7 @@ public class ListViewResp extends ArrayAdapter<ResponsavelConstr> {
 
         ResponsavelConstr respCostr = respList.get(position);
 
-        txtNome.setText(respCostr.getNomeResp());
+        txtNome.setText(respCostr.getNomeResp() + " " +respCostr.getSobrenomeResp());
         txtCpf.setText(respCostr.getCpfResp());
         txtEmail.setText(respCostr.getEmailResp());
 
