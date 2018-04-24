@@ -212,4 +212,6 @@
     <string name="title_activity_listagem_func_adm">Fncionarios</string>
     <string name="editar_perfil">Editar perfil</string>
     <string name="editar_endereco">Editar endereço</string>
+
+    <string name="sair">Sair</string>
 </resources>

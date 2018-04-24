@@ -11,15 +11,9 @@
 
         <menu>
 
-            <item android:id="@+id/action_settings"
-                android:icon="@android:drawable/ic_menu_preferences"
+            <item android:id="@+id/menu_Sair"
                 app:showAsAction="ifRoom"
-                android:title="teste 2" />
-
-            <item android:id="@+id/action_help"
-                android:icon="@android:drawable/ic_menu_help"
-                app:showAsAction="ifRoom"
-                android:title="teste 1" />
+                android:title="@string/sair" />
 
         </menu>
 
