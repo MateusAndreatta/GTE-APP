@@ -14,7 +14,7 @@ import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 import xyz.sistemagte.gte.R;
 
 /**
- * Created by Aluno on 24/04/2018.
+ * Created by Andreatta on 24/04/2018.
  */
 
 public class ListViewEscolas extends ArrayAdapter<EscolasConstr> {
@@ -36,13 +36,13 @@ public class ListViewEscolas extends ArrayAdapter<EscolasConstr> {
 
         View listViewItem = inflater.inflate(R.layout.list_view_escolas, null, true);
 
-        TextView txtNome = listViewItem.findViewById(R.id.txtNome);
-        TextView txtEnd = listViewItem.findViewById(R.id.txtTipoAndData);
+        TextView txtNome = listViewItem.findViewById(R.id.txtNomeEscola);
+        TextView txtEnd = listViewItem.findViewById(R.id.txtRuaAndNumero);
 
         EscolasConstr escolasConstr = EscolaList.get(position);
 
-        txtNome.setText(escolasConstr.getNomeAcessos() + " " + escolasConstr.getSobrenomeAcessos());
-        txtEnd.setText(escolasConstr.getTipoAcessos() + " • " + escolasConstr.getDataAcessos());
+        txtNome.setText(escolasConstr.getNomeEscola());
+        txtEnd.setText(escolasConstr.getRuaEscola() + " " + escolasConstr.getNumeroEscola());
 
         return listViewItem;
     }
