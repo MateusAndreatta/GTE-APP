@@ -46,7 +46,8 @@
         <activity android:name=".EditarCrianca" />
         <activity android:name=".Cad_crianca_Adm" />
         <activity android:name=".EditarCriancaAdm" />
-        <activity android:name=".Escolas"></activity>
+        <activity android:name=".Escolas" />
+        <activity android:name=".Responsavel"></activity>
     </application>
 
 </manifest>
