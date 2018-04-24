@@ -52,7 +52,7 @@ public class EscolasConstr {
         return idEscola;
     }
 
-    public int getIdEnderecoEscolaEscola() {
+    public int getIdEnderecoEscola() {
         return idEnderecoEscola;
     }
 }
