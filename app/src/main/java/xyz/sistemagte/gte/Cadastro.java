@@ -12,7 +12,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.Validacoes;
@@ -29,7 +36,7 @@ public class Cadastro extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
-    String HttpUrl = "https://sistemagte.xyz/PagProcessamento/RecebeCadastro.php";
+    String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenResp.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +70,9 @@ public class Cadastro extends AppCompatActivity {
 
         //aplica mascara
         MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",campo_cpf);
-       MaskEditTextChangedListener mascaraCelular = new MaskEditTextChangedListener("(##) #####-####",campo_telefone);
-       MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",campo_dataNasc);
-       MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",campo_rg);
+        MaskEditTextChangedListener mascaraCelular = new MaskEditTextChangedListener("(##) #####-####",campo_telefone);
+        MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",campo_dataNasc);
+        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",campo_rg);
 
         campo_cpf.addTextChangedListener(mascaraCPF);
         campo_telefone.addTextChangedListener(mascaraCelular);
@@ -86,13 +93,21 @@ public class Cadastro extends AppCompatActivity {
     }
 
     private boolean ValidarCampos(){
+
         if(campo_nome.getText().length() == 0 || campo_sobrenome.getText().length() == 0 || campo_email.getText().length() == 0
                 || campo_senha.getText().length() == 0 || campo_confSenha.getText().length() == 0 || campo_telefone.getText().length() == 0
                 || campo_rg.getText().length() == 0 || campo_cpf.getText().length() == 0 || campo_dataNasc.getText().length() == 0) {
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
             return false;
         }else{
-            return true;
+
+            if(campo_senha.equals(campo_confSenha)){
+                return true;
+            }else{
+                Toast.makeText(this, getResources().getString(R.string.senhasDiferentes), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
         }
     }
 
@@ -138,11 +153,76 @@ public class Cadastro extends AppCompatActivity {
                         break;
                     case ("3"):
                         //responsavel
-                        Toast.makeText(this, "Cadastro indisponivel no momento", Toast.LENGTH_SHORT).show();
+                        try{
+                            CadastrarResp();
+                        }catch (Exception ex){
+                            System.out.println(ex.getMessage());
+                            Toast.makeText(this, "Cadastro indisponivel no momento", Toast.LENGTH_SHORT).show();
+                        }
                         break;
+
                 }
             }
 
+        }
+    }
+
+
+    private void CadastrarResp(){
+        if(ValidarCampos()) {
+            // Showing progress dialog at user registration time.
+            progressDialog.setMessage(getResources().getString(R.string.loadingDados));
+            progressDialog.show();
+
+            // Calling method to get value from EditText.
+            GetValueFromEditText();
+
+            // Creating string request with post method.
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String ServerResponse) {
+                            System.out.println(ServerResponse);
+                            // Hiding the progress dialog after all task complete.
+                            progressDialog.dismiss();
+
+                            // Showing response message coming from server.
+                            Toast.makeText(Cadastro.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+                            Intent tela = new Intent(Cadastro.this, Login.class);
+                            startActivity(tela);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+
+                            // Hiding the progress dialog after all task complete.
+                            progressDialog.dismiss();
+
+                            // Showing error message if something goes wrong.
+                            Toast.makeText(Cadastro.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+
+                    Map<String, String> params = new HashMap<>();
+                    params.put("nome", campo_nome.getText().toString());
+                    params.put("sobrenome", campo_sobrenome.getText().toString());
+                    params.put("email", campo_email.getText().toString());
+                    params.put("senha", campo_senha.getText().toString());
+                    params.put("telefone", campo_telefone.getText().toString());
+                    params.put("rg", campo_rg.getText().toString());
+                    params.put("cpf", campo_cpf.getText().toString());
+                    params.put("nascimento", campo_dataNasc.getText().toString());
+
+                    return params;
+                }
+
+            };
+
+            requestQueue.getCache().clear();
+            requestQueue.add(stringRequest);
         }
     }
 
