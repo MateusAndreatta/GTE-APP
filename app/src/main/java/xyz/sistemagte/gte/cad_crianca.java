@@ -38,13 +38,13 @@ public class cad_crianca extends AppCompatActivity {
 
     private int idEmpresa,idUsuario;
 
-    EditText Nome,Sobrenome,Telefone, CEP,DataNasc,Cpf,Rg,Cidade, Rua, Numero, Complemento;
+    EditText Nome,Sobrenome, CEP,DataNasc,Cpf,Cidade, Rua, Numero, Complemento;
     Spinner Estado, EscolaSpinner;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
 
-    String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder,RgHolder, CidadeHolder,CEPHolder,TelefoneHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
+    String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder, CidadeHolder,CEPHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
     int idEscolaHolder;
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadCriancaResp.php";
     String HttpUrlSpinner = "https://sistemagte.xyz/json/ListarEscolasIdEmpresa.php";
@@ -60,11 +60,9 @@ public class cad_crianca extends AppCompatActivity {
 
         Nome = findViewById(R.id.cad_nome);
         Sobrenome = findViewById(R.id.cad_sobrenome);
-        Telefone = findViewById(R.id.cad_tel);
         CEP = findViewById(R.id.cad_cep);
         DataNasc = findViewById(R.id.cad_datanascimento);
         Cpf = findViewById(R.id.cad_cpf);
-        Rg = findViewById(R.id.cad_rg);
         Cidade = findViewById(R.id.cad_cidade);
         Rua = findViewById(R.id.cad_rua);
         Numero = findViewById(R.id.cad_num);
@@ -81,15 +79,11 @@ public class cad_crianca extends AppCompatActivity {
 
         //aplica mascara
         MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",Cpf);
-        MaskEditTextChangedListener mascaraCelular = new MaskEditTextChangedListener("(##) #####-####",Telefone);
         MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
-        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",Rg);
         MaskEditTextChangedListener mascaraCEP = new MaskEditTextChangedListener("#####-###",CEP);
 
         Cpf.addTextChangedListener(mascaraCPF);
-        Telefone.addTextChangedListener(mascaraCelular);
         DataNasc.addTextChangedListener(mascaraData);
-        Rg.addTextChangedListener(mascaraRG);
         CEP.addTextChangedListener(mascaraCEP);
 
         GlobalUser global =(GlobalUser)getApplication();
@@ -168,11 +162,9 @@ public class cad_crianca extends AppCompatActivity {
         try {
             NomeHolder = Nome.getText().toString().trim();
             SobrenomeHolder = Sobrenome.getText().toString().trim();
-            TelefoneHolder = Telefone.getText().toString().trim();
             CEPHolder = CEP.getText().toString().trim();
             DataNascHolder = DataNasc.getText().toString().trim();
             CpfHolder = Cpf.getText().toString().trim();
-            RgHolder = Rg.getText().toString().trim();
             CidadeHolder = Cidade.getText().toString();
             RuaHolder = Rua.getText().toString();
             NumeroHolder = Numero.getText().toString();
@@ -243,7 +235,7 @@ public class cad_crianca extends AppCompatActivity {
                 case "Rio Grande do Sul": //este nome deve ser igual ao item ali de cima
                     EstadoHolder = "RS";
                     break;
-                case "Rondônia": //este nome deve ser igual ao item ali de cima
+                case "Rondônia":
                     EstadoHolder = "RO";
                     break;
                 case "Roraima":
@@ -297,6 +289,8 @@ public class cad_crianca extends AppCompatActivity {
 
                             // Showing response message coming from server.
                             Toast.makeText(cad_crianca.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+                            Intent tela = new Intent(cad_crianca.this, Crianca_resp.class);
+                            startActivity(tela);
                         }
                     },
                     new Response.ErrorListener() {
@@ -322,8 +316,6 @@ public class cad_crianca extends AppCompatActivity {
                     params.put("sobrenome", SobrenomeHolder);
                     params.put("data", DataNascHolder);
                     params.put("cpf", CpfHolder);
-                    params.put("rg", RgHolder);
-                    params.put("tel", TelefoneHolder);
                     params.put("cep", CEPHolder);
                     params.put("cidade", CidadeHolder);
                     params.put("rua", RuaHolder);
@@ -343,8 +335,8 @@ public class cad_crianca extends AppCompatActivity {
     }
 
     private boolean VerificarCampos(){
-       if(Nome.getText().length() == 0 || Sobrenome.getText().length() == 0 || Telefone.getText().length() == 0 || CEP.getText().length() == 0
-                || DataNasc.getText().length() == 0 || Cpf.getText().length() == 0 || Rg.getText().length() == 0 || Cidade.getText().length() == 0
+       if(Nome.getText().length() == 0 || Sobrenome.getText().length() == 0 || CEP.getText().length() == 0
+                || DataNasc.getText().length() == 0 || Cpf.getText().length() == 0 || Cidade.getText().length() == 0
                 || Rua.getText().length() == 0 || Numero.getText().length() == 0 || Estado.getSelectedItemPosition() == 0){
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
             return false;

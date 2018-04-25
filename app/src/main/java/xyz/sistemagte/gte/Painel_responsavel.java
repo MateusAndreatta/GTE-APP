@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
@@ -56,8 +57,13 @@ public class Painel_responsavel extends AppCompatActivity {
     }
 
     public void irCriancas(View view) {
-        Intent tela = new Intent(this, Crianca_resp.class);
-        startActivity(tela);
+        try{
+            Intent tela = new Intent(this, Crianca_resp.class);
+            startActivity(tela);
+        }catch (Exception ex){
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void irEditar_perfil(View view) {

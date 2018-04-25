@@ -275,7 +275,6 @@ public class EditarCrianca extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String ServerResponse) {
-                            Toast.makeText(EditarCrianca.this, ServerResponse, Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
                             Toast.makeText(EditarCrianca.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
                         }
