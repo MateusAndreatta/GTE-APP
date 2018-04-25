@@ -44,7 +44,7 @@ public class Cadastro extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle("Cadastro GTE");     //Titulo para ser exibido na sua Action Bar em frente à seta
+        getSupportActionBar().setTitle(getResources().getString(R.string.cadastro));    //Titulo para ser exibido na sua Action Bar em frente à seta
 
         //Declarações
         campo_nome = findViewById(R.id.cad_nome);
