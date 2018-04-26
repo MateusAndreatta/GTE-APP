@@ -48,7 +48,8 @@
         <activity android:name=".EditarCriancaAdm" />
         <activity android:name=".Escolas" />
         <activity android:name=".Responsavel" />
-        <activity android:name=".EditarEscola"></activity>
+        <activity android:name=".EditarEscola" />
+        <activity android:name=".EditarFunc"></activity>
     </application>
 
 </manifest>
