@@ -22,7 +22,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -404,11 +407,17 @@ public class EditarCriancaAdm extends AppCompatActivity {
 
                             JSONArray funcArray = obj.getJSONArray("nome");
                             JSONObject jo = funcArray.getJSONObject(0);
+                            String dia = jo.getString("dt_nasc");
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position = new ParsePosition(0);
+                            Date data = format.parse(dia,position);
+                            format = new SimpleDateFormat("dd/MM/yyyy");
+                            String date = format.format(data);
 
                             Nome.setText(jo.getString("nome"));
                             String EstadoBD = jo.getString("estado");
                             Sobrenome.setText(jo.getString("sobrenome"));
-                            DataNasc.setText(jo.getString("dt_nasc"));
+                            DataNasc.setText(date);
                             Cpf.setText(jo.getString("cpf"));
                             CEP.setText(jo.getString("cep"));
                             Cidade.setText(jo.getString("cidade"));

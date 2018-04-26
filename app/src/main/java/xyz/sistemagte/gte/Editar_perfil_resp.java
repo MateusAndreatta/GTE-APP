@@ -21,7 +21,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -64,12 +67,12 @@ public class Editar_perfil_resp extends AppCompatActivity {
 
         //aplica mascara
         MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",Cpf);
-        //MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
-        //MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",Rg);
+        MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
+        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",Rg);
 
         Cpf.addTextChangedListener(mascaraCPF);
-        //DataNasc.addTextChangedListener(mascaraData);
-        //Rg.addTextChangedListener(mascaraRG);
+        DataNasc.addTextChangedListener(mascaraData);
+        Rg.addTextChangedListener(mascaraRG);
 
         requestQueue = Volley.newRequestQueue(this);
         requestQueue2 = Volley.newRequestQueue(this);
@@ -198,11 +201,17 @@ public class Editar_perfil_resp extends AppCompatActivity {
 
                             JSONArray funcArray = obj.getJSONArray("nome");
                             JSONObject funcObject = funcArray.getJSONObject(0);
+                            String dia = funcObject.getString("dt_nasc");
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position = new ParsePosition(0);
+                            Date data = format.parse(dia,position);
+                            format = new SimpleDateFormat("dd/MM/yyyy");
+                            String date = format.format(data);
 
                             Nome.setText(funcObject.getString("nome"));
                             Sobrenome.setText(funcObject.getString("sobrenome"));
                             Email.setText(funcObject.getString("email"));
-                            DataNasc.setText(funcObject.getString("dt_nasc"));
+                            DataNasc.setText(date);
                             Cpf.setText(funcObject.getString("cpf"));
                             Rg.setText(funcObject.getString("rg"));
 

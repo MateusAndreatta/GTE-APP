@@ -72,8 +72,13 @@ public class EditarCrianca extends AppCompatActivity {
         Numero = findViewById(R.id.cad_num);
         Complemento = findViewById(R.id.cad_complemento);
 
+        MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",Cpf);
         MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
+        MaskEditTextChangedListener mascaraCEP = new MaskEditTextChangedListener("#####-###",CEP);
+
+        Cpf.addTextChangedListener(mascaraCPF);
         DataNasc.addTextChangedListener(mascaraData);
+        CEP.addTextChangedListener(mascaraCEP);
 
         requestQueue = Volley.newRequestQueue(this);
         EscolasListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
