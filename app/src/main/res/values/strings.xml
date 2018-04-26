@@ -40,6 +40,7 @@
     <string name="editar_criancas">Editar Crianças</string>
     <string name="responsaveis">Responsaveis</string>
     <string name="cepInvalido">CEP inválido</string>
+    <string name="EditEscola">Editar Escola</string>
     <string name="editarCrianca">Editar Criança</string>
     <string name="editarMotorista">Editar Motorista</string>
     <string name="editarInfo">Editar suas informações</string>
@@ -102,6 +103,12 @@
         <item>Motorista</item>
         <item>Monitora</item>
         <item>Responsável</item>
+    </string-array>
+
+    <string-array name="tipoFunc">
+        <item>Escolha...</item>
+        <item>Motorista</item>
+        <item>Monitora</item>
     </string-array>
 
 
