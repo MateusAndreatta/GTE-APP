@@ -97,9 +97,9 @@ public class Escolas extends AppCompatActivity {
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                      //  Intent tela = new Intent(Escolas.this, EditarE.class);
-                      //  tela.putExtra("idC",String.valueOf(idCrianca));
-                      //  startActivity(tela);
+                      Intent tela = new Intent(Escolas.this, EditarEscola.class);
+                      tela.putExtra("idE                                                                                                 ",String.valueOf(idEscola));
+                      startActivity(tela);
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
