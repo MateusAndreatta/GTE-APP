@@ -36,7 +36,7 @@ import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 public class EditarEscola extends AppCompatActivity {
 
 
-    private int idEmpresa,idUsuario,idCrianca;
+    private int idEmpresa,idUsuario, IdEndereco;
 
     EditText Nome, CEP,Cidade, Rua, Numero, Complemento;
     Spinner Estado;
@@ -46,9 +46,8 @@ public class EditarEscola extends AppCompatActivity {
 
     String NomeHolder, CidadeHolder,CEPHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
     int idEscolaHolder,idEscola;
-    String HttpUrl = "https://sistemagte.xyz/android/editar/editarCriancaResp.php";
-    String HttpUrlSpinner = "https://sistemagte.xyz/json/ListarEscolasIdEmpresa.php";
-    String JsonURLCrianca = "https://sistemagte.xyz/json/ListarDadosCriancaId.php";
+    String HttpUrl = "https://sistemagte.xyz/android/editar/editarEscola.php";
+    String JsonEscola = "https://sistemagte.xyz/json/ListarDadosIdEscola.php";
 
     ArrayAdapter<String> EscolasListSpinner;
     ArrayList<EscolasConstr> EscolasListConst;
@@ -75,7 +74,7 @@ public class EditarEscola extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle(getResources().getString(R.string.editarCrianca));
+        getSupportActionBar().setTitle(getResources().getString(R.string.EditEscola));
 
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
@@ -236,19 +235,17 @@ public class EditarEscola extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() {
 
-                    // Creating Map String Params.
                     Map<String, String> params = new HashMap<>();
 
-                    // Adding All values to Params.
-                    params.put("id", String.valueOf(idCrianca).trim());
-                    params.put("nome", NomeHolder);
+                    params.put("id", String.valueOf(idEscola).trim());
+                    params.put("nomeEscola", NomeHolder);
                     params.put("cep", CEPHolder);
                     params.put("cidade", CidadeHolder);
                     params.put("rua", RuaHolder);
                     params.put("numero", NumeroHolder);
                     params.put("complemento", ComplementoHolder);
                     params.put("estado", EstadoHolder);
-                    params.put("idEscola", String.valueOf(idEscolaHolder));
+                    params.put("idE", String.valueOf(IdEndereco));
 
                     return params;
                 }
@@ -275,7 +272,7 @@ public class EditarEscola extends AppCompatActivity {
     private void PuxarDadosEscola(){
 
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, JsonURLCrianca,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, JsonEscola,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
@@ -285,14 +282,14 @@ public class EditarEscola extends AppCompatActivity {
                             JSONArray funcArray = obj.getJSONArray("nome");
                             JSONObject jo = funcArray.getJSONObject(0);
 
-                            Nome.setText(jo.getString("nome"));
+                            Nome.setText(jo.getString("nome_escola"));
                             String EstadoBD = jo.getString("estado");
                             CEP.setText(jo.getString("cep"));
                             Cidade.setText(jo.getString("cidade"));
                             Rua.setText(jo.getString("rua"));
                             Numero.setText(jo.getString("num"));
                             Complemento.setText(jo.getString("complemento"));
-
+                            IdEndereco = Integer.parseInt( jo.getString("id_endereco_esc"));
                             switch(EstadoBD){
                                 case "AC"://acre
                                     Estado.setSelection(1);
@@ -396,7 +393,7 @@ public class EditarEscola extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("id",String.valueOf(idCrianca));
+                params.put("id",String.valueOf(idEscola));
 
                 return params;
             }
