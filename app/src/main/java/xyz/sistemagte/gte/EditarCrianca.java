@@ -24,12 +24,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 
@@ -67,6 +71,9 @@ public class EditarCrianca extends AppCompatActivity {
         Rua = findViewById(R.id.cad_rua);
         Numero = findViewById(R.id.cad_num);
         Complemento = findViewById(R.id.cad_complemento);
+
+        MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
+        DataNasc.addTextChangedListener(mascaraData);
 
         requestQueue = Volley.newRequestQueue(this);
         EscolasListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
@@ -343,11 +350,17 @@ public class EditarCrianca extends AppCompatActivity {
 
                             JSONArray funcArray = obj.getJSONArray("nome");
                             JSONObject jo = funcArray.getJSONObject(0);
+                            String dia = jo.getString("dt_nasc");
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position = new ParsePosition(0);
+                            Date data = format.parse(dia,position);
+                            format = new SimpleDateFormat("dd/MM/yyyy");
+                            String date = format.format(data);
 
                             Nome.setText(jo.getString("nome"));
                             String EstadoBD = jo.getString("estado");
                             Sobrenome.setText(jo.getString("sobrenome"));
-                            DataNasc.setText(jo.getString("dt_nasc"));
+                            DataNasc.setText(date);
                             Cpf.setText(jo.getString("cpf"));
                             CEP.setText(jo.getString("cep"));
                             Cidade.setText(jo.getString("cidade"));
