@@ -330,8 +330,8 @@ public class EditarCrianca extends AppCompatActivity {
     }
 
     private boolean VerificarCampos(){
-      /*  if(Nome.getText().length() == 0 || Sobrenome.getText().length() == 0 || Telefone.getText().length() == 0 || CEP.getText().length() == 0
-                || DataNasc.getText().length() == 0 || Cpf.getText().length() == 0 || Rg.getText().length() == 0 || Cidade.getText().length() == 0
+        if(Nome.getText().length() == 0 || Sobrenome.getText().length() == 0  || CEP.getText().length() == 0
+                || DataNasc.getText().length() == 0 || Cpf.getText().length() == 0 || Cidade.getText().length() == 0
                 || Rua.getText().length() == 0 || Numero.getText().length() == 0 || Estado.getSelectedItemPosition() == 0){
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
             return false;
@@ -339,8 +339,6 @@ public class EditarCrianca extends AppCompatActivity {
         {
             return true;
         }
-        */
-        return true;
     }
 
     private void PuxarDadosCrianca(){
