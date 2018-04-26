@@ -46,8 +46,10 @@
     <string name="editarInfo">Editar suas informações</string>
     <string name="cadastroFunc">Cadastrar funcionário</string>
     <string name="cadastroEscola">Cadastrar Escolas</string>
+    <string name="editarFunc">Editar Funcionários</string>
     <string name="selecionarEscola">Selecionar escola</string>
     <string name="informacoesSalvasSucesso">Informações Salvas com sucesso!</string>
+
 
 
     <!--DIALOG -->
@@ -221,4 +223,5 @@
     <string name="editar_endereco">Editar endereço</string>
 
     <string name="sair">Sair</string>
+    <string name="title_activity_editar_func">EditarFunc</string>
 </resources>
