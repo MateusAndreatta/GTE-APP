@@ -13,7 +13,6 @@
         android:background="@color/branco"
         android:orientation="vertical">
 
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -51,6 +50,14 @@
                     android:background="@drawable/input_style"
                     android:inputType="textPassword"/>
 
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/login_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp" />
+
                 <Button
                     android:id="@+id/btnLogin"
                     android:textColor="@color/branco"
@@ -60,6 +67,8 @@
                     android:text="@string/logar"
                     android:background="@drawable/btn_login"
                     android:onClick="Logar" />
+
+
 
                 <TextView
                     android:id="@+id/labelRecuperarSenha"

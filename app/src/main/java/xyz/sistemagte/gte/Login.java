@@ -21,19 +21,29 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 
 public class Login extends AppCompatActivity {
-
-
 
     float offsetY;
     TextView txtBottomSheet;
@@ -49,9 +59,14 @@ public class Login extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     String HttpUrl = "https://sistemagte.xyz/android/login.php";
+    LoginButton loginButton;
+    CallbackManager callbackManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
+
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
@@ -60,22 +75,57 @@ public class Login extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         progressDialog = new ProgressDialog(Login.this);
 
-        try{
+        try {
             CoordinatorLayout llBottomSheet = findViewById(R.id.bottom_sheet);
             BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             bottomSheetBehavior.setPeekHeight(100);// altura que vem como padrao
             bottomSheetBehavior.setHideable(false);// true: ele vem em modo escondido
-       }catch (Exception ex){
-           Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
-       }
+        } catch (Exception ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
         labelRecuperarSenha = findViewById(R.id.labelRecuperarSenha);
         inputEmail = findViewById(R.id.input_email);
         inputSenha = findViewById(R.id.input_senha);
         txtBottomSheet = findViewById(R.id.txtBottomSheet1);
         btnLogin = findViewById(R.id.btnLogin);
+
+
+        iniciarComponentes();
+        loginFacebook();
+
     }
 
+    private void loginFacebook(){
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(Login.this, "sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, loginResult.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(Login.this, "cancel", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(Login.this, "erro", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void iniciarComponentes(){
+        loginButton = findViewById(R.id.login_button);
+        callbackManager = CallbackManager.Factory.create();
+    }
 
     public void irSenha (View v){
         Intent Tela = new Intent(this, RecuperarSenha.class);

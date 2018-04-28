@@ -1,5 +1,8 @@
 <resources>
     <!-- TODO: traduzir as strings-->
+    <string name="facebook_app_id">994366434064633</string>
+    <string name="fb_login_protocol_scheme">fb994366434064633</string>
+
 
     <!-- Genericos -->
     <string name="app_name">GTE</string>
