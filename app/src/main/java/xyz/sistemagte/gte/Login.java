@@ -49,6 +49,7 @@ import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 public class Login extends AppCompatActivity {
 
+    boolean LabelLogin = false;
     float offsetY;
     TextView txtBottomSheet;
     Button btnLogin;
@@ -100,6 +101,8 @@ public class Login extends AppCompatActivity {
     }
 
     private void loginFacebook(){
+        //progressDialog.setMessage("Carregando seus dados!");
+        //progressDialog.show();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -137,12 +140,11 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                Toast.makeText(Login.this, "cancel", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException error) {
-                Toast.makeText(Login.this, "erro", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -298,6 +300,7 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
+                        progressDialog.dismiss();
                         switch (ServerResponse.trim()){
                             case "UsuarioNaoCadastrado":
                                 Toast.makeText(Login.this, getResources().getString(R.string.LoginEmailNaoCadastrado), Toast.LENGTH_SHORT).show();
@@ -436,5 +439,33 @@ public class Login extends AppCompatActivity {
 
     }
 
+    public void ColocarOutrosLogins(View view) {
+        View btns = findViewById(R.id.layoutBtnsLogin);
+        TextView texto = findViewById(R.id.labelOptsLogin);
+
+        if(!LabelLogin){
+            btns.setVisibility(View.VISIBLE);
+            texto.setText(R.string.mostrarMenos);
+
+
+            Drawable imagem = getResources().getDrawable(R.drawable.ic_arrow_drop_up_black_24dp);
+            imagem.setBounds( 0, 0, 60, 60 );
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                texto.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, imagem, null);
+            }
+            LabelLogin = true;
+        }else{
+            Drawable imagem = getResources().getDrawable(R.drawable.ic_arrow_drop_down_black_24dp);
+            imagem.setBounds( 0, 0, 60, 60 );
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                texto.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, imagem, null);
+            }
+            btns.setVisibility(View.GONE);
+            texto.setText(R.string.login_opts);
+            LabelLogin = false;
+        }
+
+
+    }
 }
 

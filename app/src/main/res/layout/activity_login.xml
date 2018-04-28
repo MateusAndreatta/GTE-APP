@@ -50,14 +50,6 @@
                     android:background="@drawable/input_style"
                     android:inputType="textPassword"/>
 
-                <com.facebook.login.widget.LoginButton
-                    android:id="@+id/login_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp" />
-
                 <Button
                     android:id="@+id/btnLogin"
                     android:textColor="@color/branco"
@@ -68,21 +60,56 @@
                     android:background="@drawable/btn_login"
                     android:onClick="Logar" />
 
-
-
                 <TextView
-                    android:id="@+id/labelRecuperarSenha"
+                    android:id="@+id/labelOptsLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/não_lembro"
+                    android:text="@string/login_opts"
+                    android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
                     android:textSize="17sp"
-                    android:padding="10dp"
-                    android:onClick="irSenha"
+                    android:padding="8dp"
+                    android:onClick="ColocarOutrosLogins"
                     android:gravity="center"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/layoutBtnsLogin"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/labelRecuperarSenha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/não_lembro"
+                        android:textSize="17sp"
+                        android:padding="10dp"
+                        android:onClick="irSenha"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_button"
+                        xmlns:fb="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:padding="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="100dp"
+
+                        android:layout_gravity="center_horizontal"
+                        />
 
 
 
+                </LinearLayout>
 
             </LinearLayout>
 

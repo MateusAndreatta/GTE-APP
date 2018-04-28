@@ -11,6 +11,8 @@
     <string name="conf_senha">Confirmar senha</string>
     <string name="cadastro">Cadastro</string>
     <string name="não_lembro">Esqueceu seu senha?</string>
+    <string name="login_opts">Outras opções de login</string>
+    <string name="mostrarMenos">Mostrar menos</string>
     <string name="monitora">Monitora</string>
     <string name="motorista">Motorista</string>
     <string name="adm">Administrador</string>
