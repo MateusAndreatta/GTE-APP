@@ -10,6 +10,7 @@
     <string name="senha">Senha</string>
     <string name="conf_senha">Confirmar senha</string>
     <string name="cadastro">Cadastro</string>
+    <string name="cadastroResp">Cadastro Responsável</string>
     <string name="não_lembro">Esqueceu seu senha?</string>
     <string name="login_opts">Outras opções de login</string>
     <string name="mostrarMenos">Mostrar menos</string>
@@ -116,6 +117,11 @@
         <item>Escolha...</item>
         <item>Motorista</item>
         <item>Monitora</item>
+    </string-array>
+
+    <string-array name="resp">
+        <item>Escolha...</item>
+        <item>Responsável</item>
     </string-array>
 
 

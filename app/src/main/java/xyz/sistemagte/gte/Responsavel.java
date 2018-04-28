@@ -72,8 +72,8 @@ public class Responsavel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    //Intent tela = new Intent(Responsavel.this, .class);
-                    //startActivity(tela);
+                    Intent tela = new Intent(Responsavel.this,CadResponsavel .class);
+                    startActivity(tela);
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(Responsavel.this, e.getMessage(), Toast.LENGTH_SHORT).show();
