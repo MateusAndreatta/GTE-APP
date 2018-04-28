@@ -36,6 +36,7 @@
     <string name="userRecuperarSenha">Ajudaremos você a recuperar sua senha, para isso preencha seu e-mail abaixo:</string>
     <string name="titleContextMenu">Ações</string>
     <string name="editar">Editar</string>
+    <string name="EditarVan">Editar Van</string>
     <string name="excluir">Excluir</string>
     <string name="enquete">Enquete</string>
     <string name="responsavel">Responsavel</string>
@@ -54,7 +55,6 @@
     <string name="editarFunc">Editar Funcionários</string>
     <string name="selecionarEscola">Selecionar escola</string>
     <string name="informacoesSalvasSucesso">Informações Salvas com sucesso!</string>
-
 
 
     <!--DIALOG -->

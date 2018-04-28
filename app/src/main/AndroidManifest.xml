@@ -49,9 +49,13 @@
         <activity android:name=".Escolas" />
         <activity android:name=".Responsavel" />
         <activity android:name=".EditarEscola" />
-        <activity android:name=".EditarFunc"></activity>
+        <activity android:name=".EditarFunc" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity android:name=".EditarVan"></activity>
     </application>
 
 </manifest>

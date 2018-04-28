@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="xyz.sistemagte.gte.EditarVan">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/EditarVan"
+        android:textSize="40sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/cad_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/cad_capacidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/capacidade"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/cad_modelo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/modelo" />
+
+            <EditText
+                android:id="@+id/cad_placa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/placa" />
+
+            <EditText
+                android:id="@+id/cad_ano_fab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/anoFab"
+                android:inputType="time" />
+
+            <EditText
+                android:id="@+id/cad_marca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/marca"
+                android:inputType="time" />
+
+            <Button
+                android:id="@+id/editarVan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="editarVan"
+                android:text="@string/salvar"
+                android:textColor="@color/branco"
+                android:background="@drawable/btn_padrao"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
