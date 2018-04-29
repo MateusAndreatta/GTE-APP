@@ -38,5 +38,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'cardview-v7'
         exclude group: 'com.android.support', module: 'customtabs'
     }
+    compile 'com.google.android.gms:play-services-auth:11.8.0'
 
 }
