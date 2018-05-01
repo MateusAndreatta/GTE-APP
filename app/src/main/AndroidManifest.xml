@@ -56,7 +56,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".EditarVan" />
-        <activity android:name=".CadResponsavel"></activity>
+        <activity android:name=".CadResponsavel" />
     </application>
 
 </manifest>

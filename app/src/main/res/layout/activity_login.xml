@@ -101,13 +101,21 @@
                         android:padding="10dp"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
-                        android:layout_marginBottom="20dp"
                         android:layout_height="100dp"
-
                         android:layout_gravity="center_horizontal"
                         />
 
+                    <!-- ALterar o tamanho
 
+                    SignInButton signInButton = findViewById(R.id.sign_in_button);
+                    signInButton.setSize(SignInButton.SIZE_STANDARD);
+                    -->
+
+                    <com.google.android.gms.common.SignInButton
+                        android:id="@+id/sign_in_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"/>
 
                 </LinearLayout>
 

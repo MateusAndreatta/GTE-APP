@@ -3,6 +3,7 @@ package xyz.sistemagte.gte.Auxiliares;
 import android.content.Context;
 import android.widget.Toast;
 
+import xyz.sistemagte.gte.Login;
 import xyz.sistemagte.gte.R;
 
 /**
@@ -32,4 +33,5 @@ public class Validacoes {
         }
 
     }
+
 }

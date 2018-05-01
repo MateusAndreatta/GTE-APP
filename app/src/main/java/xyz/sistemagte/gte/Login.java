@@ -33,6 +33,17 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,24 +73,37 @@ public class Login extends AppCompatActivity {
     String EmailHolder, SenhaHolder;
 
     ProgressDialog progressDialog;
+    ProgressDialog DialogLogin;
 
     String HttpUrl = "https://sistemagte.xyz/android/login.php";
     String HttpFacebookLogin = "https://sistemagte.xyz/android/loginFB.php";
     LoginButton loginButton;
     CallbackManager callbackManager;
+
+    private static final String TAG = "ERRO";
+    GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
+    private GoogleApiClient googleApiClient;
+
+    //Booleans do login
+    public boolean LoginNormal,LoginFB,LoginGoogle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
 
-
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
 
         requestQueue = Volley.newRequestQueue(this);
         progressDialog = new ProgressDialog(Login.this);
+        DialogLogin = new ProgressDialog(Login.this);
+        DialogLogin.setMessage("Realizando o Login");
 
         try {
             CoordinatorLayout llBottomSheet = findViewById(R.id.bottom_sheet);
@@ -98,6 +122,25 @@ public class Login extends AppCompatActivity {
 
         iniciarComponentes();
         loginFacebook();
+
+        //Selecionando oque queremos do nosso login
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        //Cria o requerimento com as especificações que definimos no GoogleSignInOptions
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.sign_in_button:
+                        signIn();
+                        break;
+                    // ...
+                }
+            }
+        });
+
     }
 
     private void loginFacebook(){
@@ -147,12 +190,6 @@ public class Login extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void iniciarComponentes(){
@@ -466,6 +503,59 @@ public class Login extends AppCompatActivity {
         }
 
 
+    }
+
+
+    //Metodos para login com o google
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Verificar se o usuario não está logado
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        account = null;//forcando o usuario a deslogar
+        updateUI(account);
+    }
+
+    private void updateUI(GoogleSignInAccount account) {
+        //se receber NULL o usuario nao está logado
+        if(!(account == null)){         //Usuario está logado
+            enviarEmailFB(account.getEmail());
+        }
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            enviarEmailFB(account.getEmail());
+            // Signed in successfully, show authenticated UI.
+            updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            updateUI(null);
+        }
     }
 }
 

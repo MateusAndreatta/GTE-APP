@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Auxiliares.Validacoes;
 
 public class Painel_adm extends AppCompatActivity {
 
