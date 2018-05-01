@@ -77,7 +77,7 @@ public class Painel_adm extends AppCompatActivity {
 
     public void irMensalidade(View view) {
         try {
-            Intent Tela = new Intent(this, vans.class);
+            Intent Tela = new Intent(this, Mensalidades_adm.class);
             startActivity(Tela);
         } catch (Exception e) {
             e.printStackTrace();
