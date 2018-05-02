@@ -159,7 +159,7 @@ public class Login extends AppCompatActivity {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         if (response.getError() != null) {
                             // handle error
-                            Toast.makeText(Login.this, "Erro no response", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Erro", Toast.LENGTH_SHORT).show();
                         } else {
 
                             String user_lastname = object.optString("last_name");
