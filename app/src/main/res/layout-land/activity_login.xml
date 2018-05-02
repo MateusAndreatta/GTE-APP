@@ -64,7 +64,8 @@
                     android:hint="@string/senha"
                     android:background="@drawable/input_style"
                     android:inputType="textPassword"
-                    android:layout_marginBottom="15dp"/>
+                    android:layout_marginBottom="15dp"
+                    />
 
                 <Button
                     android:id="@+id/btnLogin"
@@ -74,7 +75,7 @@
                     android:text="@string/logar"
                     android:background="@drawable/btn_login"
                     android:onClick="Logar"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="5dp"/>
 
                 <TextView
                     android:id="@+id/labelRecuperarSenha"
@@ -86,10 +87,37 @@
                     android:onClick="irSenha"
                     android:gravity="center"
                     android:layout_gravity="center"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="5">
 
-            </LinearLayout>
+                    <com.facebook.login.widget.LoginButton xmlns:fb="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/login_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="10dp"
+                        android:layout_weight="2"/>
+
+                    <com.google.android.gms.common.SignInButton
+                        android:id="@+id/sign_in_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="3" />
 
 
+                   <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp" />
+
+                </LinearLayout>
+
+    </LinearLayout>
     </LinearLayout>
     </ScrollView>
 
