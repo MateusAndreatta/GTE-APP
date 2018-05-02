@@ -32,16 +32,17 @@ import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
-import xyz.sistemagte.gte.Construtoras.FuncConst;
+import xyz.sistemagte.gte.Construtoras.MensalidadeConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
+import xyz.sistemagte.gte.ListAdapters.ListViewMensalidades;
 
 public class Mensalidades_adm extends AppCompatActivity {
 
 
-    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
+    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarMensalidades.php";
     ListView listView;
     private int idEmpresa;
-    List<CriancaConst> criancaList;
+    List<MensalidadeConst> mensalidadeConstList;
     AlertDialog alerta;
 
     ProgressDialog progressDialog;
@@ -57,10 +58,10 @@ public class Mensalidades_adm extends AppCompatActivity {
         idEmpresa = global.getGlobalUserIdEmpresa();
 
         listView = findViewById(R.id.listView);
-        criancaList = new ArrayList<>();
+        mensalidadeConstList = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle(getResources().getString(R.string.listaCriancas));     //Titulo para ser exibido na sua Action Bar em frente à seta
+        getSupportActionBar().setTitle(getResources().getString(R.string.ListarMensalidades));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
 
         requestQueue = Volley.newRequestQueue(this);
@@ -71,10 +72,10 @@ public class Mensalidades_adm extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Cadastro de criança indisponível no momento", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+           public void onClick(View view) {
+              Snackbar.make(view, "Cadastro de mensalidades indisponível no momento", Snackbar.LENGTH_LONG)
+                     .setAction("Action", null).show();
+           }
         });
 
         loadMensalidadesList();
@@ -151,12 +152,12 @@ public class Mensalidades_adm extends AppCompatActivity {
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("responsavel"), funcObject.getString("id_crianca"));
 
-                                criancaList.add(funcConst);
+                                MensalidadeConst funcConst = new MensalidadeConst (funcObject.getString("nome"),funcObject.getString("nome_crianca"),funcObject.getString("status"),funcObject.getString("sobrenome"),funcObject.getString("sobre_crianca"),Integer.parseInt(funcObject.getString("id_usuario")), Integer.parseInt(funcObject.getString("id_crianca")), Double.parseDouble(funcObject.getString("valor_emitido")));
+                                mensalidadeConstList.add(funcConst);
                             }
 
-                            ListViewCriancaAdm adapter = new ListViewCriancaAdm(criancaList, getApplicationContext());
+                            ListViewMensalidades adapter = new ListViewMensalidades(mensalidadeConstList, getApplicationContext());
 
                             listView.setAdapter(adapter);
                         } catch (JSONException e) {

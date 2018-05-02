@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import xyz.sistemagte.gte.Construtoras.FuncConst;
 import xyz.sistemagte.gte.Construtoras.MensalidadeConst;
 import xyz.sistemagte.gte.R;
 
@@ -36,6 +37,24 @@ public class ListViewMensalidades extends ArrayAdapter <MensalidadeConst> {
         TextView txtStatus = listViewItem.findViewById(R.id.txtStatus);
         TextView txtValor = listViewItem.findViewById(R.id.txtValor);
         TextView txtCrianca = listViewItem.findViewById(R.id.txtCrianca);
+
+
+
+        MensalidadeConst mensalidadeConst = mensa.get(position);
+
+        if(Integer.parseInt(mensalidadeConst.getStatus()) == 0){
+            txtStatus.setText(mCtx.getResources().getString(R.string.pendente));
+        }
+        if(Integer.parseInt(mensalidadeConst.getStatus()) == 1){
+            txtStatus.setText(mCtx.getResources().getString(R.string.pago));
+        }
+        if(Integer.parseInt(mensalidadeConst.getStatus()) == 2){
+            txtStatus.setText(mCtx.getResources().getString(R.string.atrasada));
+        }
+
+        txtNomeResp.setText(mensalidadeConst.getNomeResp() + " " + mensalidadeConst.getSobreResp());
+        txtValor.setText((mCtx.getResources().getString(R.string.real)+ " " + String.valueOf(mensalidadeConst.getValor())));
+        txtCrianca.setText((mCtx.getResources().getString(R.string.criancaEspaço)+ " " + mensalidadeConst.getNomeCrianca() + " " + mensalidadeConst.getSobreCrianca()));
 
         return listViewItem;
     }
