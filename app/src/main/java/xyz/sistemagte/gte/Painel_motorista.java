@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
@@ -52,5 +53,11 @@ public class Painel_motorista extends AppCompatActivity {
         startActivity(new Intent(this, Login.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
+    }
+
+    public void irCriancas(View view) {
+
+        Intent Tela = new Intent(this, ListagemCriancasMotorista.class);
+        startActivity(Tela);
     }
 }
