@@ -60,4 +60,9 @@ public class Painel_motorista extends AppCompatActivity {
         Intent Tela = new Intent(this, ListagemCriancasMotorista.class);
         startActivity(Tela);
     }
+
+    public void irVan(View view) {
+        Intent Tela = new Intent(this, ListagemVanMotorista.class);
+        startActivity(Tela);
+    }
 }

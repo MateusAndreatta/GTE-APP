@@ -58,7 +58,8 @@
         <activity android:name=".EditarVan" />
         <activity android:name=".CadResponsavel" />
         <activity android:name=".ListagemCriancaMonitor" />
-        <activity android:name=".ListagemCriancasMotorista"></activity>
+        <activity android:name=".ListagemCriancasMotorista" />
+        <activity android:name=".ListagemVanMotorista"></activity>
     </application>
 
 </manifest>

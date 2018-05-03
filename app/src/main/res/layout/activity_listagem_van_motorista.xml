@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="xyz.sistemagte.gte.ListagemVanMotorista">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/ListaVanMotorista"
+        android:textSize="40sp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/cad_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/list_capacidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/list_modelo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                 />
+
+            <TextView
+                android:id="@+id/list_placa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                 />
+
+            <TextView
+                android:id="@+id/list_ano_fab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:inputType="time" />
+
+            <TextView
+                android:id="@+id/list_marca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:inputType="time" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
