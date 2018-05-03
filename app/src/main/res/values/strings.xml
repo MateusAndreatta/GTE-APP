@@ -64,6 +64,7 @@
     <string name="modeloVan">Modelo:</string>
     <string name="placaVan">Placa:</string>
     <string name="anoVan">Ano:</string>
+    <string name="EditarPerfil">Editar Perfil</string>
     <string name="marcaVan">Marca:</string>
     <string name="editarFunc">Editar Funcionários</string>
     <string name="selecionarEscola">Selecionar escola</string>

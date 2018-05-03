@@ -65,4 +65,9 @@ public class Painel_motorista extends AppCompatActivity {
         Intent Tela = new Intent(this, ListagemVanMotorista.class);
         startActivity(Tela);
     }
+
+    public void irEditar_perfil(View view) {
+        Intent Tela = new Intent(this, Editar_perfil_motorista.class);
+        startActivity(Tela);
+    }
 }
