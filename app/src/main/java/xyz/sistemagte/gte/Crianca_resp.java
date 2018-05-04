@@ -33,14 +33,15 @@ import java.util.Map;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
+import xyz.sistemagte.gte.ListAdapters.ListViewCriancaResp;
 
 public class Crianca_resp extends AppCompatActivity {
 
 
-    private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarCrianca.php";
+    private static String JSON_URL = "https://sistemagte.xyz/json/responsavel/ListarCrianca.php";
     private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirCrianca.php";
     ListView listView;
-    private int idEmpresa;
+    private int idUsuario;
     List<CriancaConst> criancaList;
     AlertDialog alerta;
     private int idCrianca;
@@ -54,7 +55,7 @@ public class Crianca_resp extends AppCompatActivity {
         setContentView(R.layout.activity_crianca_adm);
 
         GlobalUser global =(GlobalUser)getApplication();
-        idEmpresa = global.getGlobalUserIdEmpresa();
+        idUsuario = global.getGlobalUserID();
 
         listView = findViewById(R.id.listView);
         criancaList = new ArrayList<>();
@@ -148,7 +149,6 @@ public class Crianca_resp extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
 
@@ -165,7 +165,7 @@ public class Crianca_resp extends AppCompatActivity {
                                 criancaList.add(funcConst);
                             }
 
-                            ListViewCriancaAdm adapter = new ListViewCriancaAdm(criancaList, getApplicationContext());
+                            ListViewCriancaResp adapter = new ListViewCriancaResp(criancaList, getApplicationContext());
 
                             listView.setAdapter(adapter);
                         } catch (JSONException e) {
@@ -191,7 +191,7 @@ public class Crianca_resp extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 // Adding All values to Params.
-                params.put("id", String.valueOf(idEmpresa));
+                params.put("id", String.valueOf(idUsuario));
 
                 return params;
             }

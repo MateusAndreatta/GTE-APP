@@ -33,15 +33,15 @@ public class ListViewCriancaResp extends ArrayAdapter<CriancaConst> {
 
         LayoutInflater inflater = LayoutInflater.from(mCtx);
 
-        View listViewItem = inflater.inflate(R.layout.list_view_crianca, null, true);
+        View listViewItem = inflater.inflate(R.layout.list_view_crianca_resp, null, true);
 
         TextView txtNome = listViewItem.findViewById(R.id.txtNome);
-        TextView txtResp = listViewItem.findViewById(R.id.txtResp);
+        TextView txtResp = listViewItem.findViewById(R.id.txtCpf);
 
         CriancaConst criancaConst = criancaList.get(position);
 
         txtNome.setText(criancaConst.getNomeCrianca().substring(0,1).toUpperCase().concat(criancaConst.getNomeCrianca().substring(1)) + " " + criancaConst.getSobrenomeCrianca().substring(0,1).toUpperCase().concat(criancaConst.getSobrenomeCrianca().substring(1)));
-        txtResp.setText(mCtx.getResources().getString(R.string.cpf)+ ": "+ criancaConst.getResponsavelCrianca());
+        txtResp.setText(mCtx.getResources().getString(R.string.cpf)+ ": "+ criancaConst.getCpfCrianca());
 
         return listViewItem;
     }

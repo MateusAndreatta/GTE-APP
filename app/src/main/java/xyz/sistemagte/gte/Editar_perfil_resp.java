@@ -68,7 +68,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
         //aplica mascara
         MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",Cpf);
         MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
-        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",Rg);
+        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("#.###.###-#",Rg);
 
         Cpf.addTextChangedListener(mascaraCPF);
         DataNasc.addTextChangedListener(mascaraData);
@@ -127,12 +127,12 @@ public class Editar_perfil_resp extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-
-                        // Hiding the progress dialog after all task complete.
+                        GlobalUser global =(GlobalUser)getApplication();
+                        global.setGlobalUserNome(NomeHolder);
                         progressDialog.dismiss();
-
-                        // Showing response message coming from server.
                         Toast.makeText(Editar_perfil_resp.this, getResources().getString(R.string.MsgSucesso), Toast.LENGTH_LONG).show();
+                        Intent tela = new Intent(Editar_perfil_resp.this, Painel_responsavel.class);
+                        startActivity(tela);
                     }
                 },
                 new Response.ErrorListener() {

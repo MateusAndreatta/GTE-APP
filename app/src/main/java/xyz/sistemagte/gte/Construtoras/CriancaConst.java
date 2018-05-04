@@ -15,10 +15,10 @@ public class CriancaConst {
         this.idCrianca = idC;
     }
 
-    public CriancaConst(String nome, String sobrenome, String responsavel,String idC) {
+    public CriancaConst(String nome, String sobrenome, String cpf,String idC) {
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.responsavel = responsavel;
+        this.cpf = cpf;
         this.idCrianca = idC;
     }
 
