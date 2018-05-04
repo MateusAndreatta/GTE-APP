@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 public class Editar_perfil_motorista extends AppCompatActivity {
@@ -80,6 +81,16 @@ public class Editar_perfil_motorista extends AppCompatActivity {
         progressDialog = new ProgressDialog(Editar_perfil_motorista.this);
 
         PuxarDados();
+
+        MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
+        MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",validaCnh);
+        MaskEditTextChangedListener mascaraDatanasc  = new MaskEditTextChangedListener("##/##/####",nasc);
+        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("#.###.###-#",rg);
+
+        cpf.addTextChangedListener(mascaraCPF);
+        validaCnh.addTextChangedListener(mascaraData);
+        nasc.addTextChangedListener(mascaraDatanasc);
+        rg.addTextChangedListener(mascaraRG);
     }
 
     private void PuxarDados(){

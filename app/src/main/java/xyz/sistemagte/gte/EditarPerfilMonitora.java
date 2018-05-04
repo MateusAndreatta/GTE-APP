@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 public class EditarPerfilMonitora extends AppCompatActivity {
@@ -65,6 +66,16 @@ public class EditarPerfilMonitora extends AppCompatActivity {
         progressDialog = new ProgressDialog(EditarPerfilMonitora.this);
 
         PuxarDados();
+
+        MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
+        MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",dt_admissao);
+        MaskEditTextChangedListener mascaraDatanasc  = new MaskEditTextChangedListener("##/##/####",nasc);
+        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("#.###.###-#",rg);
+
+        cpf.addTextChangedListener(mascaraCPF);
+        dt_admissao.addTextChangedListener(mascaraData);
+        nasc.addTextChangedListener(mascaraDatanasc);
+        rg.addTextChangedListener(mascaraRG);
     }
 
     private void PuxarDados(){
@@ -93,7 +104,7 @@ public class EditarPerfilMonitora extends AppCompatActivity {
                             format = new SimpleDateFormat("dd/MM/yyyy");
                             String date = format.format(data);
 
-                            String dia2 = funcObject.getString("da_admissao");
+                            String dia2 = funcObject.getString("dt_admissao");
                             SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
                             ParsePosition position2 = new ParsePosition(0);
                             Date data2 = format2.parse(dia2,position2);

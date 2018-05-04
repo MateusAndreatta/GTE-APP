@@ -34,7 +34,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/nome"
-                android:inputType="number" />
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/sobrenome"
@@ -44,7 +44,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/sobrenome"
-                android:inputType="number" />
+                android:inputType="text" />
 
 
             <EditText
@@ -55,7 +55,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/email"
-                android:inputType="number" />
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/cpf"
@@ -85,7 +85,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/datanascimento"
-                android:inputType="number" />
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/dt_admissao"
@@ -95,7 +95,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/data_admissao"
-                android:inputType="number" />
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/cadastro_motorista"
