@@ -613,7 +613,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void PuxarDadosSessao() {
-
         GlobalUser global =(GlobalUser)getApplication();
         global.setGlobalUserID(Integer.parseInt(sessao.getString("id")));
         global.setGlobalUserTipoUser(Integer.parseInt(sessao.getString("tipo")));
@@ -621,8 +620,6 @@ public class Login extends AppCompatActivity {
         global.setGlobalUserNome(sessao.getString("nome"));
         global.setGlobalUserSobrenome(sessao.getString("sobrenome"));
         global.setGlobalUserEmail(sessao.getString("email"));
-
-
     }
 }
 

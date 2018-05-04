@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Auxiliares.Validacoes;
 
 public class Painel_responsavel extends AppCompatActivity {
     TextView Label;
@@ -40,6 +41,8 @@ public class Painel_responsavel extends AppCompatActivity {
                 finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
             case R.id.menu_Sair:
+                Validacoes validacoes = new Validacoes();
+                validacoes.Deslogar(this);
                 startActivity(new Intent(this, Login.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
