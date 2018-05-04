@@ -1,0 +1,114 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xyz.sistemagte.gte.cad_motorista"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/editarMonitor"
+        android:textSize="40sp"
+        android:gravity="center"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/cad_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/nome"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/sobrenome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/sobrenome"
+                android:inputType="number" />
+
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/cpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/cpf"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/rg"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/nasc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/datanascimento"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/dt_admissao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/data_admissao"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/cadastro_motorista"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_padrao"
+                android:onClick="salvar"
+                android:text="@string/enviar"
+                android:textColor="@color/branco" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

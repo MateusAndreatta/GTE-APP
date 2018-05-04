@@ -6,6 +6,7 @@
 
     <!-- Genericos -->
     <string name="app_name">GTE</string>
+    <string name="editarMonitor">Editar Monitor(a)</string>
     <string name="ListaVanMotorista">Sua Van</string>
     <string name="email">E-mail</string>
     <string name="senha">Senha</string>
