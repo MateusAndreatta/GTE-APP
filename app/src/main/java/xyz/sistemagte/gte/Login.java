@@ -277,6 +277,14 @@ public class Login extends AppCompatActivity {
                                     global.setGlobalUserSobrenome(sobrenome);
                                     global.setGlobalUserEmail(email);
 
+                                    sessao.setString("id",id);
+                                    sessao.setString("tipo",tipo);
+                                    sessao.setString("empresa",empresa);
+                                    sessao.setString("nome", nome);
+                                    sessao.setString("sobrenome",sobrenome);
+                                    sessao.setString("email",email);
+
+
                                      switch (tipo){
                                         case("1"):
                                             Intent telaMotorista = new Intent(Login.this, Painel_motorista.class);
@@ -381,6 +389,11 @@ public class Login extends AppCompatActivity {
                                     global.setGlobalUserSobrenome(sobrenome);
                                     global.setGlobalUserEmail(email);
 
+                                    sessao.setString("id",id);
+                                    sessao.setString("tipo",tipo);
+                                    sessao.setString("empresa",empresa);
+                                    sessao.setString("nome", nome);
+                                    sessao.setString("sobrenome",sobrenome);
                                     sessao.setString("email",email);
 
                                     switch (tipo){
@@ -578,24 +591,37 @@ public class Login extends AppCompatActivity {
         sessao = new Sessao(Login.this);
 
         if(sessao.getBoolean("adm")){
+            PuxarDadosSessao();
             Intent irTela = new Intent(Login.this, Painel_adm.class);
             startActivity(irTela);
         }
         if(sessao.getBoolean("monitora")){
+            PuxarDadosSessao();
             Intent irTela = new Intent(Login.this, Painel_monitora.class);
             startActivity(irTela);
         }
         if(sessao.getBoolean("motorista")){
+            PuxarDadosSessao();
             Intent irTela = new Intent(Login.this, Painel_motorista.class);
             startActivity(irTela);
         }
         if(sessao.getBoolean("resp")){
+            PuxarDadosSessao();
             Intent irTela = new Intent(Login.this, Painel_adm.class);
             startActivity(irTela);
         }
     }
 
-    private void PuxarDadosUser() {
+    private void PuxarDadosSessao() {
+
+        GlobalUser global =(GlobalUser)getApplication();
+        global.setGlobalUserID(Integer.parseInt(sessao.getString("id")));
+        global.setGlobalUserTipoUser(Integer.parseInt(sessao.getString("tipo")));
+        global.setGlobalUserIdEmpresa(Integer.parseInt(sessao.getString("empresa")));
+        global.setGlobalUserNome(sessao.getString("nome"));
+        global.setGlobalUserSobrenome(sessao.getString("sobrenome"));
+        global.setGlobalUserEmail(sessao.getString("email"));
+
 
     }
 }
