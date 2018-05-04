@@ -48,6 +48,7 @@ import com.google.android.gms.tasks.Task;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +57,7 @@ import java.util.Objects;
 
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Auxiliares.Sessao;
 
 
 public class Login extends AppCompatActivity {
@@ -87,7 +89,7 @@ public class Login extends AppCompatActivity {
 
     //Booleans do login
     public boolean LoginNormal,LoginFB,LoginGoogle;
-
+    Sessao sessao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,6 +142,8 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+        verificarSessao();
+
 
     }
 
@@ -277,18 +281,24 @@ public class Login extends AppCompatActivity {
                                         case("1"):
                                             Intent telaMotorista = new Intent(Login.this, Painel_motorista.class);
                                             startActivity(telaMotorista);
+
+                                            sessao.setBoolean("motorista", true);
+
                                             break;
                                         case ("2"):
                                             Intent telaResponsavel = new Intent(Login.this, Painel_responsavel.class);
                                             startActivity(telaResponsavel);
+                                            sessao.setBoolean("resp", true);
                                             break;
                                         case ("3"):
                                             Intent telaMonitora = new Intent(Login.this, Painel_monitora.class);
                                             startActivity(telaMonitora);
+                                            sessao.setBoolean("monitora", true);
                                             break;
                                         case ("4"):
                                             Intent telaAdm = new Intent(Login.this, Painel_adm.class);
                                             startActivity(telaAdm);
+                                            sessao.setBoolean("adm", true);
                                             break;
                                         default:
                                             Toast.makeText(Login.this, getResources().getString(R.string.LoginPermissao), Toast.LENGTH_SHORT).show();
@@ -371,22 +381,28 @@ public class Login extends AppCompatActivity {
                                     global.setGlobalUserSobrenome(sobrenome);
                                     global.setGlobalUserEmail(email);
 
+                                    sessao.setString("email",email);
+
                                     switch (tipo){
                                         case("1"):
                                             Intent telaMotorista = new Intent(Login.this, Painel_motorista.class);
                                             startActivity(telaMotorista);
+                                            sessao.setBoolean("motorista", true);
                                             break;
                                         case ("2"):
                                             Intent telaResponsavel = new Intent(Login.this, Painel_responsavel.class);
                                             startActivity(telaResponsavel);
+                                            sessao.setBoolean("resp", true);
                                             break;
                                         case ("3"):
                                             Intent telaMonitora = new Intent(Login.this, Painel_monitora.class);
                                             startActivity(telaMonitora);
+                                            sessao.setBoolean("monitora", true);
                                             break;
                                         case ("4"):
                                             Intent telaAdm = new Intent(Login.this, Painel_adm.class);
                                             startActivity(telaAdm);
+                                            sessao.setBoolean("adm", true);
                                             break;
                                         default:
                                             Toast.makeText(Login.this, getResources().getString(R.string.LoginPermissao), Toast.LENGTH_SHORT).show();
@@ -556,6 +572,31 @@ public class Login extends AppCompatActivity {
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             updateUI(null);
         }
+    }
+
+    private void verificarSessao(){
+        sessao = new Sessao(Login.this);
+
+        if(sessao.getBoolean("adm")){
+            Intent irTela = new Intent(Login.this, Painel_adm.class);
+            startActivity(irTela);
+        }
+        if(sessao.getBoolean("monitora")){
+            Intent irTela = new Intent(Login.this, Painel_monitora.class);
+            startActivity(irTela);
+        }
+        if(sessao.getBoolean("motorista")){
+            Intent irTela = new Intent(Login.this, Painel_motorista.class);
+            startActivity(irTela);
+        }
+        if(sessao.getBoolean("resp")){
+            Intent irTela = new Intent(Login.this, Painel_adm.class);
+            startActivity(irTela);
+        }
+    }
+
+    private void PuxarDadosUser() {
+
     }
 }
 
