@@ -1,16 +1,35 @@
 package xyz.sistemagte.gte;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 
 public class cad_van extends AppCompatActivity {
 
     EditText capacidade, modelo, placa,ano,marca;
+
+    RequestQueue requestQueue;
+    ProgressDialog progressDialog;
+    String HTTP_Cad = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +48,6 @@ public class cad_van extends AppCompatActivity {
         placa.addTextChangedListener(mascaraPlaca);
         ano.addTextChangedListener(mascaraAno);
 
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.cadastro_van));
@@ -39,5 +56,41 @@ public class cad_van extends AppCompatActivity {
 
     public void cadastrarVan(View view) {
         Toast.makeText(this, "Não disponivel no momento!", Toast.LENGTH_SHORT).show();
+/*  
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HTTP_Cad,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        Toast.makeText(cad_van.this, R.string.cadastradoSucesso, Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(cad_van.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<>();
+
+                // Adding All values to Params.
+                params.put("capacidade", capacidade.getText().toString());
+                params.put("modelo", modelo.getText().toString());
+                params.put("placa", placa.getText().toString());
+                params.put("ano", ano.getText().toString());
+                params.put("marca", marca.getText().toString());
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    */
     }
+
 }
