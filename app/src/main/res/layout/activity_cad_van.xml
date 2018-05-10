@@ -25,6 +25,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <Spinner
+                android:id="@+id/morotistaSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp" />
+
             <EditText
                 android:id="@+id/cad_capacidade"
                 android:layout_width="match_parent"

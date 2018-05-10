@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,19 +19,30 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
+import xyz.sistemagte.gte.Construtoras.ResponsavelConstr;
+import xyz.sistemagte.gte.Construtoras.VansConstr;
 
 public class cad_van extends AppCompatActivity {
 
     EditText capacidade, modelo, placa,ano,marca;
+    Spinner spinner;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
     String HTTP_Cad = "";
+    String UrlSpinner = "";
+
+    ArrayAdapter<String> MotoristaListSpinner;
+    ArrayAdapter<String> RespListSpinner;
+    ArrayList<vans> vansList;
+    ArrayList<ResponsavelConstr> ResponsavelConstrList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +54,8 @@ public class cad_van extends AppCompatActivity {
         placa = findViewById(R.id.cad_placa);
         ano = findViewById(R.id.cad_ano_fab);
         marca = findViewById(R.id.cad_marca);
+
+        spinner = findViewById(R.id.morotistaSpinner);
 
         MaskEditTextChangedListener mascaraPlaca = new MaskEditTextChangedListener("###-###",placa);
         MaskEditTextChangedListener mascaraAno = new MaskEditTextChangedListener("####",ano);
@@ -94,7 +109,7 @@ public class cad_van extends AppCompatActivity {
     }
 
     private void LoadMotoristas(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrlSpinner,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlSpinner,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
@@ -104,12 +119,12 @@ public class cad_van extends AppCompatActivity {
                             JSONArray jsonArray=jsonObject.getJSONArray("nome");
                             for(int i=0;i<jsonArray.length();i++){
                                 JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                                String escola = jsonObject1.getString("nome");
-                                EscolasListSpinner.add(escola);
-                                EscolasConstr escolasConstr = new EscolasConstr(jsonObject1.getString("nome"),jsonObject1.getString("cep"),jsonObject1.getString("rua"),jsonObject1.getString("numero"),jsonObject1.getString("complemento"),jsonObject1.getString("estado"),jsonObject1.getString("cidade"),jsonObject1.getInt("idEscola"),jsonObject1.getInt("idEnderecoEscola"));
-                                EscolasListConst.add(escolasConstr);
+                                String motorista = jsonObject1.getString("nome");
+                                MotoristaListSpinner.add(motorista);
+                                VansConstr vansConstr = new VansConstr(jsonObject1.getString("nome"),jsonObject1.getString("cep"),jsonObject1.getString("rua"),jsonObject1.getString("numero"),jsonObject1.getString("complemento"),jsonObject1.getString("estado"),jsonObject1.getString("cidade"),jsonObject1.getInt("idEscola"),jsonObject1.getInt("idEnderecoEscola"));
+                                EscolasListConst.add(vansConstr);
                             }
-                            EscolaSpinner.setAdapter(EscolasListSpinner);
+                            spinner.setAdapter(MotoristaListSpinner);
                         }catch (JSONException e){e.printStackTrace();}
                     }
                 },
