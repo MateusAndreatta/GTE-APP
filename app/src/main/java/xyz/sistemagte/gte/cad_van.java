@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,13 +39,11 @@ public class cad_van extends AppCompatActivity {
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
     String HTTP_Cad = "";
-    String UrlSpinner = "";
+    String UrlSpinner = "https://sistemagte.xyz/json/adm/ListarMotoristaEmp.php";
 
     Integer idEmpresa,idUsuario;
 
     ArrayAdapter<String> MotoristaListSpinner;
-    ArrayAdapter<String> RespListSpinner;
-    ArrayList<vans> vansList;
     ArrayList<MotoristaConstr> MotoristaConstrList;
 
 
@@ -64,6 +63,11 @@ public class cad_van extends AppCompatActivity {
         marca = findViewById(R.id.cad_marca);
 
         spinner = findViewById(R.id.morotistaSpinner);
+        progressDialog = new ProgressDialog(cad_van.this);
+        requestQueue = Volley.newRequestQueue(this);
+
+        MotoristaConstrList = new ArrayList<>();
+        MotoristaListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
 
         MaskEditTextChangedListener mascaraPlaca = new MaskEditTextChangedListener("###-###",placa);
         MaskEditTextChangedListener mascaraAno = new MaskEditTextChangedListener("####",ano);
@@ -79,8 +83,6 @@ public class cad_van extends AppCompatActivity {
 
 
     public void cadastrarVan(View view) {
-        Toast.makeText(this, "Não disponivel no momento!", Toast.LENGTH_SHORT).show();
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HTTP_Cad,
                 new Response.Listener<String>() {
                     @Override
@@ -97,10 +99,9 @@ public class cad_van extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
 
-                // Creating Map String Params.
                 Map<String, String> params = new HashMap<>();
 
-                // Adding All values to Params.
+                params.put("id", capacidade.getText().toString());
                 params.put("capacidade", capacidade.getText().toString());
                 params.put("modelo", modelo.getText().toString());
                 params.put("placa", placa.getText().toString());
@@ -127,9 +128,9 @@ public class cad_van extends AppCompatActivity {
                             JSONArray jsonArray = jsonObject.getJSONArray("nome");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                String motorista = jsonObject1.getString("nome");
+                                String motorista = jsonObject1.getString("nome") + jsonObject1.getString("sobrenome");
                                 MotoristaListSpinner.add(motorista);
-                                MotoristaConstr motoristaConstr = new MotoristaConstr();
+                                MotoristaConstr motoristaConstr = new MotoristaConstr(jsonObject1.getString("nome"),jsonObject1.getString("sobrenome"),Integer.parseInt(jsonObject1.getString("id_usuario")));
                                 MotoristaConstrList.add(motoristaConstr);
                             }
                             spinner.setAdapter(MotoristaListSpinner);
