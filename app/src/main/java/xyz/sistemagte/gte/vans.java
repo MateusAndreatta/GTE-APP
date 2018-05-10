@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 import xyz.sistemagte.gte.Construtoras.VansConstr;
 import xyz.sistemagte.gte.ListAdapters.ListViewVans;
 
@@ -61,9 +62,7 @@ public class vans extends AppCompatActivity {
 
 
         requestQueue = Volley.newRequestQueue(this);
-
         progressDialog = new ProgressDialog(vans.this);
-
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -127,12 +126,9 @@ public class vans extends AppCompatActivity {
 
     private void LoadListaVans() {
 
-
-        // Showing progress dialog at user registration time.
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
         progressDialog.show();
 
-        // Creating string request with post method.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -165,20 +161,15 @@ public class vans extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
 
-                        // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
 
-                        // Showing error message if something goes wrong.
                         Toast.makeText(vans.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() {
-
-                // Creating Map String Params.
                 Map<String, String> params = new HashMap<String, String>();
 
-                // Adding All values to Params.
                 params.put("id", String.valueOf(idEmpresa));
 
                 return params;
@@ -189,4 +180,6 @@ public class vans extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
     }
+
+
 }

@@ -93,4 +93,43 @@ public class cad_van extends AppCompatActivity {
     */
     }
 
+    private void LoadMotoristas(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrlSpinner,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        //Toast.makeText(cad_crianca.this, ServerResponse, Toast.LENGTH_SHORT).show();
+                        try{
+                            JSONObject jsonObject=new JSONObject(ServerResponse);
+                            JSONArray jsonArray=jsonObject.getJSONArray("nome");
+                            for(int i=0;i<jsonArray.length();i++){
+                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
+                                String escola = jsonObject1.getString("nome");
+                                EscolasListSpinner.add(escola);
+                                EscolasConstr escolasConstr = new EscolasConstr(jsonObject1.getString("nome"),jsonObject1.getString("cep"),jsonObject1.getString("rua"),jsonObject1.getString("numero"),jsonObject1.getString("complemento"),jsonObject1.getString("estado"),jsonObject1.getString("cidade"),jsonObject1.getInt("idEscola"),jsonObject1.getInt("idEnderecoEscola"));
+                                EscolasListConst.add(escolasConstr);
+                            }
+                            EscolaSpinner.setAdapter(EscolasListSpinner);
+                        }catch (JSONException e){e.printStackTrace();}
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(vans.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(idEmpresa));
+
+                return params;
+            }
+        }
+
 }
