@@ -94,6 +94,9 @@ public class vans extends AppCompatActivity {
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
 
+                        Intent tela = new Intent(vans.this, EditarVan.class);
+                        tela.putExtra("idV",String.valueOf(idVan));
+                        startActivity(tela);
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
