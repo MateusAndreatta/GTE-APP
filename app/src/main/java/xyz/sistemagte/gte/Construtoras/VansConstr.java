@@ -6,7 +6,7 @@ package xyz.sistemagte.gte.Construtoras;
 
 public class VansConstr {
     String modelo,marca,placa,motorista;
-    int ano,capacidade;
+    int ano,capacidade,id;
 
     public VansConstr(String modelo, String marca, String placa, int ano, int capacidade, String motorista) {
         this.modelo = modelo;
@@ -15,6 +15,7 @@ public class VansConstr {
         this.ano = ano;
         this.capacidade = capacidade;
         this.motorista = motorista;
+        this.id = id;
     }
 
     public String getModeloVans() {
@@ -40,4 +41,5 @@ public class VansConstr {
     public int getCapacidadeVans() {
         return capacidade;
     }
+
 }

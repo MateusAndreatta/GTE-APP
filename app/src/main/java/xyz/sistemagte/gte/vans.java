@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 import xyz.sistemagte.gte.Construtoras.VansConstr;
 import xyz.sistemagte.gte.ListAdapters.ListViewVans;
@@ -39,8 +40,10 @@ public class vans extends AppCompatActivity {
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarVan.php";
+    private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirVan.php";
     ListView listView;
     private int idEmpresa;
+    private int idVan;
     List<VansConstr> vansList;
     AlertDialog alerta;
 
@@ -76,8 +79,13 @@ public class vans extends AppCompatActivity {
         LoadListaVans();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                VansConstr van = vansList.get(position);
+                idVan = Integer.parseInt(van.getMotoristaVans());
 
                 //Alert de confirmação do excluir
                 AlertDialog.Builder builder = new AlertDialog.Builder(vans.this);
@@ -90,7 +98,7 @@ public class vans extends AppCompatActivity {
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        ExcluirVan();
                     }
                 });
 
@@ -126,6 +134,8 @@ public class vans extends AppCompatActivity {
 
     private void LoadListaVans() {
 
+        vansList.clear();
+
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
         progressDialog.show();
 
@@ -144,7 +154,7 @@ public class vans extends AppCompatActivity {
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject jsonObject = funcArray.getJSONObject(i);
                                 VansConstr vansConstr  = new VansConstr(jsonObject.getString("modelo"), jsonObject.getString("marca"), jsonObject.getString("placa"),
-                                        Integer.parseInt(jsonObject.getString("ano")),Integer.parseInt(jsonObject.getString("capacidade")),jsonObject.getString("motorista") );
+                                        Integer.parseInt(jsonObject.getString("ano")),Integer.parseInt(jsonObject.getString("capacidade")),jsonObject.getString("motorista"));
 
                                 vansList.add(vansConstr);
                             }
@@ -179,6 +189,57 @@ public class vans extends AppCompatActivity {
 
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
+    }
+
+
+    private void ExcluirVan(){
+
+        // Showing progress dialog at user registration time.
+        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+        progressDialog.show();
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_Excluir,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+                        Toast.makeText(vans.this, getResources().getString(R.string.excluidoComSucesso), Toast.LENGTH_SHORT).show();
+
+                        LoadListaVans();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+
+                        // Showing error message if something goes wrong.
+                        Toast.makeText(vans.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(idVan));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+
+
     }
 
 

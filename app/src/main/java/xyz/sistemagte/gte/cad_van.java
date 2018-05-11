@@ -1,6 +1,7 @@
 package xyz.sistemagte.gte;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +39,7 @@ public class cad_van extends AppCompatActivity {
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
-    String HTTP_Cad = "";
+    String HTTP_Cad = "https://sistemagte.xyz/android/cadastros/cadVan.php";
     String UrlSpinner = "https://sistemagte.xyz/json/adm/ListarMotoristaEmp.php";
 
     Integer idEmpresa,idUsuario;
@@ -69,10 +70,12 @@ public class cad_van extends AppCompatActivity {
         MotoristaConstrList = new ArrayList<>();
         MotoristaListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
 
-        MaskEditTextChangedListener mascaraPlaca = new MaskEditTextChangedListener("###-###",placa);
+        MaskEditTextChangedListener mascaraPlaca = new MaskEditTextChangedListener("###-####",placa);
+        MaskEditTextChangedListener mascaraCapacidade = new MaskEditTextChangedListener("##",capacidade);
         MaskEditTextChangedListener mascaraAno = new MaskEditTextChangedListener("####",ano);
 
         placa.addTextChangedListener(mascaraPlaca);
+        capacidade.addTextChangedListener(mascaraCapacidade);
         ano.addTextChangedListener(mascaraAno);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
@@ -88,6 +91,9 @@ public class cad_van extends AppCompatActivity {
                     @Override
                     public void onResponse(String ServerResponse) {
                         Toast.makeText(cad_van.this, R.string.cadastradoSucesso, Toast.LENGTH_SHORT).show();
+
+                        Intent tela = new Intent(cad_van.this, vans.class);
+                        startActivity(tela);
                     }
                 },
                 new Response.ErrorListener() {
@@ -101,11 +107,14 @@ public class cad_van extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<>();
 
-                params.put("id", capacidade.getText().toString());
+                int spinnerPos2 = spinner.getSelectedItemPosition();
+                MotoristaConstr motorista = MotoristaConstrList.get(spinnerPos2);
+
+                params.put("id", String.valueOf(motorista.getId_motorista()));
                 params.put("capacidade", capacidade.getText().toString());
                 params.put("modelo", modelo.getText().toString());
                 params.put("placa", placa.getText().toString());
-                params.put("ano", ano.getText().toString());
+                params.put("AnoFabri", ano.getText().toString());
                 params.put("marca", marca.getText().toString());
 
                 return params;
@@ -128,7 +137,7 @@ public class cad_van extends AppCompatActivity {
                             JSONArray jsonArray = jsonObject.getJSONArray("nome");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                String motorista = jsonObject1.getString("nome") + jsonObject1.getString("sobrenome");
+                                String motorista = jsonObject1.getString("nome") + " " + jsonObject1.getString("sobrenome");
                                 MotoristaListSpinner.add(motorista);
                                 MotoristaConstr motoristaConstr = new MotoristaConstr(jsonObject1.getString("nome"),jsonObject1.getString("sobrenome"),Integer.parseInt(jsonObject1.getString("id_usuario")));
                                 MotoristaConstrList.add(motoristaConstr);
