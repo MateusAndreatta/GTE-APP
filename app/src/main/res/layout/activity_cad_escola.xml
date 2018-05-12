@@ -47,7 +47,7 @@
                 android:inputType="number" />
 
             <Spinner
-                android:id="@+id/cad_estado"
+                android:id="@+id/spinnerEstado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

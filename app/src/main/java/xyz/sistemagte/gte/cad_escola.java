@@ -32,13 +32,13 @@ public class cad_escola extends AppCompatActivity {
 
     EditText NomeEscola, CEP,Cidade, Rua, Numero, Complemento;
     Spinner Estado;
-
+    String EstadoHolder;
     int idEmpresa;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
 
-    private static String HttpURL = "";
+    private static String HttpURL = "https://sistemagte.xyz/android/cadastros/cadEscola.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,7 +168,6 @@ public class cad_escola extends AppCompatActivity {
                                         break;
 
                                 }
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -215,8 +214,9 @@ public class cad_escola extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                        Toast.makeText(cad_escola.this, ServerResponse, Toast.LENGTH_SHORT).show();
-
+                        //System.out.println(ServerResponse);
+                        Intent tela = new Intent(cad_escola.this, Escolas.class);
+                        startActivity(tela);
                     }
                 },
                 new Response.ErrorListener() {
@@ -228,16 +228,102 @@ public class cad_escola extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
 
-                // Creating Map String Params.
                 Map<String, String> params = new HashMap<>();
 
-                // Adding All values to Params.
+                EstadoHolder = Estado.getSelectedItem().toString();
+
+                switch (Estado.getSelectedItem().toString()) {//pega o nome do item ali em cima
+                    case "Acre":
+                        EstadoHolder = "AC";
+                        break;
+                    case "Alagoas":
+                        EstadoHolder = "AL";
+                        break;
+                    case "Amapá":
+                        EstadoHolder = "AP";
+                        break;
+                    case "Amazonas":
+                        EstadoHolder = "AM";
+                        break;
+                    case "Bahia":
+                        EstadoHolder = "BA";
+                        break;
+                    case "Ceará":
+                        EstadoHolder = "CE";
+                        break;
+                    case "Distrito Federal":
+                        EstadoHolder = "DF";
+                        break;
+                    case "Espírito Santo":
+                        EstadoHolder = "ES";
+                        break;
+                    case "Goiás":
+                        EstadoHolder = "GO";
+                        break;
+                    case "Maranhão":
+                        EstadoHolder = "MA";
+                        break;
+                    case "Mato Grosso":
+                        EstadoHolder = "MT";
+                        break;
+                    case "Mato Grosso do Sul":
+                        EstadoHolder = "MS";
+                        break;
+                    case "Minas Gerais":
+                        EstadoHolder = "MG";
+                        break;
+                    case "Pará":
+                        EstadoHolder = "PA";
+                        break;
+                    case "Paraiba":
+                        EstadoHolder = "PB";
+                        break;
+                    case "Paraná":
+                        EstadoHolder = "PR";
+                        break;
+                    case "Pernambuco":
+                        EstadoHolder = "PE";
+                        break;
+                    case "Piauí":
+                        EstadoHolder = "PI";
+                        break;
+                    case "Rio de Janeiro":
+                        EstadoHolder = "RJ";
+                        break;
+                    case "Rio Grande do Norte":
+                        EstadoHolder = "RN";
+                        break;
+                    case "Rio Grande do Sul":
+                        EstadoHolder = "RS";
+                        break;
+                    case "Rondônia":
+                        EstadoHolder = "RO";
+                        break;
+                    case "Roraima":
+                        EstadoHolder = "RR";
+                        break;
+                    case "Santa Catarina":
+                        EstadoHolder = "SC";
+                        break;
+                    case "São Paulo":
+                        EstadoHolder = "SP";
+                        break;
+                    case "Sergipe":
+                        EstadoHolder = "SE";
+                        break;
+                    case "Tocantinss":
+                        EstadoHolder = "TO";
+                        break;
+                }
+
                 params.put("id", String.valueOf(idEmpresa));
                 params.put("NomeEscola", NomeEscola.getText().toString());
                 params.put("CEP", CEP.getText().toString());
                 params.put("Cidade", Cidade.getText().toString());
                 params.put("Rua", Rua.getText().toString());
                 params.put("Numero", Numero.getText().toString());
+                params.put("Complemento", Complemento.getText().toString());
+                params.put("Estado", EstadoHolder);
 
                 return params;
             }
@@ -247,4 +333,5 @@ public class cad_escola extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
     }
+
 }
