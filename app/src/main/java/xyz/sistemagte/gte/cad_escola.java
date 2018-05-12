@@ -1,5 +1,6 @@
 package xyz.sistemagte.gte;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,22 +10,35 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 
 public class cad_escola extends AppCompatActivity {
 
-    EditText Nome,Sobrenome, CEP,Cidade, Rua, Numero, Complemento;
+    EditText NomeEscola, CEP,Cidade, Rua, Numero, Complemento;
     Spinner Estado;
 
+    int idEmpresa;
+
+    RequestQueue requestQueue;
+    ProgressDialog progressDialog;
+
+    private static String HttpURL = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +48,15 @@ public class cad_escola extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.cadastroEscola));
 
+        GlobalUser global =(GlobalUser)getApplication();
+        idEmpresa = global.getGlobalUserIdEmpresa();
+
+        requestQueue = Volley.newRequestQueue(this);
+        progressDialog = new ProgressDialog(cad_escola.this);
 
         Estado = findViewById(R.id.spinnerEstado);
 
-        Nome = findViewById(R.id.cad_nome);
-        Sobrenome = findViewById(R.id.cad_sobrenome);
+        NomeEscola = findViewById(R.id.cad_nome);
         CEP = findViewById(R.id.cad_cep);
         Cidade = findViewById(R.id.cad_cidade);
         Rua = findViewById(R.id.cad_rua);
@@ -49,6 +67,7 @@ public class cad_escola extends AppCompatActivity {
 
         CEP.addTextChangedListener(mascaraCEP);
 
+        /*
         CEP.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -82,70 +101,70 @@ public class cad_escola extends AppCompatActivity {
                                         Estado.setSelection(5);
                                         break;
                                     case "CE"://ceara
-                                        Estado.setSelection(6); // este numero é o numero do item,
+                                        Estado.setSelection(6);
                                         break;
                                     case "DF"://distrito federal
-                                        Estado.setSelection(7); // este numero é o numero do item,
+                                        Estado.setSelection(7);
                                         break;
                                     case "ES"://espirito santo
-                                        Estado.setSelection(8); // este numero é o numero do item,
+                                        Estado.setSelection(8);
                                         break;
                                     case "GO"://goias
-                                        Estado.setSelection(9); // este numero é o numero do item,
+                                        Estado.setSelection(9);
                                         break;
                                     case "MA"://maranhão
-                                        Estado.setSelection(10); // este numero é o numero do item,
+                                        Estado.setSelection(10);
                                         break;
                                     case "MT"://mato grosso
-                                        Estado.setSelection(11); // este numero é o numero do item,
+                                        Estado.setSelection(11);
                                         break;
                                     case "MS"://mato grosso do sul
-                                        Estado.setSelection(12); // este numero é o numero do item,
+                                        Estado.setSelection(12);
                                         break;
                                     case "MG"://Minas gerais
-                                        Estado.setSelection(13); // este numero é o numero do item,
+                                        Estado.setSelection(13);
                                         break;
                                     case "PA"://pará
-                                        Estado.setSelection(14); // este numero é o numero do item,
+                                        Estado.setSelection(14);
                                         break;
                                     case "PB"://paraiba
-                                        Estado.setSelection(15); // este numero é o numero do item,
+                                        Estado.setSelection(15);
                                         break;
                                     case "PR"://paraná
-                                        Estado.setSelection(16); // este numero é o numero do item,
+                                        Estado.setSelection(16);
                                         break;
                                     case "PE"://pernambuco
-                                        Estado.setSelection(17); // este numero é o numero do item,
+                                        Estado.setSelection(17);
                                         break;
                                     case "PI"://piaui
-                                        Estado.setSelection(18); // este numero é o numero do item,
+                                        Estado.setSelection(18);
                                         break;
                                     case "RJ"://rio de janeiro
-                                        Estado.setSelection(19); // este numero é o numero do item,
+                                        Estado.setSelection(19);
                                         break;
                                     case "RN"://rio grande do norte
-                                        Estado.setSelection(20); // este numero é o numero do item,
+                                        Estado.setSelection(20);
                                         break;
                                     case "RS"://rio grande do sul
-                                        Estado.setSelection(21); // este numero é o numero do item,
+                                        Estado.setSelection(21);
                                         break;
                                     case "RO"://rondonia
-                                        Estado.setSelection(22); // este numero é o numero do item,
+                                        Estado.setSelection(22);
                                         break;
                                     case "RR"://roraima
-                                        Estado.setSelection(23); // este numero é o numero do item,
+                                        Estado.setSelection(23);
                                         break;
                                     case "SC"://santa catarina
-                                        Estado.setSelection(24); // este numero é o numero do item,
+                                        Estado.setSelection(24);
                                         break;
                                     case "SP"://são paulo
-                                        Estado.setSelection(25); // este numero é o numero do item,
+                                        Estado.setSelection(25);
                                         break;
                                     case "SE"://sergipe
-                                        Estado.setSelection(26); // este numero é o numero do item,
+                                        Estado.setSelection(26);
                                         break;
                                     case "TO"://tocantins
-                                        Estado.setSelection(1); // este numero é o numero do item,
+                                        Estado.setSelection(1);
                                         break;
 
                                 }
@@ -164,7 +183,7 @@ public class cad_escola extends AppCompatActivity {
                     rq.add(sr);
                 }
             }
-        });
+        });*/
     }
 
 
@@ -189,4 +208,43 @@ public class cad_escola extends AppCompatActivity {
         return;
     }
 
+
+    public void cadastrarEscola(View view) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        Toast.makeText(cad_escola.this, ServerResponse, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(cad_escola.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(idEmpresa));
+                params.put("NomeEscola", NomeEscola.getText().toString());
+                params.put("CEP", CEP.getText().toString());
+                params.put("Cidade", Cidade.getText().toString());
+                params.put("Rua", Rua.getText().toString());
+                params.put("Numero", Numero.getText().toString());
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
 }

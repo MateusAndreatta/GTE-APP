@@ -8,10 +8,11 @@
     android:orientation="vertical"
     android:padding="20dp"
     tools:context="xyz.sistemagte.gte.cad_escola">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cadastro da Escola"
+        android:text="@string/cadastro_da_escola"
         android:textSize="40sp"
         android:gravity="center"/>
 
@@ -50,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/input_style"
                 android:entries="@array/estados" />
 
@@ -103,6 +105,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/btn_padrao"
                     android:text="@string/enviar"
+                    android:onClick="cadastrarEscola"
                     android:textColor="@color/branco" />
             </LinearLayout>
         </LinearLayout>
