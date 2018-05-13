@@ -246,4 +246,6 @@ public class EditarVan extends AppCompatActivity {
         requestQueue2.getCache().clear();
         requestQueue2.add(stringRequest);
     }
+
+
 }

@@ -90,21 +90,20 @@ public class Responsavel extends AppCompatActivity {
                 ResponsavelConstr resp = respList.get(position);
                 idResp = resp.getIdResp();
 
-
                 //Alert de confirmação do excluir
                 AlertDialog.Builder builder = new AlertDialog.Builder(Responsavel.this);
                 builder.setTitle(getResources().getString(R.string.opcoesDialog));
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                        //  Intent tela = new Intent(Escolas.this, EditarE.class);
-                        //  tela.putExtra("idC",String.valueOf(idCrianca));
-                        //  startActivity(tela);
+                       Intent tela = new Intent(Responsavel.this, EditarResponsavelAdm.class);
+                       tela.putExtra("idR",String.valueOf(idResp));
+                       startActivity(tela);
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                        ExcluirResp(idResp);
+                        ExcluirResp();
                     }
                 });
 
@@ -199,7 +198,7 @@ public class Responsavel extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void ExcluirResp(int id){
+    private void ExcluirResp(){
 
         // Showing progress dialog at user registration time.
         progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));

@@ -61,7 +61,8 @@
         <activity android:name=".ListagemCriancasMotorista" />
         <activity android:name=".ListagemVanMotorista" />
         <activity android:name=".Editar_perfil_motorista" />
-        <activity android:name=".EditarPerfilMonitora"></activity>
+        <activity android:name=".EditarPerfilMonitora" />
+        <activity android:name=".EditarResponsavelAdm"></activity>
     </application>
 
 </manifest>
