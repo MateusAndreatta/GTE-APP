@@ -67,7 +67,7 @@ public class cad_escola extends AppCompatActivity {
 
         CEP.addTextChangedListener(mascaraCEP);
 
-        /*
+
         CEP.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -164,7 +164,7 @@ public class cad_escola extends AppCompatActivity {
                                         Estado.setSelection(26);
                                         break;
                                     case "TO"://tocantins
-                                        Estado.setSelection(1);
+                                        Estado.setSelection(27);
                                         break;
 
                                 }
@@ -182,7 +182,7 @@ public class cad_escola extends AppCompatActivity {
                     rq.add(sr);
                 }
             }
-        });*/
+        });
     }
 
 
