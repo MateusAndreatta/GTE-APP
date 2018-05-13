@@ -103,6 +103,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/btn_padrao"
                     android:text="@string/enviar"
+                    android:onClick="Cadastrar"
                     android:textColor="@color/branco" />
             </LinearLayout>
         </LinearLayout>

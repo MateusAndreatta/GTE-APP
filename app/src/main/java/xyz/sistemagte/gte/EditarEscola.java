@@ -29,6 +29,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.net.ssl.SSLEngineResult;
+
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
@@ -47,7 +49,7 @@ public class EditarEscola extends AppCompatActivity {
     String NomeHolder, CidadeHolder,CEPHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
     int idEscolaHolder,idEscola;
     String HttpUrl = "https://sistemagte.xyz/android/editar/editarEscola.php";
-    String JsonEscola = "https://sistemagte.xyz/json/ListarDadosIdEscola.php";
+    String JsonEscola = "https://sistemagte.xyz/json/adm/ListarDadosIdEscola.php";
 
     ArrayAdapter<String> EscolasListSpinner;
     ArrayList<EscolasConstr> EscolasListConst;
@@ -63,6 +65,7 @@ public class EditarEscola extends AppCompatActivity {
         Rua = findViewById(R.id.cad_rua);
         Numero = findViewById(R.id.cad_num);
         Complemento = findViewById(R.id.cad_complemento);
+        Estado = findViewById(R.id.cad_estado);
 
         MaskEditTextChangedListener mascaraCEP = new MaskEditTextChangedListener("#####-###",CEP);
         CEP.addTextChangedListener(mascaraCEP);
@@ -89,7 +92,7 @@ public class EditarEscola extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
-                startActivity(new Intent(this, Painel_adm.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                startActivity(new Intent(this, Escolas.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
             default:break;
@@ -100,12 +103,11 @@ public class EditarEscola extends AppCompatActivity {
     //O botao padrao do android
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(this, Painel_adm.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        startActivity(new Intent(this, Escolas.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
     }
 
-    // Creating method to get value from EditText.
     public void GetValueFromEditText(){
 
         try {
@@ -127,61 +129,61 @@ public class EditarEscola extends AppCompatActivity {
                 case "Amapá":
                     EstadoHolder = "AP";
                     break;
-                case "Amazonas": //este nome deve ser igual ao item ali de cima
+                case "Amazonas":
                     EstadoHolder = "AM";
                     break;
-                case "Bahia": //este nome deve ser igual ao item ali de cima
+                case "Bahia":
                     EstadoHolder = "BA";
                     break;
-                case "Ceará": //este nome deve ser igual ao item ali de cima
+                case "Ceará":
                     EstadoHolder = "CE";
                     break;
-                case "Distrito Federal": //este nome deve ser igual ao item ali de cima
+                case "Distrito Federal":
                     EstadoHolder = "DF";
                     break;
-                case "Espírito Santo": //este nome deve ser igual ao item ali de cima
+                case "Espírito Santo":
                     EstadoHolder = "ES";
                     break;
-                case "Goiás": //este nome deve ser igual ao item ali de cima
+                case "Goiás":
                     EstadoHolder = "GO";
                     break;
-                case "Maranhão": //este nome deve ser igual ao item ali de cima
+                case "Maranhão":
                     EstadoHolder = "MA";
                     break;
-                case "Mato Grosso": //este nome deve ser igual ao item ali de cima
+                case "Mato Grosso":
                     EstadoHolder = "MT";
                     break;
-                case "Mato Grosso do Sul": //este nome deve ser igual ao item ali de cima
+                case "Mato Grosso do Sul":
                     EstadoHolder = "MS";
                     break;
-                case "Minas Gerais": //este nome deve ser igual ao item ali de cima
+                case "Minas Gerais":
                     EstadoHolder = "MG";
                     break;
-                case "Pará": //este nome deve ser igual ao item ali de cima
+                case "Pará":
                     EstadoHolder = "PA";
                     break;
-                case "Paraiba": //este nome deve ser igual ao item ali de cima
+                case "Paraiba":
                     EstadoHolder = "PB";
                     break;
-                case "Paraná": //este nome deve ser igual ao item ali de cima
+                case "Paraná":
                     EstadoHolder = "PR";
                     break;
-                case "Pernambuco": //este nome deve ser igual ao item ali de cima
+                case "Pernambuco":
                     EstadoHolder = "PE";
                     break;
-                case "Piauí": //este nome deve ser igual ao item ali de cima
+                case "Piauí":
                     EstadoHolder = "PI";
                     break;
-                case "Rio de Janeiro": //este nome deve ser igual ao item ali de cima
+                case "Rio de Janeiro":
                     EstadoHolder = "RJ";
                     break;
-                case "Rio Grande do Norte": //este nome deve ser igual ao item ali de cima
+                case "Rio Grande do Norte":
                     EstadoHolder = "RN";
                     break;
-                case "Rio Grande do Sul": //este nome deve ser igual ao item ali de cima
+                case "Rio Grande do Sul":
                     EstadoHolder = "RS";
                     break;
-                case "Rondônia": //este nome deve ser igual ao item ali de cima
+                case "Rondônia":
                     EstadoHolder = "RO";
                     break;
                 case "Roraima":
@@ -209,20 +211,20 @@ public class EditarEscola extends AppCompatActivity {
 
     public void Cadastrar(View view) {
         if(VerificarCampos()) {
-            // Showing progress dialog at user registration time.
             progressDialog.setMessage(getResources().getString(R.string.loadingDados));
             progressDialog.show();
 
-            // Calling method to get value from EditText.
             GetValueFromEditText();
 
-            // Creating string request with post method.
             StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String ServerResponse) {
                             progressDialog.dismiss();
+                            System.out.println(ServerResponse);
                             Toast.makeText(EditarEscola.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+                            Intent tela = new Intent(EditarEscola.this, Escolas.class);
+                            startActivity(tela);
                         }
                     },
                     new Response.ErrorListener() {
@@ -258,6 +260,7 @@ public class EditarEscola extends AppCompatActivity {
 
     }
 
+
     private boolean VerificarCampos(){
         if(Nome.getText().length() == 0 ||  CEP.getText().length() == 0 || Cidade.getText().length() == 0
                 || Rua.getText().length() == 0 || Numero.getText().length() == 0 || Estado.getSelectedItemPosition() == 0){
@@ -271,7 +274,6 @@ public class EditarEscola extends AppCompatActivity {
 
     private void PuxarDadosEscola(){
 
-        // Creating string request with post method.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JsonEscola,
                 new Response.Listener<String>() {
                     @Override
@@ -385,8 +387,6 @@ public class EditarEscola extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
-                        // Showing error message if something goes wrong.
                         Toast.makeText(EditarEscola.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
