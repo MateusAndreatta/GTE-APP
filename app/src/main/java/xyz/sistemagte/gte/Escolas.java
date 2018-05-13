@@ -104,7 +104,7 @@ public class Escolas extends AppCompatActivity {
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                        ExcluirEscola(idEscola);
+                        ExcluirEscola();
                     }
                 });
 
@@ -199,7 +199,7 @@ public class Escolas extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void ExcluirEscola(int id){
+    private void ExcluirEscola(){
 
         // Showing progress dialog at user registration time.
         progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
