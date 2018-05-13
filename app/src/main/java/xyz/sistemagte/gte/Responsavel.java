@@ -72,7 +72,7 @@ public class Responsavel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    Intent tela = new Intent(Responsavel.this,CadResponsavel .class);
+                    Intent tela = new Intent(Responsavel.this, CadResponsavel.class);
                     startActivity(tela);
                 } catch (Exception e) {
                     e.printStackTrace();

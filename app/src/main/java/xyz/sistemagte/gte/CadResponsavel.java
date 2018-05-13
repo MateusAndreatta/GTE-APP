@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,20 +24,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Auxiliares.Validacoes;
 
 public class CadResponsavel extends AppCompatActivity {
 
     EditText campo_nome,campo_sobrenome,campo_email,campo_senha,campo_confSenha,campo_telefone,campo_rg,campo_cpf,campo_dataNasc;
-
+    private static String HTTPURL = "https://sistemagte.xyz/android/cadastros/cadResp.php";
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
+    int idEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_responsavel);
 
-        setContentView(R.layout.activity_cadastro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.cadastroResp));    //Titulo para ser exibido na sua Action Bar em frente à seta
@@ -51,6 +54,9 @@ public class CadResponsavel extends AppCompatActivity {
         campo_cpf = findViewById(R.id.cad_cpf);
         campo_dataNasc = findViewById(R.id.cad_datanascimento);
 
+        requestQueue = Volley.newRequestQueue(this);
+        progressDialog = new ProgressDialog(this);
+
         MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",campo_cpf);
         MaskEditTextChangedListener mascaraCelular = new MaskEditTextChangedListener("(##) #####-####",campo_telefone);
         MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",campo_dataNasc);
@@ -60,6 +66,9 @@ public class CadResponsavel extends AppCompatActivity {
         campo_telefone.addTextChangedListener(mascaraCelular);
         campo_dataNasc.addTextChangedListener(mascaraData);
         campo_rg.addTextChangedListener(mascaraRG);
+
+        GlobalUser global =(GlobalUser)getApplication();
+        idEmpresa = global.getGlobalUserIdEmpresa();
     }
 
     //este é para o da navbar (seta)
@@ -85,18 +94,14 @@ public class CadResponsavel extends AppCompatActivity {
 
     public void Cadastrar(View view) {
         if (ValidarCampos()) {
-            //TODO: Criar o stringrequest para o cadastro
-            /*StringRequest stringRequest = new StringRequest(Request.Method.POST, JsonEscola,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, HTTPURL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String ServerResponse) {
-
-
-                            }catch (JSONException e){
-                                e.printStackTrace();
-                                Toast.makeText(CadResponsavel.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                System.out.println(e.getMessage());
-                            }
+                            Toast.makeText(CadResponsavel.this, getResources().getString(R.string.cadastradoSucesso), Toast.LENGTH_SHORT).show();
+                            Intent tela = new Intent(CadResponsavel.this, Responsavel.class);
+                            startActivity(tela);
+                            System.out.println(ServerResponse);
                         }
                     },
                     new Response.ErrorListener() {
@@ -108,7 +113,15 @@ public class CadResponsavel extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
-                    params.put("id",String.valueOf(idEscola));
+                    params.put("nome", campo_nome.getText().toString());
+                    params.put("sobrenome", campo_sobrenome.getText().toString());
+                    params.put("senha", campo_senha.getText().toString());
+                    params.put("email", campo_email.getText().toString());
+                    params.put("telefone", campo_telefone.getText().toString());
+                    params.put("cpf", campo_cpf.getText().toString());
+                    params.put("rg", campo_rg.getText().toString());
+                    params.put("nascimento", campo_dataNasc.getText().toString());
+                    params.put("id", String.valueOf(idEmpresa));
 
                     return params;
                 }
@@ -119,11 +132,28 @@ public class CadResponsavel extends AppCompatActivity {
             requestQueue.add(stringRequest);
         }
 
-        */
-        }
     }
 
     private boolean ValidarCampos(){
-        return true;
+        if(
+        campo_nome.getText().length() == 0 ||
+        campo_sobrenome.getText().length() == 0 ||
+        campo_email.getText().length() == 0 ||
+        campo_senha.getText().length() == 0 ||
+        campo_confSenha.getText().length() == 0 ||
+        campo_telefone.getText().length() == 0 ||
+        campo_rg.getText().length() == 0 ||
+        campo_cpf.getText().length() == 0 ||
+        campo_dataNasc.getText().length() == 0){
+            Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            Validacoes validacoes = new Validacoes();
+            if(validacoes.ValidarSenhas(this,campo_senha.getText().toString(), campo_confSenha.getText().toString())){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 }
