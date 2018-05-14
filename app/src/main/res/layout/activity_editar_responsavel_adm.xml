@@ -4,6 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context="xyz.sistemagte.gte.EditarResponsavelAdm">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/cad_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/editarResponsavel"
+                android:textSize="40sp"
+                android:gravity="center"/>
+
+            <EditText
+                android:id="@+id/edit_nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="@string/nome"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/edit_sobrenome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="@string/sobrenome"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+
+            <EditText
+                android:id="@+id/edit_cpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="@string/cpf"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/edit_rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="@string/rg"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/edit_datanascimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date"
+                android:hint="@string/datanascimento"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+
+            <Button
+                android:id="@+id/cadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_padrao"
+                android:text="@string/enviar"
+                android:onClick="editResponsavel"
+                android:textColor="@color/branco" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
