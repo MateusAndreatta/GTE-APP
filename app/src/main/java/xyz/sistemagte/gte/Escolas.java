@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,7 +37,7 @@ import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 import xyz.sistemagte.gte.ListAdapters.ListViewEscolas;
 
-public class Escolas extends AppCompatActivity {
+public class Escolas extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarEscola.php";
     private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirEscola.php";
@@ -44,6 +46,7 @@ public class Escolas extends AppCompatActivity {
     private int idEmpresa;
     List<EscolasConstr> escolasList;
     AlertDialog alerta;
+    SearchView searchView;
 
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
@@ -57,6 +60,7 @@ public class Escolas extends AppCompatActivity {
         idEmpresa = global.getGlobalUserIdEmpresa();
 
         listView = findViewById(R.id.listView);
+        searchView = findViewById(R.id.barra_pesquisa);
         escolasList = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
@@ -115,6 +119,16 @@ public class Escolas extends AppCompatActivity {
 
             }
         });
+
+        listView.setTextFilterEnabled(true);//filtro pré-definido
+        setupSearchView();//inicia o metodo de configurações da searchview
+    }
+
+    private void setupSearchView() {
+        searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
+        searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint("Pesquisar...");
     }
 
     //este é para o da navbar (seta)
@@ -247,4 +261,21 @@ public class Escolas extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+    @Override
+    public boolean onQueryTextChange(String newText){//onkeyup do java
+        if (TextUtils.isEmpty(newText)) {
+            listView.clearTextFilter();
+        } else {
+            listView.setFilterText(newText);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query){
+        return false;
+    }
+
 }
+
