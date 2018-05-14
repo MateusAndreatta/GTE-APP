@@ -289,6 +289,8 @@ public class EditarCrianca extends AppCompatActivity {
                         public void onResponse(String ServerResponse) {
                             progressDialog.dismiss();
                             Toast.makeText(EditarCrianca.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+                            Intent tela = new Intent(EditarCrianca.this, Crianca_resp.class);
+                            startActivity(tela);
                         }
                     },
                     new Response.ErrorListener() {

@@ -607,7 +607,7 @@ public class Login extends AppCompatActivity {
         }
         if(sessao.getBoolean("resp")){
             PuxarDadosSessao();
-            Intent irTela = new Intent(Login.this, Painel_adm.class);
+            Intent irTela = new Intent(Login.this, Painel_responsavel.class);
             startActivity(irTela);
         }
     }
