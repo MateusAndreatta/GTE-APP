@@ -50,7 +50,12 @@ public class ListViewEscolas extends ArrayAdapter<EscolasConstr> {
         return listViewItem;
     }
 
+    @Override
+    public int getCount() {
+        return EscolaList.size();
+    }
 
+    @Override
     public Filter getFilter() {
         return new Filter() {
             @Override
@@ -66,8 +71,11 @@ public class ListViewEscolas extends ArrayAdapter<EscolasConstr> {
                     if (orig != null && orig.size() > 0) {
                         //para cada obj do UsuarioConst dentro lista
                         for (final EscolasConstr g : orig) {//Ocorerá para cada usuario que está na lista
-                            if (((g.getNomeEscola().toLowerCase().contains(constraint.toString())) ||
-                                    (g.getRuaEscola().toLowerCase().contains(constraint.toString()))));
+                            if ((g.getNomeEscola().toLowerCase().contains(constraint.toString())) ||
+                                    (g.getCepEscola().toLowerCase().contains(constraint.toString())) ||
+                                    g.getRuaEscola().toLowerCase().contains(constraint.toString())) {
+                                results.add(g);
+                            }
                         }
                     }
                     oReturn.values = results;
@@ -82,5 +90,5 @@ public class ListViewEscolas extends ArrayAdapter<EscolasConstr> {
                 notifyDataSetChanged();
             }
         };
-    }}
-
+    }
+}

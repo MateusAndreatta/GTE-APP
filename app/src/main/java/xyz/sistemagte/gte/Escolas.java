@@ -127,7 +127,7 @@ public class Escolas extends AppCompatActivity implements SearchView.OnQueryText
     private void setupSearchView() {
         searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
         searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
-        searchView.setSubmitButtonEnabled(true);
+        searchView.setSubmitButtonEnabled(false);
         searchView.setQueryHint("Pesquisar...");
     }
 
@@ -263,7 +263,7 @@ public class Escolas extends AppCompatActivity implements SearchView.OnQueryText
     }
 
     @Override
-    public boolean onQueryTextChange(String newText){//onkeyup do java
+    public boolean onQueryTextChange(String newText){//onkeyup do javascript
         if (TextUtils.isEmpty(newText)) {
             listView.clearTextFilter();
         } else {
