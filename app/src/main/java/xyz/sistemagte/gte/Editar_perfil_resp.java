@@ -130,7 +130,7 @@ public class Editar_perfil_resp extends AppCompatActivity {
                         GlobalUser global =(GlobalUser)getApplication();
                         global.setGlobalUserNome(NomeHolder);
                         progressDialog.dismiss();
-                        Toast.makeText(Editar_perfil_resp.this, getResources().getString(R.string.MsgSucesso), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Editar_perfil_resp.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
                         Intent tela = new Intent(Editar_perfil_resp.this, Painel_responsavel.class);
                         startActivity(tela);
                     }
@@ -168,7 +168,6 @@ public class Editar_perfil_resp extends AppCompatActivity {
 
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
-        Toast.makeText(this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
     }
 
 
