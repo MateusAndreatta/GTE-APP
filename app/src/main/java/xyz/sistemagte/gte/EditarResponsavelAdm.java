@@ -22,11 +22,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Auxiliares.Validacoes;
 import xyz.sistemagte.gte.Construtoras.ResponsavelConstr;
@@ -42,22 +46,30 @@ public class EditarResponsavelAdm extends AppCompatActivity {
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
 
-    EditText campo_nome,campo_sobrenome,campo_email,campo_senha,campo_confSenha,campo_telefone,campo_rg,campo_cpf,campo_dataNasc;
+    EditText campo_nome,campo_sobrenome,campo_email,campo_telefone,campo_rg,campo_cpf,campo_dataNasc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_responsavel_adm);
 
-        campo_nome = findViewById(R.id.cad_nome);
-        campo_sobrenome = findViewById(R.id.cad_sobrenome);
-        campo_email = findViewById(R.id.cad_email);
-        campo_senha = findViewById(R.id.cad_senha);
-        campo_confSenha = findViewById(R.id.cad_conf_senha);
-        campo_telefone = findViewById(R.id.cad_tel);
-        campo_rg = findViewById(R.id.cad_rg);
-        campo_cpf = findViewById(R.id.cad_cpf);
-        campo_dataNasc = findViewById(R.id.cad_datanascimento);
+        campo_nome = findViewById(R.id.edit_nome);
+        campo_sobrenome = findViewById(R.id.edit_sobrenome);
+        campo_email = findViewById(R.id.edit_email);
+        campo_telefone = findViewById(R.id.edit_tel);
+        campo_rg = findViewById(R.id.edit_rg);
+        campo_cpf = findViewById(R.id.edit_cpf);
+        campo_dataNasc = findViewById(R.id.edit_datanascimento);
+
+        MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",campo_cpf);
+        MaskEditTextChangedListener mascaraCelular = new MaskEditTextChangedListener("(##) #####-####",campo_telefone);
+        MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",campo_dataNasc);
+        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("#.###.###-#",campo_rg);
+
+        campo_cpf.addTextChangedListener(mascaraCPF);
+        campo_telefone.addTextChangedListener(mascaraCelular);
+        campo_dataNasc.addTextChangedListener(mascaraData);
+        campo_rg.addTextChangedListener(mascaraRG);
 
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
@@ -88,15 +100,20 @@ public class EditarResponsavelAdm extends AppCompatActivity {
                             JSONArray jsonArray = obj.getJSONArray("nome");
                             JSONObject jo = jsonArray.getJSONObject(0);
 
-                            campo_nome.setText(jo.getString(""));
-                            campo_sobrenome.setText(jo.getString(""));
-                            campo_email.setText(jo.getString(""));
-                            campo_senha.setText(jo.getString(""));
-                            campo_confSenha.setText(jo.getString(""));
-                            campo_telefone.setText(jo.getString(""));
-                            campo_rg.setText(jo.getString(""));
-                            campo_cpf.setText(jo.getString(""));
-                            campo_dataNasc.setText(jo.getString(""));
+                            String dia = jo.getString("dt_nasc");
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position = new ParsePosition(0);
+                            Date data = format.parse(dia,position);
+                            format = new SimpleDateFormat("dd/MM/yyyy");
+                            String date = format.format(data);
+
+                            campo_nome.setText(jo.getString("nome"));
+                            campo_sobrenome.setText(jo.getString("sobrenome"));
+                            campo_email.setText(jo.getString("email"));
+                            campo_telefone.setText(jo.getString("tel_cel"));
+                            campo_rg.setText(jo.getString("rg"));
+                            campo_cpf.setText(jo.getString("cpf"));
+                            campo_dataNasc.setText(date);
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -117,7 +134,7 @@ public class EditarResponsavelAdm extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("id", String.valueOf(idResp));
+                params.put("idUsuario", String.valueOf(idResp));
                 return params;
             }
 
@@ -154,8 +171,6 @@ public class EditarResponsavelAdm extends AppCompatActivity {
             campo_nome.getText().length() == 0 ||
             campo_sobrenome.getText().length() == 0 ||
             campo_email.getText().length() == 0 ||
-            campo_senha.getText().length() == 0 ||
-            campo_confSenha.getText().length() == 0 ||
             campo_telefone.getText().length() == 0 ||
             campo_rg.getText().length() == 0 ||
             campo_cpf.getText().length() == 0 ||
@@ -163,12 +178,7 @@ public class EditarResponsavelAdm extends AppCompatActivity {
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
             return false;
         }else{
-            Validacoes validacoes = new Validacoes();
-            if(validacoes.ValidarSenhas(this,campo_senha.getText().toString(), campo_confSenha.getText().toString())){
-                return true;
-            }else{
-                return false;
-            }
+            return true;
         }
     }
 
@@ -179,7 +189,7 @@ public class EditarResponsavelAdm extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String ServerResponse) {
-                            Toast.makeText(EditarResponsavelAdm.this, getResources().getString(R.string.cadastradoSucesso), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditarResponsavelAdm.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
                             Intent tela = new Intent(EditarResponsavelAdm.this, Responsavel.class);
                             startActivity(tela);
                             System.out.println(ServerResponse);
@@ -196,7 +206,6 @@ public class EditarResponsavelAdm extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
                     params.put("nome", campo_nome.getText().toString());
                     params.put("sobrenome", campo_sobrenome.getText().toString());
-                    params.put("senha", campo_senha.getText().toString());
                     params.put("email", campo_email.getText().toString());
                     params.put("telefone", campo_telefone.getText().toString());
                     params.put("cpf", campo_cpf.getText().toString());

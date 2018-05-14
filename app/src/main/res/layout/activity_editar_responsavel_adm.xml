@@ -54,6 +54,16 @@
                 android:layout_marginBottom="5dp"/>
 
             <EditText
+                android:id="@+id/edit_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="phone"
+                android:hint="@string/telefone"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+
+            <EditText
                 android:id="@+id/edit_cpf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +98,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_padrao"
                 android:text="@string/enviar"
-                android:onClick="editResponsavel"
+                android:onClick="Editar"
                 android:textColor="@color/branco" />
 
 
