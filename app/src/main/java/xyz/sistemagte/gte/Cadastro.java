@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,21 +59,19 @@ public class Cadastro extends AppCompatActivity {
         campo_dataNasc = findViewById(R.id.cad_datanascimento);
         tipoUser = findViewById(R.id.cad_tipousuario);
 
-        Button cadastrar = findViewById(R.id.cadastro);
-
-
-
         //Array do spinner tipo Usuario
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipousuario, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tipoUser.setAdapter(adapter);
 
+        requestQueue = Volley.newRequestQueue(this);
+        progressDialog = new ProgressDialog(this);
 
         //aplica mascara
         MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",campo_cpf);
         MaskEditTextChangedListener mascaraCelular = new MaskEditTextChangedListener("(##) #####-####",campo_telefone);
         MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",campo_dataNasc);
-        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",campo_rg);
+        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("#.###.###-#",campo_rg);
 
         campo_cpf.addTextChangedListener(mascaraCPF);
         campo_telefone.addTextChangedListener(mascaraCelular);
@@ -100,11 +99,11 @@ public class Cadastro extends AppCompatActivity {
             Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
             return false;
         }else{
-
-            if(campo_senha.equals(campo_confSenha)){
+            Validacoes validacoes = new Validacoes();
+            if(validacoes.ValidarSenhas(this, campo_senha.getText().toString(),campo_confSenha.getText().toString()))
+            {
                 return true;
             }else{
-                Toast.makeText(this, getResources().getString(R.string.senhasDiferentes), Toast.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -154,7 +153,7 @@ public class Cadastro extends AppCompatActivity {
                     case ("3"):
                         //responsavel
                         try{
-                            CadastrarResp();
+                          CadastrarResp();
                         }catch (Exception ex){
                             System.out.println(ex.getMessage());
                             Toast.makeText(this, "Cadastro indisponivel no momento", Toast.LENGTH_SHORT).show();
@@ -173,11 +172,7 @@ public class Cadastro extends AppCompatActivity {
             // Showing progress dialog at user registration time.
             progressDialog.setMessage(getResources().getString(R.string.loadingDados));
             progressDialog.show();
-
-            // Calling method to get value from EditText.
             GetValueFromEditText();
-
-            // Creating string request with post method.
             StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl,
                     new Response.Listener<String>() {
                         @Override
