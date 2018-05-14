@@ -8,10 +8,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,7 +37,7 @@ import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaResp;
 
-public class Crianca_resp extends AppCompatActivity {
+public class Crianca_resp extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/responsavel/ListarCrianca.php";
@@ -45,6 +47,7 @@ public class Crianca_resp extends AppCompatActivity {
     List<CriancaConst> criancaList;
     AlertDialog alerta;
     private int idCrianca;
+    SearchView searchView;
 
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
@@ -58,6 +61,7 @@ public class Crianca_resp extends AppCompatActivity {
         idUsuario = global.getGlobalUserID();
 
         listView = findViewById(R.id.listView);
+        searchView = findViewById(R.id.barra_pesquisa);
         criancaList = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
@@ -114,6 +118,13 @@ public class Crianca_resp extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setupSearchView() {
+        searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
+        searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
+        searchView.setSubmitButtonEnabled(false);
+        searchView.setQueryHint("Pesquisar...");
     }
 
     //este é para o da navbar (seta)
@@ -249,5 +260,20 @@ public class Crianca_resp extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
 
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText){//onkeyup do javascript
+        if (TextUtils.isEmpty(newText)) {
+            listView.clearTextFilter();
+        } else {
+            listView.setFilterText(newText);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query){
+        return false;
     }
 }
