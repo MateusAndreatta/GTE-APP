@@ -75,7 +75,6 @@ public class Funcionario_adm extends AppCompatActivity {
         });
 
         loadFuncList();
-        //aqui
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -103,7 +102,7 @@ public class Funcionario_adm extends AppCompatActivity {
                 alerta.show();
 
             }
-        });//até aqui
+        });
     }
 
     //este é para o da navbar (seta)
