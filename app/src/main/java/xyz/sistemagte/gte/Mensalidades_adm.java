@@ -8,10 +8,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,15 +38,16 @@ import xyz.sistemagte.gte.Construtoras.MensalidadeConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 import xyz.sistemagte.gte.ListAdapters.ListViewMensalidades;
 
-public class Mensalidades_adm extends AppCompatActivity {
+public class Mensalidades_adm extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarMensalidades.php";
     ListView listView;
     private int idEmpresa;
     List<MensalidadeConst> mensalidadeConstList;
+    List<MensalidadeConst> listaQuery;
     AlertDialog alerta;
-
+    SearchView searchView;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
 
@@ -56,9 +59,10 @@ public class Mensalidades_adm extends AppCompatActivity {
 
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
-
+        searchView = findViewById(R.id.barra_pesquisa);
         listView = findViewById(R.id.listView);
         mensalidadeConstList = new ArrayList<>();
+        listaQuery = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.ListarMensalidades));     //Titulo para ser exibido na sua Action Bar em frente à seta
@@ -107,6 +111,17 @@ public class Mensalidades_adm extends AppCompatActivity {
 
             }
         });
+
+        listView.setTextFilterEnabled(true);
+        setupSearchView();
+
+    }
+
+    private void setupSearchView() {
+        searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
+        searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
+        searchView.setSubmitButtonEnabled(false);//Defini se terá ou nao um o botao de submit
+        searchView.setQueryHint(getString(R.string.pesquisarSearchPlaceholder));//Placeholder da searchbar
     }
 
     //este é para o da navbar (seta)
@@ -155,6 +170,7 @@ public class Mensalidades_adm extends AppCompatActivity {
 
                                 MensalidadeConst funcConst = new MensalidadeConst (funcObject.getString("nome"),funcObject.getString("nome_crianca"),funcObject.getString("status"),funcObject.getString("sobrenome"),funcObject.getString("sobre_crianca"),Integer.parseInt(funcObject.getString("id_usuario")), Integer.parseInt(funcObject.getString("id_crianca")), Double.parseDouble(funcObject.getString("valor_emitido")));
                                 mensalidadeConstList.add(funcConst);
+                                listaQuery.add(funcConst);
                             }
 
                             ListViewMensalidades adapter = new ListViewMensalidades(mensalidadeConstList, getApplicationContext());
@@ -192,5 +208,32 @@ public class Mensalidades_adm extends AppCompatActivity {
 
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText){
+        listaQuery.clear();
+        if (TextUtils.isEmpty(newText)) {
+            listaQuery.addAll(mensalidadeConstList);
+        } else {
+            String queryText = newText.toLowerCase();
+            for(MensalidadeConst obj : mensalidadeConstList){
+                if(obj.getNomeCrianca().toLowerCase().contains(queryText) ||
+                        obj.getSobreCrianca().toLowerCase().contains(queryText) ||
+                        obj.getNomeResp().toLowerCase().contains(queryText) ||
+                        obj.getSobreResp().toLowerCase().contains(queryText) ||
+                        obj.getStatus().toLowerCase().contains(queryText) ||
+                        obj.getValor().toString().toLowerCase().contains(queryText)){
+                    listaQuery.add(obj);
+                }
+            }
+        }
+        listView.setAdapter(new ListViewMensalidades(listaQuery, Mensalidades_adm.this));
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query){
+        return false;
     }
 }

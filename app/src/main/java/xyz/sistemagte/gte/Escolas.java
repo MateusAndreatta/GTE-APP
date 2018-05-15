@@ -45,6 +45,7 @@ public class Escolas extends AppCompatActivity implements SearchView.OnQueryText
     private int idEscola;
     private int idEmpresa;
     List<EscolasConstr> escolasList;
+    List<EscolasConstr> listaQuery;
     AlertDialog alerta;
     SearchView searchView;
 
@@ -62,6 +63,7 @@ public class Escolas extends AppCompatActivity implements SearchView.OnQueryText
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.barra_pesquisa);
         escolasList = new ArrayList<>();
+        listaQuery = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.listaEscolas));     //Titulo para ser exibido na sua Action Bar em frente à seta
@@ -119,18 +121,17 @@ public class Escolas extends AppCompatActivity implements SearchView.OnQueryText
 
             }
         });
+        listView.setTextFilterEnabled(true);
+        setupSearchView();
 
-        listView.setTextFilterEnabled(true);//filtro pré-definido
-        setupSearchView();//inicia o metodo de configurações da searchview
     }
 
     private void setupSearchView() {
         searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
         searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
-        searchView.setSubmitButtonEnabled(false);
-        searchView.setQueryHint("Pesquisar...");
+        searchView.setSubmitButtonEnabled(false);//Defini se terá ou nao um o botao de submit
+        searchView.setQueryHint(getString(R.string.pesquisarSearchPlaceholder));//Placeholder da searchbar
     }
-
     //este é para o da navbar (seta)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -176,6 +177,7 @@ public class Escolas extends AppCompatActivity implements SearchView.OnQueryText
                                 JSONObject funcObject = funcArray.getJSONObject(i);
                                 EscolasConstr funcConst = new EscolasConstr(funcObject.getString("nome_escola"),funcObject.getString("cep"),funcObject.getString("rua"),funcObject.getString("num"),funcObject.getString("complemento"),funcObject.getString("estado"),funcObject.getString("cidade"),Integer.parseInt(funcObject.getString("id_escola")),Integer.parseInt(funcObject.getString("id_endereco_esc")));
                                 escolasList.add(funcConst);
+                                listaQuery.add(funcConst);
                             }
 
                             ListViewEscolas adapter = new ListViewEscolas(escolasList, getApplicationContext());
@@ -263,12 +265,23 @@ public class Escolas extends AppCompatActivity implements SearchView.OnQueryText
     }
 
     @Override
-    public boolean onQueryTextChange(String newText){//onkeyup do javascript
+    public boolean onQueryTextChange(String newText){
+        listaQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            listaQuery.addAll(escolasList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(EscolasConstr obj : escolasList){
+                if(obj.getCepEscola().toLowerCase().contains(queryText) ||
+                        obj.getCidadeEscola().toLowerCase().contains(queryText) ||
+                        obj.getNomeEscola().toLowerCase().contains(queryText) ||
+                        obj.getRuaEscola().toLowerCase().contains(queryText) ||
+                        obj.getEstadoEscola().toLowerCase().contains(queryText)){
+                    listaQuery.add(obj);
+                }
+            }
         }
+        listView.setAdapter(new ListViewEscolas(listaQuery, Escolas.this));
         return true;
     }
 
@@ -276,6 +289,5 @@ public class Escolas extends AppCompatActivity implements SearchView.OnQueryText
     public boolean onQueryTextSubmit(String query){
         return false;
     }
-
 }
 

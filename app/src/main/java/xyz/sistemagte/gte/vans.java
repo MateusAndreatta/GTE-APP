@@ -8,10 +8,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,9 +36,10 @@ import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 import xyz.sistemagte.gte.Construtoras.VansConstr;
+import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 import xyz.sistemagte.gte.ListAdapters.ListViewVans;
 
-public class vans extends AppCompatActivity {
+public class vans extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarVan.php";
@@ -45,10 +48,13 @@ public class vans extends AppCompatActivity {
     private int idEmpresa;
     private int idVan;
     List<VansConstr> vansList;
+    List<VansConstr> listaQuery;
     AlertDialog alerta;
 
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
+
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +62,10 @@ public class vans extends AppCompatActivity {
         setContentView(R.layout.activity_vans);
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
-
+        searchView = findViewById(R.id.barra_pesquisa);
         listView = findViewById(R.id.listView);
         vansList = new ArrayList<>();
+        listaQuery = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.van));     //Titulo para ser exibido na sua Action Bar em frente à seta
@@ -112,6 +119,16 @@ public class vans extends AppCompatActivity {
 
             }
         });
+        listView.setTextFilterEnabled(true);
+        setupSearchView();
+
+    }
+
+    private void setupSearchView() {
+        searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
+        searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
+        searchView.setSubmitButtonEnabled(false);//Defini se terá ou nao um o botao de submit
+        searchView.setQueryHint(getString(R.string.pesquisarSearchPlaceholder));//Placeholder da searchbar
     }
 
     //este é para o da navbar (seta)
@@ -160,6 +177,7 @@ public class vans extends AppCompatActivity {
                                         Integer.parseInt(jsonObject.getString("ano")),Integer.parseInt(jsonObject.getString("capacidade")),jsonObject.getString("motorista"));
 
                                 vansList.add(vansConstr);
+                                listaQuery.add(vansConstr);
                             }
 
                             ListViewVans adapter = new ListViewVans(vansList, getApplicationContext());
@@ -245,5 +263,29 @@ public class vans extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onQueryTextChange(String newText){
+        listaQuery.clear();
+        if (TextUtils.isEmpty(newText)) {
+            listaQuery.addAll(vansList);
+        } else {
+            String queryText = newText.toLowerCase();
+            for(VansConstr obj : vansList){
+                if(obj.getPlacaVans().toLowerCase().contains(queryText) ||
+                        obj.getMotoristaVans().toLowerCase().contains(queryText) ||
+                        obj.getMarcaVans().toLowerCase().contains(queryText) ||
+                        obj.getModeloVans().toLowerCase().contains(queryText)){
+                    listaQuery.add(obj);
+                }
+            }
+        }
+        listView.setAdapter(new ListViewVans(listaQuery, vans.this));
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query){
+        return false;
+    }
 
 }

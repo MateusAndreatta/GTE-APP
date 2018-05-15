@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,12 +32,14 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 import xyz.sistemagte.gte.Construtoras.ResponsavelConstr;
+import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 import xyz.sistemagte.gte.ListAdapters.ListViewEscolas;
 import xyz.sistemagte.gte.ListAdapters.ListViewResp;
 
-public class Responsavel extends AppCompatActivity {
+public class Responsavel extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarResponsaveis.php";
     private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirResp.php";
@@ -43,8 +47,9 @@ public class Responsavel extends AppCompatActivity {
     private int idResp;
     private int idEmpresa;
     List<ResponsavelConstr> respList;
+    List<ResponsavelConstr> listaQuery;
     AlertDialog alerta;
-
+    SearchView searchView;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
 
@@ -55,9 +60,10 @@ public class Responsavel extends AppCompatActivity {
         setContentView(R.layout.activity_responsavel);
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
-
+        searchView = findViewById(R.id.barra_pesquisa);
         listView = findViewById(R.id.listView);
         respList = new ArrayList<>();
+        listaQuery = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.listaResp));     //Titulo para ser exibido na sua Action Bar em frente à seta
@@ -114,6 +120,16 @@ public class Responsavel extends AppCompatActivity {
 
             }
         });
+        listView.setTextFilterEnabled(true);
+        setupSearchView();
+
+    }
+
+    private void setupSearchView() {
+        searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
+        searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
+        searchView.setSubmitButtonEnabled(false);//Defini se terá ou nao um o botao de submit
+        searchView.setQueryHint(getString(R.string.pesquisarSearchPlaceholder));//Placeholder da searchbar
     }
 
     //este é para o da navbar (seta)
@@ -161,6 +177,7 @@ public class Responsavel extends AppCompatActivity {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
                                 ResponsavelConstr funcConst = new ResponsavelConstr(funcObject.getString("nome"),funcObject.getString("sobrenome"),funcObject.getString("email"),funcObject.getString("cpf"),funcObject.getString("rg"),funcObject.getString("dt_nasc"),Integer.parseInt(funcObject.getString("id_usuario")),Integer.parseInt(funcObject.getString("id_empresa")));
                                 respList.add(funcConst);
+                                listaQuery.add(funcConst);
                             }
 
                             ListViewResp adapter = new ListViewResp(respList, getApplicationContext());
@@ -245,5 +262,33 @@ public class Responsavel extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
 
+    }
+
+
+    @Override
+    public boolean onQueryTextChange(String newText){
+        listaQuery.clear();
+        if (TextUtils.isEmpty(newText)) {
+            listaQuery.addAll(respList);
+        } else {
+            String queryText = newText.toLowerCase();
+            for(ResponsavelConstr obj : respList){
+                if(obj.getCpfResp().toLowerCase().contains(queryText) ||
+                        obj.getDataNascResp().toLowerCase().contains(queryText) ||
+                        obj.getNomeResp().toLowerCase().contains(queryText) ||
+                        obj.getRgResp().toLowerCase().contains(queryText) ||
+                        obj.getSobrenomeResp().toLowerCase().contains(queryText) ||
+                        obj.getEmailResp().toLowerCase().contains(queryText)){
+                    listaQuery.add(obj);
+                }
+            }
+        }
+        listView.setAdapter(new ListViewResp(listaQuery, Responsavel.this));
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query){
+        return false;
     }
 }
