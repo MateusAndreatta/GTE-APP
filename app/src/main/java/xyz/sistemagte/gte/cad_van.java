@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -58,11 +59,15 @@ public class cad_van extends AppCompatActivity {
         idUsuario = global.getGlobalUserID();
         idEmpresa = global.getGlobalUserIdEmpresa();
 
+
         capacidade = findViewById(R.id.cad_capacidade);
         modelo = findViewById(R.id.cad_modelo);
         placa = findViewById(R.id.cad_placa);
         ano = findViewById(R.id.cad_ano_fab);
         marca = findViewById(R.id.cad_marca);
+
+        //Filtro para que todos os caracteres sejam maiusculos
+        placa.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
 
         spinner = findViewById(R.id.morotistaSpinner);
         progressDialog = new ProgressDialog(cad_van.this);

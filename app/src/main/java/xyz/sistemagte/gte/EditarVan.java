@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -37,6 +38,7 @@ public class EditarVan extends AppCompatActivity {
 
     EditText capacidade, modelo, placa,ano,marca;
     private int idVan;
+    private int idVanJson;
     Spinner spinner;
 
     RequestQueue requestQueue,requestQueue2;
@@ -60,6 +62,7 @@ public class EditarVan extends AppCompatActivity {
         idUsuario = global.getGlobalUserID();
         idEmpresa = global.getGlobalUserIdEmpresa();
 
+
         spinner = findViewById(R.id.morotistaSpinner);
         progressDialog = new ProgressDialog(EditarVan.this);
         requestQueue = Volley.newRequestQueue(this);
@@ -76,7 +79,10 @@ public class EditarVan extends AppCompatActivity {
         ano = findViewById(R.id.cad_ano_fab);
         marca = findViewById(R.id.cad_marca);
 
-        MaskEditTextChangedListener mascaraPlaca = new MaskEditTextChangedListener("###-###",placa);
+        //Filtro para que todos os caracteres sejam maiusculos
+        placa.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
+
+        MaskEditTextChangedListener mascaraPlaca = new MaskEditTextChangedListener("###-####",placa);
         MaskEditTextChangedListener mascaraAno = new MaskEditTextChangedListener("####",ano);
         MaskEditTextChangedListener mascaraCapacidade = new MaskEditTextChangedListener("##",capacidade);
 
@@ -148,6 +154,7 @@ public class EditarVan extends AppCompatActivity {
                 params.put("placa", placa.getText().toString());
                 params.put("AnoFabri", ano.getText().toString());
                 params.put("marca", marca.getText().toString());
+                params.put("idVan", String.valueOf(idVanJson));
 
                 return params;
             }
@@ -174,7 +181,7 @@ public class EditarVan extends AppCompatActivity {
                             placa.setText(jo.getString("placa"));
                             ano.setText(jo.getString("ano_fabri"));
                             marca.setText(jo.getString("marca"));
-
+                            idVanJson = Integer.parseInt(jo.getString("id_van"));
                         }catch (JSONException e){
                             e.printStackTrace();
                             Toast.makeText(EditarVan.this, e.getMessage(), Toast.LENGTH_LONG).show();
