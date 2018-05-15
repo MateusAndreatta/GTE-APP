@@ -252,4 +252,5 @@
     <string name="mais_op_es">Mais opções</string>
     <string name="cadastradoSucesso">Cadastradado com sucesso</string>
     <string name="cadastro_da_escola">Cadastro da Escola</string>
+    <string name="pesquisarSearchPlaceholder">Pesquisar...</string>
 </resources>
