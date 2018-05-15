@@ -93,9 +93,9 @@ public class CriancaListagemAdm extends AppCompatActivity implements SearchView.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
                 CriancaConst crianca = listaQuery.get(position);
                 idCrianca = Integer.parseInt(crianca.getIdCrianca());
-
 
                 //Alert de confirmação do excluir
                 AlertDialog.Builder builder = new AlertDialog.Builder(CriancaListagemAdm.this);
@@ -129,7 +129,7 @@ public class CriancaListagemAdm extends AppCompatActivity implements SearchView.
     private void setupSearchView() {
         searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
         searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
-        searchView.setSubmitButtonEnabled(true);//Defini se terá ou nao um o botao de submit
+        searchView.setSubmitButtonEnabled(false);//Defini se terá ou nao um o botao de submit
         searchView.setQueryHint(getString(R.string.pesquisarSearchPlaceholder));//Placeholder da searchbar
     }
 
@@ -180,6 +180,7 @@ public class CriancaListagemAdm extends AppCompatActivity implements SearchView.
                                 CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"),funcObject.getString("responsavel"), funcObject.getString("cpf"), funcObject.getString("id_crianca"));
 
                                 criancaList.add(funcConst);
+                                listaQuery.add(funcConst);
                             }
 
                             ListViewCriancaAdm adapter = new ListViewCriancaAdm(criancaList, getApplicationContext());

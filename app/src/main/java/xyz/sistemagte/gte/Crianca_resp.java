@@ -45,6 +45,7 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
     ListView listView;
     private int idUsuario;
     List<CriancaConst> criancaList;
+    List<CriancaConst> listaQuery;
     AlertDialog alerta;
     private int idCrianca;
     SearchView searchView;
@@ -63,6 +64,7 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.barra_pesquisa);
         criancaList = new ArrayList<>();
+        listaQuery = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.listaCriancas));     //Titulo para ser exibido na sua Action Bar em frente à seta
@@ -91,7 +93,7 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                CriancaConst crianca = criancaList.get(position);
+                CriancaConst crianca = listaQuery.get(position);
                 idCrianca = Integer.parseInt(crianca.getIdCrianca());
 
                 //Alert de confirmação do excluir
@@ -118,13 +120,16 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
 
             }
         });
+        setupSearchView();
+
     }
+
 
     private void setupSearchView() {
         searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
         searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
-        searchView.setSubmitButtonEnabled(false);
-        searchView.setQueryHint("Pesquisar...");
+        searchView.setSubmitButtonEnabled(false);//Defini se terá ou nao um o botao de submit
+        searchView.setQueryHint(getString(R.string.pesquisarSearchPlaceholder));//Placeholder da searchbar
     }
 
     //este é para o da navbar (seta)
@@ -174,6 +179,7 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
                                         funcObject.getString("cpf"), funcObject.getString(("id_crianca")));
 
                                 criancaList.add(funcConst);
+                                listaQuery.add(funcConst);
                             }
 
                             ListViewCriancaResp adapter = new ListViewCriancaResp(criancaList, getApplicationContext());
@@ -263,12 +269,21 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
     }
 
     @Override
-    public boolean onQueryTextChange(String newText){//onkeyup do javascript
+    public boolean onQueryTextChange(String newText){
+        listaQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            listaQuery.addAll(criancaList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(CriancaConst obj : criancaList){
+                if(obj.getNomeCrianca().toLowerCase().contains(queryText) ||
+                        obj.getSobrenomeCrianca().toLowerCase().contains(queryText) ||
+                        obj.getSobrenomeCrianca().toLowerCase().contains(queryText)){
+                    listaQuery.add(obj);
+                }
+            }
         }
+        listView.setAdapter(new ListViewCriancaResp(listaQuery, Crianca_resp.this));
         return true;
     }
 
