@@ -51,6 +51,7 @@
     <string name="responsavel">Responsavel</string>
     <string name="editarResponsavel">Editar Responsável</string>
     <string name="salvar">Salvar</string>
+    <string name="valor">Valor</string>
     <string name="escolas">Escolas</string>
     <string name="editar_criancas">Editar Crianças</string>
     <string name="responsaveis">Responsaveis</string>
@@ -67,6 +68,7 @@
     <string name="anoVan">Ano:</string>
     <string name="EditarPerfil">Editar Perfil</string>
     <string name="marcaVan">Marca:</string>
+    <string name="cadMensalidade">Cadastrar Mensalidade</string>
     <string name="editarFunc">Editar Funcionários</string>
     <string name="selecionarEscola">Selecionar escola</string>
     <string name="informacoesSalvasSucesso">Informações Salvas com sucesso!</string>
