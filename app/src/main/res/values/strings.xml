@@ -256,4 +256,5 @@
     <string name="cadastro_da_escola">Cadastro da Escola</string>
     <string name="pesquisarSearchPlaceholder">Pesquisar...</string>
     <string name="data_vencimento">Data de vencimento</string>
+    <string name="editarMensalidade">Editar Mensalidade</string>
 </resources>
