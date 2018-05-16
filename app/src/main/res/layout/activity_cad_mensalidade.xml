@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="number"
-                android:hint="@string/sobrenome"
+                android:hint="@string/data_vencimento"
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
 

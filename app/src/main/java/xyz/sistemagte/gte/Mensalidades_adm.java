@@ -79,8 +79,8 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
            public void onClick(View view) {
-              Snackbar.make(view, "Cadastro de mensalidades indisponível no momento", Snackbar.LENGTH_LONG)
-                     .setAction("Action", null).show();
+           Intent tela = new Intent(Mensalidades_adm.this,CadMensalidade.class);
+           startActivity(tela);
            }
         });
 
