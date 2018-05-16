@@ -8,7 +8,7 @@ public class VansConstr {
     String modelo,marca,placa,motorista;
     int ano,capacidade,id;
 
-    public VansConstr(String modelo, String marca, String placa, int ano, int capacidade, String motorista) {
+    public VansConstr(String modelo, String marca, String placa, int ano, int capacidade, String motorista, int id) {
         this.modelo = modelo;
         this.marca = marca;
         this.placa = placa;
@@ -41,5 +41,7 @@ public class VansConstr {
     public int getCapacidadeVans() {
         return capacidade;
     }
+
+    public int getIdVans(){ return id;}
 
 }

@@ -92,7 +92,7 @@ public class vans extends AppCompatActivity implements SearchView.OnQueryTextLis
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
                 VansConstr van = vansList.get(position);
-                idVan = Integer.parseInt(van.getMotoristaVans());
+                idVan = van.getIdVans();
 
                 //Alert de confirmação do excluir
                 AlertDialog.Builder builder = new AlertDialog.Builder(vans.this);
@@ -163,7 +163,6 @@ public class vans extends AppCompatActivity implements SearchView.OnQueryTextLis
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
 
                         try {
@@ -174,7 +173,7 @@ public class vans extends AppCompatActivity implements SearchView.OnQueryTextLis
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject jsonObject = funcArray.getJSONObject(i);
                                 VansConstr vansConstr  = new VansConstr(jsonObject.getString("modelo"), jsonObject.getString("marca"), jsonObject.getString("placa"),
-                                        Integer.parseInt(jsonObject.getString("ano")),Integer.parseInt(jsonObject.getString("capacidade")),jsonObject.getString("motorista"));
+                                        Integer.parseInt(jsonObject.getString("ano")),Integer.parseInt(jsonObject.getString("capacidade")),jsonObject.getString("motorista"),Integer.parseInt(jsonObject.getString("id_van")));
 
                                 vansList.add(vansConstr);
                                 listaQuery.add(vansConstr);
