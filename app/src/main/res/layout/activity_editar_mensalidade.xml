@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cadMensalidade"
+                android:text="@string/editarMensalidade"
                 android:textSize="40sp"
                 android:gravity="center"/>
 

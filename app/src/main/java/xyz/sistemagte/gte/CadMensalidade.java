@@ -140,7 +140,6 @@ public class CadMensalidade extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                        System.out.println(ServerResponse);
                         try {
                             JSONObject jsonObject = new JSONObject(ServerResponse);
                             JSONArray jsonArray = jsonObject.getJSONArray("nome");
@@ -176,5 +175,5 @@ public class CadMensalidade extends AppCompatActivity {
 
     }
 
-    
+
     }
