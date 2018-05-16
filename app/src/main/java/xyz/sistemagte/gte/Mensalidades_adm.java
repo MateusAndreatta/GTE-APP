@@ -42,8 +42,10 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarMensalidades.php";
+    private static String URLExcluir = "https://sistemagte.xyz/android/excluir/ExcluirMensalidade.php";
     ListView listView;
     private int idEmpresa;
+    private int idmensalidade;
     List<MensalidadeConst> mensalidadeConstList;
     List<MensalidadeConst> listaQuery;
     AlertDialog alerta;
@@ -87,7 +89,8 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
+                MensalidadeConst mensalidadeConst = listaQuery.get(position);
+                idmensalidade = mensalidadeConst.getMensalidadeID();
 
                 //Alert de confirmação do excluir
                 AlertDialog.Builder builder = new AlertDialog.Builder(Mensalidades_adm.this);
@@ -100,7 +103,7 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        ExcluirMensalidade();
                     }
                 });
 
@@ -146,7 +149,7 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
     }
 
     private void loadMensalidadesList() {
-
+        mensalidadeConstList.clear();
         // Showing progress dialog at user registration time.
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
         progressDialog.show();
@@ -159,7 +162,7 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
 
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-
+                        System.out.println(response);
                         try {
                             JSONObject obj = new JSONObject(response);
 
@@ -168,7 +171,7 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
 
-                                MensalidadeConst funcConst = new MensalidadeConst (funcObject.getString("nome"),funcObject.getString("nome_crianca"),funcObject.getString("status"),funcObject.getString("sobrenome"),funcObject.getString("sobre_crianca"),Integer.parseInt(funcObject.getString("id_usuario")), Integer.parseInt(funcObject.getString("id_crianca")), Double.parseDouble(funcObject.getString("valor_emitido")));
+                                MensalidadeConst funcConst = new MensalidadeConst (funcObject.getString("nome"),funcObject.getString("nome_crianca"),funcObject.getString("status"),funcObject.getString("sobrenome"),funcObject.getString("sobre_crianca"),Integer.parseInt(funcObject.getString("id_usuario")), Integer.parseInt(funcObject.getString("id_crianca")), Double.parseDouble(funcObject.getString("valor_emitido")), Integer.parseInt(funcObject.getString("id_mensalidade")));
                                 mensalidadeConstList.add(funcConst);
                                 listaQuery.add(funcConst);
                             }
@@ -184,11 +187,7 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
-                        // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-
-                        // Showing error message if something goes wrong.
                         Toast.makeText(Mensalidades_adm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
@@ -236,4 +235,45 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
     public boolean onQueryTextSubmit(String query){
         return false;
     }
+
+
+    private void ExcluirMensalidade(){
+
+        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLExcluir,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println("ENVIANDO ID: " + response);
+                        progressDialog.dismiss();
+                        Toast.makeText(Mensalidades_adm.this, R.string.excluidoComSucesso, Toast.LENGTH_SHORT).show();
+                        loadMensalidadesList();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Mensalidades_adm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id", String.valueOf(idmensalidade));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+
+    }
+
 }
