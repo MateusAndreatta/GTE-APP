@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -27,6 +28,7 @@ import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 import xyz.sistemagte.gte.Construtoras.MensalidadeConst;
 import xyz.sistemagte.gte.Construtoras.ResponsavelConstr;
@@ -36,17 +38,20 @@ public class CadMensalidade extends AppCompatActivity {
     private int idEmpresa, idResp;
 
     EditText valor, dtVencimento;
-    Spinner respSpinner;
+    Spinner respSpinner,criancaSpinner;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
 
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadMensalidade.php";
     String JsonUrlResponsaveis = "https://sistemagte.xyz/json/adm/ListarResponsaveis.php";
+    String JsonUrlCriancas = "https://sistemagte.xyz/json/responsavel/ListarCrianca.php";
 
     ArrayAdapter<String> RespListSpinner;
+    ArrayAdapter<String> CriancaListSpinner;
     ArrayList<MensalidadeConst> MensalidadeConst;
     ArrayList<ResponsavelConstr> ResponsavelConstrList;
+    ArrayList<CriancaConst> CriancaConstrList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +60,16 @@ public class CadMensalidade extends AppCompatActivity {
 
         setContentView(R.layout.activity_cad_mensalidade);
         respSpinner = findViewById(R.id.responsaveis);
+        criancaSpinner = findViewById(R.id.criancas);
 
         valor = findViewById(R.id.cad_valor);
         dtVencimento = findViewById(R.id.cad_dt_vencimento);
 
         requestQueue = Volley.newRequestQueue(this);
         RespListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
+        CriancaListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
         ResponsavelConstrList = new ArrayList<>();
+        CriancaConstrList = new ArrayList<>();
         progressDialog = new ProgressDialog(CadMensalidade.this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
@@ -78,7 +86,18 @@ public class CadMensalidade extends AppCompatActivity {
         idEmpresa = global.getGlobalUserIdEmpresa();
         CarregarResponsaveis();
 
+        respSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                ResponsavelConstr resp = ResponsavelConstrList.get(position);
+                CarregarCriancasResp(resp.getIdResp());
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
 
     }
 
@@ -175,5 +194,44 @@ public class CadMensalidade extends AppCompatActivity {
 
     }
 
+    private void CarregarCriancasResp(final int idResp){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, JsonUrlCriancas,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(ServerResponse);
+                            JSONArray jsonArray = jsonObject.getJSONArray("nome");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                String resp = jsonObject1.getString("nome") + " " + jsonObject1.getString("sobrenome");
+                                CriancaListSpinner.add(resp);
+                                CriancaConst criancas = new CriancaConst(jsonObject1.getString("nome"), jsonObject1.getString("sobrenome"),
+                                        jsonObject1.getString("cpf"), jsonObject1.getString(("id_crianca")));
+                                CriancaConstrList.add(criancas);
+                            }
+                            criancaSpinner.setAdapter(CriancaListSpinner);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(CadMensalidade.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", String.valueOf(idResp));
+                return params;
+            }
 
+        };
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
     }
+
+}
