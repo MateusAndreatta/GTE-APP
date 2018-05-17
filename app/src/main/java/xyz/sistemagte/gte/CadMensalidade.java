@@ -90,7 +90,9 @@ public class CadMensalidade extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 ResponsavelConstr resp = ResponsavelConstrList.get(position);
-                CarregarCriancasResp(resp.getIdResp());
+                idResp = resp.getIdResp();
+                CarregarCriancasResp();
+                //Toast.makeText(CadMensalidade.this, String.valueOf(idResp), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -194,7 +196,10 @@ public class CadMensalidade extends AppCompatActivity {
 
     }
 
-    private void CarregarCriancasResp(final int idResp){
+    private void CarregarCriancasResp(){
+        CriancaListSpinner.clear();
+        progressDialog.setMessage(getResources().getString(R.string.loadingDados));
+        progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JsonUrlCriancas,
                 new Response.Listener<String>() {
                     @Override
@@ -204,14 +209,21 @@ public class CadMensalidade extends AppCompatActivity {
                             JSONArray jsonArray = jsonObject.getJSONArray("nome");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                String resp = jsonObject1.getString("nome") + " " + jsonObject1.getString("sobrenome");
-                                CriancaListSpinner.add(resp);
+                                String crianca = jsonObject1.getString("nome") + " " + jsonObject1.getString("sobrenome");
+                                CriancaListSpinner.add(crianca);
                                 CriancaConst criancas = new CriancaConst(jsonObject1.getString("nome"), jsonObject1.getString("sobrenome"),
                                         jsonObject1.getString("cpf"), jsonObject1.getString(("id_crianca")));
                                 CriancaConstrList.add(criancas);
                             }
                             criancaSpinner.setAdapter(CriancaListSpinner);
+
+                            if(CriancaListSpinner.isEmpty()){
+                                Toast.makeText(CadMensalidade.this, respSpinner.getSelectedItem().toString() + " " +  getString(R.string.nenhumaCriancaCadastrada), Toast.LENGTH_LONG).show();
+                            }
+
+                            progressDialog.dismiss();
                         } catch (JSONException e) {
+                            progressDialog.dismiss();
                             e.printStackTrace();
                         }
                     }
@@ -219,11 +231,13 @@ public class CadMensalidade extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
                         Toast.makeText(CadMensalidade.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() {
+
                 Map<String, String> params = new HashMap<>();
                 params.put("id", String.valueOf(idResp));
                 return params;

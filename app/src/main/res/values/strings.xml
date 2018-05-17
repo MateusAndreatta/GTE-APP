@@ -257,4 +257,5 @@
     <string name="pesquisarSearchPlaceholder">Pesquisar...</string>
     <string name="data_vencimento">Data de vencimento</string>
     <string name="editarMensalidade">Editar Mensalidade</string>
+    <string name="nenhumaCriancaCadastrada">Não possui nenhuma criança cadastrada!</string>
 </resources>
