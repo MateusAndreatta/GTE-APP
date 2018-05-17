@@ -10,4 +10,8 @@
     <color name="cinza">#FEFEFE</color>
     <color name="cinzaClaro">#e0e0e0</color>
     <color name="preto">#000</color>
+    <!-- Cores Mensalidade -->
+    <color name="amareloPendente">#fbc02d</color>
+    <color name="verdePago">#43a047</color>
+    <color name="vermelhoAtrasado">#e53935</color>
 </resources>

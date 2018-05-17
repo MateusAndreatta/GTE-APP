@@ -38,18 +38,23 @@ public class ListViewMensalidades extends ArrayAdapter <MensalidadeConst> {
         TextView txtValor = listViewItem.findViewById(R.id.txtValor);
         TextView txtCrianca = listViewItem.findViewById(R.id.txtCrianca);
 
+        //DIVISOR Colorido
+        View div = listViewItem.findViewById(R.id.Divisor);
 
 
         MensalidadeConst mensalidadeConst = mensa.get(position);
 
         if(Integer.parseInt(mensalidadeConst.getStatus()) == 0){
             txtStatus.setText(mCtx.getResources().getString(R.string.pendente));
+            div.setBackgroundResource(R.color.amareloPendente);
         }
         if(Integer.parseInt(mensalidadeConst.getStatus()) == 1){
             txtStatus.setText(mCtx.getResources().getString(R.string.pago));
+            div.setBackgroundResource(R.color.verdePago);
         }
         if(Integer.parseInt(mensalidadeConst.getStatus()) == 2){
             txtStatus.setText(mCtx.getResources().getString(R.string.atrasada));
+            div.setBackgroundResource(R.color.vermelhoAtrasado);
         }
 
         txtNomeResp.setText(mensalidadeConst.getNomeResp() + " " + mensalidadeConst.getSobreResp());
