@@ -136,15 +136,17 @@ public class CadMensalidade extends AppCompatActivity {
 
                 int spinnerPos = respSpinner.getSelectedItemPosition();
                 ResponsavelConstr resp = ResponsavelConstrList.get(spinnerPos);
+                int spinnerPos2 = criancaSpinner.getSelectedItemPosition();
+                CriancaConst crianca = CriancaConstrList.get(spinnerPos2);
 
                 // Creating Map String Params.
                 Map<String, String> params = new HashMap<>();
 
-                // Adding All values to Params.
-                params.put("id", String.valueOf(idEmpresa));
+
                 params.put("valor",valor.getText().toString());
-                params.put("dtVencimento", dtVencimento.getText().toString());
-                params.put("resp", String.valueOf(resp.getIdResp()));
+                params.put("dtv", dtVencimento.getText().toString());
+                params.put("responsavel", String.valueOf(resp.getIdResp()));
+                params.put("crianca", String.valueOf(crianca.getIdCrianca()));
 
 
                 return params;
@@ -198,6 +200,7 @@ public class CadMensalidade extends AppCompatActivity {
 
     private void CarregarCriancasResp(){
         CriancaListSpinner.clear();
+        CriancaConstrList.clear();
         progressDialog.setMessage(getResources().getString(R.string.loadingDados));
         progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JsonUrlCriancas,
