@@ -261,4 +261,5 @@
     <string name="PagoMensalidadeDialog">Definir como pago</string>
     <string name="PendenteMensalidadeDialog">Definir não paga</string>
     <string name="pagoSucesso">Paga com sucesso</string>
+    <string name="carregando">Carregando</string>
 </resources>

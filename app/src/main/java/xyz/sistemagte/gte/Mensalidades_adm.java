@@ -297,7 +297,7 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
     }
 
     private void PagarMensalidade(){
-       progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+       progressDialog.setMessage(getResources().getString(R.string.carregando));
        progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLPagar,
@@ -336,7 +336,7 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
     }
 
     private void NaoPagarMensalidade(){
-        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+        progressDialog.setMessage(getResources().getString(R.string.carregando));
         progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLNaoPago,
