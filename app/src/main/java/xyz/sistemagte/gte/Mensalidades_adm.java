@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -59,7 +60,7 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mensalidades__adm);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
@@ -87,7 +88,6 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
         });
 
         loadMensalidadesList();
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -118,6 +118,7 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                         }
                     });
                 }else{
+                    //nao pago
                     builder.setNeutralButton(getResources().getString(R.string.PagoMensalidadeDialog), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
                             PagarMensalidade();
@@ -130,9 +131,9 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                 alerta = builder.create();
                 //Exibe
                 alerta.show();
-
             }
         });
+
 
         listView.setTextFilterEnabled(true);
         setupSearchView();
@@ -296,8 +297,8 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
     }
 
     private void PagarMensalidade(){
-        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
-        progressDialog.show();
+       progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+       progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLPagar,
                 new Response.Listener<String>() {
@@ -305,7 +306,10 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                     public void onResponse(String response) {
                         progressDialog.dismiss();
                         Toast.makeText(Mensalidades_adm.this, R.string.pagoSucesso, Toast.LENGTH_SHORT).show();
-                        loadMensalidadesList();
+                        //loadMensalidadesList();
+                        Intent tela = new Intent(Mensalidades_adm.this, Mensalidades_adm.class);
+                        startActivity(tela);
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -341,7 +345,9 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                     public void onResponse(String response) {
                         progressDialog.dismiss();
                         Toast.makeText(Mensalidades_adm.this, R.string.pagoSucesso, Toast.LENGTH_SHORT).show();
-                        loadMensalidadesList();
+                        //loadMensalidadesList();
+                        Intent tela = new Intent(Mensalidades_adm.this, Mensalidades_adm.class);
+                        startActivity(tela);
                     }
                 },
                 new Response.ErrorListener() {
