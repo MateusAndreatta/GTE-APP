@@ -43,6 +43,8 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarMensalidades.php";
     private static String URLExcluir = "https://sistemagte.xyz/android/excluir/ExcluirMensalidade.php";
+    private static String URLPagar = "https://sistemagte.xyz/android/DefinirMensalidadePaga.php";
+    private static String URLNaoPago = "https://sistemagte.xyz/android/DefinirMensalidadePendente.php";
     ListView listView;
     private int idEmpresa;
     private int idmensalidade;
@@ -108,6 +110,21 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                         ExcluirMensalidade();
                     }
                 });
+                if(mensalidadeConst.getStatus().equals("1")){
+                    //Pago
+                    builder.setNeutralButton(getResources().getString(R.string.PendenteMensalidadeDialog), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            NaoPagarMensalidade();
+                        }
+                    });
+                }else{
+                    builder.setNeutralButton(getResources().getString(R.string.PagoMensalidadeDialog), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            PagarMensalidade();
+                        }
+                    });
+
+                }
 
                 //cria o AlertDialog
                 alerta = builder.create();
@@ -276,6 +293,78 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
 
+    }
+
+    private void PagarMensalidade(){
+        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLPagar,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Mensalidades_adm.this, R.string.pagoSucesso, Toast.LENGTH_SHORT).show();
+                        loadMensalidadesList();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Mensalidades_adm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id", String.valueOf(idmensalidade));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
+    private void NaoPagarMensalidade(){
+        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLNaoPago,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Mensalidades_adm.this, R.string.pagoSucesso, Toast.LENGTH_SHORT).show();
+                        loadMensalidadesList();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Mensalidades_adm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id", String.valueOf(idmensalidade));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
     }
 
 }
