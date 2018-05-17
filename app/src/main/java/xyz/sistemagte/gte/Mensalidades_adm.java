@@ -98,7 +98,9 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        Intent tela = new Intent(Mensalidades_adm.this,EditarMensalidade.class);
+                        tela.putExtra("idM",String.valueOf(idmensalidade));
+                        startActivity(tela);
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {

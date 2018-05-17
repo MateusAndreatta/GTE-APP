@@ -57,8 +57,6 @@ public class CadMensalidade extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_mensalidade);
-
-        setContentView(R.layout.activity_cad_mensalidade);
         respSpinner = findViewById(R.id.responsaveis);
         criancaSpinner = findViewById(R.id.criancas);
 
