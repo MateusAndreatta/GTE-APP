@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,17 +26,19 @@ import org.json.JSONObject;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
+import xyz.sistemagte.gte.Construtoras.VansConstr;
+import xyz.sistemagte.gte.ListAdapters.RecyclerViewAdapter;
 
 public class ListagemVanMotorista extends AppCompatActivity {
-
-    TextView capacidade, modelo, placa,ano,marca;
 
     private static String JSON_URL = "https://sistemagte.xyz/json/motorista/ListarDadosVan.php";
     ListView listView;
@@ -44,6 +48,13 @@ public class ListagemVanMotorista extends AppCompatActivity {
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
 
+    List<VansConstr> vansList;
+
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerViewAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,23 +63,26 @@ public class ListagemVanMotorista extends AppCompatActivity {
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
 
-        capacidade = findViewById(R.id.list_capacidade);
-        modelo = findViewById(R.id.list_modelo);
-        placa = findViewById(R.id.list_placa);
-        ano = findViewById(R.id.list_ano_fab);
-        marca = findViewById(R.id.list_marca);
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.ListaVanMotorista));
 
+
+        vansList = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(this);
 
         progressDialog = new ProgressDialog(ListagemVanMotorista.this);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         PuxarDados();
     }
+
     private void PuxarDados(){
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
         progressDialog.show();
@@ -84,21 +98,47 @@ public class ListagemVanMotorista extends AppCompatActivity {
 
                         try {
                             JSONObject obj = new JSONObject(response);
-
                             JSONArray funcArray = obj.getJSONArray("nome");
-                            JSONObject funcObject = funcArray.getJSONObject(0);
+                            for (int i = 0; i < funcArray.length(); i++) {
+                                JSONObject funcObject = funcArray.getJSONObject(0);
+                                //TODO: Colocar na webservice para trazer o nome do motorista, provisioriamente estamos puxando a id_usuario
+                                VansConstr vansConstr = new VansConstr(funcObject.getString("modelo"),funcObject.getString("marca"),
+                                        funcObject.getString("placa"),Integer.parseInt(funcObject.getString("ano_fabri")),
+                                        Integer.parseInt(funcObject.getString("capacidade")),funcObject.getString("nome"),Integer.parseInt(funcObject.getString("id_van")));
 
+                                vansList.add(vansConstr);
+                            }
 
-                            capacidade.setText(getResources().getString(R.string.capacidadeVan) + " " + funcObject.getString ("capacidade"));
-                            modelo.setText((getResources().getString(R.string.modeloVan) + " " +funcObject.getString("modelo")));
-                            placa.setText((getResources().getString(R.string.placaVan) + " " +funcObject.getString("placa")));
-                            ano.setText((getResources().getString(R.string.anoVan) + " " + funcObject.getString("ano_fabri")));
-                            marca.setText((getResources().getString(R.string.marcaVan) + " " + funcObject.getString("marca")));
-
+                            mAdapter = new RecyclerViewAdapter(vansList);
+                            mRecyclerView.setAdapter(mAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        /**
+                         *  try {
+                         JSONObject obj = new JSONObject(response);
+
+                         JSONArray funcArray = obj.getJSONArray("nome");
+
+                         for (int i = 0; i < funcArray.length(); i++) {
+                         JSONObject funcObject = funcArray.getJSONObject(i);
+                         CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"),funcObject.getString("responsavel"), funcObject.getString("cpf"), funcObject.getString("id_crianca"));
+
+                         criancaList.add(funcConst);
+                         listaQuery.add(funcConst);
+                         }
+
+                         ListViewCriancaAdm adapter = new ListViewCriancaAdm(criancaList, getApplicationContext());
+
+                         listView.setAdapter(adapter);
+                         } catch (JSONException e) {
+                         e.printStackTrace();
+                         }
+                         *
+                         * */
+
                     }
                 },
                 new Response.ErrorListener() {
