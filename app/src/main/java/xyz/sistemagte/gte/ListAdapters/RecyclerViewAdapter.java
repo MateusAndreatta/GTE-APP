@@ -1,11 +1,11 @@
 package xyz.sistemagte.gte.ListAdapters;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,20 +18,22 @@ import xyz.sistemagte.gte.R;
  * Created by Andreatta on 18/05/2018.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.PersonViewHolder> {
-
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.VansViewHolder> {
 
     @Override
-    public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public VansViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_view_vans, viewGroup, false);
-        PersonViewHolder pvh = new PersonViewHolder(v);
+        VansViewHolder pvh = new VansViewHolder(v);
         return pvh;
     }
 
     @Override
-    public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        personViewHolder.personName.setText("Nome");
-        personViewHolder.personAge.setText("23");
+    public void onBindViewHolder(VansViewHolder ViewHolder, int i) {
+        ViewHolder.Placa.setText("Placa: " + vansList.get(i).getPlacaVans());
+        ViewHolder.ano.setText("Ano: " + String.valueOf(vansList.get(i).getAnoVans()));
+        ViewHolder.marcaModelo.setText(vansList.get(i).getMarcaVans() + " " + vansList.get(i).getModeloVans());
+        ViewHolder.capacidade.setText("Capacidade: " + String.valueOf(vansList.get(i).getCapacidadeVans()));
+        ViewHolder.motorista.setText("Motorista: " + vansList.get(i).getMotoristaVans());
     }
 
     @Override
@@ -39,29 +41,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public static class PersonViewHolder extends RecyclerView.ViewHolder {
+    public static class VansViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
-        TextView personName;
-        TextView personAge;
+        TextView Placa,ano,marcaModelo,capacidade,motorista;
 
-        PersonViewHolder(View itemView) {
+        VansViewHolder(View itemView) {
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
-            personName = (TextView) itemView.findViewById(R.id.person_name);
-            personAge = (TextView) itemView.findViewById(R.id.person_age);
+            Placa = (TextView) itemView.findViewById(R.id.txtPlaca);
+            ano = (TextView) itemView.findViewById(R.id.txtAno);
+            marcaModelo = (TextView) itemView.findViewById(R.id.txtMarcaAndModelo);
+            capacidade = (TextView) itemView.findViewById(R.id.txtCapacidade);
+            motorista  = (TextView) itemView.findViewById(R.id.txtMotorista);
         }
 
     }
 
-    List<VansConstr> persons;
+    List<VansConstr> vansList;
 
-    public RecyclerViewAdapter(List<VansConstr> persons){
-        this.persons = persons;
+    public RecyclerViewAdapter(List<VansConstr> vans){
+        vansList = new ArrayList<>();
+        this.vansList = vans;
     }
 
     @Override
     public int getItemCount() {
-        return persons.size();
+        return vansList.size();
     }
 
 }

@@ -80,6 +80,8 @@ public class ListagemVanMotorista extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        mAdapter = new RecyclerViewAdapter(vansList);
+        mRecyclerView.setAdapter(mAdapter);
         PuxarDados();
     }
 
@@ -87,15 +89,12 @@ public class ListagemVanMotorista extends AppCompatActivity {
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
         progressDialog.show();
 
-        // Creating string request with post method.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-
                         try {
                             JSONObject obj = new JSONObject(response);
                             JSONArray funcArray = obj.getJSONArray("nome");
@@ -104,40 +103,15 @@ public class ListagemVanMotorista extends AppCompatActivity {
                                 //TODO: Colocar na webservice para trazer o nome do motorista, provisioriamente estamos puxando a id_usuario
                                 VansConstr vansConstr = new VansConstr(funcObject.getString("modelo"),funcObject.getString("marca"),
                                         funcObject.getString("placa"),Integer.parseInt(funcObject.getString("ano_fabri")),
-                                        Integer.parseInt(funcObject.getString("capacidade")),funcObject.getString("nome"),Integer.parseInt(funcObject.getString("id_van")));
-
-                                vansList.add(vansConstr);
+                                        Integer.parseInt(funcObject.getString("capacidade")),funcObject.getString("id_usuario"),Integer.parseInt(funcObject.getString("id_van")));
+                                vansList.add(i,vansConstr);
+                                mAdapter.notifyDataSetChanged();
                             }
 
-                            mAdapter = new RecyclerViewAdapter(vansList);
-                            mRecyclerView.setAdapter(mAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-                        /**
-                         *  try {
-                         JSONObject obj = new JSONObject(response);
-
-                         JSONArray funcArray = obj.getJSONArray("nome");
-
-                         for (int i = 0; i < funcArray.length(); i++) {
-                         JSONObject funcObject = funcArray.getJSONObject(i);
-                         CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"),funcObject.getString("responsavel"), funcObject.getString("cpf"), funcObject.getString("id_crianca"));
-
-                         criancaList.add(funcConst);
-                         listaQuery.add(funcConst);
-                         }
-
-                         ListViewCriancaAdm adapter = new ListViewCriancaAdm(criancaList, getApplicationContext());
-
-                         listView.setAdapter(adapter);
-                         } catch (JSONException e) {
-                         e.printStackTrace();
-                         }
-                         *
-                         * */
 
                     }
                 },
