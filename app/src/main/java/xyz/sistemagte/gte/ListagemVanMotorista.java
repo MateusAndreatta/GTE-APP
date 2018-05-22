@@ -103,7 +103,7 @@ public class ListagemVanMotorista extends AppCompatActivity {
                                 //TODO: Colocar na webservice para trazer o nome do motorista, provisioriamente estamos puxando a id_usuario
                                 VansConstr vansConstr = new VansConstr(funcObject.getString("modelo"),funcObject.getString("marca"),
                                         funcObject.getString("placa"),Integer.parseInt(funcObject.getString("ano_fabri")),
-                                        Integer.parseInt(funcObject.getString("capacidade")),funcObject.getString("id_usuario"),Integer.parseInt(funcObject.getString("id_van")));
+                                        Integer.parseInt(funcObject.getString("capacidade")),funcObject.getString("nome"),Integer.parseInt(funcObject.getString("id_van")));
                                 vansList.add(i,vansConstr);
                                 mAdapter.notifyDataSetChanged();
                             }
