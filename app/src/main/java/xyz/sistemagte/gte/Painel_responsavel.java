@@ -75,6 +75,8 @@ public class Painel_responsavel extends AppCompatActivity {
     }
 
     public void irMensalidade(View view) {
+        Intent tela = new Intent(this,ListagemMensalidadeResp.class);
+        startActivity(tela);
     }
 
     public void irEnquete(View view) {

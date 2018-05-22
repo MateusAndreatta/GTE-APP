@@ -109,7 +109,7 @@ public class ListagemVanMotorista extends AppCompatActivity implements SearchVie
                                         Integer.parseInt(jsonObject.getString("ano_fabri")),Integer.parseInt(jsonObject.getString("capacidade")),jsonObject.getString("nome"),Integer.parseInt(jsonObject.getString("id_van")));
 
                                 vansList.add(vansConstr);
-                              //  listaQuery.add(vansConstr);
+                                listaQuery.add(vansConstr);
                             }
 
                             ListViewVansCard adapter = new ListViewVansCard(vansList, getApplicationContext());
