@@ -52,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             ano = (TextView) itemView.findViewById(R.id.txtAno);
             marcaModelo = (TextView) itemView.findViewById(R.id.txtMarcaAndModelo);
             capacidade = (TextView) itemView.findViewById(R.id.txtCapacidade);
-            motorista  = (TextView) itemView.findViewById(R.id.txtMotorista);
+            //motorista  = (TextView) itemView.findViewById(R.id.txtMotorista);
         }
 
     }
