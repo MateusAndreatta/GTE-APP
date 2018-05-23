@@ -24,7 +24,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,11 +136,20 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
                             JSONObject obj = new JSONObject(response);
 
                             JSONArray funcArray = obj.getJSONArray("nome");
-                            //TODO: converter a data e hora de acesso do app para o padrao brasileiro
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
+
+                                String dia2= funcObject.getString("data");
+                                SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                ParsePosition position2 = new ParsePosition(0);
+                                Date data2 = format2.parse(dia2,position2);
+                                format2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                String date2 = format2.format(data2);
+
                                 AcessosConst acessosConst = new AcessosConst(funcObject.getString("nome"), funcObject.getString("sobrenome"),
-                                        funcObject.getString("tipo"), funcObject.getString("data"));
+                                        funcObject.getString("tipo"), date2);
+
+
 
                                 acessoList.add(acessosConst);
                                 listaQuery.add(acessosConst);

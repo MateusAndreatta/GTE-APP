@@ -6,15 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="20dp"
     tools:context="xyz.sistemagte.gte.cad_escola">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cadastro_da_escola"
-        android:textSize="40sp"
-        android:gravity="center"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,7 +16,15 @@
             android:id="@+id/cad_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="20dp"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cadastro_da_escola"
+                android:textSize="40sp"
+                android:gravity="center"/>
 
             <EditText
                 android:id="@+id/cad_nome"
