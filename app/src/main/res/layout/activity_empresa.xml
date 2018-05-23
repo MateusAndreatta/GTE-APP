@@ -12,7 +12,7 @@
 
 
         <LinearLayout
-            android:id="@+id/cad_form"
+            android:id="@+id/cad_empresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/codEmpresa"
+            android:text="@string/empresa"
             android:textSize="40sp"
             android:gravity="center"/>
 
@@ -33,18 +33,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txtEmpresa"
-                android:textSize="20sp"
-                android:layout_gravity="center_vertical|right"/>
+                android:gravity="top"
+                android:lineSpacingExtra="5sp"
+                android:textSize="20sp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
 
         <EditText
-            android:id="@+id/cad_nome"
+            android:id="@+id/cad_cod"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="@string/id"
+            android:hint="@string/cod"
             android:background="@drawable/input_style"
             android:layout_marginBottom="5dp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="7dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/enviar"
+                android:textColor="@color/branco"
+                android:id="@+id/cadastro"
+                android:onClick="Enviar"
+                android:background="@drawable/btn_padrao"
+                />
         </LinearLayout>
 
 
