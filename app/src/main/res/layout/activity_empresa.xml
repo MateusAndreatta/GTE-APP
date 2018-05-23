@@ -6,19 +6,56 @@
     android:layout_height="match_parent"
     tools:context="xyz.sistemagte.gte.Empresa"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
 
         <LinearLayout
             android:id="@+id/cad_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/codEmpresa"
+            android:textSize="40sp"
+            android:gravity="center"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txtEmpresa"
+                android:textSize="20sp"
+                android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/cad_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/id"
+            android:background="@drawable/input_style"
+            android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:padding="20dp"
+            android:id="@+id/empresa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -27,8 +64,30 @@
                 android:textSize="40sp"
                 android:gravity="center"/>
 
+            <TextView
+                android:id="@+id/NomeEmpresa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/cnpj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/telefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+
 
         </LinearLayout>
-    </ScrollView>
+
 
 </LinearLayout>
