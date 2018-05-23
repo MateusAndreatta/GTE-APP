@@ -65,7 +65,8 @@
         <activity android:name=".EditarResponsavelAdm" />
         <activity android:name=".CadMensalidade" />
         <activity android:name=".EditarMensalidade" />
-        <activity android:name=".ListagemMensalidadeResp"></activity>
+        <activity android:name=".ListagemMensalidadeResp" />
+        <activity android:name=".Empresa"></activity>
     </application>
 
 </manifest>

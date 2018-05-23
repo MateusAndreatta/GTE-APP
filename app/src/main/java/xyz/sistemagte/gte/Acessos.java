@@ -143,7 +143,7 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
                                 SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 ParsePosition position2 = new ParsePosition(0);
                                 Date data2 = format2.parse(dia2,position2);
-                                format2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                format2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                                 String date2 = format2.format(data2);
 
                                 AcessosConst acessosConst = new AcessosConst(funcObject.getString("nome"), funcObject.getString("sobrenome"),
