@@ -3,6 +3,7 @@ package xyz.sistemagte.gte;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -37,6 +38,7 @@ public class cad_monitor extends AppCompatActivity {
         data_admissao = findViewById(R.id.data_admissao);
         hora_entrada = findViewById(R.id.hora_entrada);
         hora_saida = findViewById(R.id.hora_saida);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         Estado = findViewById(R.id.cad_estado);
         sexo = findViewById(R.id.cad_sexo);

@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -59,6 +60,7 @@ public class Funcionario_adm extends AppCompatActivity implements SearchView.OnQ
 
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         searchView = findViewById(R.id.barra_pesquisa);
         listView = findViewById(R.id.listView);

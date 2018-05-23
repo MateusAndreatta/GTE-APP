@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -57,6 +58,7 @@ public class cad_crianca extends AppCompatActivity {
         setContentView(R.layout.activity_cad_crianca);
         EscolaSpinner = findViewById(R.id.escolas);
         Estado = findViewById(R.id.spinnerEstado);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         Nome = findViewById(R.id.cad_nome);
         Sobrenome = findViewById(R.id.cad_sobrenome);
