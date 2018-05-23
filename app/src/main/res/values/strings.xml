@@ -32,7 +32,7 @@
     <string name="acesso">Acesso</string>
     <string name="pendente">Pendente</string>
     <string name="pago">Pago</string>
-    <string name="txtEmpresa">Verificamos que você não possui uma empresa vinculada a sua conta no Sistema GTE, se você possui o código dela coloque no campo abaixo, caso contrario entre em contato com um administrado da empresa</string>
+    <string name="txtEmpresa">Verificamos que você não possui uma conta vinculada no Sistema GTE. Preencha o campo abaixo com o código fornecido pelo administrador.</string>
     <string name="atrasada">Atrasada</string>
     <string name="real">R$ </string>
     <string name="criancaEspaço">Criança:  </string>
