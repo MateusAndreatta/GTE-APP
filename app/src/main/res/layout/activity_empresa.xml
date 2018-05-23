@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txtEmpresa"
                 android:textSize="20sp"
-                android:gravity="center"/>
+                android:layout_gravity="center_vertical|right"/>
 
         <EditText
             android:id="@+id/cad_nome"
