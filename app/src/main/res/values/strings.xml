@@ -263,4 +263,6 @@
     <string name="pagoSucesso">Paga com sucesso</string>
     <string name="carregando">Carregando</string>
     <string name="suas_vans">Suas Vans</string>
+    <string name="empresa">Empresa</string>
+    <string name="suaEmpresa">Sua empresa</string>
 </resources>

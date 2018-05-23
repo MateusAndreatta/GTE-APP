@@ -66,4 +66,14 @@ public class Painel_monitora extends AppCompatActivity {
         Intent Tela = new Intent(this, EditarPerfilMonitora.class);
         startActivity(Tela);
     }
+
+    public void irEditar_endereco(View view) {
+    }
+
+    public void irEmpresa(View view) {
+        Intent Tela = new Intent(this, Empresa.class);
+        startActivity(Tela);
+    }
+
+
 }
