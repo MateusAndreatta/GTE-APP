@@ -259,8 +259,8 @@
     <string name="data_vencimento">Data de vencimento</string>
     <string name="editarMensalidade">Editar Mensalidade</string>
     <string name="nenhumaCriancaCadastrada">Não possui nenhuma criança cadastrada!</string>
-    <string name="PagoMensalidadeDialog">Definir como pago</string>
-    <string name="PendenteMensalidadeDialog">Definir não paga</string>
+    <string name="PagoMensalidadeDialog">Paga</string>
+    <string name="PendenteMensalidadeDialog">Não paga</string>
     <string name="pagoSucesso">Paga com sucesso</string>
     <string name="carregando">Carregando</string>
     <string name="suas_vans">Suas Vans</string>
