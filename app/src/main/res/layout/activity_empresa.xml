@@ -8,16 +8,13 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-
-
-
-        <LinearLayout
-            android:id="@+id/cad_empresa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp"
-            android:visibility="gone">
+    <LinearLayout
+        android:id="@+id/cad_empresa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -47,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:hint="@string/cod"
             android:background="@drawable/input_style"
             android:layout_marginBottom="5dp"/>

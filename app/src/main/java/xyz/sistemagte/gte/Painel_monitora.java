@@ -72,6 +72,7 @@ public class Painel_monitora extends AppCompatActivity {
 
     public void irEmpresa(View view) {
         Intent Tela = new Intent(this, Empresa.class);
+        Tela.putExtra("tipo","monitora");
         startActivity(Tela);
     }
 

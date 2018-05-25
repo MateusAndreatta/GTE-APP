@@ -80,5 +80,12 @@ public class Painel_responsavel extends AppCompatActivity {
     }
 
     public void irEnquete(View view) {
+        Toast.makeText(this, "Não disponivel no momento", Toast.LENGTH_SHORT).show();
+    }
+
+    public void irEmpresa(View view) {
+        Intent Tela = new Intent(this, Empresa.class);
+        Tela.putExtra("tipo","resp");
+        startActivity(Tela);
     }
 }
