@@ -13,7 +13,9 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -55,6 +57,7 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
     SearchView searchView;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
+    Boolean VerificModal = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,16 +75,39 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.ListarMensalidades));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
-
         requestQueue = Volley.newRequestQueue(this);
 
         progressDialog = new ProgressDialog(ListagemMensalidadeResp.this);
 
         loadMensalidadesList();
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                MensalidadeConst mensalidadeConst = listaQuery.get(position);
+                idmensalidade = mensalidadeConst.getMensalidadeID();
+
+                //Alert de confirmação do excluir
+                AlertDialog.Builder builder = new AlertDialog.Builder(ListagemMensalidadeResp.this);
+                builder.setTitle(getResources().getString(R.string.opcoesDialog));
+                builder.setMessage(getResources().getString(R.string.textoDialog));
+                builder.setPositiveButton(getResources().getString(R.string.GerarBoleto), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        WebView webView = findViewById(R.id.wb);
+                        webView.loadUrl("https://sistemagte.xyz/boleto/boleto_itau.php?id="+idmensalidade);
+                        MostrarModal();
+                    }
+                });
+
+                //cria o AlertDialog
+                alerta = builder.create();
+                //Exibe
+                alerta.show();
+            }
+        });
+
         listView.setTextFilterEnabled(true);
         setupSearchView();
-
     }
 
     private void setupSearchView() {
@@ -96,8 +122,12 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
-                startActivity(new Intent(this, Painel_responsavel.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
-                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                if(VerificModal){
+                    FecharModal();
+                }else {
+                    startActivity(new Intent(this, Painel_responsavel.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                    finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                }
                 break;
             default:break;
         }
@@ -107,8 +137,12 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
     //O botao padrao do android
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(this, Painel_responsavel.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
-        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        if(VerificModal){
+            FecharModal();
+        }else {
+            startActivity(new Intent(this, Painel_responsavel.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+            finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+        }
         return;
     }
 
@@ -191,7 +225,7 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
                 }
             }
         }
-        listView.setAdapter(new ListViewMensalidades(listaQuery, ListagemMensalidadeResp.this));
+        listView.setAdapter(new ListViewMensalidadesResp(listaQuery, ListagemMensalidadeResp.this));
         return true;
     }
 
@@ -199,5 +233,22 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
     public boolean onQueryTextSubmit(String query){
         return false;
     }
+
+    private void MostrarModal(){
+        LinearLayout telaNormal =  findViewById(R.id.layoutNormalMensalidades);
+        telaNormal.setVisibility(View.GONE);
+        LinearLayout modal =  findViewById(R.id.layoutWeb);
+        modal.setVisibility(View.VISIBLE);
+        VerificModal = true;
+    }
+
+    private void FecharModal(){
+        LinearLayout telaNormal =  findViewById(R.id.layoutNormalMensalidades);
+        telaNormal.setVisibility(View.VISIBLE);
+        LinearLayout modal =  findViewById(R.id.layoutWeb);
+        modal.setVisibility(View.GONE);
+        VerificModal = false;
+    }
+
 
 }

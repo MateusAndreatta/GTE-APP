@@ -268,4 +268,5 @@
     <string name="suaEmpresa">Sua empresa</string>
     <string name="IDempresa">Insira o id de sua empresa</string>
     <string name="cod">Código</string>
+    <string name="GerarBoleto">Gerar Boleto</string>
 </resources>
