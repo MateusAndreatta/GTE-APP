@@ -278,7 +278,8 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
             for(CriancaConst obj : criancaList){
                 if(obj.getNomeCrianca().toLowerCase().contains(queryText) ||
                         obj.getSobrenomeCrianca().toLowerCase().contains(queryText) ||
-                        obj.getSobrenomeCrianca().toLowerCase().contains(queryText)){
+                        obj.getSobrenomeCrianca().toLowerCase().contains(queryText) ||
+                        obj.getCpfCrianca().toLowerCase().contains(queryText)){
                     listaQuery.add(obj);
                 }
             }

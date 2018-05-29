@@ -162,10 +162,11 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
 
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-                        System.out.println(response);
                         try {
                             JSONObject obj = new JSONObject(response);
 
+
+                            
                             JSONArray funcArray = obj.getJSONArray("nome");
 
                             for (int i = 0; i < funcArray.length(); i++) {
