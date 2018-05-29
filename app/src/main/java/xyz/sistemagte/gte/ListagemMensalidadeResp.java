@@ -165,8 +165,6 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
                         try {
                             JSONObject obj = new JSONObject(response);
 
-
-                            
                             JSONArray funcArray = obj.getJSONArray("nome");
 
                             for (int i = 0; i < funcArray.length(); i++) {
