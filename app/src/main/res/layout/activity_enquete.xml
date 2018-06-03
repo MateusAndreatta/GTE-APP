@@ -16,51 +16,121 @@
 
 
     <LinearLayout
+        android:id="@+id/telaResponder"
         android:orientation="vertical"
         android:gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="30dp">
+        android:visibility="gone">
 
-        <RadioButton
-            android:layoutDirection="rtl"
-            android:id="@+id/r1"
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="30dp">
+
+            <RadioButton
+                android:layoutDirection="rtl"
+                android:id="@+id/r1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="20dp"
+                android:text="Sim"/>
+
+            <RadioButton
+                android:layoutDirection="rtl"
+                android:id="@+id/r2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="20dp"
+                android:text="Não"/>
+
+            <RadioButton
+                android:layoutDirection="rtl"
+                android:id="@+id/r3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="20dp"
+                android:text="Um pouco"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_margin="20dp"
+            android:id="@+id/btnVotar"
+            android:textColor="@color/branco"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textSize="20dp"
-            android:text="Sim"/>
-
-        <RadioButton
-            android:layoutDirection="rtl"
-            android:id="@+id/r2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textSize="20dp"
-            android:text="Não"/>
-
-        <RadioButton
-            android:layoutDirection="rtl"
-            android:id="@+id/r3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textSize="20dp"
-            android:text="Um pouco"/>
+            android:text="Votar"
+            android:background="@drawable/btn_padrao"
+            android:onClick="votar" />
 
     </LinearLayout>
 
-    <Button
-        android:layout_margin="20dp"
-        android:id="@+id/btnVotar"
-        android:textColor="@color/branco"
-        android:layout_marginTop="20dp"
+    <LinearLayout
+        android:id="@+id/telaResultados"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Votar"
-        android:background="@drawable/btn_padrao"
-        android:onClick="votar" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:padding="30dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sim"
+            android:textSize="20dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBarSim"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Não"
+            android:textSize="20dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBarNao"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Um pouco"
+            android:textSize="20dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBarUmPouco"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_margin="20dp"
+            android:id="@+id/btnVoltar"
+            android:textColor="@color/branco"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Voltar"
+            android:background="@drawable/btn_padrao"
+            android:onClick="voltar" />
+
+    </LinearLayout>
+
 
 
 </LinearLayout>
