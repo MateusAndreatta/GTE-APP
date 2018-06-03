@@ -14,14 +14,13 @@
         android:textSize="40sp"
         android:textAlignment="center"/>
 
-
     <LinearLayout
         android:id="@+id/telaResponder"
         android:orientation="vertical"
         android:gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="">
+        android:visibility="visible">
 
         <LinearLayout
             android:orientation="vertical"
@@ -30,32 +29,38 @@
             android:layout_height="match_parent"
             android:padding="30dp">
 
-            <RadioButton
-                android:layoutDirection="rtl"
-                android:id="@+id/r1"
+            <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textSize="20dp"
-                android:text="Sim"/>
+                android:layout_height="match_parent" >
 
-            <RadioButton
-                android:layoutDirection="rtl"
-                android:id="@+id/r2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textSize="20dp"
-                android:text="Não"/>
+                <RadioButton
+                    android:layoutDirection="rtl"
+                    android:id="@+id/r1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textSize="20dp"
+                    android:text="Sim"/>
 
-            <RadioButton
-                android:layoutDirection="rtl"
-                android:id="@+id/r3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textSize="20dp"
-                android:text="Um pouco"/>
+                <RadioButton
+                    android:layoutDirection="rtl"
+                    android:id="@+id/r2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textSize="20dp"
+                    android:text="Não"/>
+
+                <RadioButton
+                    android:layoutDirection="rtl"
+                    android:id="@+id/r3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textSize="20dp"
+                    android:text="Um pouco"/>
+
+            </RadioGroup>
 
         </LinearLayout>
 

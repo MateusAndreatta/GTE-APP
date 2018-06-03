@@ -29,7 +29,7 @@ public class Enquete extends AppCompatActivity {
     private String perfil;
 
     private RadioButton rSim,rNao,rPouco;
-    private String resposta;
+    private String resposta = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +115,7 @@ public class Enquete extends AppCompatActivity {
     public void votar(View view) {
         //TODO: Request da reposta
         //TODO: Validar radiobuttons
-
+        Toast.makeText(this, "Clicou", Toast.LENGTH_SHORT).show();
         if(rSim.isChecked()){
             resposta = "S";
         }else if (rNao.isChecked()){
