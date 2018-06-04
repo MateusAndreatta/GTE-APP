@@ -79,4 +79,10 @@ public class Painel_motorista extends AppCompatActivity {
         Tela.putExtra("tipo","motorista");
         startActivity(Tela);
     }
+
+    public void irEnquete(View view) {
+        Intent Tela = new Intent(this, Enquete.class);
+        Tela.putExtra("tipo","motorista");
+        startActivity(Tela);
+    }
 }
