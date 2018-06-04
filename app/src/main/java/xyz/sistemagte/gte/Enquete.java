@@ -29,7 +29,7 @@ public class Enquete extends AppCompatActivity {
     private String perfil;
 
     private RadioButton rSim,rNao,rPouco;
-    private String resposta = null;
+    private String resposta = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,8 +114,6 @@ public class Enquete extends AppCompatActivity {
 
     public void votar(View view) {
         //TODO: Request da reposta
-        //TODO: Validar radiobuttons
-        Toast.makeText(this, "Clicou", Toast.LENGTH_SHORT).show();
         if(rSim.isChecked()){
             resposta = "S";
         }else if (rNao.isChecked()){
@@ -123,10 +121,8 @@ public class Enquete extends AppCompatActivity {
         }else if(rPouco.isChecked()){
             resposta = "P";
         }
-
-        if(String.valueOf(resposta) == null){
-            //TODO: Colocar essses textos nos strings e os do XML
-            Toast.makeText(this, "Selecione alguma opção para votar!", Toast.LENGTH_SHORT).show();
+        if(resposta.equals("")){
+            Toast.makeText(this, R.string.radioVazioEnquete, Toast.LENGTH_SHORT).show();
         }else {
              /* BASE VOLLEY
         progressDialog.setMessage(getResources().getString(R.string.carregando));
@@ -176,11 +172,9 @@ public class Enquete extends AppCompatActivity {
             case "monitora":
                 startActivity(new Intent(this, Painel_monitora.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 break;
-
             case "motorista":
                 startActivity(new Intent(this, Painel_motorista.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 break;
-
             case "resp":
                 startActivity(new Intent(this, Painel_responsavel.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 break;

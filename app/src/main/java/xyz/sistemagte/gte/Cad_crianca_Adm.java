@@ -44,6 +44,7 @@ public class Cad_crianca_Adm extends AppCompatActivity {
 
     String NomeHolder,SobrenomeHolder,DataNascHolder,CpfHolder, CidadeHolder,CEPHolder,NumeroHolder,RuaHolder, ComplementoHolder, EstadoHolder;
     int idEscolaHolder,IdRespHolder;
+
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadCriancaResp.php";
     String HttpUrlSpinner = "https://sistemagte.xyz/json/ListarEscolasIdEmpresa.php";
     String JsonUrlResponsaveis = "https://sistemagte.xyz/json/adm/ListarResponsaveis.php";

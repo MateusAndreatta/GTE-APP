@@ -269,4 +269,10 @@
     <string name="IDempresa">Insira o id de sua empresa</string>
     <string name="cod">Código</string>
     <string name="GerarBoleto">Gerar Boleto</string>
+    <string name="radioVazioEnquete">Selecione alguma opção para votar!</string>
+    <string name="opSim">Sim</string>
+    <string name="opNao">Não</string>
+    <string name="opPouco">Um pouco</string>
+    <string name="votar">Votar</string>
+    <string name="voltar">Voltar</string>
 </resources>

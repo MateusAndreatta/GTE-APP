@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:textSize="20dp"
-                    android:text="Sim"/>
+                    android:text="@string/opSim"/>
 
                 <RadioButton
                     android:layoutDirection="rtl"
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:textSize="20dp"
-                    android:text="Não"/>
+                    android:text="@string/opNao"/>
 
                 <RadioButton
                     android:layoutDirection="rtl"
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:textSize="20dp"
-                    android:text="Um pouco"/>
+                    android:text="@string/opPouco"/>
 
             </RadioGroup>
 
@@ -71,7 +71,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Votar"
+            android:text="@string/votar"
             android:background="@drawable/btn_padrao"
             android:onClick="votar" />
 
@@ -88,7 +88,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sim"
+            android:text="@string/opSim"
             android:textSize="20dp"/>
 
         <ProgressBar
@@ -101,7 +101,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Não"
+            android:text="@string/opNao"
             android:textSize="20dp"/>
 
         <ProgressBar
@@ -110,11 +110,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Um pouco"
+            android:text="@string/opPouco"
             android:textSize="20dp"/>
 
         <ProgressBar
@@ -130,7 +129,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Voltar"
+            android:text="@string/voltar"
             android:background="@drawable/btn_padrao"
             android:onClick="voltar" />
 
