@@ -16,10 +16,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Construtoras.VansConstr;
 
 public class Enquete extends AppCompatActivity {
 
@@ -30,6 +34,8 @@ public class Enquete extends AppCompatActivity {
 
     private RadioButton rSim,rNao,rPouco;
     private String resposta = "";
+
+    private static String URL_VERIFICA = "https://sistemagte.xyz/android/enquete.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +57,8 @@ public class Enquete extends AppCompatActivity {
         rSim = findViewById(R.id.r1);
         rNao = findViewById(R.id.r2);
         rPouco = findViewById(R.id.r3);
+
+        VerificaVoto();
     }
 
     //este é para o da navbar (seta)
@@ -164,6 +172,12 @@ public class Enquete extends AppCompatActivity {
         }
 
 
+        /**
+         * mandar
+         * id -> idusuario
+         * idEnquete -> id da enquete
+         * resp -> resposta
+         * */
 
     }
 
@@ -183,6 +197,59 @@ public class Enquete extends AppCompatActivity {
                 finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
         }
+    }
+
+    private void VerificaVoto(){
+
+        progressDialog.setMessage(getResources().getString(R.string.carregando));
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_VERIFICA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        System.out.println(response);
+                      // //Toast.makeText(Empresa.this, response, Toast.LENGTH_SHORT).show();
+                      // Intent tela = new Intent(Enquete.this, Enquete.class);
+                      // tela.putExtra("tipo",perfil);
+                      // startActivity(tela);
+                        try{
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray JsonPergunta = obj.getJSONArray("resposta");
+
+                            JSONObject jsonObject = JsonPergunta.getJSONObject(0);
+                            System.out.println(jsonObject.getString("ss"));
+                            System.out.println(jsonObject.getString("nn"));
+                            System.out.println(jsonObject.getString("tt"));
+                            System.out.println(jsonObject.getString("pergunta"));
+                        }catch (Exception ex){
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Enquete.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("id", String.valueOf(idUsuario));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+
     }
 
 }
