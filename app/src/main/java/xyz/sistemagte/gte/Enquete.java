@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,15 +30,25 @@ import xyz.sistemagte.gte.Construtoras.VansConstr;
 
 public class Enquete extends AppCompatActivity {
 
+    TextView txtPergunta,txtSim,txtNao,txtPouco;
+    ProgressBar progresSim, progresNao, progresPouco;
+
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
-    private int idUsuario;
+    private int idUsuario, idEnquete;
     private String perfil;
 
     private RadioButton rSim,rNao,rPouco;
     private String resposta = "";
 
     private static String URL_VERIFICA = "https://sistemagte.xyz/android/enquete.php";
+    //resultados
+    String resulSim, resulNao, resulPouco,pergunta;
+
+    Boolean votou;
+
+    private LinearLayout TelaVotou;
+    private LinearLayout TelaNaoVotou;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +57,15 @@ public class Enquete extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.empresa));     //Titulo para ser exibido na sua Action Bar em frente à seta
+
+        txtNao = findViewById(R.id.txtNaoResul);
+        txtSim = findViewById(R.id.txtSimResul);
+        txtPouco = findViewById(R.id.txtPoucoResul);
+        txtPergunta = findViewById(R.id.txtEnqueteTitulo);
+
+        progresNao = findViewById(R.id.progressBarNao);
+        progresPouco = findViewById(R.id.progressBarUmPouco);
+        progresSim = findViewById(R.id.progressBarSim);
 
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
@@ -57,6 +79,9 @@ public class Enquete extends AppCompatActivity {
         rSim = findViewById(R.id.r1);
         rNao = findViewById(R.id.r2);
         rPouco = findViewById(R.id.r3);
+
+        TelaVotou =    findViewById(R.id.telaResultados);
+        TelaNaoVotou =  findViewById(R.id.telaResponder);
 
         VerificaVoto();
     }
@@ -200,7 +225,6 @@ public class Enquete extends AppCompatActivity {
     }
 
     private void VerificaVoto(){
-
         progressDialog.setMessage(getResources().getString(R.string.carregando));
         progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_VERIFICA,
@@ -219,14 +243,37 @@ public class Enquete extends AppCompatActivity {
                             JSONArray JsonPergunta = obj.getJSONArray("resposta");
 
                             JSONObject jsonObject = JsonPergunta.getJSONObject(0);
-                            System.out.println(jsonObject.getString("ss"));
-                            System.out.println(jsonObject.getString("nn"));
-                            System.out.println(jsonObject.getString("tt"));
-                            System.out.println(jsonObject.getString("pergunta"));
-                        }catch (Exception ex){
+                            resulSim = jsonObject.getString("ss");
+                            jsonObject = JsonPergunta.getJSONObject(1);
+                            resulNao =  jsonObject.getString("nn");
+                            jsonObject = JsonPergunta.getJSONObject(2);
+                            resulPouco =  jsonObject.getString("tt");
+                            jsonObject = JsonPergunta.getJSONObject(3);
+                            pergunta = jsonObject.getString("pergunta");
 
-                        }
+                            txtNao.setText(txtNao.getText() + " - " + resulNao + "%");
+                            txtSim.setText(txtSim.getText() + " - " + resulSim + "%");
+                            txtPouco.setText(txtPouco.getText() + " - " + resulPouco + "%");
+                            txtPergunta.setText(pergunta);
 
+                            progresNao.setProgress(Integer.parseInt(resulNao));
+                            progresPouco.setProgress(Integer.parseInt(resulPouco));
+                            progresSim.setProgress(Integer.parseInt(resulSim));
+                            TelaVotou.setVisibility(View.VISIBLE);
+                        }catch (Exception ignored){}
+
+                        try{
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray JsonPergunta = obj.getJSONArray("pergunta");
+
+                            JSONObject jsonObject = JsonPergunta.getJSONObject(0);
+                            idEnquete = Integer.parseInt(jsonObject.getString("id_enquete"));
+                            jsonObject = JsonPergunta.getJSONObject(1);
+                            pergunta = jsonObject.getString("pergunta");
+                            txtPergunta.setText(pergunta);
+                            TelaNaoVotou.setVisibility(View.VISIBLE);
+                        }catch (Exception ignored){}
                     }
                 },
                 new Response.ErrorListener() {

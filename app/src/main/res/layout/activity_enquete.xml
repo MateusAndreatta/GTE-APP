@@ -8,10 +8,13 @@
     tools:context="xyz.sistemagte.gte.Enquete">
 
     <TextView
+        android:id="@+id/txtEnqueteTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/enquete"
         android:textSize="40sp"
+        android:padding="20dp"
+        android:paddingBottom="0dp"
         android:textAlignment="center"/>
 
     <LinearLayout
@@ -20,7 +23,7 @@
         android:gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:orientation="vertical"
@@ -82,10 +85,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible"
-        android:padding="30dp">
+        android:visibility="gone"
+        android:padding="30dp"
+        >
 
         <TextView
+            android:id="@+id/txtSimResul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/opSim"
@@ -99,6 +104,7 @@
 
 
         <TextView
+            android:id="@+id/txtNaoResul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/opNao"
@@ -111,6 +117,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/txtPoucoResul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/opPouco"
