@@ -57,7 +57,7 @@ public class Enquete extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle(getResources().getString(R.string.empresa));     //Titulo para ser exibido na sua Action Bar em frente à seta
+        getSupportActionBar().setTitle(getResources().getString(R.string.enquete));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
         txtNao = findViewById(R.id.txtNaoResul);
         txtSim = findViewById(R.id.txtSimResul);
