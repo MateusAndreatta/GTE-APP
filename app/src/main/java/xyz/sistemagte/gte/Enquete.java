@@ -42,6 +42,7 @@ public class Enquete extends AppCompatActivity {
     private String resposta = "";
 
     private static String URL_VERIFICA = "https://sistemagte.xyz/android/enquete.php";
+    private static String URL_VOTAR = "https://sistemagte.xyz/android/resposta_enquete.php";
     //resultados
     String resulSim, resulNao, resulPouco,pergunta;
 
@@ -146,7 +147,7 @@ public class Enquete extends AppCompatActivity {
     }
 
     public void votar(View view) {
-        //TODO: Request da reposta
+        //TODO: Fazer o usuario votar na enquete
         if(rSim.isChecked()){
             resposta = "S";
         }else if (rNao.isChecked()){
@@ -157,7 +158,7 @@ public class Enquete extends AppCompatActivity {
         if(resposta.equals("")){
             Toast.makeText(this, R.string.radioVazioEnquete, Toast.LENGTH_SHORT).show();
         }else {
-             /* BASE VOLLEY
+
         progressDialog.setMessage(getResources().getString(R.string.carregando));
         progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_VOTAR,
@@ -182,8 +183,9 @@ public class Enquete extends AppCompatActivity {
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idUsuario", String.valueOf(idUsuario));
-                params.put("voto","");
+                params.put("id", String.valueOf(idUsuario));
+                params.put("idEnquete", String.valueOf(idEnquete));
+                params.put("resposta", resposta);
 
                 return params;
             }
@@ -192,11 +194,7 @@ public class Enquete extends AppCompatActivity {
 
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
-
-        */
         }
-
-
         /**
          * mandar
          * id -> idusuario
@@ -233,10 +231,6 @@ public class Enquete extends AppCompatActivity {
                     public void onResponse(String response) {
                         progressDialog.dismiss();
                         System.out.println(response);
-                      // //Toast.makeText(Empresa.this, response, Toast.LENGTH_SHORT).show();
-                      // Intent tela = new Intent(Enquete.this, Enquete.class);
-                      // tela.putExtra("tipo",perfil);
-                      // startActivity(tela);
                         try{
                             JSONObject obj = new JSONObject(response);
 
