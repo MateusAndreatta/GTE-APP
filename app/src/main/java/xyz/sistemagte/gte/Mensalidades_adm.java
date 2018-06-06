@@ -28,7 +28,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -191,7 +194,21 @@ public class Mensalidades_adm extends AppCompatActivity implements SearchView.On
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
 
-                                MensalidadeConst funcConst = new MensalidadeConst (funcObject.getString("nome"),funcObject.getString("nome_crianca"),funcObject.getString("status"),funcObject.getString("sobrenome"),funcObject.getString("sobre_crianca"),Integer.parseInt(funcObject.getString("id_usuario")), Integer.parseInt(funcObject.getString("id_crianca")), Double.parseDouble(funcObject.getString("valor_emitido")), Integer.parseInt(funcObject.getString("id_mensalidade")));
+                                String dia2= funcObject.getString("dt_vencimento");
+                                SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+                                ParsePosition position2 = new ParsePosition(0);
+                                Date data2 = format2.parse(dia2,position2);
+                                format2 = new SimpleDateFormat("dd/MM/yyyy");
+                                String date2 = format2.format(data2);
+
+                                String dia1= funcObject.getString("dt_emissao");
+                                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                                ParsePosition position1 = new ParsePosition(0);
+                                Date data1 = format1.parse(dia1,position1);
+                                format1 = new SimpleDateFormat("dd/MM/yyyy");
+                                String date1 = format1.format(data1);
+
+                                MensalidadeConst funcConst = new MensalidadeConst (funcObject.getString("nome"),funcObject.getString("nome_crianca"),funcObject.getString("status"),funcObject.getString("sobrenome"),funcObject.getString("sobre_crianca"),Integer.parseInt(funcObject.getString("id_usuario")), Integer.parseInt(funcObject.getString("id_crianca")), Double.parseDouble(funcObject.getString("valor_emitido")), Integer.parseInt(funcObject.getString("id_mensalidade")),date2,date1);
                                 mensalidadeConstList.add(funcConst);
                                 listaQuery.add(funcConst);
                             }

@@ -275,4 +275,5 @@
     <string name="opPouco">Um pouco</string>
     <string name="votar">Votar</string>
     <string name="voltar">Voltar</string>
+    <string name="data_emitida">Data Emitida</string>
 </resources>

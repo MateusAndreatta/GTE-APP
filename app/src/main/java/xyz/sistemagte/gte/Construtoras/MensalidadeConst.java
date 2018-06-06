@@ -2,14 +2,16 @@ package xyz.sistemagte.gte.Construtoras;
 
 
 public class MensalidadeConst {
-    String NomeResp, NomeCrianca, Status, SobreResp, SobreCrianca;
+    String NomeResp, NomeCrianca, Status, SobreResp, SobreCrianca, DataVencimento, DataEmitida;
     int  id_resp;
     int id_crianca;
     Double Valor;
     int mensalidadeID;
 
 
-    public MensalidadeConst(String nomeResp, String nomeCrianca, String status, String sobreResp, String sobreCrianca, int id_resp, int id_crianca, Double valor, int id) {
+
+
+    public MensalidadeConst(String nomeResp, String nomeCrianca, String status, String sobreResp, String sobreCrianca, int id_resp, int id_crianca, Double valor, int id, String dataVencimento, String dataEmitida) {
         NomeResp = nomeResp;
         NomeCrianca = nomeCrianca;
         Status = status;
@@ -19,6 +21,10 @@ public class MensalidadeConst {
         this.id_crianca = id_crianca;
         Valor = valor;
         mensalidadeID = id;
+        DataVencimento = dataVencimento;
+        DataEmitida = dataEmitida;
+
+
     }
 
 
@@ -57,4 +63,8 @@ public class MensalidadeConst {
     public int getMensalidadeID() {
         return mensalidadeID;
     }
+
+    public String getDataVencimento() {return DataVencimento;}
+
+    public String getDataEmitida() {return DataEmitida;}
 }

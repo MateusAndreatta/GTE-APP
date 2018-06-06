@@ -37,6 +37,7 @@ public class ListViewMensalidades extends ArrayAdapter <MensalidadeConst> {
         TextView txtStatus = listViewItem.findViewById(R.id.txtStatus);
         TextView txtValor = listViewItem.findViewById(R.id.txtValor);
         TextView txtCrianca = listViewItem.findViewById(R.id.txtCrianca);
+        TextView txtData = listViewItem.findViewById(R.id.txtData);
 
         //DIVISOR Colorido
         View div = listViewItem.findViewById(R.id.Divisor);
@@ -60,6 +61,7 @@ public class ListViewMensalidades extends ArrayAdapter <MensalidadeConst> {
         txtNomeResp.setText(mensalidadeConst.getNomeResp() + " " + mensalidadeConst.getSobreResp());
         txtValor.setText((mCtx.getResources().getString(R.string.real)+ " " + String.valueOf(mensalidadeConst.getValor())));
         txtCrianca.setText((mCtx.getResources().getString(R.string.criancaEspaço)+ " " + mensalidadeConst.getNomeCrianca() + " " + mensalidadeConst.getSobreCrianca()));
+        txtData.setText((mCtx.getResources().getString(R.string.data_vencimento) + ": "+mensalidadeConst.getDataVencimento() + " \n" +(mCtx.getResources().getString(R.string.data_emitida) + ": " + mensalidadeConst.getDataEmitida())));
 
         return listViewItem;
     }

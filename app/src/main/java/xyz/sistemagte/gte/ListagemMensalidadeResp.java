@@ -170,7 +170,7 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
 
-                                MensalidadeConst funcConst = new MensalidadeConst (funcObject.getString("nome"),funcObject.getString("nome_crianca"),funcObject.getString("status"),funcObject.getString("sobrenome"),funcObject.getString("sobre_crianca"),Integer.parseInt(funcObject.getString("id_usuario")), Integer.parseInt(funcObject.getString("id_crianca")), Double.parseDouble(funcObject.getString("valor_emitido")), Integer.parseInt(funcObject.getString("id_mensalidade")));
+                                MensalidadeConst funcConst = new MensalidadeConst (funcObject.getString("nome"),funcObject.getString("nome_crianca"),funcObject.getString("status"),funcObject.getString("sobrenome"),funcObject.getString("sobre_crianca"),Integer.parseInt(funcObject.getString("id_usuario")), Integer.parseInt(funcObject.getString("id_crianca")), Double.parseDouble(funcObject.getString("valor_emitido")), Integer.parseInt(funcObject.getString("id_mensalidade")),funcObject.getString("dt_vencimento"),funcObject.getString("dt_emissao"));
                                 mensalidadeConstList.add(funcConst);
                                 listaQuery.add(funcConst);
                             }
