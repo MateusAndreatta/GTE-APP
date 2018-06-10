@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,8 +38,10 @@ import xyz.sistemagte.gte.ListAdapters.ListViewVansCard;
 public class Rotas extends AppCompatActivity {
 
     private static String JSON_URL = "https://sistemagte.xyz/json/motorista/ListarDadosVan.php";
-    private int idUsuario;
+    private static String JSON_CRIANCAS = "https://sistemagte.xyz/json/EnderecosVan.php";
+    private int idUsuario,idVan;
 
+    TextView txt;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     List<VansConstr> vansList;
@@ -53,8 +56,10 @@ public class Rotas extends AppCompatActivity {
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
 
+        txt = findViewById(R.id.txtInfoVan);
         spinner = findViewById(R.id.spinnerVans);
         vansList = new ArrayList<>();
+        WordList = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.rotas));
@@ -63,11 +68,16 @@ public class Rotas extends AppCompatActivity {
         progressDialog = new ProgressDialog(Rotas.this);
 
         PuxarDadosSpinner();
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Toast.makeText(Rotas.this, vansList.get(position).getIdVans(), Toast.LENGTH_SHORT).show();
+                idVan = vansList.get(position).getIdVans();
+                txt.setText(
+                    getResources().getString(R.string.modeloVan )+ " " + vansList.get(position).getModeloVans() + "\n" +
+                    getResources().getString(R.string.marcaVan )+ " " + vansList.get(position).getMarcaVans() + "\n" +
+                    getResources().getString(R.string.anoVan )+ " " + vansList.get(position).getAnoVans() + "\n" +
+                    getResources().getString(R.string.capacidadeVan )+" " + vansList.get(position).getCapacidadeVans()
+                );
             }
 
             @Override
@@ -155,4 +165,53 @@ public class Rotas extends AppCompatActivity {
 
     }
 
+    public void Iniciar(View view) {
+        progressDialog.setMessage(getResources().getString(R.string.iniciandoNavegacao));
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_CRIANCAS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        System.out.println(response);
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray funcArray = obj.getJSONArray("crianca");
+
+                            for (int i = 0; i < funcArray.length(); i++) {
+                                JSONObject jsonObject = funcArray.getJSONObject(i);
+                                String rua = jsonObject.getString("rua");
+                                String cep = jsonObject.getString("cep");
+                                String numero = jsonObject.getString("num");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        progressDialog.dismiss();
+
+                        Toast.makeText(Rotas.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id", String.valueOf(idVan));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
 }

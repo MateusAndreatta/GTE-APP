@@ -27,11 +27,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/txtInfoVan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
             <Button
                 android:id="@+id/btnIniciar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/iniciar_navega_o" />
+                android:text="@string/iniciar_navega_o"
+                android:onClick="Iniciar"/>
 
         </LinearLayout>
 
