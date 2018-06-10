@@ -67,7 +67,8 @@
         <activity android:name=".EditarMensalidade" />
         <activity android:name=".ListagemMensalidadeResp" />
         <activity android:name=".Empresa" />
-        <activity android:name=".Enquete"></activity>
+        <activity android:name=".Enquete" />
+        <activity android:name=".Rotas"></activity>
     </application>
 
 </manifest>

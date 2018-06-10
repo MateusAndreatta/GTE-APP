@@ -85,4 +85,9 @@ public class Painel_motorista extends AppCompatActivity {
         Tela.putExtra("tipo","motorista");
         startActivity(Tela);
     }
+
+    public void irRotas(View view) {
+        Intent tela = new Intent(this, Rotas.class);
+        startActivity(tela);
+    }
 }

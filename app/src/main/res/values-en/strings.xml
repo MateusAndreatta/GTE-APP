@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">GTE</string>
     <string name="ola">Hello</string>
+    <string name="email">Email</string>
+    <string name="senha">Password</string>
+    <string name="proximo">Next</string>
+    <string name="nome">Name</string>
+    <string name="editar">Edit</string>
 </resources>
