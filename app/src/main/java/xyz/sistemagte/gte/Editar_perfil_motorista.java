@@ -70,8 +70,6 @@ public class Editar_perfil_motorista extends AppCompatActivity {
         categoria = findViewById(R.id.categoria);
         Estado = findViewById(R.id.estado);
 
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.EditarPerfil));
@@ -97,7 +95,6 @@ public class Editar_perfil_motorista extends AppCompatActivity {
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
         progressDialog.show();
 
-        // Creating string request with post method.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -140,8 +137,6 @@ public class Editar_perfil_motorista extends AppCompatActivity {
                             complemento.setText(funcObject.getString ("complemento"));
                             cnh.setText(funcObject.getString ("cnh"));
                             validaCnh.setText(date2);
-
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
