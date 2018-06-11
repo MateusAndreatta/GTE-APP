@@ -53,6 +53,16 @@
                 android:text="@string/iniciar_navega_o"
                 android:onClick="Iniciar"
                 android:background="@drawable/btn_padrao"
+                android:textColor="@color/branco"
+                android:layout_marginBottom="7dp"/>
+
+            <Button
+                android:id="@+id/btnIniciarEscolas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/iniciar_escola"
+                android:onClick="IniciarEscola"
+                android:background="@drawable/btn_padrao"
                 android:textColor="@color/branco"/>
 
         </LinearLayout>

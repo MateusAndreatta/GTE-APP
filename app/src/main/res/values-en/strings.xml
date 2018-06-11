@@ -7,4 +7,5 @@
     <string name="proximo">Next</string>
     <string name="nome">Name</string>
     <string name="editar">Edit</string>
+    <string name="instalarMaps">Please install a maps application</string>
 </resources>

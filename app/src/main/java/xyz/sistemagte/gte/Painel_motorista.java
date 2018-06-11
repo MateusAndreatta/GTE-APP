@@ -90,4 +90,9 @@ public class Painel_motorista extends AppCompatActivity {
         Intent tela = new Intent(this, Rotas.class);
         startActivity(tela);
     }
+
+    public void irEditar_endereco(View view) {
+        Intent tela = new Intent(this, Editar_perfil_motorista.class);
+        startActivity(tela);
+    }
 }
