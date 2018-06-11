@@ -42,6 +42,7 @@ public class Rotas extends AppCompatActivity {
     private static String JSON_URL = "https://sistemagte.xyz/json/motorista/ListarDadosVan.php";
     private static String JSON_CRIANCAS = "https://sistemagte.xyz/json/motorista/ListarCriancaVan.php";
     private static String JSON_ESCOLAS = "https://sistemagte.xyz/json/motorista/ListarEscolasVan.php";
+    private static String JSON_MOTORISTA = "https://sistemagte.xyz/json/motorista/EnderecoM.php";
     private int idUsuario,idVan;
 
     TextView txt;
@@ -51,6 +52,8 @@ public class Rotas extends AppCompatActivity {
     List<String> WordList;
     Spinner spinner;
     String enderecos = "";
+    String EnderecoMotorista = "-25.513906,-49.235105";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +70,54 @@ public class Rotas extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.rotas));
 
+
+
         requestQueue = Volley.newRequestQueue(this);
         progressDialog = new ProgressDialog(Rotas.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_MOTORISTA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        System.out.println(response);
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray funcArray = obj.getJSONArray("endereco");
+
+                            for (int i = 0; i < funcArray.length(); i++) {
+                                JSONObject jsonObject = funcArray.getJSONObject(i);
+                                String rua = jsonObject.getString("rua");
+                                String cep = jsonObject.getString("cep");
+                                String numero = jsonObject.getString("num");
+                                System.out.println("RUA MOTORISTA: " + rua.replace(" ","+")+ "+" + numero+"+"+cep+"|");
+                                EnderecoMotorista = rua.replace(" ","+")+ "+" + numero+"+"+cep+"|";
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(Rotas.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", String.valueOf(idUsuario));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+
 
         PuxarDadosSpinner();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -188,8 +237,8 @@ public class Rotas extends AppCompatActivity {
                                 String rua = jsonObject.getString("rua");
                                 String cep = jsonObject.getString("cep");
                                 String numero = jsonObject.getString("num");
-                                System.out.println("RUA: " + rua.replace(" ","+")+ "+" + numero);
-                                enderecos += rua.replace(" ","+")+ "+" + numero+"|";
+                                System.out.println("RUA: "+ rua.replace(" ","+")+ "+" + numero+"+"+cep+"|");
+                                enderecos += rua.replace(" ","+")+ "+" + numero+"+"+cep+"|";
                             }
                             IniciarGPS(enderecos);
                         } catch (JSONException e) {
@@ -242,7 +291,7 @@ public class Rotas extends AppCompatActivity {
                                 String cep = jsonObject.getString("cep");
                                 String numero = jsonObject.getString("num");
                                 System.out.println("RUA: " + rua.replace(" ","+")+ "+" + numero);
-                                enderecos += rua.replace(" ","+")+ "+" + numero+"|";
+                                enderecos += rua.replace(" ","+")+ "+" + numero+"+"+cep+"|";
                             }
                             IniciarGPS(enderecos);
                         } catch (JSONException e) {
@@ -276,7 +325,7 @@ public class Rotas extends AppCompatActivity {
 
     private void IniciarGPS(String endereco){
 
-        Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&dir_action=navigate&destination=-25.513968,-49.235208&waypoints=" + endereco +"&travelmode=driving");
+        Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&dir_action=navigate&destination= "+ EnderecoMotorista + "&waypoints=" + endereco +"&travelmode=driving");
         Intent intent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         intent.setPackage("com.google.android.apps.maps");
         try {

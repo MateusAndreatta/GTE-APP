@@ -173,4 +173,8 @@ public class cad_motorista extends AppCompatActivity{
 
 
     }
+
+    public void salvar(View view) {
+        //TODO: Salvar dados no banco EDITAR MOTORISTA
+    }
 }
