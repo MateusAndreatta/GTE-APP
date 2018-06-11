@@ -2,7 +2,9 @@ package xyz.sistemagte.gte;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -38,7 +40,7 @@ import xyz.sistemagte.gte.ListAdapters.ListViewVansCard;
 public class Rotas extends AppCompatActivity {
 
     private static String JSON_URL = "https://sistemagte.xyz/json/motorista/ListarDadosVan.php";
-    private static String JSON_CRIANCAS = "https://sistemagte.xyz/json/EnderecosVan.php";
+    private static String JSON_CRIANCAS = "https://sistemagte.xyz/json/motorista/ListarCriancaVan.php";
     private int idUsuario,idVan;
 
     TextView txt;
@@ -47,7 +49,7 @@ public class Rotas extends AppCompatActivity {
     List<VansConstr> vansList;
     List<String> WordList;
     Spinner spinner;
-
+    String enderecos = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,7 +187,11 @@ public class Rotas extends AppCompatActivity {
                                 String rua = jsonObject.getString("rua");
                                 String cep = jsonObject.getString("cep");
                                 String numero = jsonObject.getString("num");
+                                System.out.println("RUA: " + rua.replace(" ","+")+ "+" + numero);
+                                enderecos += rua.replace(" ","+")+ "+" + numero+"|";
                             }
+                            System.out.println("END " + enderecos);
+                            IniciarGPS();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -203,7 +209,7 @@ public class Rotas extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-
+                System.out.println("Enviando idvan: " + String.valueOf(idVan));
                 params.put("id", String.valueOf(idVan));
 
                 return params;
@@ -213,5 +219,22 @@ public class Rotas extends AppCompatActivity {
 
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
+    }
+
+    private void IniciarGPS(){
+
+        Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&dir_action=navigate&destination=-25.513968,-49.235208&waypoints=" + enderecos +"&travelmode=driving");
+        Intent intent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        intent.setPackage("com.google.android.apps.maps");
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException ex) {
+            try {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                startActivity(unrestrictedIntent);
+            } catch (ActivityNotFoundException innerEx) {
+                Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
