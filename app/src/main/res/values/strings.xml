@@ -276,8 +276,10 @@
     <string name="votar">Votar</string>
     <string name="voltar">Voltar</string>
     <string name="data_emitida">Data Emitida</string>
-    <string name="iniciar_navega_o">Iniciar Navegação</string>
+    <string name="iniciar_navega_o">Iniciar Navegação das Crianças</string>
     <string name="rotas">Rotas</string>
     <string name="iniciandoNavegacao">Iniciando Navegação</string>
     <string name="SelecioneAVan">Selecione a sua van</string>
+    <string name="instalarMaps">Por favor instale o aplicativo do Google Maps</string>
+    <string name="iniciar_escola">Iniciar navegação das escolas</string>
 </resources>

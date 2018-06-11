@@ -41,6 +41,7 @@ public class Rotas extends AppCompatActivity {
 
     private static String JSON_URL = "https://sistemagte.xyz/json/motorista/ListarDadosVan.php";
     private static String JSON_CRIANCAS = "https://sistemagte.xyz/json/motorista/ListarCriancaVan.php";
+    private static String JSON_ESCOLAS = "https://sistemagte.xyz/json/motorista/ListarEscolasVan.php";
     private int idUsuario,idVan;
 
     TextView txt;
@@ -190,8 +191,7 @@ public class Rotas extends AppCompatActivity {
                                 System.out.println("RUA: " + rua.replace(" ","+")+ "+" + numero);
                                 enderecos += rua.replace(" ","+")+ "+" + numero+"|";
                             }
-                            System.out.println("END " + enderecos);
-                            IniciarGPS();
+                            IniciarGPS(enderecos);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -221,9 +221,62 @@ public class Rotas extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void IniciarGPS(){
+    public void IniciarEscola(View view) {
+        progressDialog.setMessage(getResources().getString(R.string.iniciandoNavegacao));
+        progressDialog.show();
 
-        Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&dir_action=navigate&destination=-25.513968,-49.235208&waypoints=" + enderecos +"&travelmode=driving");
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_ESCOLAS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        System.out.println(response);
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray funcArray = obj.getJSONArray("escola");
+
+                            for (int i = 0; i < funcArray.length(); i++) {
+                                JSONObject jsonObject = funcArray.getJSONObject(i);
+                                String rua = jsonObject.getString("rua");
+                                String cep = jsonObject.getString("cep");
+                                String numero = jsonObject.getString("num");
+                                System.out.println("RUA: " + rua.replace(" ","+")+ "+" + numero);
+                                enderecos += rua.replace(" ","+")+ "+" + numero+"|";
+                            }
+                            IniciarGPS(enderecos);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        progressDialog.dismiss();
+
+                        Toast.makeText(Rotas.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                System.out.println("Enviando idvan: " + String.valueOf(idVan));
+                params.put("id", String.valueOf(idVan));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
+    private void IniciarGPS(String endereco){
+
+        Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&dir_action=navigate&destination=-25.513968,-49.235208&waypoints=" + endereco +"&travelmode=driving");
         Intent intent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         intent.setPackage("com.google.android.apps.maps");
         try {
@@ -233,7 +286,7 @@ public class Rotas extends AppCompatActivity {
                 Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 startActivity(unrestrictedIntent);
             } catch (ActivityNotFoundException innerEx) {
-                Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.instalarMaps, Toast.LENGTH_LONG).show();
             }
         }
     }
