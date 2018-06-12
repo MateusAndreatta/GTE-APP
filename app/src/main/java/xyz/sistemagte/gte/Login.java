@@ -340,7 +340,7 @@ public class Login extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 // Adding All values to Params.
-                params.put("emailAPP", EmailHolder);
+                params.put("emailAPP", EmailHolder.toLowerCase());
                 params.put("senhaAPP", SenhaHolder);
 
                 return params;
