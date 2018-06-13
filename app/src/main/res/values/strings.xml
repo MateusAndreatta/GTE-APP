@@ -5,7 +5,7 @@
 
 
     <!-- Genericos -->
-    <string name="app_name">GTE</string>
+    <string name="app_name" translatable="false">GTE</string>
     <string name="editarMonitor">Editar Monitor(a)</string>
     <string name="ListaVanMotorista">Sua Van</string>
     <string name="email">E-mail</string>
@@ -282,4 +282,8 @@
     <string name="SelecioneAVan">Selecione a sua van</string>
     <string name="instalarMaps">Por favor instale o aplicativo do Google Maps</string>
     <string name="iniciar_escola">Iniciar navegação das escolas</string>
+    <string name="FaltaHoje">Falta hoje</string>
+    <string name="CancelaFaltaHoje">Remover falta</string>
+    <string name="FaltaDefinida">Falta definida com sucesso</string>
+    <string name="FaltaRemovida">Falta removida com sucesso</string>
 </resources>

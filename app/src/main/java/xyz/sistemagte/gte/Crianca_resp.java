@@ -42,9 +42,13 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
 
     private static String JSON_URL = "https://sistemagte.xyz/json/responsavel/ListarCrianca.php";
     private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/ExcluirCrianca.php";
+    private static String URL_Falta = "https://sistemagte.xyz/android/DefinirFalta.php";
+    private static String JSON_FALTAS = "https://sistemagte.xyz/json/responsavel/ListarFalta.php";
+    private static String URL_REMOVER_FALTAS = "https://sistemagte.xyz/android/DeletarFalta.php";
     ListView listView;
     private int idUsuario;
     List<CriancaConst> criancaList;
+    List<String> faltasList;
     List<CriancaConst> listaQuery;
     AlertDialog alerta;
     private int idCrianca;
@@ -64,6 +68,7 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.barra_pesquisa);
         criancaList = new ArrayList<>();
+        faltasList = new ArrayList<>();
         listaQuery = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
@@ -72,7 +77,7 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
         requestQueue = Volley.newRequestQueue(this);
 
         progressDialog = new ProgressDialog(Crianca_resp.this);
-
+        PuxarFaltas();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +117,22 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
                         ExcluirCrianca(idCrianca);
                     }
                 });
+                if(faltasList.contains(crianca.getIdCrianca())){
+                    builder.setNeutralButton(getResources().getString(R.string.CancelaFaltaHoje), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            RemoverFaltas();
+                        }
+                    });
+                }else{
+                    //CancelaFaltaHoje -> String para cancelar falta
+                    builder.setNeutralButton(getResources().getString(R.string.FaltaHoje), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            DefinirFalta();
+                        }
+                    });
+                }
+
+
 
                 //cria o AlertDialog
                 alerta = builder.create();
@@ -233,18 +254,13 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
                         Toast.makeText(Crianca_resp.this, getResources().getString(R.string.excluidoComSucesso), Toast.LENGTH_SHORT).show();
-
                         loadCriancaList();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
-                        // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-
-                        // Showing error message if something goes wrong.
                         Toast.makeText(Crianca_resp.this, volleyError.toString(), Toast.LENGTH_LONG).show();
 
                     }
@@ -262,10 +278,124 @@ public class Crianca_resp extends AppCompatActivity implements SearchView.OnQuer
             }
 
         };
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
+    private void DefinirFalta(){
+        progressDialog.setMessage(getResources().getString(R.string.carregando));
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_Falta,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                        progressDialog.dismiss();
+                        Toast.makeText(Crianca_resp.this, getResources().getString(R.string.FaltaDefinida), Toast.LENGTH_SHORT).show();
+                        PuxarFaltas();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Crianca_resp.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", String.valueOf(idCrianca));
+                return params;
+            }
+
+        };
 
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
+    }
 
+    private void PuxarFaltas(){
+        faltasList.clear();
+        progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_FALTAS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                        progressDialog.dismiss();
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray funcArray = obj.getJSONArray("nome");
+
+                            for (int i = 0; i < funcArray.length(); i++) {
+                                JSONObject funcObject = funcArray.getJSONObject(i);
+                                faltasList.add(funcObject.getString("id_crianca"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Crianca_resp.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", String.valueOf(idUsuario));
+
+                return params;
+            }
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
+    private void RemoverFaltas(){
+        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REMOVER_FALTAS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                        progressDialog.dismiss();
+                        Toast.makeText(Crianca_resp.this, getResources().getString(R.string.FaltaRemovida), Toast.LENGTH_SHORT).show();
+                        PuxarFaltas();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Crianca_resp.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(idCrianca));
+
+                return params;
+            }
+
+        };
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
     }
 
     @Override
