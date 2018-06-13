@@ -76,9 +76,14 @@ public class Painel_monitora extends AppCompatActivity {
         startActivity(Tela);
     }
 
-
     public void irEnquete(View view) {
         Intent Tela = new Intent(this, Enquete.class);
+        Tela.putExtra("tipo","monitora");
+        startActivity(Tela);
+    }
+
+    public void irFaltas(View view) {
+        Intent Tela = new Intent(this, Faltas.class);
         Tela.putExtra("tipo","monitora");
         startActivity(Tela);
     }

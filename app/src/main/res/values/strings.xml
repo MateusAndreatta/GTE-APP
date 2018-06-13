@@ -286,4 +286,5 @@
     <string name="CancelaFaltaHoje">Remover falta</string>
     <string name="FaltaDefinida">Falta definida com sucesso</string>
     <string name="FaltaRemovida">Falta removida com sucesso</string>
+    <string name="faltas">Faltas hoje</string>
 </resources>

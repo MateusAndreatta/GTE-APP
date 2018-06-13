@@ -147,7 +147,6 @@ public class Enquete extends AppCompatActivity {
     }
 
     public void votar(View view) {
-        //TODO: Fazer o usuario votar na enquete
         if(rSim.isChecked()){
             resposta = "S";
         }else if (rNao.isChecked()){

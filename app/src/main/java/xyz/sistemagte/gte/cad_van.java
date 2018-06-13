@@ -49,7 +49,7 @@ public class cad_van extends AppCompatActivity {
     ArrayAdapter<String> MotoristaListSpinner;
     ArrayList<MotoristaConstr> MotoristaConstrList;
 
-
+    //TODO: COLOCAR UM SELECT PARA A MONITORA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
