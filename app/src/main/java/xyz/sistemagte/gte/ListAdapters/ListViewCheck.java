@@ -7,10 +7,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Filter;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import xyz.sistemagte.gte.Construtoras.CheckStatusConstr;
@@ -26,11 +31,22 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
     private List<CheckStatusConstr> CheckList;
     private List<CheckStatusConstr> orig;
     private Context mCtx;
+    private String dataAtual;
+    int botao;
 
     public ListViewCheck(List<CheckStatusConstr> checkList, Context mCtx) {
         super(mCtx, R.layout.list_view_escolas, checkList);
         this.CheckList = checkList;
         this.mCtx = mCtx;
+
+        GregorianCalendar calendar = new GregorianCalendar();
+        String dia = String.valueOf(calendar.get(GregorianCalendar.DAY_OF_MONTH));
+        String mes = String.valueOf(calendar.get(GregorianCalendar.MONTH) + 1);
+        String ano = String.valueOf(calendar.get(GregorianCalendar.YEAR));
+        if(mes.length() == 1){
+            mes = "0"+mes;
+        }
+        this.dataAtual = dia + "/" + mes + "/" + ano;
     }
 
     @Override
@@ -49,6 +65,29 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
         txtNome.setText(check.getNomeCheck() + " " + check.getSobrenomeCheck());
         id.setText(String.valueOf(check.getIdCriancaCheck()));
 
+        if(check.getHoraEntradaCheck() != "null"){
+            if(ValidaDatas(FormataData(check.getHoraEntradaCheck()))){
+                btn.setText("Entrou na van");
+            }
+        }
+        if(check.getHoraEscolaCheck() != "null"){
+            if(ValidaDatas(FormataData(check.getHoraEscolaCheck()))){
+                btn.setText("Escola");
+            }
+        }
+        if(check.getHoraSaidaCheck() != "null"){
+            if(ValidaDatas(FormataData(check.getHoraSaidaCheck()))){
+                btn.setText("Saiu Escola");
+            }
+        }
+        if(check.getHoraCasaCheck() != "null"){
+            if(ValidaDatas(FormataData(check.getHoraCasaCheck()))){
+                btn.setText("Em casa");
+            }
+        }
+
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +97,26 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
 
         return listViewItem;
     }
+
+    private String FormataData(String dt){
+        String dia2= dt;
+        SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition position2 = new ParsePosition(0);
+        Date data2 = format2.parse(dia2,position2);
+        format2 = new SimpleDateFormat("dd/MM/yyyy");
+        String date2 = format2.format(data2);
+        return date2;
+    }
+
+    private boolean ValidaDatas(String data){
+        if(data.equals(dataAtual)){
+            System.out.println(data + " - " + dataAtual);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
     @Override
     public int getCount() {
