@@ -87,4 +87,9 @@ public class Painel_monitora extends AppCompatActivity {
         Tela.putExtra("tipo","monitora");
         startActivity(Tela);
     }
+
+    public void irCheck(View view){
+        Intent tela = new Intent(this, SelecionarVanMonitoraParaCheckList.class);
+        startActivity(tela);
+    }
 }

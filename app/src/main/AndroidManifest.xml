@@ -69,7 +69,9 @@
         <activity android:name=".Empresa" />
         <activity android:name=".Enquete" />
         <activity android:name=".Rotas" />
-        <activity android:name=".Faltas"></activity>
+        <activity android:name=".Faltas" />
+        <activity android:name=".CheckListMonitora" />
+        <activity android:name=".SelecionarVanMonitoraParaCheckList"></activity>
     </application>
 
 </manifest>
