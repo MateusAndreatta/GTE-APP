@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import xyz.sistemagte.gte.R;
 
 public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
 
+    int idCrianca;
     private List<CheckStatusConstr> CheckList;
     private List<CheckStatusConstr> orig;
     private Context mCtx;
@@ -39,11 +41,20 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
         View listViewItem = inflater.inflate(R.layout.list_view_checklist, null, true);
 
         TextView txtNome = listViewItem.findViewById(R.id.txtNome);
+        final TextView id = listViewItem.findViewById(R.id.txtId);
         Button btn = listViewItem.findViewById(R.id.btnCheck);
 
         CheckStatusConstr check = CheckList.get(position);
-
+        idCrianca = check.getIdCriancaCheck();
         txtNome.setText(check.getNomeCheck() + " " + check.getSobrenomeCheck());
+        id.setText(String.valueOf(check.getIdCriancaCheck()));
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mCtx, id.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return listViewItem;
     }
