@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import xyz.sistemagte.gte.Auxiliares.DefinicoesPresenca;
 import xyz.sistemagte.gte.Construtoras.CheckStatusConstr;
 import xyz.sistemagte.gte.R;
 
@@ -33,6 +34,9 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
     private Context mCtx;
     private String dataAtual;
     int botao;
+    //String idWebService;
+
+    DefinicoesPresenca volley;
 
     public ListViewCheck(List<CheckStatusConstr> checkList, Context mCtx) {
         super(mCtx, R.layout.list_view_escolas, checkList);
@@ -47,6 +51,7 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
             mes = "0"+mes;
         }
         this.dataAtual = dia + "/" + mes + "/" + ano;
+        volley = new DefinicoesPresenca();
     }
 
     @Override
@@ -58,40 +63,59 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
 
         TextView txtNome = listViewItem.findViewById(R.id.txtNome);
         final TextView id = listViewItem.findViewById(R.id.txtId);
-        Button btn = listViewItem.findViewById(R.id.btnCheck);
+        final Button btn = listViewItem.findViewById(R.id.btnCheck);
 
-        CheckStatusConstr check = CheckList.get(position);
+        final CheckStatusConstr check = CheckList.get(position);
         idCrianca = check.getIdCriancaCheck();
         txtNome.setText(check.getNomeCheck() + " " + check.getSobrenomeCheck());
         id.setText(String.valueOf(check.getIdCriancaCheck()));
-
-        if(check.getHoraEntradaCheck() != "null"){
-            if(ValidaDatas(FormataData(check.getHoraEntradaCheck()))){
-                btn.setText("Entrou na van");
-            }
-        }
+       // idWebService = String.valueOf(id.getText());
+        btn.setText(R.string.monitoraCheckEntrouVan);
         if(check.getHoraEscolaCheck() != "null"){
             if(ValidaDatas(FormataData(check.getHoraEscolaCheck()))){
-                btn.setText("Escola");
+                btn.setText(R.string.monitoraCheckChegouEscola);
             }
         }
         if(check.getHoraSaidaCheck() != "null"){
             if(ValidaDatas(FormataData(check.getHoraSaidaCheck()))){
-                btn.setText("Saiu Escola");
+                btn.setText(R.string.monitoraCheckSaiuEscola);
             }
         }
         if(check.getHoraCasaCheck() != "null"){
             if(ValidaDatas(FormataData(check.getHoraCasaCheck()))){
-                btn.setText("Em casa");
+                btn.setText(R.string.monitoraCheckChegouCasa);
             }
         }
 
 
-
+        System.out.println(check.getHoraEntradaCheck());
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mCtx, id.getText(), Toast.LENGTH_SHORT).show();
+                String btnText = String.valueOf(btn.getText());
+
+                if(btnText.equals(mCtx.getString(R.string.monitoraCheckChegouCasa))){
+                    //TODO: Desativar btn
+                    check.setHoraCasa(GerarTimeStamp());
+                    volley.ChegouCasa(String.valueOf(id.getText()),mCtx);
+                }else{
+                    if(btnText.equals(mCtx.getString(R.string.monitoraCheckSaiuEscola))){
+                        check.setHoraSaida(GerarTimeStamp());
+                        volley.RetornouVan(String.valueOf(id.getText()),mCtx);
+                        btn.setText(mCtx.getString(R.string.monitoraCheckChegouCasa));
+                    }else{
+                        if(btnText.equals(mCtx.getString(R.string.monitoraCheckChegouEscola))){
+                            check.setHoraEscola(GerarTimeStamp());
+                            volley.ChegouEscola(String.valueOf(id.getText()),mCtx);
+                            btn.setText(mCtx.getString(R.string.monitoraCheckSaiuEscola));
+                        }else{
+                            //Nem entrou na vans
+                            check.setHoraEntrada(GerarTimeStamp());
+                            volley.EntrouNaVan(String.valueOf(id.getText()),mCtx);
+                            btn.setText(mCtx.getString(R.string.monitoraCheckChegouEscola));
+                        }
+                    }
+                }
             }
         });
 
@@ -117,6 +141,22 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
         }
     }
 
+    //2018-06-18 15:36:57
+    private String GerarTimeStamp(){
+        GregorianCalendar calendar = new GregorianCalendar();
+        String dia = String.valueOf(calendar.get(GregorianCalendar.DAY_OF_MONTH));
+        String mes = String.valueOf(calendar.get(GregorianCalendar.MONTH) + 1);
+        String ano = String.valueOf(calendar.get(GregorianCalendar.YEAR));
+
+        String hora = String.valueOf(calendar.get(GregorianCalendar.HOUR_OF_DAY));
+        String minuto = String.valueOf(calendar.get(GregorianCalendar.MINUTE));
+        String seg = String.valueOf(calendar.get(GregorianCalendar.SECOND));
+        if(mes.length() == 1){
+            mes = "0"+mes;
+        }
+        String timestamp = "TIMESTAMP: " + ano + "-" + mes + "-" + dia + " " +hora + ":" + minuto + ":" + seg;
+        return timestamp;
+    }
 
     @Override
     public int getCount() {

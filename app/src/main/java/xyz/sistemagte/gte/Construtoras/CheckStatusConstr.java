@@ -46,4 +46,20 @@ public class CheckStatusConstr {
     public String getHoraCasaCheck() {
         return horaCasa;
     }
+
+    public void setHoraEntrada(String horaEntrada) {
+        this.horaEntrada = horaEntrada;
+    }
+
+    public void setHoraEscola(String horaEscola) {
+        this.horaEscola = horaEscola;
+    }
+
+    public void setHoraSaida(String horaSaida) {
+        this.horaSaida = horaSaida;
+    }
+
+    public void setHoraCasa(String horaCasa) {
+        this.horaCasa = horaCasa;
+    }
 }
