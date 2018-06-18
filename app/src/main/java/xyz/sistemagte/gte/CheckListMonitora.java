@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -171,5 +172,10 @@ public class CheckListMonitora extends AppCompatActivity implements SearchView.O
     @Override
     public boolean onQueryTextSubmit(String query){
         return false;
+    }
+
+    public void MarcarCheck(View view) {
+        finish();
+        startActivity(getIntent());
     }
 }

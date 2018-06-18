@@ -65,27 +65,30 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
         final TextView id = listViewItem.findViewById(R.id.txtId);
         final Button btn = listViewItem.findViewById(R.id.btnCheck);
 
-        final CheckStatusConstr check = CheckList.get(position);
+        CheckStatusConstr check = CheckList.get(position);
         idCrianca = check.getIdCriancaCheck();
         txtNome.setText(check.getNomeCheck() + " " + check.getSobrenomeCheck());
         id.setText(String.valueOf(check.getIdCriancaCheck()));
-       // idWebService = String.valueOf(id.getText());
         btn.setText(R.string.monitoraCheckEntrouVan);
-        if(check.getHoraEscolaCheck() != "null"){
-            if(ValidaDatas(FormataData(check.getHoraEscolaCheck()))){
-                btn.setText(R.string.monitoraCheckChegouEscola);
+
+        if(check.getHoraCasaCheck() != "null"){
+            if(ValidaDatas(FormataData(check.getHoraCasaCheck()))){
+                //TODO: Desativar BTN
+                btn.setEnabled(false);
+                //btn.setText(R.string.monitoraCheckChegouCasa);
             }
         }
         if(check.getHoraSaidaCheck() != "null"){
             if(ValidaDatas(FormataData(check.getHoraSaidaCheck()))){
-                btn.setText(R.string.monitoraCheckSaiuEscola);
-            }
-        }
-        if(check.getHoraCasaCheck() != "null"){
-            if(ValidaDatas(FormataData(check.getHoraCasaCheck()))){
                 btn.setText(R.string.monitoraCheckChegouCasa);
             }
         }
+        if(check.getHoraEscolaCheck() != "null"){
+            if(ValidaDatas(FormataData(check.getHoraEscolaCheck()))){
+                btn.setText(R.string.monitoraCheckSaiuEscola);
+            }
+        }
+
 
 
         System.out.println(check.getHoraEntradaCheck());
@@ -96,21 +99,17 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
 
                 if(btnText.equals(mCtx.getString(R.string.monitoraCheckChegouCasa))){
                     //TODO: Desativar btn
-                    check.setHoraCasa(GerarTimeStamp());
                     volley.ChegouCasa(String.valueOf(id.getText()),mCtx);
                 }else{
                     if(btnText.equals(mCtx.getString(R.string.monitoraCheckSaiuEscola))){
-                        check.setHoraSaida(GerarTimeStamp());
                         volley.RetornouVan(String.valueOf(id.getText()),mCtx);
                         btn.setText(mCtx.getString(R.string.monitoraCheckChegouCasa));
                     }else{
                         if(btnText.equals(mCtx.getString(R.string.monitoraCheckChegouEscola))){
-                            check.setHoraEscola(GerarTimeStamp());
                             volley.ChegouEscola(String.valueOf(id.getText()),mCtx);
                             btn.setText(mCtx.getString(R.string.monitoraCheckSaiuEscola));
                         }else{
                             //Nem entrou na vans
-                            check.setHoraEntrada(GerarTimeStamp());
                             volley.EntrouNaVan(String.valueOf(id.getText()),mCtx);
                             btn.setText(mCtx.getString(R.string.monitoraCheckChegouEscola));
                         }
@@ -139,23 +138,6 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
         }else{
             return false;
         }
-    }
-
-    //2018-06-18 15:36:57
-    private String GerarTimeStamp(){
-        GregorianCalendar calendar = new GregorianCalendar();
-        String dia = String.valueOf(calendar.get(GregorianCalendar.DAY_OF_MONTH));
-        String mes = String.valueOf(calendar.get(GregorianCalendar.MONTH) + 1);
-        String ano = String.valueOf(calendar.get(GregorianCalendar.YEAR));
-
-        String hora = String.valueOf(calendar.get(GregorianCalendar.HOUR_OF_DAY));
-        String minuto = String.valueOf(calendar.get(GregorianCalendar.MINUTE));
-        String seg = String.valueOf(calendar.get(GregorianCalendar.SECOND));
-        if(mes.length() == 1){
-            mes = "0"+mes;
-        }
-        String timestamp = "TIMESTAMP: " + ano + "-" + mes + "-" + dia + " " +hora + ":" + minuto + ":" + seg;
-        return timestamp;
     }
 
     @Override
@@ -197,5 +179,22 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
                 notifyDataSetChanged();
             }
         };
+    }
+
+    //2018-06-18 15:36:57
+    private String GerarTimeStamp(){
+        GregorianCalendar calendar = new GregorianCalendar();
+        String dia = String.valueOf(calendar.get(GregorianCalendar.DAY_OF_MONTH));
+        String mes = String.valueOf(calendar.get(GregorianCalendar.MONTH) + 1);
+        String ano = String.valueOf(calendar.get(GregorianCalendar.YEAR));
+
+        String hora = String.valueOf(calendar.get(GregorianCalendar.HOUR_OF_DAY));
+        String minuto = String.valueOf(calendar.get(GregorianCalendar.MINUTE));
+        String seg = String.valueOf(calendar.get(GregorianCalendar.SECOND));
+        if(mes.length() == 1){
+            mes = "0"+mes;
+        }
+        String timestamp = "TIMESTAMP: " + ano + "-" + mes + "-" + dia + " " +hora + ":" + minuto + ":" + seg;
+        return timestamp;
     }
 }

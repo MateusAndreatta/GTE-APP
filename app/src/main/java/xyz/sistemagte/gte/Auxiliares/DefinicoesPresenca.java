@@ -16,6 +16,9 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import xyz.sistemagte.gte.CheckListMonitora;
+import xyz.sistemagte.gte.R;
+
 /**
  * Created by Aluno on 18/06/2018.
  */
@@ -32,12 +35,14 @@ public class DefinicoesPresenca {
 
     public void EntrouNaVan(final String id, final Context ctx){
         requestQueue = Volley.newRequestQueue(ctx);
-        progressDialog = new ProgressDialog(ctx);
+      //  progressDialog = new ProgressDialog(ctx);
+  //      progressDialog.setMessage(ctx.getString(R.string.carregando));
+//        progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ENTROU,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                       // Toast.makeText(ctx, ServerResponse, Toast.LENGTH_SHORT).show();
+
                     }
                 },
                 new Response.ErrorListener() {
