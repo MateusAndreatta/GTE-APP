@@ -288,4 +288,5 @@
     <string name="FaltaRemovida">Falta removida com sucesso</string>
     <string name="faltas">Faltas hoje</string>
     <string name="verificacaopresenca">Verificacão de presença</string>
+    <string name="faltasL">Faltas</string>
 </resources>

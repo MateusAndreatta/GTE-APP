@@ -230,19 +230,13 @@
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
-            </LinearLayout>
             <!-- TODO Trocar esse cartao para o de faltas -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="5"
-                android:layout_marginTop="10dp">
+
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/faltas"
                     android:layout_width="match_parent"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content"
                     card_view:cardCornerRadius="7dp"
                     card_view:cardBackgroundColor="@color/cinza"
@@ -259,12 +253,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/enquete" />
+                            android:src="@drawable/faltas" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/enquete"
+                            android:text="@string/faltasL"
                             android:textSize="17sp"
                             android:layout_gravity="center"/>
                     </LinearLayout>
@@ -300,12 +294,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/enquete" />
+                            android:src="@drawable/checklist" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Checklist"
+                            android:text="@string/verificacaopresenca"
                             android:textSize="17sp"
                             android:layout_gravity="center"/>
                     </LinearLayout>
