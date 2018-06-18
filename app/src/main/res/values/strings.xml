@@ -289,4 +289,8 @@
     <string name="faltas">Faltas hoje</string>
     <string name="verificacaopresenca">Verificacão de presença</string>
     <string name="faltasL">Faltas</string>
+    <string name="monitoraCheckEntrouVan">Entrou na van</string>
+    <string name="monitoraCheckChegouEscola">Chegou na escola</string>
+    <string name="monitoraCheckSaiuEscola">Saiu da escola</string>
+    <string name="monitoraCheckChegouCasa">Chegou em casa</string>
 </resources>
