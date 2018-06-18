@@ -58,7 +58,7 @@ public class SelecionarVanMonitoraParaCheckList extends AppCompatActivity {
         WordList = new ArrayList<>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-        getSupportActionBar().setTitle(getResources().getString(R.string.rotas));
+        getSupportActionBar().setTitle(getResources().getString(R.string.Checklist));
 
 
 

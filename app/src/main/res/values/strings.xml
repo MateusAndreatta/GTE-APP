@@ -293,4 +293,5 @@
     <string name="monitoraCheckChegouEscola">Chegou na escola</string>
     <string name="monitoraCheckSaiuEscola">Saiu da escola</string>
     <string name="monitoraCheckChegouCasa">Chegou em casa</string>
+    <string name="Checklist">Checklist</string>
 </resources>
