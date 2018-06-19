@@ -258,7 +258,7 @@ public class Login extends AppCompatActivity {
                             //nenhum erro
 
                                 if(Objects.equals(ServerResponse, "UsuarioNaoCadastrado")){
-                                    Toast.makeText(Login.this, "Caiu no if", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, "Erro inesperado", Toast.LENGTH_SHORT).show();
                                 }
 
                                 try{
