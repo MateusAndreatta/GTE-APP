@@ -3,6 +3,7 @@ package xyz.sistemagte.gte;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ public class cad_motorista extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_motorista);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         cep = findViewById(R.id.cad_cep);
         cidade = findViewById(R.id.cad_cidade);
         rua = findViewById(R.id.cad_rua);

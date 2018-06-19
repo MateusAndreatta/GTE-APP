@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.SearchView;
@@ -55,7 +56,7 @@ public class Faltas extends AppCompatActivity implements SearchView.OnQueryTextL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faltas);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         GregorianCalendar calendar = new GregorianCalendar();
         String dia = String.valueOf(calendar.get(GregorianCalendar.DAY_OF_MONTH));
         String mes = String.valueOf(calendar.get(GregorianCalendar.MONTH) + 1);

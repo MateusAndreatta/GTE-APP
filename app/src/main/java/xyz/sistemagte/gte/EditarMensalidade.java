@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -62,7 +63,7 @@ public class EditarMensalidade extends AppCompatActivity {
         setContentView(R.layout.activity_editar_mensalidade);
         respSpinner = findViewById(R.id.responsaveis);
         criancaSpinner = findViewById(R.id.criancas);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         valor = findViewById(R.id.cad_valor);
         dtVencimento = findViewById(R.id.cad_dt_vencimento);
 

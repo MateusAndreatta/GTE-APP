@@ -2,6 +2,7 @@ package xyz.sistemagte.gte;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
@@ -14,7 +15,7 @@ public class EditarFunc extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_func);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         Nome = findViewById(R.id.cad_nome);
         Sobrenome = findViewById(R.id.cad_sobrenome);
