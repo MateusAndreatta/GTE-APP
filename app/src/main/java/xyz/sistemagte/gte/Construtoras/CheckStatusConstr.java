@@ -8,6 +8,7 @@ public class CheckStatusConstr {
     private int id;
     private String nome,sobrenome;
     private String horaEntrada,horaEscola,horaSaida,horaCasa;
+    private String btnText;
 
     public CheckStatusConstr(int id, String nome, String sobrenome, String horaEntrada, String horaEscola, String horaSaida, String horaCasa) {
         this.id = id;
@@ -17,6 +18,10 @@ public class CheckStatusConstr {
         this.horaEscola = horaEscola;
         this.horaSaida = horaSaida;
         this.horaCasa = horaCasa;
+    }
+
+    public CheckStatusConstr(String btn){
+        this.btnText = btn;
     }
 
     public int getIdCriancaCheck() {

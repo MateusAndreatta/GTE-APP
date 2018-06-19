@@ -176,7 +176,6 @@ public class CheckListMonitora extends AppCompatActivity implements SearchView.O
     }
 
     public void MarcarCheck(View view) {
-        finish();
-        startActivity(getIntent());
+        listView.invalidateViews();
     }
 }

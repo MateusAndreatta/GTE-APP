@@ -37,7 +37,10 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
     //String idWebService;
 
     DefinicoesPresenca volley;
-
+    //TODO: Pesquisar https://pt.stackoverflow.com/questions/83510/como-inflar-um-bot%C3%A3o-dentro-de-um-item-de-listview
+    /**
+     * Sua classe é o construtor
+     * */
     public ListViewCheck(List<CheckStatusConstr> checkList, Context mCtx) {
         super(mCtx, R.layout.list_view_escolas, checkList);
         this.CheckList = checkList;
