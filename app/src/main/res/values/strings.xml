@@ -34,7 +34,7 @@
     <string name="pago">Pago</string>
     <string name="txtEmpresa">Verificamos que você não possui uma conta vinculada no Sistema GTE. Preencha o campo abaixo com o código fornecido pelo administrador.</string>
     <string name="atrasada">Atrasada</string>
-    <string name="real" translatable="false">R$ </string>
+    <string name="real">R$ </string>
     <string name="criancaEspaço">Criança:  </string>
     <string name="funcionario">Funcionários</string>
     <string name="listaFunc">Listagem de Funcionários</string>
@@ -42,7 +42,7 @@
     <string name="listaEscolas">Listagem Escolas</string>
     <string name="listaResp">Listagem de Responsáveis</string>
     <string name="recuperarSenha">Recuperar Senha</string>
-    <string name="userEsqueceuSenha">Esqueceu sua\n senha?</string>
+    <string name="userEsqueceuSenha">Esqueceu sua  senha?</string>
     <string name="userRecuperarSenha">Ajudaremos você a recuperar sua senha, para isso preencha seu e-mail abaixo:</string>
     <string name="titleContextMenu">Ações</string>
     <string name="editar">Editar</string>
@@ -173,8 +173,8 @@
     <string name="cadastro_monitora">Cadastro da Monitora</string>
     <string name="cadastro_van">Cadastro van</string>
     <string name="telefone">Celular</string>
-    <string name="rg">RG</string>
-    <string name="cpf">CPF</string>
+    <string name="rg" translatable="false">RG</string>
+    <string name="cpf" translatable="false">CPF</string>
     <string name="datanascimento">Data de nascimento</string>
     <string name="salario">Salário </string>
     <string name="cidade">Cidade</string>
@@ -231,7 +231,7 @@
         <item>Sergipe</item>
         <item>Tocantins</item>
     </string-array>
-    <string name="title_activity_cad_monitora">cad_monitora</string>
+    <string name="title_activity_cad_monitora" translatable="false">cad_monitora</string>
     <string name="title_activity_cad_van">CadVanActivity</string>
 
 
@@ -293,5 +293,5 @@
     <string name="monitoraCheckChegouEscola">Chegou na escola</string>
     <string name="monitoraCheckSaiuEscola">Saiu da escola</string>
     <string name="monitoraCheckChegouCasa">Chegou em casa</string>
-    <string name="Checklist">Checklist</string>
+    <string name="Checklist" translatable="false">Checklist</string>
 </resources>
