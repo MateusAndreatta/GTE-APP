@@ -30,7 +30,6 @@
     <string name="pendente">Pending</string>
     <string name="pago">Paid out</string>
     <string name="atrasada">Late</string>
-    <string name="real" translatable="false">$</string>
     <string name="criancaEspaço">Child:</string>
     <string name="funcionario">Offices</string>
     <string name="listaFunc">Employee Listing</string>
@@ -181,4 +180,10 @@
     <string name="monitoraCheckChegouEscola">" Arrived at school"</string>
     <string name="monitoraCheckSaiuEscola">" Left school"</string>
     <string name="monitoraCheckChegouCasa">" He got home."</string>
+    <string name="real">$</string>
+    <string name="txtEmpresa">We have verified that you do not have a linked account in the GTE System. Fill in the field below with the code provided by the administrator.</string>
+    <string name="userRecuperarSenha">We will help you to recover your password, for it, fill in your email below:</string>
+    <string name="txtSobre">"GTE is a platform that aims to assist the driver and monitors of school vans. Also assist those responsible for greater control of their children's daily lives. "</string>
+    <string name="contatoTela1">"Hello, to contact us, we will need some information from you, please enter your name and your email below: "</string>
+    <string name="continuarContato">", to get in touch, please select the subject and write your message below: "</string>
 </resources>

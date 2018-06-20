@@ -232,7 +232,7 @@
         <item>Tocantins</item>
     </string-array>
     <string name="title_activity_cad_monitora" translatable="false">cad_monitora</string>
-    <string name="title_activity_cad_van">CadVanActivity</string>
+    <string name="title_activity_cad_van" translatable="false">CadVanActivity</string>
 
 
     <string name="capacidade">Capacidade</string>
