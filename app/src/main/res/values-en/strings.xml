@@ -139,13 +139,12 @@
     <string name="editar_perfil">Edit profile</string>
     <string name="editar_endereco">Edit Address</string>
     <string name="sair">Exit</string>
-    <string name="title_activity_editar_func">EditFunc</string>
     <string name="mais_op_es">" More options"</string>
     <string name="cadastradoSucesso">Registered successfully</string>
     <string name="cadastro_da_escola">School Registration</string>
     <string name="pesquisarSearchPlaceholder">Search...</string>
     <string name="data_vencimento">" Due date"</string>
-    <string name="editarMensalidade">" edit monthly fee"</string>
+    <string name="editarMensalidade">Edit monthly fee</string>
     <string name="nenhumaCriancaCadastrada">" Do not have any children registered!"</string>
     <string name="PagoMensalidadeDialog">Pay</string>
     <string name="PendenteMensalidadeDialog">Does not pay</string>

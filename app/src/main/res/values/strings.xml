@@ -251,7 +251,7 @@
     <string name="editar_endereco">Editar endereço</string>
 
     <string name="sair">Sair</string>
-    <string name="title_activity_editar_func">EditarFunc</string>
+    <string name="title_activity_editar_func" translatable="false">EditarFunc</string>
     <string name="mais_op_es">Mais opções</string>
     <string name="cadastradoSucesso">Cadastradado com sucesso</string>
     <string name="cadastro_da_escola">Cadastro da Escola</string>
@@ -275,7 +275,6 @@
     <string name="opPouco">Um pouco</string>
     <string name="votar">Votar</string>
     <string name="voltar">Voltar</string>
-    <string name="data_emitida">Data Emitida</string>
     <string name="iniciar_navega_o">Iniciar Navegação das Crianças</string>
     <string name="rotas">Rotas</string>
     <string name="iniciandoNavegacao">Iniciando Navegação</string>
@@ -294,4 +293,5 @@
     <string name="monitoraCheckSaiuEscola">Saiu da escola</string>
     <string name="monitoraCheckChegouCasa">Chegou em casa</string>
     <string name="Checklist" translatable="false">Checklist</string>
+    <string name="data_emitida">Data Emitida</string>
 </resources>
