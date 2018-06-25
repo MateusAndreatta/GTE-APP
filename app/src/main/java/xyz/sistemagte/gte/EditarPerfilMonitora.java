@@ -36,6 +36,7 @@ public class EditarPerfilMonitora extends AppCompatActivity {
     EditText nome,sobrenome,email,cpf,rg,nasc, dt_admissao;
 
     private static String JSON_URL = "https://sistemagte.xyz/json/monitora/ListarMonitora.php";
+    private static String URL_EDITAR = "https://sistemagte.xyz/android/editar/editarMonitora.php";
     ListView listView;
     private int idUsuario;
     AlertDialog alerta;
@@ -179,7 +180,47 @@ public class EditarPerfilMonitora extends AppCompatActivity {
 
     public void salvar(View view) {
 
-        //TODO opa
+        progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
+        progressDialog.show();
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_EDITAR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                        Toast.makeText(EditarPerfilMonitora.this, R.string.informacoesSalvasSucesso, Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        Intent tela = new Intent(EditarPerfilMonitora.this,Painel_monitora.class);
+                        startActivity(tela);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(EditarPerfilMonitora.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", String.valueOf(idUsuario));
+                params.put("nome", nome.getText().toString());
+                params.put("sobrenome", sobrenome.getText().toString());
+                params.put("email", email.getText().toString());
+                params.put("rg", rg.getText().toString());
+                params.put("cpf", cpf.getText().toString());
+                params.put("dataN", nasc.getText().toString());
+                params.put("dataA", dt_admissao.getText().toString());
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
 
     }
 }
