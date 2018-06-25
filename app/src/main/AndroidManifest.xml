@@ -71,7 +71,8 @@
         <activity android:name=".Rotas" />
         <activity android:name=".Faltas" />
         <activity android:name=".CheckListMonitora" />
-        <activity android:name=".SelecionarVanMonitoraParaCheckList"></activity>
+        <activity android:name=".SelecionarVanMonitoraParaCheckList" />
+        <activity android:name=".EditarEndereco"></activity>
     </application>
 
 </manifest>
