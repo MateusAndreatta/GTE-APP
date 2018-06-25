@@ -256,13 +256,13 @@ public class cad_motorista extends AppCompatActivity{
                     params.put("cpf", CpfHolder);
                     params.put("nascimento", DtNascHolder);
 
-                    params.put("nome", cep.getText().toString());
-                    params.put("sobrenome", cidade.getText().toString());
-                    params.put("email", rua.getText().toString());
-                    params.put("senha", numero.getText().toString());
-                    params.put("telefone", complemento.getText().toString());
-                    params.put("rg", cnh.getText().toString());
-                    params.put("cpf", validaCnh.getText().toString());
+                    params.put("cep", cep.getText().toString());
+                    params.put("cidade", cidade.getText().toString());
+                    params.put("rua", rua.getText().toString());
+                    params.put("numero", numero.getText().toString());
+                    params.put("complemento", complemento.getText().toString());
+                    params.put("cnh", cnh.getText().toString());
+                    params.put("validadeCnh", validaCnh.getText().toString());
 
                     return params;
                 }
