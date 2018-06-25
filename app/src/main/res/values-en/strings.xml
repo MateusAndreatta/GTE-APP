@@ -174,7 +174,7 @@
     <string name="FaltaRemovida">Missing successfully removed</string>
     <string name="faltas">" You miss today"</string>
     <string name="verificacaopresenca">Presence check</string>
-    <string name="faltasL">" Failures"</string>
+    <string name="faltasL">Absences</string>
     <string name="monitoraCheckEntrouVan">" Got in the van"</string>
     <string name="monitoraCheckChegouEscola">" Arrived at school"</string>
     <string name="monitoraCheckSaiuEscola">" Left school"</string>

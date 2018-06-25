@@ -145,16 +145,32 @@ public class Cadastro extends AppCompatActivity {
                     case("1"):
                         //Motorista
                         Intent telaMotorista = new Intent(Cadastro.this, cad_motorista.class);
+                        telaMotorista.putExtra("nome", campo_nome.getText().toString());
+                        telaMotorista.putExtra("sobrenome", campo_sobrenome.getText().toString());
+                        telaMotorista.putExtra("email", campo_email.getText().toString());
+                        telaMotorista.putExtra("senha", campo_senha.getText().toString());
+                        telaMotorista.putExtra("telefone", campo_telefone.getText().toString());
+                        telaMotorista.putExtra("rg", campo_rg.getText().toString());
+                        telaMotorista.putExtra("cpf", campo_cpf.getText().toString());
+                        telaMotorista.putExtra("nascimento", campo_dataNasc.getText().toString());
                         startActivity(telaMotorista);
                         break;
                     case("2"):
                         //Monitora
                         Intent telaMonitora = new Intent(Cadastro.this, cad_monitor.class);
+                        telaMonitora.putExtra("nome", campo_nome.getText().toString());
+                        telaMonitora.putExtra("sobrenome", campo_sobrenome.getText().toString());
+                        telaMonitora.putExtra("email", campo_email.getText().toString());
+                        telaMonitora.putExtra("senha", campo_senha.getText().toString());
+                        telaMonitora.putExtra("telefone", campo_telefone.getText().toString());
+                        telaMonitora.putExtra("rg", campo_rg.getText().toString());
+                        telaMonitora.putExtra("cpf", campo_cpf.getText().toString());
+                        telaMonitora.putExtra("nascimento", campo_dataNasc.getText().toString());
                         startActivity(telaMonitora);
                         break;
                     case ("3"):
                         //responsavel
-                        try{
+                         try{
                           CadastrarResp();
                         }catch (Exception ex){
                             System.out.println(ex.getMessage());
@@ -183,10 +199,15 @@ public class Cadastro extends AppCompatActivity {
                             // Hiding the progress dialog after all task complete.
                             progressDialog.dismiss();
 
-                            // Showing response message coming from server.
-                            Toast.makeText(Cadastro.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
-                            Intent tela = new Intent(Cadastro.this, Login.class);
-                            startActivity(tela);
+                            if(ServerResponse.trim().equals("EmailCadastrado")){
+                                Toast.makeText(Cadastro.this, R.string.emailCadastrado, Toast.LENGTH_SHORT).show();
+                            }else{
+                                // Showing response message coming from server.
+                                Toast.makeText(Cadastro.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+                                Intent tela = new Intent(Cadastro.this, Login.class);
+                                startActivity(tela);
+                            }
+
                         }
                     },
                     new Response.ErrorListener() {
