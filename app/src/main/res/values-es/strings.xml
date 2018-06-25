@@ -183,4 +183,5 @@
     <string name="monitoraCheckChegouEscola">Llegó a la escuela</string>
     <string name="monitoraCheckSaiuEscola">Salió de la escuela</string>
     <string name="monitoraCheckChegouCasa">Llegó a casa</string>
+    <string name="email">e-mail</string>
 </resources>
