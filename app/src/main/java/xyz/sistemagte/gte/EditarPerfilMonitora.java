@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -174,5 +175,11 @@ public class EditarPerfilMonitora extends AppCompatActivity {
         startActivity(new Intent(this, Painel_monitora.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
+    }
+
+    public void salvar(View view) {
+
+        //TODO opa
+
     }
 }
