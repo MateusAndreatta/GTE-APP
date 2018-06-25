@@ -1,5 +1,7 @@
 package xyz.sistemagte.gte;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -17,14 +20,22 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+import xyz.sistemagte.gte.Auxiliares.Validacoes;
 
 
 public class cad_motorista extends AppCompatActivity{
 
     EditText cep,cidade,rua,numero,complemento,cnh,validaCnh;
     Spinner sexo,categoria,Estado;
+    String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder;
+    String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenMotorista.php";
 
+    RequestQueue requestQueue;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +52,19 @@ public class cad_motorista extends AppCompatActivity{
         categoria = findViewById(R.id.cad_categoria);
         sexo = findViewById(R.id.cad_sexo);
         Estado = findViewById(R.id.cad_estado);
+
+        requestQueue = Volley.newRequestQueue(this);
+        progressDialog = new ProgressDialog(this);
+
+        Intent i = getIntent();
+        NomeHolder = i.getStringExtra("nome");
+        SobrenomeHolder = i.getStringExtra("sobrenome");
+        EmailHolder = i.getStringExtra("email");
+        SenhaHolder = i.getStringExtra("senha");
+        TelefoneHolder = i.getStringExtra("telefone");
+        RgHolder = i.getStringExtra("rg");
+        CpfHolder = i.getStringExtra("cpf");
+        DtNascHolder = i.getStringExtra("nascimento");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
@@ -175,6 +199,79 @@ public class cad_motorista extends AppCompatActivity{
 
     }
 
+    private boolean ValidarCampos(){
+        if(cep.getText().length() == 0 || cidade.getText().length() == 0 || rua.getText().length() == 0
+                || numero.getText().length() == 0 || cnh.getText().length() == 0 || validaCnh.getText().length() == 0) {
+            Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public void Cadastrar_motorista(View view) {
+        if(ValidarCampos()){
+            progressDialog.setMessage(getResources().getString(R.string.loadingDados));
+            progressDialog.show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String ServerResponse) {
+                            System.out.println(ServerResponse);
+                            // Hiding the progress dialog after all task complete.
+                            progressDialog.dismiss();
+
+                            if(ServerResponse.trim().equals("EmailCadastrado")){
+                                Toast.makeText(cad_motorista.this, R.string.emailCadastrado, Toast.LENGTH_SHORT).show();
+                            }else{
+                                // Showing response message coming from server.
+                                Toast.makeText(cad_motorista.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+                                Intent tela = new Intent(cad_motorista.this, Login.class);
+                                startActivity(tela);
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+
+                            // Hiding the progress dialog after all task complete.
+                            progressDialog.dismiss();
+
+                            // Showing error message if something goes wrong.
+                            Toast.makeText(cad_motorista.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+
+                    Map<String, String> params = new HashMap<>();
+                    params.put("nome", NomeHolder);
+                    params.put("sobrenome", SobrenomeHolder);
+                    params.put("email", EmailHolder);
+                    params.put("senha", SenhaHolder);
+                    params.put("telefone", TelefoneHolder);
+                    params.put("rg", RgHolder);
+                    params.put("cpf", CpfHolder);
+                    params.put("nascimento", DtNascHolder);
+
+                    params.put("nome", cep.getText().toString());
+                    params.put("sobrenome", cidade.getText().toString());
+                    params.put("email", rua.getText().toString());
+                    params.put("senha", numero.getText().toString());
+                    params.put("telefone", complemento.getText().toString());
+                    params.put("rg", cnh.getText().toString());
+                    params.put("cpf", validaCnh.getText().toString());
+
+                    return params;
+                }
+
+            };
+
+            requestQueue.getCache().clear();
+            requestQueue.add(stringRequest);
+        }
+
     }
 }

@@ -294,4 +294,5 @@
     <string name="monitoraCheckChegouCasa">Chegou em casa</string>
     <string name="Checklist" translatable="false">Checklist</string>
     <string name="data_emitida">Data Emitida</string>
+    <string name="emailCadastrado">Email já cadastrado</string>
 </resources>
