@@ -85,7 +85,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/datanascimento"
-                android:inputType="text" />
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/dt_admissao"
@@ -95,7 +95,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/data_admissao"
-                android:inputType="text" />
+                android:inputType="number" />
 
             <Button
                 android:id="@+id/cadastro_motorista"

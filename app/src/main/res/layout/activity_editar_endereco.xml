@@ -57,7 +57,7 @@
                 android:layout_marginBottom="5dp"/>
 
             <Spinner
-                android:id="@+id/cad_estado"
+                android:id="@+id/estado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -66,16 +66,28 @@
                 android:entries="@array/estados" />
 
 
+
             <EditText
-                android:id="@+id/num"
+                android:id="@+id/editar_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="date"
+                android:inputType="number"
+                android:hint="@string/num"
+                android:background="@drawable/input_style"
+
+                />
+
+            <EditText
+                android:id="@+id/editar_complemento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
                 android:hint="@string/complemento"
                 android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-
+                android:layout_marginBottom="15dp"
+                />
 
             <Button
                 android:layout_width="match_parent"
