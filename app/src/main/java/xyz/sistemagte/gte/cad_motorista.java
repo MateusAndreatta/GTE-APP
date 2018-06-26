@@ -29,7 +29,7 @@ import xyz.sistemagte.gte.Auxiliares.Validacoes;
 
 public class cad_motorista extends AppCompatActivity{
 
-    EditText cep,cidade,rua,numero,complemento,cnh,validaCnh,cad_data_hablitacao;
+    EditText cep,cidade,rua,numero,complemento,cnh,validaCnh,cad_data_hablitacao,salario,tel_residencial;
     Spinner sexo,categoria,Estado;
     String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder,EstadoHolder,catHolder;
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenMotorista.php";
@@ -50,6 +50,8 @@ public class cad_motorista extends AppCompatActivity{
         cnh = findViewById(R.id.cad_cnh);
         validaCnh = findViewById(R.id.cad_ValidCnh);
         cad_data_hablitacao = findViewById(R.id.cad_data_hablitacao);
+        salario = findViewById(R.id.salario);
+        tel_residencial = findViewById(R.id.cad_tel_residencial);
 
         categoria = findViewById(R.id.cad_categoria);
         sexo = findViewById(R.id.cad_sexo);
@@ -76,11 +78,15 @@ public class cad_motorista extends AppCompatActivity{
         MaskEditTextChangedListener mascaraCNH = new MaskEditTextChangedListener("###########",cnh);
         MaskEditTextChangedListener mascaraValida  = new MaskEditTextChangedListener("##/##/####",validaCnh);
         MaskEditTextChangedListener mascaraDtHabi  = new MaskEditTextChangedListener("##/##/####",cad_data_hablitacao);
+        MaskEditTextChangedListener mascaraTelResidencial = new MaskEditTextChangedListener("(##) ####-####", tel_residencial);
+        MaskEditTextChangedListener mascaraSalario = new MaskEditTextChangedListener("#.###,##", salario);
 
         cep.addTextChangedListener(mascaraCPE);
         cnh.addTextChangedListener(mascaraCNH);
         validaCnh.addTextChangedListener(mascaraValida);
         cad_data_hablitacao.addTextChangedListener(mascaraDtHabi);
+        tel_residencial.addTextChangedListener(mascaraTelResidencial);
+        salario.addTextChangedListener(mascaraSalario);
 
 
         cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
