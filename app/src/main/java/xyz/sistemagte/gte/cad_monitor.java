@@ -30,7 +30,7 @@ public class cad_monitor extends AppCompatActivity {
 
     EditText cep, cidade, rua, numero, complemetno, data_admissao, hora_entrada, hora_saida;
     Spinner sexo, Estado;
-    String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder;
+    String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder,EstadoHolder;
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenMotorista.php";
 
     RequestQueue requestQueue;
@@ -210,7 +210,7 @@ public class cad_monitor extends AppCompatActivity {
     }
 
     public void CadastrarMonitora(View view) {
-
+        PegarEstado();
         if(ValidarCampos()){
             progressDialog.setMessage(getResources().getString(R.string.loadingDados));
             progressDialog.show();
@@ -264,6 +264,8 @@ public class cad_monitor extends AppCompatActivity {
                     params.put("horaE", hora_entrada.getText().toString());
                     params.put("horaS", hora_saida.getText().toString());
                     params.put("dataA", data_admissao.getText().toString());
+                    params.put("sexo", sexo.getSelectedItem().toString().toLowerCase());
+                    params.put("estado",EstadoHolder);
 
                     return params;
                 }
@@ -273,7 +275,94 @@ public class cad_monitor extends AppCompatActivity {
             requestQueue.getCache().clear();
             requestQueue.add(stringRequest);
         }
+    }
 
 
+    private void PegarEstado(){
+        EstadoHolder = Estado.getSelectedItem().toString();
+
+        switch (Estado.getSelectedItem().toString()) {//pega o nome do item ali em cima
+            case "Acre":
+                EstadoHolder = "AC";
+                break;
+            case "Alagoas":
+                EstadoHolder = "AL";
+                break;
+            case "Amapá":
+                EstadoHolder = "AP";
+                break;
+            case "Amazonas":
+                EstadoHolder = "AM";
+                break;
+            case "Bahia":
+                EstadoHolder = "BA";
+                break;
+            case "Ceará":
+                EstadoHolder = "CE";
+                break;
+            case "Distrito Federal":
+                EstadoHolder = "DF";
+                break;
+            case "Espírito Santo":
+                EstadoHolder = "ES";
+                break;
+            case "Goiás":
+                EstadoHolder = "GO";
+                break;
+            case "Maranhão":
+                EstadoHolder = "MA";
+                break;
+            case "Mato Grosso":
+                EstadoHolder = "MT";
+                break;
+            case "Mato Grosso do Sul":
+                EstadoHolder = "MS";
+                break;
+            case "Minas Gerais":
+                EstadoHolder = "MG";
+                break;
+            case "Pará":
+                EstadoHolder = "PA";
+                break;
+            case "Paraiba":
+                EstadoHolder = "PB";
+                break;
+            case "Paraná":
+                EstadoHolder = "PR";
+                break;
+            case "Pernambuco":
+                EstadoHolder = "PE";
+                break;
+            case "Piauí":
+                EstadoHolder = "PI";
+                break;
+            case "Rio de Janeiro":
+                EstadoHolder = "RJ";
+                break;
+            case "Rio Grande do Norte":
+                EstadoHolder = "RN";
+                break;
+            case "Rio Grande do Sul":
+                EstadoHolder = "RS";
+                break;
+            case "Rondônia":
+                EstadoHolder = "RO";
+                break;
+            case "Roraima":
+                EstadoHolder = "RR";
+                break;
+            case "Santa Catarina":
+                EstadoHolder = "SC";
+                break;
+            case "São Paulo":
+                EstadoHolder = "SP";
+                break;
+            case "Sergipe":
+                EstadoHolder = "SE";
+                break;
+            case "Tocantinss":
+                EstadoHolder = "TO";
+                break;
+        }
     }
 }
