@@ -123,6 +123,13 @@ public class Editar_perfil_motorista extends AppCompatActivity {
                             format2 = new SimpleDateFormat("dd/MM/yyyy");
                             String date2 = format2.format(data2);
 
+                            String dia3 = funcObject.getString("dt_hab");
+                            SimpleDateFormat format3 = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position3 = new ParsePosition(0);
+                            Date data3 = format3.parse(dia3,position3);
+                            format3 = new SimpleDateFormat("dd/MM/yyyy");
+                            String date3 = format3.format(data3);
+
 
                             nome.setText(funcObject.getString ("nome"));
                             sobrenome.setText(funcObject.getString ("sobrenome"));
@@ -131,6 +138,7 @@ public class Editar_perfil_motorista extends AppCompatActivity {
                             rg.setText(funcObject.getString ("rg"));
                             nasc.setText(date);
                             cnh.setText(funcObject.getString ("cnh"));
+                            primeiraHabi.setText(date3);
                             validaCnh.setText(date2);
 
                         } catch (JSONException e) {
@@ -224,6 +232,7 @@ public class Editar_perfil_motorista extends AppCompatActivity {
                     params.put("cpf", cpf.getText().toString());
                     params.put("cnh", cnh.getText().toString());
                     params.put("validaCnh", validaCnh.getText().toString());
+                    params.put("dt_hab", primeiraHabi.getText().toString());
                     params.put("nasc",  nasc.getText().toString());
                     params.put("categoria", catHolder);
                     params.put("sexo", sexo.getSelectedItem().toString().toLowerCase());
