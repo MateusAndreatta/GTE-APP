@@ -36,8 +36,10 @@ import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 public class EditarEndereco extends AppCompatActivity {
     EditText cep,cidade,rua,num,complemento;
     Spinner Estado;
+    String EstadoHolder;
 
     private static String JSON_URL = "https://sistemagte.xyz/json/ListarUsuario.php";
+    private static String HttpUrl = "https://sistemagte.xyz/android/editar/editarEndereco.php";
     ListView listView;
     private int idUsuario;
     AlertDialog alerta;
@@ -206,7 +208,7 @@ public class EditarEndereco extends AppCompatActivity {
                         finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                         break;
 
-                    case  "motorista":
+                    case "motorista":
                         startActivity(new Intent(this, Painel_motorista.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                         finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                         break;
@@ -232,7 +234,7 @@ public class EditarEndereco extends AppCompatActivity {
                 finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
 
-            case  "motorista":
+            case "motorista":
                 startActivity(new Intent(this, Painel_motorista.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
@@ -254,7 +256,7 @@ public class EditarEndereco extends AppCompatActivity {
                     public void onResponse(String response) {
                         System.out.println(response);
                         // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
+
 
                         try {
                             JSONObject obj = new JSONObject(response);
@@ -269,11 +271,12 @@ public class EditarEndereco extends AppCompatActivity {
                             rua.setText(funcObject.getString ("rua"));
                             num.setText(funcObject.getString ("num"));
                             complemento.setText(funcObject.getString ("complemento"));
-
+                            cidade.requestFocus();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
@@ -295,7 +298,6 @@ public class EditarEndereco extends AppCompatActivity {
 
                 // Adding All values to Params.
                 params.put("id", String.valueOf(idUsuario));
-
                 return params;
             }
 
@@ -305,6 +307,165 @@ public class EditarEndereco extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    public void salvarEdicao(View view) {
+
+        if(ValidarCampos()){
+            progressDialog.setMessage(getResources().getString(R.string.loadingDados));
+            progressDialog.show();
+            PegarEstado();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String ServerResponse) {
+                            System.out.println(ServerResponse);
+                            progressDialog.dismiss();
+
+
+                            Toast.makeText(EditarEndereco.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+
+
+                            switch (perfil) {
+                                case "monitora":
+                                    startActivity(new Intent(EditarEndereco.this, Painel_monitora.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                                    finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                                    break;
+
+                                case "motorista":
+                                    startActivity(new Intent(EditarEndereco.this, Painel_motorista.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                                    finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                                    break;
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            progressDialog.dismiss();
+                            Toast.makeText(EditarEndereco.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+
+                    Map<String, String> params = new HashMap<>();
+
+                    params.put("id", String.valueOf(idUsuario));
+                    params.put("cep", cep.getText().toString());
+                    params.put("cidade", cidade.getText().toString());
+                    params.put("rua", rua.getText().toString());
+                    params.put("numero", num.getText().toString());
+                    params.put("complemento", complemento.getText().toString());
+                    params.put("estado", EstadoHolder);
+
+                    return params;
+                }
+
+            };
+
+            requestQueue.getCache().clear();
+            requestQueue.add(stringRequest);
+        }
+
+
+    }
+
+    private boolean ValidarCampos(){
+        if(cep.getText().length() == 0 || cidade.getText().length() == 0 || rua.getText().length() == 0
+                || num.getText().length() == 0) {
+            Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    private void PegarEstado(){
+        EstadoHolder = Estado.getSelectedItem().toString();
+
+        switch (Estado.getSelectedItem().toString()) {//pega o nome do item ali em cima
+            case "Acre":
+                EstadoHolder = "AC";
+                break;
+            case "Alagoas":
+                EstadoHolder = "AL";
+                break;
+            case "Amapá":
+                EstadoHolder = "AP";
+                break;
+            case "Amazonas":
+                EstadoHolder = "AM";
+                break;
+            case "Bahia":
+                EstadoHolder = "BA";
+                break;
+            case "Ceará":
+                EstadoHolder = "CE";
+                break;
+            case "Distrito Federal":
+                EstadoHolder = "DF";
+                break;
+            case "Espírito Santo":
+                EstadoHolder = "ES";
+                break;
+            case "Goiás":
+                EstadoHolder = "GO";
+                break;
+            case "Maranhão":
+                EstadoHolder = "MA";
+                break;
+            case "Mato Grosso":
+                EstadoHolder = "MT";
+                break;
+            case "Mato Grosso do Sul":
+                EstadoHolder = "MS";
+                break;
+            case "Minas Gerais":
+                EstadoHolder = "MG";
+                break;
+            case "Pará":
+                EstadoHolder = "PA";
+                break;
+            case "Paraiba":
+                EstadoHolder = "PB";
+                break;
+            case "Paraná":
+                EstadoHolder = "PR";
+                break;
+            case "Pernambuco":
+                EstadoHolder = "PE";
+                break;
+            case "Piauí":
+                EstadoHolder = "PI";
+                break;
+            case "Rio de Janeiro":
+                EstadoHolder = "RJ";
+                break;
+            case "Rio Grande do Norte":
+                EstadoHolder = "RN";
+                break;
+            case "Rio Grande do Sul":
+                EstadoHolder = "RS";
+                break;
+            case "Rondônia":
+                EstadoHolder = "RO";
+                break;
+            case "Roraima":
+                EstadoHolder = "RR";
+                break;
+            case "Santa Catarina":
+                EstadoHolder = "SC";
+                break;
+            case "São Paulo":
+                EstadoHolder = "SP";
+                break;
+            case "Sergipe":
+                EstadoHolder = "SE";
+                break;
+            case "Tocantinss":
+                EstadoHolder = "TO";
+                break;
+        }
+    }
 }
 
 
