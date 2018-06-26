@@ -31,7 +31,7 @@ public class cad_motorista extends AppCompatActivity{
 
     EditText cep,cidade,rua,numero,complemento,cnh,validaCnh,cad_data_hablitacao;
     Spinner sexo,categoria,Estado;
-    String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder,EstadoHolder;
+    String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder,EstadoHolder,catHolder;
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenMotorista.php";
 
     RequestQueue requestQueue;
@@ -75,10 +75,12 @@ public class cad_motorista extends AppCompatActivity{
         MaskEditTextChangedListener mascaraCPE = new MaskEditTextChangedListener("#####-###",cep);
         MaskEditTextChangedListener mascaraCNH = new MaskEditTextChangedListener("###########",cnh);
         MaskEditTextChangedListener mascaraValida  = new MaskEditTextChangedListener("##/##/####",validaCnh);
+        MaskEditTextChangedListener mascaraDtHabi  = new MaskEditTextChangedListener("##/##/####",cad_data_hablitacao);
 
         cep.addTextChangedListener(mascaraCPE);
         cnh.addTextChangedListener(mascaraCNH);
         validaCnh.addTextChangedListener(mascaraValida);
+        cad_data_hablitacao.addTextChangedListener(mascaraDtHabi);
 
 
         cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -212,7 +214,7 @@ public class cad_motorista extends AppCompatActivity{
     }
 
     public void Cadastrar_motorista(View view) {
-        if(ValidarCampos()){
+        if(ValidarCampos() && PegarCategoria()){
             progressDialog.setMessage(getResources().getString(R.string.loadingDados));
             progressDialog.show();
             PegarEstado();
@@ -268,8 +270,8 @@ public class cad_motorista extends AppCompatActivity{
                     params.put("validadeCnh", validaCnh.getText().toString());
                     params.put("dtHabilitacao", cad_data_hablitacao.getText().toString());
                     params.put("estado", EstadoHolder);
-                    params.put("categoria", categoria.getSelectedItem().toString());
-                    params.put("sexo", sexo.getSelectedItem().toString());
+                    params.put("categoria", catHolder);
+                    params.put("sexo", sexo.getSelectedItem().toString().toLowerCase());
 
                     return params;
                 }
@@ -281,7 +283,6 @@ public class cad_motorista extends AppCompatActivity{
         }
 
     }
-
 
     private void PegarEstado(){
         EstadoHolder = Estado.getSelectedItem().toString();
@@ -368,6 +369,21 @@ public class cad_motorista extends AppCompatActivity{
             case "Tocantinss":
                 EstadoHolder = "TO";
                 break;
+        }
+    }
+
+    public boolean PegarCategoria(){
+        if(categoria.getSelectedItemPosition() == 0){
+            Toast.makeText(this, R.string.verificarCNH, Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            if(categoria.getSelectedItemPosition() == 1){
+                catHolder = "cat_d";
+                return true;
+            }else{
+                catHolder = "cat_e";
+                return true;
+            }
         }
     }
 }

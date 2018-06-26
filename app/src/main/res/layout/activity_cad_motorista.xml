@@ -110,7 +110,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/data_habilitacao"
-                android:inputType="date" />
+                android:inputType="number" />
 
             <LinearLayout
                 android:layout_width="match_parent"
