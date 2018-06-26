@@ -37,7 +37,7 @@ public class EditarEndereco extends AppCompatActivity {
     EditText cep,cidade,rua,num,complemento;
     Spinner Estado;
 
-    private static String JSON_URL = "https://sistemagte.xyz/json/motorista/ListarMotorista.php";
+    private static String JSON_URL = "https://sistemagte.xyz/json/ListarUsuario.php";
     ListView listView;
     private int idUsuario;
     AlertDialog alerta;
@@ -252,6 +252,7 @@ public class EditarEndereco extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        System.out.println(response);
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
 
