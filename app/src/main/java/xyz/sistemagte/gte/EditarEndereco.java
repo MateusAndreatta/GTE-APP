@@ -41,6 +41,7 @@ public class EditarEndereco extends AppCompatActivity {
     ListView listView;
     private int idUsuario;
     AlertDialog alerta;
+    private String perfil;
 
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
@@ -52,6 +53,9 @@ public class EditarEndereco extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
+        //Pegando o usuario que clica na tela
+        Intent i = getIntent();
+        perfil = i.getStringExtra("tipo");
 
         cep = findViewById(R.id.editar_cep);
         rua = findViewById(R.id.editar_rua);
@@ -190,6 +194,56 @@ public class EditarEndereco extends AppCompatActivity {
             }
         });
     }
+    //este é para o da navbar (seta)
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+
+                switch (perfil){
+                    case "monitora":
+                        startActivity(new Intent(this, Painel_monitora.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                        finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                        break;
+
+                    case  "motorista":
+                        startActivity(new Intent(this, Painel_motorista.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                        finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                        break;
+
+                    default:
+                        startActivity(new Intent(this, Login.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                        finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                        break;
+                }
+
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+    //O botao padrao do android
+    @Override
+    public void onBackPressed(){
+        switch (perfil){
+            case "monitora":
+                startActivity(new Intent(this, Painel_monitora.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+
+            case  "motorista":
+                startActivity(new Intent(this, Painel_motorista.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+
+            default:
+                startActivity(new Intent(this, Login.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+        }
+        return;
+    }
     private void PuxarDados(){
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
         progressDialog.show();
@@ -250,26 +304,6 @@ public class EditarEndereco extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
-                startActivity(new Intent(this, Painel_motorista.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
-                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
-                break;
-            default:break;
-        }
-        return true;
-    }
-
-    //O botao padrao do android
-    @Override
-    public void onBackPressed(){
-        startActivity(new Intent(this, Painel_motorista.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
-        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
-        return;
-    }
 }
 
 

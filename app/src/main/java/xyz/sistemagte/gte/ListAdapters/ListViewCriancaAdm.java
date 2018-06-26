@@ -41,7 +41,7 @@ public class ListViewCriancaAdm extends ArrayAdapter<CriancaConst>{
         CriancaConst criancaConst = criancaList.get(position);
 
         txtNome.setText(criancaConst.getNomeCrianca().substring(0,1).toUpperCase().concat(criancaConst.getNomeCrianca().substring(1)) + " " + criancaConst.getSobrenomeCrianca().substring(0,1).toUpperCase().concat(criancaConst.getSobrenomeCrianca().substring(1)));
-        txtResp.setText(mCtx.getResources().getString(R.string.responsavel)+ ": "+ criancaConst.getResponsavelCrianca());
+        txtResp.setText(mCtx.getResources().getString(R.string.responsavel)+ ": "+ criancaConst.getResponsavelCrianca() + " " + criancaConst.getSobrenomeResp());
 
         return listViewItem;
     }

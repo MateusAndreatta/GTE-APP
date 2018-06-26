@@ -95,6 +95,7 @@ public class Painel_motorista extends AppCompatActivity {
 
     public void irEditar_endereco(View view) {
         Intent tela = new Intent(this, EditarEndereco.class);
+        tela.putExtra("tipo","motorista");
         startActivity(tela);
     }
 }

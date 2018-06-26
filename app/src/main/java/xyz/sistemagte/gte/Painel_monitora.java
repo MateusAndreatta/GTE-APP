@@ -70,6 +70,9 @@ public class Painel_monitora extends AppCompatActivity {
     }
 
     public void irEditar_endereco(View view) {
+        Intent Tela = new Intent(this, EditarEndereco.class);
+        Tela.putExtra("tipo","monitora");
+        startActivity(Tela);
     }
 
     public void irEmpresa(View view) {
