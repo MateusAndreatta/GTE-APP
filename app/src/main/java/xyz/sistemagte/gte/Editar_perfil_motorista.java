@@ -101,7 +101,7 @@ public class Editar_perfil_motorista extends AppCompatActivity {
                     public void onResponse(String response) {
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-
+                        System.out.println(response);
                         try {
                             JSONObject obj = new JSONObject(response);
 

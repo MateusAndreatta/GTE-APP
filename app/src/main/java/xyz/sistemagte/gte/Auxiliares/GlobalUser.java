@@ -2,6 +2,8 @@ package xyz.sistemagte.gte.Auxiliares;
 
 import android.app.Application;
 
+import com.flurry.android.FlurryAgent;
+
 /**
  * Created by Andreatta on 04/04/2018.
  */
@@ -58,4 +60,13 @@ public class GlobalUser extends Application {
     public void setGlobalUserEmail(String globalUserEmail) {
         GlobalUserEmail = globalUserEmail;
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        new FlurryAgent.Builder()
+                .withLogEnabled(true)
+                .build(this, "GC9KRTVDYX3D9DQ7BB2X");
+    }
+
 }
