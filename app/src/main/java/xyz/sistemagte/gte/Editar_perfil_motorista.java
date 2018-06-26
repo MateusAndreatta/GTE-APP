@@ -36,7 +36,7 @@ import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 public class Editar_perfil_motorista extends AppCompatActivity {
 
-    EditText nome,sobrenome,email,cpf,rg,nasc,cnh,validaCnh;
+    EditText nome,sobrenome,email,cpf,rg,nasc,cnh,validaCnh,primeiraHabi;
     Spinner sexo,categoria;
     private static String URL_EDITAR = "https://sistemagte.xyz/android/editar/editarMotorista.php";
     private static String JSON_URL = "https://sistemagte.xyz/json/motorista/ListarMotorista.php";
@@ -66,6 +66,7 @@ public class Editar_perfil_motorista extends AppCompatActivity {
         validaCnh = findViewById(R.id.ValidCnh);
         sexo = findViewById(R.id.sexo);
         categoria = findViewById(R.id.categoria);
+        primeiraHabi = findViewById(R.id.editar_primeira_habi);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
@@ -79,6 +80,7 @@ public class Editar_perfil_motorista extends AppCompatActivity {
 
         MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
         MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",validaCnh);
+        MaskEditTextChangedListener mascaraprimeiraHabi  = new MaskEditTextChangedListener("##/##/####",primeiraHabi);
         MaskEditTextChangedListener mascaraDatanasc  = new MaskEditTextChangedListener("##/##/####",nasc);
         MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("#.###.###-#",rg);
 
@@ -86,6 +88,7 @@ public class Editar_perfil_motorista extends AppCompatActivity {
         validaCnh.addTextChangedListener(mascaraData);
         nasc.addTextChangedListener(mascaraDatanasc);
         rg.addTextChangedListener(mascaraRG);
+        primeiraHabi.addTextChangedListener(mascaraprimeiraHabi);
     }
 
     private void PuxarDados(){
