@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -35,14 +36,15 @@ import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 public class Editar_perfil_motorista extends AppCompatActivity {
 
-    EditText nome,sobrenome,email,cpf,rg,nasc,cep,cidade,rua,num,complemento,cnh,validaCnh;
-    Spinner sexo,categoria,Estado;
-
+    EditText nome,sobrenome,email,cpf,rg,nasc,cnh,validaCnh;
+    Spinner sexo,categoria;
+    private static String URL_EDITAR = "https://sistemagte.xyz/android/editar/editarMotorista.php";
     private static String JSON_URL = "https://sistemagte.xyz/json/motorista/ListarMotorista.php";
     ListView listView;
     private int idUsuario;
     AlertDialog alerta;
 
+    String catHolder;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
 
@@ -181,6 +183,72 @@ public class Editar_perfil_motorista extends AppCompatActivity {
         startActivity(new Intent(this, Painel_motorista.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
+    }
+
+    public void salvarDados(View view) {
+
+        if(PegarCategoria()){
+            progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
+            progressDialog.show();
+
+            // Creating string request with post method.
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_EDITAR,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            System.out.println(response);
+                            Toast.makeText(Editar_perfil_motorista.this, R.string.informacoesSalvasSucesso, Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                            Intent tela = new Intent(Editar_perfil_motorista.this,Painel_motorista.class);
+                            startActivity(tela);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            progressDialog.dismiss();
+                            Toast.makeText(Editar_perfil_motorista.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("id", String.valueOf(idUsuario));
+                    params.put("nome", nome.getText().toString());
+                    params.put("sobrenome", sobrenome.getText().toString());
+                    params.put("email", email.getText().toString());
+                    params.put("rg", rg.getText().toString());
+                    params.put("cpf", cpf.getText().toString());
+                    params.put("cnh", cnh.getText().toString());
+                    params.put("validaCnh", validaCnh.getText().toString());
+                    params.put("nasc",  nasc.getText().toString());
+                    params.put("categoria", catHolder);
+                    params.put("sexo", sexo.getSelectedItem().toString().toLowerCase());
+
+                    return params;
+                }
+
+            };
+
+            requestQueue.getCache().clear();
+            requestQueue.add(stringRequest);
+        }
+
+    }
+
+    public boolean PegarCategoria(){
+        if(categoria.getSelectedItemPosition() == 0){
+            Toast.makeText(this, R.string.verificarCNH, Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            if(categoria.getSelectedItemPosition() == 1){
+                catHolder = "cat_d";
+                return true;
+            }else{
+                catHolder = "cat_e";
+                return true;
+            }
+        }
     }
 }
 
