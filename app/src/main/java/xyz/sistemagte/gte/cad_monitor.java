@@ -272,6 +272,8 @@ public class cad_monitor extends AppCompatActivity {
                     params.put("dataA", data_admissao.getText().toString());
                     params.put("sexo", sexo.getSelectedItem().toString().toLowerCase());
                     params.put("estado",EstadoHolder);
+                    params.put("telR", tel_residencial.getText().toString());
+                    params.put("salario", salario.getText().toString());
 
                     return params;
                 }
