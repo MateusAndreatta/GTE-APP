@@ -275,6 +275,8 @@ public class cad_motorista extends AppCompatActivity{
                     params.put("cnh", cnh.getText().toString());
                     params.put("validadeCnh", validaCnh.getText().toString());
                     params.put("dtHabilitacao", cad_data_hablitacao.getText().toString());
+                    params.put("telR", tel_residencial.getText().toString());
+                    params.put("salario", salario.getText().toString());
                     params.put("estado", EstadoHolder);
                     params.put("categoria", catHolder);
                     params.put("sexo", sexo.getSelectedItem().toString().toLowerCase());
