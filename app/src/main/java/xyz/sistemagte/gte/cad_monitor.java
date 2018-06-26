@@ -28,7 +28,7 @@ import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 public class cad_monitor extends AppCompatActivity {
 
-    EditText cep, cidade, rua, numero, complemetno, data_admissao, hora_entrada, hora_saida;
+    EditText cep, cidade, rua, numero, complemetno, data_admissao, hora_entrada, hora_saida,salario,tel_residencial;
     Spinner sexo, Estado;
     String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder,EstadoHolder;
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenMotorista.php";
@@ -49,6 +49,8 @@ public class cad_monitor extends AppCompatActivity {
         data_admissao = findViewById(R.id.data_admissao);
         hora_entrada = findViewById(R.id.hora_entrada);
         hora_saida = findViewById(R.id.hora_saida);
+        salario = findViewById(R.id.salario);
+        tel_residencial = findViewById(R.id.cad_tel_residencial);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         Estado = findViewById(R.id.cad_estado);
@@ -71,11 +73,15 @@ public class cad_monitor extends AppCompatActivity {
         MaskEditTextChangedListener mascaraHoraEntrada = new MaskEditTextChangedListener("##:##", hora_entrada);
         MaskEditTextChangedListener mascaraData = new MaskEditTextChangedListener("##/##/####", data_admissao);
         MaskEditTextChangedListener mascaraHoraSaida = new MaskEditTextChangedListener("##:##", hora_saida);
+        MaskEditTextChangedListener mascaraTelResidencial = new MaskEditTextChangedListener("(##) ####-####", tel_residencial);
+        MaskEditTextChangedListener mascaraSalario = new MaskEditTextChangedListener("#.###,##", salario);
 
         cep.addTextChangedListener(mascaraCEP);
         hora_entrada.addTextChangedListener(mascaraHoraEntrada);
         data_admissao.addTextChangedListener(mascaraData);
         hora_saida.addTextChangedListener(mascaraHoraSaida);
+        tel_residencial.addTextChangedListener(mascaraTelResidencial);
+        salario.addTextChangedListener(mascaraSalario);
 
         cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

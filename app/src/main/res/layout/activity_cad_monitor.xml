@@ -78,6 +78,15 @@
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
             <EditText
+                android:id="@+id/cad_tel_residencial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/telefone_residencial"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"
+                android:inputType="number"/>
+            <EditText
                 android:id="@+id/data_admissao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,6 +113,17 @@
                 android:hint="@string/horaSaida"
                 android:background="@drawable/input_style"
                 android:layout_marginBottom="5dp"/>
+
+            <EditText
+                android:id="@+id/salario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="@string/salario"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

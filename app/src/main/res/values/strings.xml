@@ -296,4 +296,5 @@
     <string name="data_emitida">Data Emitida</string>
     <string name="emailCadastrado">Email já cadastrado</string>
     <string name="verificarCNH">Coloque categoria de CNH</string>
+    <string name="telefone_residencial">Telefone Residencial</string>
 </resources>
