@@ -126,6 +126,7 @@
                     android:textColor="@color/branco"
                     android:id="@+id/cadastro_motorista"
                     android:background="@drawable/btn_padrao"
+                    android:onClick="CadastrarMonitora"
                     />
 
             </LinearLayout>

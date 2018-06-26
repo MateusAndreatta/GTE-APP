@@ -29,13 +29,14 @@ import xyz.sistemagte.gte.Auxiliares.Validacoes;
 
 public class cad_motorista extends AppCompatActivity{
 
-    EditText cep,cidade,rua,numero,complemento,cnh,validaCnh;
+    EditText cep,cidade,rua,numero,complemento,cnh,validaCnh,cad_data_hablitacao;
     Spinner sexo,categoria,Estado;
-    String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder;
+    String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder,EstadoHolder;
     String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenMotorista.php";
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class cad_motorista extends AppCompatActivity{
         complemento = findViewById(R.id.cad_complemento);
         cnh = findViewById(R.id.cad_cnh);
         validaCnh = findViewById(R.id.cad_ValidCnh);
+        cad_data_hablitacao = findViewById(R.id.cad_data_hablitacao);
 
         categoria = findViewById(R.id.cad_categoria);
         sexo = findViewById(R.id.cad_sexo);
@@ -213,6 +215,7 @@ public class cad_motorista extends AppCompatActivity{
         if(ValidarCampos()){
             progressDialog.setMessage(getResources().getString(R.string.loadingDados));
             progressDialog.show();
+            PegarEstado();
             StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl,
                     new Response.Listener<String>() {
                         @Override
@@ -263,6 +266,10 @@ public class cad_motorista extends AppCompatActivity{
                     params.put("complemento", complemento.getText().toString());
                     params.put("cnh", cnh.getText().toString());
                     params.put("validadeCnh", validaCnh.getText().toString());
+                    params.put("dtHabilitacao", cad_data_hablitacao.getText().toString());
+                    params.put("estado", EstadoHolder);
+                    params.put("categoria", categoria.getSelectedItem().toString());
+                    params.put("sexo", sexo.getSelectedItem().toString());
 
                     return params;
                 }
@@ -273,5 +280,94 @@ public class cad_motorista extends AppCompatActivity{
             requestQueue.add(stringRequest);
         }
 
+    }
+
+
+    private void PegarEstado(){
+        EstadoHolder = Estado.getSelectedItem().toString();
+
+        switch (Estado.getSelectedItem().toString()) {//pega o nome do item ali em cima
+            case "Acre":
+                EstadoHolder = "AC";
+                break;
+            case "Alagoas":
+                EstadoHolder = "AL";
+                break;
+            case "Amapá":
+                EstadoHolder = "AP";
+                break;
+            case "Amazonas":
+                EstadoHolder = "AM";
+                break;
+            case "Bahia":
+                EstadoHolder = "BA";
+                break;
+            case "Ceará":
+                EstadoHolder = "CE";
+                break;
+            case "Distrito Federal":
+                EstadoHolder = "DF";
+                break;
+            case "Espírito Santo":
+                EstadoHolder = "ES";
+                break;
+            case "Goiás":
+                EstadoHolder = "GO";
+                break;
+            case "Maranhão":
+                EstadoHolder = "MA";
+                break;
+            case "Mato Grosso":
+                EstadoHolder = "MT";
+                break;
+            case "Mato Grosso do Sul":
+                EstadoHolder = "MS";
+                break;
+            case "Minas Gerais":
+                EstadoHolder = "MG";
+                break;
+            case "Pará":
+                EstadoHolder = "PA";
+                break;
+            case "Paraiba":
+                EstadoHolder = "PB";
+                break;
+            case "Paraná":
+                EstadoHolder = "PR";
+                break;
+            case "Pernambuco":
+                EstadoHolder = "PE";
+                break;
+            case "Piauí":
+                EstadoHolder = "PI";
+                break;
+            case "Rio de Janeiro":
+                EstadoHolder = "RJ";
+                break;
+            case "Rio Grande do Norte":
+                EstadoHolder = "RN";
+                break;
+            case "Rio Grande do Sul":
+                EstadoHolder = "RS";
+                break;
+            case "Rondônia":
+                EstadoHolder = "RO";
+                break;
+            case "Roraima":
+                EstadoHolder = "RR";
+                break;
+            case "Santa Catarina":
+                EstadoHolder = "SC";
+                break;
+            case "São Paulo":
+                EstadoHolder = "SP";
+                break;
+            case "Sergipe":
+                EstadoHolder = "SE";
+                break;
+            case "Tocantinss":
+                EstadoHolder = "TO";
+                break;
+        }
     }
 }

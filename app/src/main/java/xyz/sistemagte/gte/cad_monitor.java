@@ -1,5 +1,7 @@
 package xyz.sistemagte.gte;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,12 +21,20 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 public class cad_monitor extends AppCompatActivity {
 
     EditText cep, cidade, rua, numero, complemetno, data_admissao, hora_entrada, hora_saida;
     Spinner sexo, Estado;
+    String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder;
+    String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenMotorista.php";
+
+    RequestQueue requestQueue;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,19 @@ public class cad_monitor extends AppCompatActivity {
 
         Estado = findViewById(R.id.cad_estado);
         sexo = findViewById(R.id.cad_sexo);
+
+        requestQueue = Volley.newRequestQueue(this);
+        progressDialog = new ProgressDialog(this);
+
+        Intent i = getIntent();
+        NomeHolder = i.getStringExtra("nome");
+        SobrenomeHolder = i.getStringExtra("sobrenome");
+        EmailHolder = i.getStringExtra("email");
+        SenhaHolder = i.getStringExtra("senha");
+        TelefoneHolder = i.getStringExtra("telefone");
+        RgHolder = i.getStringExtra("rg");
+        CpfHolder = i.getStringExtra("cpf");
+        DtNascHolder = i.getStringExtra("nascimento");
 
         MaskEditTextChangedListener mascaraCEP = new MaskEditTextChangedListener("#####-###", cep);
         MaskEditTextChangedListener mascaraHoraEntrada = new MaskEditTextChangedListener("##:##", hora_entrada);
@@ -173,5 +197,83 @@ public class cad_monitor extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.cadastro_monitora));     //Titulo para ser exibido na sua Action Bar em frente à seta
+    }
+
+    private boolean ValidarCampos(){
+        if(cep.getText().length() == 0 || hora_saida.getText().length() == 0 || cidade.getText().length() == 0 || rua.getText().length() == 0
+                || numero.getText().length() == 0 || data_admissao.getText().length() == 0 || hora_entrada.getText().length() == 0) {
+            Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public void CadastrarMonitora(View view) {
+
+        if(ValidarCampos()){
+            progressDialog.setMessage(getResources().getString(R.string.loadingDados));
+            progressDialog.show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String ServerResponse) {
+                            System.out.println(ServerResponse);
+                            // Hiding the progress dialog after all task complete.
+                            progressDialog.dismiss();
+
+                            if(ServerResponse.trim().equals("EmailCadastrado")){
+                                Toast.makeText(cad_monitor.this, R.string.emailCadastrado, Toast.LENGTH_SHORT).show();
+                            }else{
+                                // Showing response message coming from server.
+                                Toast.makeText(cad_monitor.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+                                Intent tela = new Intent(cad_monitor.this, Login.class);
+                                startActivity(tela);
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+
+                            // Hiding the progress dialog after all task complete.
+                            progressDialog.dismiss();
+
+                            // Showing error message if something goes wrong.
+                            Toast.makeText(cad_monitor.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+
+                    Map<String, String> params = new HashMap<>();
+                    params.put("nome", NomeHolder);
+                    params.put("sobrenome", SobrenomeHolder);
+                    params.put("email", EmailHolder);
+                    params.put("senha", SenhaHolder);
+                    params.put("telefone", TelefoneHolder);
+                    params.put("rg", RgHolder);
+                    params.put("cpf", CpfHolder);
+                    params.put("nascimento", DtNascHolder);
+
+                    params.put("cep", cep.getText().toString());
+                    params.put("cidade", cidade.getText().toString());
+                    params.put("rua", rua.getText().toString());
+                    params.put("numero", numero.getText().toString());
+                    params.put("horaE", hora_entrada.getText().toString());
+                    params.put("horaS", hora_saida.getText().toString());
+                    params.put("dataA", data_admissao.getText().toString());
+
+                    return params;
+                }
+
+            };
+
+            requestQueue.getCache().clear();
+            requestQueue.add(stringRequest);
+        }
+
+
     }
 }
