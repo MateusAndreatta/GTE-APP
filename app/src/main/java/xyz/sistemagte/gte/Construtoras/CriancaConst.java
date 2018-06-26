@@ -5,16 +5,17 @@ package xyz.sistemagte.gte.Construtoras;
  */
 
 public class CriancaConst {
-    String nome, sobrenome, responsavel,cpf,idCrianca;
-
-    public CriancaConst(String nome, String sobrenome, String responsavel, String cpf, String idC) {
+    String nome, sobrenome, responsavel,sobrenomeResp,cpf,idCrianca;
+    //para funcionarios
+    public CriancaConst(String nome, String sobrenome, String responsavel,String sobrenomeResp, String cpf, String idC) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.responsavel = responsavel;
         this.cpf = cpf;
         this.idCrianca = idC;
+        this.sobrenomeResp = sobrenomeResp;
     }
-
+    //para o responsavel
     public CriancaConst(String nome, String sobrenome, String cpf,String idC) {
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -40,5 +41,9 @@ public class CriancaConst {
 
     public String getIdCrianca() {
         return idCrianca;
+    }
+
+    public String getSobrenomeResp() {
+        return sobrenomeResp;
     }
 }

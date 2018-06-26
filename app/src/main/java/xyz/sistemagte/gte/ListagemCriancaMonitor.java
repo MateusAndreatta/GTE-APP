@@ -123,7 +123,7 @@ public class ListagemCriancaMonitor extends AppCompatActivity implements SearchV
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("responsavel"),funcObject.getString("cpf"), funcObject.getString("id_crianca"));
+                                CriancaConst funcConst = new CriancaConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("responsavel"),funcObject.getString("sobrenomeResp"),funcObject.getString("cpf"), funcObject.getString("id_crianca"));
 
                                 criancaList.add(funcConst);
                                 listaQuery.add(funcConst);
