@@ -97,7 +97,17 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/cnh"
-                android:inputType="numberDecimal" />
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editar_primeira_habi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/input_style"
+                android:ems="10"
+                android:hint="@string/data_habilitacao"
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/ValidCnh"
@@ -107,7 +117,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/validadeCnh"
-                android:inputType="date" />
+                android:inputType="number" />
 
 
             <LinearLayout
