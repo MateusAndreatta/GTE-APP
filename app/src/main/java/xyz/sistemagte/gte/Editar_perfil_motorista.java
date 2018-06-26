@@ -60,16 +60,10 @@ public class Editar_perfil_motorista extends AppCompatActivity {
         cpf = findViewById(R.id.cpf);
         rg = findViewById(R.id.rg);
         nasc = findViewById(R.id.nasc);
-        cep = findViewById(R.id.cep);
-        cidade = findViewById(R.id.cidade);
-        rua = findViewById(R.id.rua);
-        num = findViewById(R.id.num);
-        complemento = findViewById(R.id.complemento);
         cnh = findViewById(R.id.cnh);
         validaCnh = findViewById(R.id.ValidCnh);
         sexo = findViewById(R.id.sexo);
         categoria = findViewById(R.id.categoria);
-        Estado = findViewById(R.id.estado);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
@@ -131,11 +125,6 @@ public class Editar_perfil_motorista extends AppCompatActivity {
                             cpf.setText(funcObject.getString ("cpf"));
                             rg.setText(funcObject.getString ("rg"));
                             nasc.setText(date);
-                            cep.setText(funcObject.getString ("cep"));
-                            cidade.setText(funcObject.getString ("cidade"));
-                            rua.setText(funcObject.getString ("rua"));
-                            num.setText(funcObject.getString ("num"));
-                            complemento.setText(funcObject.getString ("complemento"));
                             cnh.setText(funcObject.getString ("cnh"));
                             validaCnh.setText(date2);
 

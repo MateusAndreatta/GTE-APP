@@ -90,62 +90,6 @@
 
 
             <EditText
-                android:id="@+id/cep"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/input_style"
-                android:ems="10"
-                android:hint="@string/cep"
-                android:inputType="number" />
-
-            <Spinner
-                android:id="@+id/estado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/input_style"
-                android:entries="@array/estados" />
-
-            <EditText
-                android:id="@+id/cidade"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/input_style"
-                android:ems="10"
-                android:hint="@string/cidade" />
-
-            <EditText
-                android:id="@+id/rua"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/input_style"
-                android:ems="10"
-                android:hint="@string/rua" />
-
-            <EditText
-                android:id="@+id/num"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/input_style"
-                android:ems="10"
-                android:hint="@string/num"
-                android:inputType="number" />
-
-            <EditText
-                android:id="@+id/complemento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/input_style"
-                android:ems="10"
-                android:hint="@string/complemento" />
-
-            <EditText
                 android:id="@+id/cnh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
