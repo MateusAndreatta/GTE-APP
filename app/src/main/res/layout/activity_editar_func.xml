@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <EditText
-                    android:id="@+id/cad_cep"
+                    android:id="@+id/cad_cep_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -148,7 +148,7 @@
                     android:background="@drawable/input_style"
                     android:layout_marginBottom="5dp"/>
                 <Spinner
-                    android:id="@+id/cad_estado"
+                    android:id="@+id/cad_estado_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/estados"
@@ -157,7 +157,7 @@
                     />
                 <EditText
                     android:layout_marginTop="4dp"
-                    android:id="@+id/cad_cidade"
+                    android:id="@+id/cad_cidade_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -165,7 +165,7 @@
                     android:background="@drawable/input_style"
                     android:layout_marginBottom="5dp"/>
                 <EditText
-                    android:id="@+id/cad_rua"
+                    android:id="@+id/cad_rua_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -173,7 +173,7 @@
                     android:background="@drawable/input_style"
                     android:layout_marginBottom="5dp"/>
                 <EditText
-                    android:id="@+id/cad_num"
+                    android:id="@+id/cad_num_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -182,7 +182,7 @@
                     android:layout_marginBottom="5dp"
                     android:inputType="number"/>
                 <EditText
-                    android:id="@+id/cad_complemento"
+                    android:id="@+id/cad_complemento_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -190,7 +190,7 @@
                     android:background="@drawable/input_style"
                     android:layout_marginBottom="5dp"/>
                 <EditText
-                    android:id="@+id/cad_tel_residencial"
+                    android:id="@+id/cad_tel_residencia_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -199,7 +199,7 @@
                     android:layout_marginBottom="5dp"
                     android:inputType="number"/>
                 <EditText
-                    android:id="@+id/data_admissao"
+                    android:id="@+id/data_admissao_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -208,7 +208,7 @@
                     android:background="@drawable/input_style"
                     android:layout_marginBottom="5dp"/>
                 <EditText
-                    android:id="@+id/hora_entrada"
+                    android:id="@+id/hora_entrada_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -217,7 +217,7 @@
                     android:background="@drawable/input_style"
                     android:layout_marginBottom="5dp"/>
                 <EditText
-                    android:id="@+id/hora_saida"
+                    android:id="@+id/hora_saida_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -227,7 +227,7 @@
                     android:layout_marginBottom="5dp"/>
 
                 <EditText
-                    android:id="@+id/salario"
+                    android:id="@+id/salario_monitora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -242,7 +242,7 @@
                     android:orientation="horizontal">
 
                     <Spinner
-                        android:id="@+id/cad_sexo"
+                        android:id="@+id/cad_sexo_monitora"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:entries="@array/sx"
