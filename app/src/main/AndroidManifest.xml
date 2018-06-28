@@ -74,7 +74,8 @@
         <activity android:name=".SelecionarVanMonitoraParaCheckList" />
         <activity android:name=".EditarEndereco" />
         <activity android:name=".cad_motorista_adm" />
-        <activity android:name=".CadMonitoraAdm"></activity>
+        <activity android:name=".CadMonitoraAdm" />
+        <activity android:name=".Graficos"></activity>
     </application>
 
 </manifest>
