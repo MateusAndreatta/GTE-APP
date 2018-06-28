@@ -27,6 +27,7 @@ import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Auxiliares.Validacoes;
 import xyz.sistemagte.gte.Construtoras.FuncConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewFunc;
 
@@ -37,8 +38,6 @@ public class Cad_funcionario extends AppCompatActivity {
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
     int idEmpresa;
-
-    private static String HTTP_URL = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,74 +99,64 @@ public class Cad_funcionario extends AppCompatActivity {
         return;
     }
 
+    private boolean ValidarCampos(){
+
+        if(Nome.getText().length() == 0 || Sobrenome.getText().length() == 0 || Email.getText().length() == 0
+                || senha.getText().length() == 0 || confSenha.getText().length() == 0 || Telefone.getText().length() == 0
+                || Rg.getText().length() == 0 || Cpf.getText().length() == 0 || DataNasc.getText().length() == 0) {
+            Toast.makeText(this, getResources().getString(R.string.verificarCampos), Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            Validacoes validacoes = new Validacoes();
+            if(validacoes.ValidarSenhas(this, senha.getText().toString(),confSenha.getText().toString()))
+            {
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
 
     public void Cadastrar(View view) {
-        //TODO: CADASTRAR FUNCIONARIO
-        /**
-         * Verificar qual o select
-         * Passar todos os parametros por bundle
-         * e realizar lá o cadastro de monitora ou motorista
-         * */
-
-
-        progressDialog.setMessage(getResources().getString(R.string.loadingDados));
-        progressDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, HTTP_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progressDialog.dismiss();
-                        Toast.makeText(Cad_funcionario.this, getResources().getString(R.string.cadastradoSucesso), Toast.LENGTH_SHORT).show();
-                        Intent tela = new Intent(Cad_funcionario.this,Funcionario_adm.class);
-                        startActivity(tela);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        progressDialog.dismiss();
-                        Toast.makeText(Cad_funcionario.this, volleyError.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-
+        Validacoes validacoes = new Validacoes();
+        if(ValidarCampos()){
+            if(validacoes.ValidarSenhas(this,senha.getText().toString(),confSenha.getText().toString())){
                 String tipo = String.valueOf(tipoSpinner.getSelectedItemPosition());
-                switch (tipo) {
-                    case ("0"):
+                switch (tipo){
+                    case("0"):
                         //escolha
-                        Toast.makeText(Cad_funcionario.this, getResources().getString(R.string.tipoUserFeedback), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getResources().getString(R.string.tipoUserFeedback), Toast.LENGTH_SHORT).show();
                         break;
-                    case ("1"):
+                    case("1"):
                         //Motorista
-
+                        Intent telaMotorista = new Intent(Cad_funcionario.this, cad_motorista_adm.class);
+                        telaMotorista.putExtra("nome", Nome.getText().toString());
+                        telaMotorista.putExtra("sobrenome", Sobrenome.getText().toString());
+                        telaMotorista.putExtra("email", Email.getText().toString());
+                        telaMotorista.putExtra("senha", senha.getText().toString());
+                        telaMotorista.putExtra("telefone", Telefone.getText().toString());
+                        telaMotorista.putExtra("rg", Rg.getText().toString());
+                        telaMotorista.putExtra("cpf", Cpf.getText().toString());
+                        telaMotorista.putExtra("nascimento", DataNasc.getText().toString());
+                        startActivity(telaMotorista);
                         break;
-                    case ("2"):
-                        //monitora
-
+                    case("2"):
+                        //Monitora
+                        Intent telaMonitora = new Intent(Cad_funcionario.this, CadMonitoraAdm.class);
+                        telaMonitora.putExtra("nome", Nome.getText().toString());
+                        telaMonitora.putExtra("sobrenome", Sobrenome.getText().toString());
+                        telaMonitora.putExtra("email", Email.getText().toString());
+                        telaMonitora.putExtra("senha", senha.getText().toString());
+                        telaMonitora.putExtra("telefone", Telefone.getText().toString());
+                        telaMonitora.putExtra("rg", Rg.getText().toString());
+                        telaMonitora.putExtra("cpf", Cpf.getText().toString());
+                        telaMonitora.putExtra("nascimento", DataNasc.getText().toString());
+                        startActivity(telaMonitora);
                         break;
                 }
-
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("id", String.valueOf(idEmpresa));
-                params.put("nome", Nome.getText().toString());
-                params.put("sobrenome", Sobrenome.getText().toString());
-                params.put("tel", Telefone.getText().toString());
-                params.put("email", Email.getText().toString());
-                params.put("dt_nasc", DataNasc.getText().toString());
-                params.put("cpf", Cpf.getText().toString());
-                params.put("rg", Rg.getText().toString());
-                params.put("cidade", Cidade.getText().toString());
-                params.put("senha", senha.getText().toString());
-                params.put("tipo", "");
-
-                return params;
             }
 
-        };
-
-        requestQueue.getCache().clear();
-        requestQueue.add(stringRequest);
+        }
     }
 }

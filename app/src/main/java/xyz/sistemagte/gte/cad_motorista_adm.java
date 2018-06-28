@@ -24,16 +24,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 public class cad_motorista_adm extends AppCompatActivity {
     EditText cep,cidade,rua,numero,complemento,cnh,validaCnh,cad_data_hablitacao,salario,tel_residencial;
     Spinner sexo,categoria,Estado;
     String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder,EstadoHolder,catHolder;
-    String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenMotorista.php";
+    String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadAdmMotorista.php";
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
-
+    int idEmpresa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,9 @@ public class cad_motorista_adm extends AppCompatActivity {
         cad_data_hablitacao = findViewById(R.id.cad_data_hablitacao);
         salario = findViewById(R.id.salario);
         tel_residencial = findViewById(R.id.cad_tel_residencial);
+
+        GlobalUser global =(GlobalUser)getApplication();
+        idEmpresa = global.getGlobalUserIdEmpresa();
 
         categoria = findViewById(R.id.cad_categoria);
         sexo = findViewById(R.id.cad_sexo);
@@ -278,6 +282,7 @@ public class cad_motorista_adm extends AppCompatActivity {
                     params.put("estado", EstadoHolder);
                     params.put("categoria", catHolder);
                     params.put("sexo", sexo.getSelectedItem().toString().toLowerCase());
+                    params.put("idE", String.valueOf(idEmpresa));
 
                     return params;
                 }

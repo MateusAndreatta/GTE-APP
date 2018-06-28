@@ -24,21 +24,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 public class CadMonitoraAdm extends AppCompatActivity {
 
     EditText cep, cidade, rua, numero, complemetno, data_admissao, hora_entrada, hora_saida,salario,tel_residencial;
     Spinner sexo, Estado;
     String NomeHolder, SobrenomeHolder,EmailHolder,SenhaHolder,TelefoneHolder,RgHolder,CpfHolder,DtNascHolder,EstadoHolder;
-    String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadGenMotorista.php";
-
+    String HttpUrl = "https://sistemagte.xyz/android/cadastros/cadAdmMonitora.php\n";
+    int idEmpresa;
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_monitora_adm);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         cep = findViewById(R.id.cad_cep);
         cidade = findViewById(R.id.cad_cidade);
         rua = findViewById(R.id.cad_rua);
@@ -49,7 +50,10 @@ public class CadMonitoraAdm extends AppCompatActivity {
         hora_saida = findViewById(R.id.hora_saida);
         salario = findViewById(R.id.salario);
         tel_residencial = findViewById(R.id.cad_tel_residencial);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        GlobalUser global =(GlobalUser)getApplication();
+        idEmpresa = global.getGlobalUserIdEmpresa();
+
 
         Estado = findViewById(R.id.cad_estado);
         sexo = findViewById(R.id.cad_sexo);
@@ -272,6 +276,7 @@ public class CadMonitoraAdm extends AppCompatActivity {
                     params.put("estado",EstadoHolder);
                     params.put("telR", tel_residencial.getText().toString());
                     params.put("salario", salario.getText().toString());
+                    params.put("idE", String.valueOf(idEmpresa));
 
                     return params;
                 }
