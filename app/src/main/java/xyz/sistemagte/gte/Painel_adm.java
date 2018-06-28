@@ -94,7 +94,8 @@ public class Painel_adm extends AppCompatActivity {
     }
 
     public void irGraficos(View view) {
-        Toast.makeText(this, "Gráficos indisponível no momento", Toast.LENGTH_SHORT).show();
+        Intent Tela = new Intent(this, Graficos.class);
+        startActivity(Tela);
     }
 
     public void irResponsaveis(View view) {

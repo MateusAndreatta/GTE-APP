@@ -1,9 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.sistemagte.gte.Graficos">
+    tools:context="xyz.sistemagte.gte.Graficos"
+    android:padding="20dp">
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtEnqueteTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/grafico"
+            android:textSize="40sp"
+            android:padding="20dp"
+            android:paddingBottom="0dp"
+            android:textAlignment="center"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/mensal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/graficoMensal" />
+
+
+             <RadioButton
+                android:id="@+id/anual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/graficoAnual" />
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/escolas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/input_style"
+            android:layout_marginBottom="5dp"
+            />
+
+        <Spinner
+            android:id="@+id/spinerMeses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="54dp"
+            android:entries="@array/meses"
+            android:background="@drawable/input_style"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnIniciar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enviar"
+            android:onClick="Enviar"
+            android:background="@drawable/btn_padrao"
+            android:textColor="@color/branco"
+            android:layout_marginBottom="7dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
