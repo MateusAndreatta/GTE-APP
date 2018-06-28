@@ -315,5 +315,5 @@
     <string name="verificarCNH">Coloque categoria de CNH</string>
     <string name="telefone_residencial">Telefone Residencial</string>
     <string name="graficoMensal">Gráfico Mensal</string>
-    <string name="graficoAnual">Gráfico Anual</string>
+    <string name="graficoAnual">Gráfico Anual (Ano atual)</string>
 </resources>
