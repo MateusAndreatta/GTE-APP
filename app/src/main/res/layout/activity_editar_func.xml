@@ -9,133 +9,437 @@
     android:padding="20dp"
     tools:context="xyz.sistemagte.gte.EditarFunc">
 
-
-    <ScrollView
+    <!-- Generico -->
+    <LinearLayout
+        android:id="@+id/telaGenerico"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:visibility="visible">
 
-        <LinearLayout
-            android:id="@+id/cad_form"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/editarFunc"
-                android:textSize="40sp"
-                android:gravity="center"/>
-
-            <EditText
-                android:id="@+id/cad_nome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="@string/nome"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_sobrenome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="@string/sobrenome"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:hint="@string/email"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_senha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:hint="@string/senha"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_conf_senha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:hint="@string/conf_senha"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_tel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone"
-                android:hint="@string/telefone"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_cpf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:hint="@string/cpf"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_rg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:hint="@string/rg"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/cad_datanascimento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
-                android:hint="@string/datanascimento"
-                android:background="@drawable/input_style"
-                android:layout_marginBottom="5dp"/>
             <LinearLayout
+                android:id="@+id/cad_form"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <!-- TODO: personalizar esse spiinner -->
-                <Spinner
-                    android:id="@+id/cad_func"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/tipoFunc"
+                    android:text="@string/editarFunc"
+                    android:textSize="40sp"
+                    android:gravity="center"/>
+
+                <EditText
+                    android:id="@+id/cad_nome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:hint="@string/nome"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/cad_sobrenome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:hint="@string/sobrenome"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/cad_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/email"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/cad_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="phone"
+                    android:hint="@string/telefone"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/cad_cpf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/cpf"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/cad_rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/rg"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/cad_datanascimento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:hint="@string/datanascimento"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/salvar"
+                        android:textColor="@color/branco"
+                        android:id="@+id/cadastro"
+                        android:onClick="TrocarTela"
+                        android:background="@drawable/btn_padrao"
+                        />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <!-- Monitora -->
+    <LinearLayout
+        android:id="@+id/telaMonitora"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/editarMonitor"
+            android:textSize="40sp"
+            android:gravity="center"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/cad_monitora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/cad_cep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/cep"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <Spinner
+                    android:id="@+id/cad_estado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/estados"
                     android:layout_weight="1"
                     android:background="@drawable/input_style"
                     />
-
-                <Button
+                <EditText
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/cad_cidade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/salvar"
-                    android:textColor="@color/branco"
-                    android:id="@+id/cadastro"
-                    android:onClick="Cadastrar"
-                    android:background="@drawable/btn_padrao"
-                    />
+                    android:ems="10"
+                    android:hint="@string/cidade"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/cad_rua"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/rua"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/cad_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/num"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="number"/>
+                <EditText
+                    android:id="@+id/cad_complemento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/complemento"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/cad_tel_residencial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/telefone_residencial"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="number"/>
+                <EditText
+                    android:id="@+id/data_admissao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:hint="@string/data_admissao"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/hora_entrada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="time"
+                    android:hint="@string/horaEntrada"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+                <EditText
+                    android:id="@+id/hora_saida"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="time"
+                    android:hint="@string/horaSaida"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+
+                <EditText
+                    android:id="@+id/salario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/salario"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/cad_sexo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/sx"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_style"
+                        />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/salvar"
+                        android:textColor="@color/branco"
+                        android:id="@+id/cadastro_motorista"
+                        android:background="@drawable/btn_padrao"
+                        android:onClick="EditarMonitora"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <!-- Motorista -->
+    <LinearLayout
+        android:id="@+id/telaMotorista"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/editarMotorista"
+            android:textSize="40sp"
+            android:gravity="center"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/cad_form_motorista"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/cad_cep_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/input_style"
+                    android:ems="10"
+                    android:hint="@string/cep"
+                    android:inputType="number" />
+
+                <Spinner
+                    android:id="@+id/cad_estado_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/input_style"
+                    android:entries="@array/estados" />
+
+                <EditText
+                    android:id="@+id/cad_cidade_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/input_style"
+                    android:ems="10"
+                    android:hint="@string/cidade" />
+
+                <EditText
+                    android:id="@+id/cad_rua_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/input_style"
+                    android:ems="10"
+                    android:hint="@string/rua" />
+
+                <EditText
+                    android:id="@+id/cad_num_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/input_style"
+                    android:ems="10"
+                    android:hint="@string/num"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/cad_complemento_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/input_style"
+                    android:ems="10"
+                    android:hint="@string/complemento" />
+
+                <EditText
+                    android:id="@+id/cad_cnh_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/input_style"
+                    android:ems="10"
+                    android:hint="@string/cnh"
+                    android:inputType="numberDecimal" />
+
+                <EditText
+                    android:id="@+id/cad_ValidCnh_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/input_style"
+                    android:ems="10"
+                    android:hint="@string/validadeCnh"
+                    android:inputType="date" />
+
+                <EditText
+                    android:id="@+id/cad_data_hablitacao_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/input_style"
+                    android:ems="10"
+                    android:hint="@string/data_habilitacao"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/cad_tel_residencial_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/telefone_residencial"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="number"/>
+
+                <EditText
+                    android:id="@+id/salario_motorista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/salario"
+                    android:background="@drawable/input_style"
+                    android:layout_marginBottom="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/cad_categoria_motorista"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_style"
+                        android:entries="@array/categoria" />
+
+                    <Spinner
+                        android:id="@+id/cad_sexo_motorista"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_style"
+                        android:entries="@array/sx" />
+
+                    <Button
+                        android:id="@+id/cadastro_motorista_motorista"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_padrao"
+                        android:onClick="editar_motorista"
+                        android:text="@string/enviar"
+                        android:textColor="@color/branco" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
 </LinearLayout>
 
 
