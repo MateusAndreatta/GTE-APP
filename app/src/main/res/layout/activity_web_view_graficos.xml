@@ -4,11 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.sistemagte.gte.WebViewGraficos">
+    tools:context="xyz.sistemagte.gte.WebViewGraficos"
+    android:orientation="vertical">
 
 
     <WebView
         android:id="@+id/webViewGrafico"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+    <Button
+        android:id="@+id/btnIniciar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/voltar"
+        android:onClick="voltar"
+        android:background="@drawable/btn_padrao"
+        android:textColor="@color/branco"
+        android:layout_marginBottom="10dp"
+
+        />
+</LinearLayout>
 </LinearLayout>
