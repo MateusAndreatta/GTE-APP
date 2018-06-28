@@ -5,11 +5,11 @@ package xyz.sistemagte.gte.Construtoras;
  */
 
 public class FuncConst {
-    String nome, sobrenome, tipo;
-
-    public FuncConst(String nome, String sobrenome,String tipo){
+    String nome, sobrenome, tipo,id;
+    public FuncConst(String nome, String sobrenome,String tipo,String id){
         this.nome = nome + " " + sobrenome;
         this.tipo = tipo;
+        this.id = id;
     }
 
     public String getNome(){
@@ -20,4 +20,7 @@ public class FuncConst {
         return this.tipo;
     }
 
+    public String getId() {
+        return id;
+    }
 }
