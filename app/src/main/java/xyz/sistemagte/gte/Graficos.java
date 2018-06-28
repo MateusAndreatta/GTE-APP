@@ -149,6 +149,14 @@ public class Graficos extends AppCompatActivity {
                  * */
                 Intent Tela = new Intent(this,WebViewGraficos.class);
                 Tela.putExtra("idEscola",String.valueOf(idEscolaHolder));
+                Tela.putExtra("tipo","anual");
+                startActivity(Tela);
+            }else{
+
+                Intent Tela = new Intent(this,WebViewGraficos.class);
+                Tela.putExtra("tipo","mensal");
+                Tela.putExtra("idEscola",String.valueOf(idEscolaHolder));
+                Tela.putExtra("mes",spinerMeses.getSelectedItem().toString());
                 startActivity(Tela);
             }
         }
