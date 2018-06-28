@@ -1,9 +1,13 @@
 package xyz.sistemagte.gte;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,8 +31,8 @@ import xyz.sistemagte.gte.Construtoras.EscolasConstr;
 
 public class Graficos extends AppCompatActivity {
 
-    private int idEmpresa,idUsuario;
-    Spinner EscolaSpinner;
+    private int idEmpresa, idUsuario;
+    Spinner EscolaSpinner,spinerMeses;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
@@ -39,12 +43,17 @@ public class Graficos extends AppCompatActivity {
     ArrayAdapter<String> EscolasListSpinner;
     ArrayList<EscolasConstr> EscolasListConst;
 
+    RadioGroup radioGroup;
+
+    boolean vAnual,vMensal;
+    String HttpUrlAnual = "https://sistemagte.xyz/android/graficoAnual.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graficos);
         EscolaSpinner = findViewById(R.id.escolas);
-
+        spinerMeses = findViewById(R.id.spinerMeses);
         requestQueue = Volley.newRequestQueue(this);
         EscolasListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
         EscolasListConst = new ArrayList<>();
@@ -54,9 +63,28 @@ public class Graficos extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.grafico));
 
-        GlobalUser global =(GlobalUser)getApplication();
+        GlobalUser global = (GlobalUser) getApplication();
         idUsuario = global.getGlobalUserID();
         idEmpresa = global.getGlobalUserIdEmpresa();
+
+        radioGroup = findViewById(R.id.radioGrup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i){
+                    case R.id.anual:
+                        spinerMeses.setVisibility(View.GONE);
+                        vAnual = true;
+                        vMensal = false;
+                        break;
+                    case R.id.mensal:
+                        spinerMeses.setVisibility(View.VISIBLE);
+                        vMensal = true;
+                        vAnual = false;
+                        break;
+                }
+            }
+        });
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrlSpinner,
                 new Response.Listener<String>() {
@@ -82,18 +110,12 @@ public class Graficos extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
-                        // Showing error message if something goes wrong.
                         Toast.makeText(Graficos.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() {
-
-                // Creating Map String Params.
                 Map<String, String> params = new HashMap<>();
-
-                // Adding All values to Params.
                 params.put("id", String.valueOf(idEmpresa));
 
                 return params;
@@ -106,4 +128,21 @@ public class Graficos extends AppCompatActivity {
 
     }
 
+
+    public void Enviar(View view) {
+
+        if(!vAnual && !vMensal){
+            Toast.makeText(this, "Selecione o tipo de gráfico.", Toast.LENGTH_SHORT).show();
+        }else{
+            if(vAnual){
+                /**
+                 * grafico anual
+                 * */
+                
+            }
+        }
+
+
+
+    }
 }

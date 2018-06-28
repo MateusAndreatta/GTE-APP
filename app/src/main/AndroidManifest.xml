@@ -75,7 +75,7 @@
         <activity android:name=".EditarEndereco" />
         <activity android:name=".cad_motorista_adm" />
         <activity android:name=".CadMonitoraAdm" />
-        <activity android:name=".Graficos"></activity>
+        <activity android:name=".Graficos" />
     </application>
 
 </manifest>
