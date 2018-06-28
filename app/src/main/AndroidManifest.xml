@@ -76,6 +76,7 @@
         <activity android:name=".cad_motorista_adm" />
         <activity android:name=".CadMonitoraAdm" />
         <activity android:name=".Graficos" />
+        <activity android:name=".WebViewGraficos"></activity>
     </application>
 
 </manifest>

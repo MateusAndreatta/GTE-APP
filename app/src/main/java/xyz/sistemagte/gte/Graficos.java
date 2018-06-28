@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -48,6 +49,8 @@ public class Graficos extends AppCompatActivity {
     boolean vAnual,vMensal;
     String HttpUrlAnual = "https://sistemagte.xyz/android/graficoAnual.php";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,8 @@ public class Graficos extends AppCompatActivity {
         GlobalUser global = (GlobalUser) getApplication();
         idUsuario = global.getGlobalUserID();
         idEmpresa = global.getGlobalUserIdEmpresa();
+
+
 
         radioGroup = findViewById(R.id.radioGrup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -138,7 +143,8 @@ public class Graficos extends AppCompatActivity {
                 /**
                  * grafico anual
                  * */
-                
+                Intent Tela = new Intent(this,WebViewGraficos.class);
+                startActivity(Tela);
             }
         }
 
