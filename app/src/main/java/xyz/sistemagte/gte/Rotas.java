@@ -53,6 +53,7 @@ public class Rotas extends AppCompatActivity {
     List<String> WordList;
     Spinner spinner;
     String enderecos = "";
+    String enderecosEscola = "";
     String EnderecoMotorista = "-25.513906,-49.235105";
 
     @Override
@@ -290,10 +291,10 @@ public class Rotas extends AppCompatActivity {
                                 String rua = jsonObject.getString("rua");
                                 String cep = jsonObject.getString("cep");
                                 String numero = jsonObject.getString("num");
-                                System.out.println("RUA: " + rua.replace(" ","+")+ "+" + numero);
-                                enderecos += rua.replace(" ","+")+ "+" + numero+"+"+cep+"|";
+                                System.out.println("RUA: " + rua.replace(" ","+")+ "+" + numero+"+"+cep+"|");
+                                enderecosEscola += rua.replace(" ","+")+ "+" + numero+"+"+cep+"|";
                             }
-                            IniciarGPS(enderecos);
+                            IniciarGPS(enderecosEscola);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -324,7 +325,7 @@ public class Rotas extends AppCompatActivity {
     }
 
     private void IniciarGPS(String endereco){
-
+        System.out.println("ENVIANDO: " + endereco);
         Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&dir_action=navigate&destination= "+ EnderecoMotorista + "&waypoints=" + endereco +"&travelmode=driving");
         Intent intent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         intent.setPackage("com.google.android.apps.maps");
