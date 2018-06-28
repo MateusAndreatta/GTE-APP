@@ -44,13 +44,14 @@ import xyz.sistemagte.gte.ListAdapters.ListViewFunc;
 public class Funcionario_adm extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private static String JSON_URL = "https://sistemagte.xyz/json/adm/ListarFuncionarios.php";
+    private static String URL_Excluir = "https://sistemagte.xyz/android/excluir/excluirFunc.php";
     ListView listView;
     private int idEmpresa;
     List<FuncConst> funcList;
     List<FuncConst> listaQuery;
     AlertDialog alerta;
     SearchView searchView;
-
+    int idFunc;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     @Override
@@ -88,7 +89,8 @@ public class Funcionario_adm extends AppCompatActivity implements SearchView.OnQ
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
+                FuncConst func = listaQuery.get(position);
+                idFunc = Integer.parseInt(func.getId());
 
                 //Alert de confirmação do excluir
                 AlertDialog.Builder builder = new AlertDialog.Builder(Funcionario_adm.this);
@@ -102,7 +104,7 @@ public class Funcionario_adm extends AppCompatActivity implements SearchView.OnQ
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        ExcluirFunc();
                     }
                 });
 
@@ -148,20 +150,15 @@ public class Funcionario_adm extends AppCompatActivity implements SearchView.OnQ
 
     private void loadFuncList() {
 
-
-        // Showing progress dialog at user registration time.
+        funcList.clear();
+        listaQuery.clear();
         progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
         progressDialog.show();
-
-        // Creating string request with post method.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-
                         try {
                             JSONObject obj = new JSONObject(response);
 
@@ -169,7 +166,7 @@ public class Funcionario_adm extends AppCompatActivity implements SearchView.OnQ
 
                             for (int i = 0; i < funcArray.length(); i++) {
                                 JSONObject funcObject = funcArray.getJSONObject(i);
-                                FuncConst funcConst = new FuncConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("descricao"));
+                                FuncConst funcConst = new FuncConst(funcObject.getString("nome"), funcObject.getString("sobrenome"), funcObject.getString("descricao"),funcObject.getString("id_usuario"));
 
                                 funcList.add(funcConst);
                                 listaQuery.add(funcConst);
@@ -234,4 +231,37 @@ public class Funcionario_adm extends AppCompatActivity implements SearchView.OnQ
     public boolean onQueryTextSubmit(String query){
         return false;
     }
+
+    private void ExcluirFunc() {
+        progressDialog.setMessage(getResources().getString(R.string.loadingExcluindo));
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_Excluir,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+                        Toast.makeText(Funcionario_adm.this, getResources().getString(R.string.excluidoComSucesso), Toast.LENGTH_SHORT).show();
+                        loadFuncList();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Funcionario_adm.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", String.valueOf(idFunc));
+                return params;
+            }
+
+        };
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
 }
+
