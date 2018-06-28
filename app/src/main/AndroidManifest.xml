@@ -72,7 +72,8 @@
         <activity android:name=".Faltas" />
         <activity android:name=".CheckListMonitora" />
         <activity android:name=".SelecionarVanMonitoraParaCheckList" />
-        <activity android:name=".EditarEndereco"></activity>
+        <activity android:name=".EditarEndereco" />
+        <activity android:name=".cad_motorista_adm"></activity>
     </application>
 
 </manifest>
