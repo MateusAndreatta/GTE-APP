@@ -139,11 +139,16 @@ public class Graficos extends AppCompatActivity {
         if(!vAnual && !vMensal){
             Toast.makeText(this, "Selecione o tipo de gráfico.", Toast.LENGTH_SHORT).show();
         }else{
+
+            int spinnerPos = EscolaSpinner.getSelectedItemPosition();
+            EscolasConstr escolasConstr = EscolasListConst.get(spinnerPos);
+            idEscolaHolder = escolasConstr.getIdEscola();//pegar a id da escola
             if(vAnual){
                 /**
                  * grafico anual
                  * */
                 Intent Tela = new Intent(this,WebViewGraficos.class);
+                Tela.putExtra("idEscola",String.valueOf(idEscolaHolder));
                 startActivity(Tela);
             }
         }
