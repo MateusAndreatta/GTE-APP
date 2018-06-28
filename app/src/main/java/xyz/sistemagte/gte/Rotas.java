@@ -59,7 +59,6 @@ public class Rotas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rotas);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
 
