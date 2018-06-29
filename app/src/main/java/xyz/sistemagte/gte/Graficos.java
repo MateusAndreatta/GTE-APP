@@ -45,7 +45,7 @@ public class Graficos extends AppCompatActivity {
     ArrayList<EscolasConstr> EscolasListConst;
 
     RadioGroup radioGroup;
-
+    String nomeEscolaHolder;
     boolean vAnual,vMensal;
     String HttpUrlAnual = "https://sistemagte.xyz/android/graficoAnual.php";
 
@@ -143,12 +143,14 @@ public class Graficos extends AppCompatActivity {
             int spinnerPos = EscolaSpinner.getSelectedItemPosition();
             EscolasConstr escolasConstr = EscolasListConst.get(spinnerPos);
             idEscolaHolder = escolasConstr.getIdEscola();//pegar a id da escola
+            nomeEscolaHolder = escolasConstr.getNomeEscola();//pegar a id da escola
             if(vAnual){
                 /**
                  * grafico anual
                  * */
                 Intent Tela = new Intent(this,WebViewGraficos.class);
                 Tela.putExtra("idEscola",String.valueOf(idEscolaHolder));
+                Tela.putExtra("nomeEscola",String.valueOf(nomeEscolaHolder));
                 Tela.putExtra("tipo","anual");
                 startActivity(Tela);
             }else{
@@ -156,6 +158,7 @@ public class Graficos extends AppCompatActivity {
                 Intent Tela = new Intent(this,WebViewGraficos.class);
                 Tela.putExtra("tipo","mensal");
                 Tela.putExtra("idEscola",String.valueOf(idEscolaHolder));
+                Tela.putExtra("nomeEscola",String.valueOf(nomeEscolaHolder));
                 Tela.putExtra("mes",spinerMeses.getSelectedItem().toString());
                 startActivity(Tela);
             }
