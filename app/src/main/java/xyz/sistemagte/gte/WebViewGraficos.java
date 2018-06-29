@@ -30,7 +30,7 @@ public class WebViewGraficos extends AppCompatActivity {
         }else{
             String mes = i.getStringExtra("mes");
             System.out.println(mes);
-            webViewGrafico.loadUrl("https://sistemagte.xyz/android/grafico.php?escola=" +id + "&mes" + mes);
+            webViewGrafico.loadUrl("https://sistemagte.xyz/android/grafico.php?escola=" +id + "&mes=" + mes);
         }
 
     }
