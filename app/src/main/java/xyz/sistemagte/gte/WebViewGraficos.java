@@ -48,7 +48,13 @@ public class WebViewGraficos extends AppCompatActivity {
         return true;
     }
 
-
+    //O botao padrao do android
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(this, Graficos.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        return;
+    }
     public void voltar(View view) {
         Intent tela = new Intent(this,Graficos.class);
         startActivity(tela);
