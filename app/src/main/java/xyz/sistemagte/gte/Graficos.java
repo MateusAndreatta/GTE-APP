@@ -139,7 +139,10 @@ public class Graficos extends AppCompatActivity {
         if(!vAnual && !vMensal){
             Toast.makeText(this, "Selecione o tipo de gráfico.", Toast.LENGTH_SHORT).show();
         }else{
-
+            if(vMensal && spinerMeses.getSelectedItemPosition() == 0){
+                Toast.makeText(this, R.string.selecioneUmMes, Toast.LENGTH_SHORT).show();
+                return;
+            }
             int spinnerPos = EscolaSpinner.getSelectedItemPosition();
             EscolasConstr escolasConstr = EscolasListConst.get(spinnerPos);
             idEscolaHolder = escolasConstr.getIdEscola();//pegar a id da escola
