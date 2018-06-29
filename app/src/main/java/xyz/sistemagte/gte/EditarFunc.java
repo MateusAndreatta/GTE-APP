@@ -1,5 +1,7 @@
 package xyz.sistemagte.gte;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,14 +11,22 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
@@ -30,20 +40,36 @@ public class EditarFunc extends AppCompatActivity {
     EditText cep_motorista,cidade_motorista,rua_motorista,num_motorista,complemento_motorista,cnh_motorista,validade_cnh_motorista,data_hablitacao_motorista,tel_residencial_motorista,salario_motorista;
     Spinner estado_motorista,sexo_motorista,categoria_motorista;
 
+    ProgressDialog progressDialog;
+    RequestQueue requestQueue;
+    String perfil;
+
+    private int idUsuario;
+    AlertDialog alerta;
+
+    private static String JSON_URL = "https://sistemagte.xyz/json/listagem.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_func);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        Intent i = getIntent();
+        perfil = i.getStringExtra("id");
+        System.out.println("ENVIANDO: " +perfil);
+        requestQueue = Volley.newRequestQueue(this);
+
+        progressDialog = new ProgressDialog(EditarFunc.this);
+
         //Campos Genericos
-        Nome = findViewById(R.id.cad_nome);
-        Sobrenome = findViewById(R.id.cad_sobrenome);
-        Telefone = findViewById(R.id.cad_tel);
-        Email = findViewById(R.id.cad_email);
-        DataNasc = findViewById(R.id.cad_datanascimento);
-        Cpf = findViewById(R.id.cad_cpf);
-        Rg = findViewById(R.id.cad_rg);
+        Nome             = findViewById(R.id.cad_nome);
+        Sobrenome        = findViewById(R.id.cad_sobrenome);
+        Telefone         = findViewById(R.id.cad_tel);
+        Email            = findViewById(R.id.cad_email);
+        DataNasc         = findViewById(R.id.cad_datanascimento);
+        Cpf              = findViewById(R.id.cad_cpf);
+        Rg               = findViewById(R.id.cad_rg);
 
         //monitora
         cep_monitora            = findViewById(R.id.cad_cep_monitora);
@@ -82,7 +108,7 @@ public class EditarFunc extends AppCompatActivity {
         MaskEditTextChangedListener mascaraCPF = new MaskEditTextChangedListener("###.###.###-##",Cpf);
         MaskEditTextChangedListener mascaraCelular = new MaskEditTextChangedListener("(##) #####-####",Telefone);
         MaskEditTextChangedListener mascaraData  = new MaskEditTextChangedListener("##/##/####",DataNasc);
-        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("##.###.###-#",Rg);
+        MaskEditTextChangedListener mascaraRG  = new MaskEditTextChangedListener("#.###.###-#",Rg);
         Cpf.addTextChangedListener(mascaraCPF);
         Telefone.addTextChangedListener(mascaraCelular);
         DataNasc.addTextChangedListener(mascaraData);
@@ -354,10 +380,146 @@ public class EditarFunc extends AppCompatActivity {
                 }
             }
         });
-
+            PuxarDados();
 
     }
 
+    private void PuxarDados(){
+        progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+                        System.out.println(response);
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray funcArray = obj.getJSONArray("motorista");
+                            JSONObject funcObject = funcArray.getJSONObject(0);
+
+
+                            String dia = funcObject.getString("dt_nasc");
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position = new ParsePosition(0);
+                            Date data = format.parse(dia,position);
+                            format = new SimpleDateFormat("dd/MM/yyyy");
+                            String date = format.format(data);
+
+                            String dia2 = funcObject.getString("val_cnh");
+                            SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position2 = new ParsePosition(0);
+                            Date data2 = format2.parse(dia2,position2);
+                            format2 = new SimpleDateFormat("dd/MM/yyyy");
+                            String date2 = format2.format(data2);
+
+                            String dia3 = funcObject.getString("dt_hab");
+                            SimpleDateFormat format3 = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position3 = new ParsePosition(0);
+                            Date data3 = format3.parse(dia3,position3);
+                            format3 = new SimpleDateFormat("dd/MM/yyyy");
+                            String date3 = format3.format(data3);
+
+                           cep_motorista            .setText(funcObject.getString("cep"));
+                           cidade_motorista         .setText(funcObject.getString("cidade"));
+                           rua_motorista            .setText(funcObject.getString("rua"));
+                           num_motorista            .setText(funcObject.getString("num"));
+                           complemento_motorista    .setText(funcObject.getString("complemento"));
+                           cnh_motorista            .setText(funcObject.getString("cnh"));
+                           tel_residencial_motorista.setText(funcObject.getString("tel_residencial"));
+                           salario_motorista        .setText(funcObject.getString("salario"));
+                           Nome                     .setText(funcObject.getString("nome"));
+                           Sobrenome                .setText(funcObject.getString("sobrenome"));
+                           Telefone                 .setText(funcObject.getString("tel_cel"));
+                           Email                    .setText(funcObject.getString("email"));
+                           Cpf                      .setText(funcObject.getString("cpf"));
+                           Rg                       .setText(funcObject.getString("rg"));
+                           DataNasc                 .setText(date);
+                           data_hablitacao_motorista.setText(date3);
+                           validade_cnh_motorista   .setText(date2);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray funcArray = obj.getJSONArray("monitora");
+                            JSONObject funcObject = funcArray.getJSONObject(0);
+
+
+                            String dia = funcObject.getString("dt_nasc");
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position = new ParsePosition(0);
+                            Date data = format.parse(dia,position);
+                            format = new SimpleDateFormat("dd/MM/yyyy");
+                            String date = format.format(data);
+
+                            String dia2 = funcObject.getString("dt_admissao");
+                            SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition position2 = new ParsePosition(0);
+                            Date data2 = format2.parse(dia2,position2);
+                            format2 = new SimpleDateFormat("dd/MM/yyyy");
+                            String date2 = format2.format(data2);
+
+
+
+                            cep_monitora           .setText(funcObject.getString("cep"));
+                            cidade_monitora        .setText(funcObject.getString("cidade"));
+                            rua_monitora           .setText(funcObject.getString("rua"));
+                            num_monitora           .setText(funcObject.getString("num"));
+                            complemento_monitora   .setText(funcObject.getString("complemento"));
+                            tel_residencia_monitora.setText(funcObject.getString("tel_residencial"));
+                            hora_entrada_monitora  .setText(funcObject.getString("hora_entrada"));
+                            hora_saida_monitora    .setText(funcObject.getString("hora_saida"));
+                            salario_monitora       .setText(funcObject.getString("salario"));
+                            Nome                     .setText(funcObject.getString("nome"));
+                            Sobrenome                .setText(funcObject.getString("sobrenome"));
+                            Telefone                 .setText(funcObject.getString("tel_cel"));
+                            Email                    .setText(funcObject.getString("email"));
+                            Cpf                      .setText(funcObject.getString("cpf"));
+                            Rg                       .setText(funcObject.getString("rg"));
+                            DataNasc                 .setText(date);
+                            data_admissao_monitora.setText(date2);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+
+                        // Showing error message if something goes wrong.
+                        Toast.makeText(EditarFunc.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(perfil));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
     public void TrocarTela(View view) {
         //TODO: Pegar por Intent o tipo do usuario para trocar o layout
     }

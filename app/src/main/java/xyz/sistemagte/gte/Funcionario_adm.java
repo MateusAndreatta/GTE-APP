@@ -98,8 +98,9 @@ public class Funcionario_adm extends AppCompatActivity implements SearchView.OnQ
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.editarDialog), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
-
+                        Intent Tela = new Intent(Funcionario_adm.this, EditarFunc.class);
+                        Tela.putExtra("id",String.valueOf(idFunc));
+                        startActivity(Tela);
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.excluirDialog), new DialogInterface.OnClickListener() {
