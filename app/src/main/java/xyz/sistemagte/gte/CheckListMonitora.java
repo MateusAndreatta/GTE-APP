@@ -6,9 +6,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -30,17 +34,18 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Auxiliares.Validacoes;
 import xyz.sistemagte.gte.Construtoras.CheckStatusConstr;
 import xyz.sistemagte.gte.Construtoras.CriancaConst;
 import xyz.sistemagte.gte.ListAdapters.ListViewCheck;
 import xyz.sistemagte.gte.ListAdapters.ListViewCriancaAdm;
 
-public class CheckListMonitora extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class CheckListMonitora extends AppCompatActivity{
 
 
     private static String JSON_URL = "https://sistemagte.xyz/json/monitora/checklist.php";
     ListView listView;
-    private int idEmpresa;
+    private int idEmpresa,idUsuario;
     private String idVan;
     List<CheckStatusConstr> checkList;
     List<CheckStatusConstr> listaQuery;
@@ -48,6 +53,7 @@ public class CheckListMonitora extends AppCompatActivity implements SearchView.O
     SearchView searchView;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
+    WebView webViewChecklist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,33 +61,45 @@ public class CheckListMonitora extends AppCompatActivity implements SearchView.O
         setContentView(R.layout.activity_check_list_monitora);
         GlobalUser global =(GlobalUser)getApplication();
         idEmpresa = global.getGlobalUserIdEmpresa();
+        idUsuario = global.getGlobalUserIdEmpresa();
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Intent i = getIntent();
         idVan = i.getStringExtra("id");
 
-        searchView = findViewById(R.id.barra_pesquisa);
-        listView = findViewById(R.id.listView);
-        checkList = new ArrayList<>();
-        listaQuery = new ArrayList<>();
+        webViewChecklist = findViewById(R.id.webViewChecklist);
+        webViewChecklist.getSettings().setJavaScriptEnabled(false);
+        webViewChecklist.loadUrl("https://sistemagte.xyz/android/checklist2.php?id=" + idUsuario +"&van=" + idVan);
+
+
+
+        webViewChecklist.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                view.loadUrl(url);
+                webViewChecklist.clearCache(true);
+                return false;
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.listaCriancas));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
-        requestQueue = Volley.newRequestQueue(this);
-        progressDialog = new ProgressDialog(CheckListMonitora.this);
-
-        loadChecksList();
-
-        listView.setTextFilterEnabled(true);
-        setupSearchView();
 
     }
 
-    private void setupSearchView() {
-        searchView.setIconifiedByDefault(false);// definir se seria usado o icone ou o campo inteiro
-        searchView.setOnQueryTextListener(this);//passagem do contexto para usar o searchview
-        searchView.setSubmitButtonEnabled(false);//Defini se terá ou nao um o botao de submit
-        searchView.setQueryHint(getString(R.string.pesquisarSearchPlaceholder));//Placeholder da searchbar
+   // @Override
+   // public boolean dispatchTouchEvent(MotionEvent ev) {
+   //     // Your code here
+   //     webViewChecklist.reload();
+   //     return super.dispatchTouchEvent(ev);
+   // }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_reload, menu);
+        return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -89,6 +107,10 @@ public class CheckListMonitora extends AppCompatActivity implements SearchView.O
             case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
                 startActivity(new Intent(this, SelecionarVanMonitoraParaCheckList.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+            case R.id.recarregar:
+                Toast.makeText(this, R.string.att, Toast.LENGTH_SHORT).show();
+                webViewChecklist.reload();
                 break;
             default:break;
         }
@@ -101,81 +123,5 @@ public class CheckListMonitora extends AppCompatActivity implements SearchView.O
         startActivity(new Intent(this, SelecionarVanMonitoraParaCheckList.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
-    }
-
-    private void loadChecksList() {
-        checkList.clear();
-        // Showing progress dialog at user registration time.
-        progressDialog.setMessage(getResources().getString(R.string.loadingRegistros));
-        progressDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progressDialog.dismiss();
-                        System.out.println(idVan);
-                        System.out.println(response);
-                        try {
-                            JSONObject obj = new JSONObject(response);
-
-                            JSONArray funcArray = obj.getJSONArray("nome");
-
-                            for (int i = 0; i < funcArray.length(); i++) {
-                                JSONObject funcObject = funcArray.getJSONObject(i);
-                                CheckStatusConstr checkStatusConstr = new CheckStatusConstr(Integer.parseInt(funcObject.getString("id_crianca")), funcObject.getString("nome"), funcObject.getString("sobrenome"),funcObject.getString("hora_entrada"), funcObject.getString("hora_escola"), funcObject.getString("hora_saida"),funcObject.getString("hora_casa"));
-
-                                checkList.add(checkStatusConstr);
-                                listaQuery.add(checkStatusConstr);
-                            }
-                            ListViewCheck adapter = new ListViewCheck(checkList, getApplicationContext());
-                            listView.setAdapter(adapter);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        progressDialog.dismiss();
-                        Toast.makeText(CheckListMonitora.this, volleyError.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("id", String.valueOf(idVan));
-                return params;
-            }
-        };
-        requestQueue.getCache().clear();
-        requestQueue.add(stringRequest);
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText){
-        listaQuery.clear();
-        if (TextUtils.isEmpty(newText)) {
-            listaQuery.addAll(checkList);
-        } else {
-            String queryText = newText.toLowerCase();
-            for(CheckStatusConstr obj : checkList){
-                if(obj.getNomeCheck().toLowerCase().contains(queryText) ||
-                        obj.getSobrenomeCheck().toLowerCase().contains(queryText)){
-                    listaQuery.add(obj);
-                }
-            }
-        }
-        listView.setAdapter(new ListViewCheck(listaQuery, CheckListMonitora.this));
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query){
-        return false;
-    }
-
-    public void MarcarCheck(View view) {
-        listView.invalidateViews();
     }
 }
