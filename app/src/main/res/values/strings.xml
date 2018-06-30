@@ -319,5 +319,6 @@
     <string name="selecioneUmMes">Selecione um mês</string>
     <string name="relatorio">Relatório de presença</string>
     <string name="status">Status</string>
+    <string name="recarregar">Recarregar</string>
 
 </resources>
