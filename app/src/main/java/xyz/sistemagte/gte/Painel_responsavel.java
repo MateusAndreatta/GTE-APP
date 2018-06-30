@@ -92,4 +92,7 @@ public class Painel_responsavel extends AppCompatActivity {
         Tela.putExtra("tipo","resp");
         startActivity(Tela);
     }
+
+    public void irRelatorio(View view) {
+    }
 }

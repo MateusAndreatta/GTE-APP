@@ -317,4 +317,7 @@
     <string name="graficoMensal">Gráfico Mensal</string>
     <string name="graficoAnual">Gráfico Anual (Ano atual)</string>
     <string name="selecioneUmMes">Selecione um mês</string>
+    <string name="relatorio">Relatório de presença</string>
+    <string name="status">Status</string>
+
 </resources>
