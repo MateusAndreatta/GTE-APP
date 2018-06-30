@@ -33,7 +33,7 @@ public class ListViewRelatorio extends ArrayAdapter<RelatorioRespConstr> {
 
         LayoutInflater inflater = LayoutInflater.from(mCtx);
 
-        View listViewItem = inflater.inflate(R.layout.list_view_resp, null, true);
+        View listViewItem = inflater.inflate(R.layout.list_view_presenca, null, true);
 
         TextView txtNome = listViewItem.findViewById(R.id.txtNomeCrianca);
         TextView txtCpf = listViewItem.findViewById(R.id.Status);

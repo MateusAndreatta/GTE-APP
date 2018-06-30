@@ -94,5 +94,7 @@ public class Painel_responsavel extends AppCompatActivity {
     }
 
     public void irRelatorio(View view) {
+        Intent tela = new Intent(this,RelatorioPresenca.class);
+        startActivity(tela);
     }
 }
