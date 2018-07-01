@@ -79,6 +79,9 @@ public class RelatorioPresenca extends AppCompatActivity implements SearchView.O
         if(mes.length() == 1){
             mes = "0"+mes;
         }
+        if(dia.length() == 1){
+            dia = "0"+dia;
+        }
         this.dataAtual = dia + "/" + mes + "/" + ano;
 
         requestQueue = Volley.newRequestQueue(this);
@@ -99,28 +102,28 @@ public class RelatorioPresenca extends AppCompatActivity implements SearchView.O
 
                 if(relatorio.getHora_entrada() != "null"){
                     if(ValidaDatas(FormataData(relatorio.getHora_entrada()))){
-                        HoraEntrada = relatorio.getHora_entrada();
+                        HoraEntrada = getResources().getString(R.string.hj) + " " + relatorio.getHora_entrada().substring(11,16);
                     }
                 }
                 if(relatorio.getHora_escola() != "null"){
                     if(ValidaDatas(FormataData(relatorio.getHora_escola()))){
-                        HoraEscola = relatorio.getHora_escola();
+                        HoraEscola = getResources().getString(R.string.hj) + " " + relatorio.getHora_escola().substring(11,16);
                     }
                 }
                 if(relatorio.getHora_saida() != "null"){
                     if(ValidaDatas(FormataData(relatorio.getHora_saida()))){
-                        HoraSaida = relatorio.getHora_escola();
+                        HoraSaida = getResources().getString(R.string.hj) + " " + relatorio.getHora_escola().substring(11,16);
                     }
                 }
                 if(relatorio.getHora_casa() != "null"){
                     if(ValidaDatas(FormataData(relatorio.getHora_casa()))){
-                        HoraCasa = relatorio.getHora_casa();
+                        HoraCasa = getResources().getString(R.string.hj) + " " + relatorio.getHora_casa().substring(11,16);
                     }
                 }
-                String finalMsg = "Hora Entrada: " + HoraEntrada
-                        + "\n" + "Hora Escola: " + HoraEscola
-                        + "\n" + "Hora Saída: " + HoraSaida
-                        + "\n" + "Hora Casa: " + HoraCasa;
+                String finalMsg = getResources().getString(R.string.horaEntrada) + " " + HoraEntrada
+                        + "\n" +  getResources().getString(R.string.horaEscola) + " " + HoraEscola
+                        + "\n" +  getResources().getString(R.string.horaSaida) + " " + HoraSaida
+                        + "\n" +  getResources().getString(R.string.horaCasa) + " " + HoraCasa;
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RelatorioPresenca.this);
                 builder.setTitle(getResources().getString(R.string.horarios));

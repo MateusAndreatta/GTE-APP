@@ -41,6 +41,9 @@ public class ListViewRelatorio extends ArrayAdapter<RelatorioRespConstr> {
         if(mes.length() == 1){
             mes = "0"+mes;
         }
+        if(dia.length() == 1){
+            dia = "0"+dia;
+        }
         this.dataAtual = dia + "/" + mes + "/" + ano;
     }
 
@@ -106,6 +109,8 @@ public class ListViewRelatorio extends ArrayAdapter<RelatorioRespConstr> {
     }
 
     private boolean ValidaDatas(String data){
+        System.out.println("RECEBENDO - " + data);
+        System.out.println("Data hoje - " +dataAtual);
         if(data.equals(dataAtual)){
             System.out.println(data + " - " + dataAtual);
             return true;
