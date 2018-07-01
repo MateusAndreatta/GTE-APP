@@ -441,11 +441,11 @@ public class EditarFunc extends AppCompatActivity {
                            num_motorista            .setText(funcObject.getString("num"));
                            complemento_motorista    .setText(funcObject.getString("complemento"));
                            cnh_motorista            .setText(funcObject.getString("cnh"));
-                           tel_residencial_motorista.setText(funcObject.getString("tel_residencial"));
+                           tel_residencial_motorista.setText(funcObject.getString("telR"));
                            salario_motorista        .setText(funcObject.getString("salario"));
                            Nome                     .setText(funcObject.getString("nome"));
                            Sobrenome                .setText(funcObject.getString("sobrenome"));
-                           Telefone                 .setText(funcObject.getString("tel_cel"));
+                           Telefone                 .setText(funcObject.getString("tel"));
                            Email                    .setText(funcObject.getString("email"));
                            Cpf                      .setText(funcObject.getString("cpf"));
                            Rg                       .setText(funcObject.getString("rg"));
@@ -484,13 +484,13 @@ public class EditarFunc extends AppCompatActivity {
                             rua_monitora           .setText(funcObject.getString("rua"));
                             num_monitora           .setText(funcObject.getString("num"));
                             complemento_monitora   .setText(funcObject.getString("complemento"));
-                            tel_residencia_monitora.setText(funcObject.getString("tel_residencial"));
+                            tel_residencia_monitora.setText(funcObject.getString("telR"));
                             hora_entrada_monitora  .setText(funcObject.getString("hora_entrada"));
                             hora_saida_monitora    .setText(funcObject.getString("hora_saida"));
                             salario_monitora       .setText(funcObject.getString("salario"));
                             Nome                     .setText(funcObject.getString("nome"));
                             Sobrenome                .setText(funcObject.getString("sobrenome"));
-                            Telefone                 .setText(funcObject.getString("tel_cel"));
+                            Telefone                 .setText(funcObject.getString("tel"));
                             Email                    .setText(funcObject.getString("email"));
                             Cpf                      .setText(funcObject.getString("cpf"));
                             Rg                       .setText(funcObject.getString("rg"));
@@ -588,7 +588,7 @@ public class EditarFunc extends AppCompatActivity {
                     params.put("rua", rua_motorista.getText().toString());
                     params.put("numero", num_motorista.getText().toString());
                     params.put("complemento", complemento_motorista.getText().toString());
-                    params.put("cng", cnh_motorista.getText().toString());
+                    params.put("cnh", cnh_motorista.getText().toString());
                     params.put("validadeCNH", validade_cnh_motorista.getText().toString());
                     params.put("dtHab", data_hablitacao_motorista.getText().toString());
                     params.put("categoria", catHolder);
