@@ -2,12 +2,15 @@ package xyz.sistemagte.gte;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -23,7 +26,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +55,8 @@ public class RelatorioPresenca extends AppCompatActivity implements SearchView.O
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
 
+    private String dataAtual;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +72,93 @@ public class RelatorioPresenca extends AppCompatActivity implements SearchView.O
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.relatorio));     //Titulo para ser exibido na sua Action Bar em frente à seta
 
+        GregorianCalendar calendar = new GregorianCalendar();
+        String dia = String.valueOf(calendar.get(GregorianCalendar.DAY_OF_MONTH));
+        String mes = String.valueOf(calendar.get(GregorianCalendar.MONTH) + 1);
+        String ano = String.valueOf(calendar.get(GregorianCalendar.YEAR));
+        if(mes.length() == 1){
+            mes = "0"+mes;
+        }
+        this.dataAtual = dia + "/" + mes + "/" + ano;
 
         requestQueue = Volley.newRequestQueue(this);
 
         progressDialog = new ProgressDialog(RelatorioPresenca.this);
 
         loadCriancas();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                RelatorioRespConstr relatorio = listaQuery.get(position);
+                String HoraEntrada = getResources().getString(R.string.StatusNaoDefinido);
+                String HoraCasa = getResources().getString(R.string.StatusNaoDefinido);
+                String HoraEscola = getResources().getString(R.string.StatusNaoDefinido);
+                String HoraSaida = getResources().getString(R.string.StatusNaoDefinido);
+
+                if(relatorio.getHora_entrada() != "null"){
+                    if(ValidaDatas(FormataData(relatorio.getHora_entrada()))){
+                        HoraEntrada = relatorio.getHora_entrada();
+                    }
+                }
+                if(relatorio.getHora_escola() != "null"){
+                    if(ValidaDatas(FormataData(relatorio.getHora_escola()))){
+                        HoraEscola = relatorio.getHora_escola();
+                    }
+                }
+                if(relatorio.getHora_saida() != "null"){
+                    if(ValidaDatas(FormataData(relatorio.getHora_saida()))){
+                        HoraSaida = relatorio.getHora_escola();
+                    }
+                }
+                if(relatorio.getHora_casa() != "null"){
+                    if(ValidaDatas(FormataData(relatorio.getHora_casa()))){
+                        HoraCasa = relatorio.getHora_casa();
+                    }
+                }
+                String finalMsg = "Hora Entrada: " + HoraEntrada
+                        + "\n" + "Hora Escola: " + HoraEscola
+                        + "\n" + "Hora Saída: " + HoraSaida
+                        + "\n" + "Hora Casa: " + HoraCasa;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(RelatorioPresenca.this);
+                builder.setTitle(getResources().getString(R.string.horarios));
+                builder.setMessage(finalMsg);
+                builder.setPositiveButton(getResources().getString(R.string.fechar), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        alerta.hide();
+                    }
+                });
+
+                //cria o AlertDialog
+                alerta = builder.create();
+                //Exibe
+                alerta.show();
+
+            }
+        });
+
         setupSearchView();
+    }
+
+    private String FormataData(String dt){
+        String dia2= dt;
+        SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition position2 = new ParsePosition(0);
+        Date data2 = format2.parse(dia2,position2);
+        format2 = new SimpleDateFormat("dd/MM/yyyy");
+        String date2 = format2.format(data2);
+        return date2;
+    }
+
+    private boolean ValidaDatas(String data){
+        if(data.equals(dataAtual)){
+            System.out.println(data + " - " + dataAtual);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private void setupSearchView() {

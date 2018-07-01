@@ -325,5 +325,7 @@
     <string name="StatusNaEscola">Na Escola</string>
     <string name="StatusRetornandoCasa">Retornando para casa</string>
     <string name="StatusEmCasa">Chegou em casa</string>
+    <string name="fechar">fechar</string>
+    <string name="horarios">Horarios</string>
 
 </resources>
