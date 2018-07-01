@@ -213,10 +213,10 @@
     <string name="validadeCnh">Validade da CNH</string>
     <string name="data_habilitacao">Data da 1ª habilitação</string>
     <string name="complemento">Complemento</string>
-    <string name="horaEntrada">Hora de </string>
-    <string name="horaSaida">Hora da Saída</string>
-    <string name="horaEscola">Hora Escola</string>
-    <string name="horaCasa">Hora Escola</string>
+    <string name="horaEntrada">Entrou na van</string>
+    <string name="horaSaida">Saiu da escola</string>
+    <string name="horaEscola">Chegou a escola</string>
+    <string name="horaCasa">Chegou em casa</string>
 
 
     <string-array name="estados">
