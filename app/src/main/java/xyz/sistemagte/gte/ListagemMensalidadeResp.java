@@ -86,16 +86,21 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 MensalidadeConst mensalidadeConst = listaQuery.get(position);
                 idmensalidade = mensalidadeConst.getMensalidadeID();
-
+                final int status = Integer.parseInt(mensalidadeConst.getStatus());
                 //Alert de confirmação do excluir
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListagemMensalidadeResp.this);
                 builder.setTitle(getResources().getString(R.string.opcoesDialog));
                 builder.setMessage(getResources().getString(R.string.textoDialog));
                 builder.setPositiveButton(getResources().getString(R.string.GerarBoleto), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                        WebView webView = findViewById(R.id.wb);
-                        webView.loadUrl("https://sistemagte.xyz/boleto/boleto_itau.php?id="+idmensalidade);
-                        MostrarModal();
+                        if(status == 1){
+                            Toast.makeText(ListagemMensalidadeResp.this, R.string.mensalidadeJaPaga, Toast.LENGTH_SHORT).show();
+                        }else{
+                            WebView webView = findViewById(R.id.wb);
+                            webView.loadUrl("https://sistemagte.xyz/boleto/boleto_itau.php?id="+idmensalidade);
+                            MostrarModal();
+                        }
+
                     }
                 });
 

@@ -330,5 +330,6 @@
     <string name="fechar">fechar</string>
     <string name="horarios">Horários</string>
     <string name="hj">hoje às: </string>
+    <string name="mensalidadeJaPaga">Está mensalidade já foi paga!</string>
 
 </resources>
