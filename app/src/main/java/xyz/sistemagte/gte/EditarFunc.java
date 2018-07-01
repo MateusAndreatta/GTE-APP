@@ -582,6 +582,7 @@ public class EditarFunc extends AppCompatActivity {
                     params.put("rg", Rg.getText().toString());
                     params.put("cpf", Cpf.getText().toString());
                     params.put("nascimento", DataNasc.getText().toString());
+                    params.put("id", perfil);
 
                     params.put("cep", cep_motorista.getText().toString());
                     params.put("cidade", cidade_motorista.getText().toString());
@@ -665,6 +666,7 @@ public class EditarFunc extends AppCompatActivity {
                 params.put("rg", Rg.getText().toString());
                 params.put("cpf", Cpf.getText().toString());
                 params.put("nascimento", DataNasc.getText().toString());
+                params.put("id", perfil);
 
                 params.put("cep", cep_monitora.getText().toString());
                 params.put("cidade", cidade_monitora.getText().toString());
