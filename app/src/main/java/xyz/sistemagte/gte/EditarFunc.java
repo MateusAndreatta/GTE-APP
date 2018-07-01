@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 
 public class EditarFunc extends AppCompatActivity {
     //generico
@@ -39,14 +42,18 @@ public class EditarFunc extends AppCompatActivity {
     //motorista
     EditText cep_motorista,cidade_motorista,rua_motorista,num_motorista,complemento_motorista,cnh_motorista,validade_cnh_motorista,data_hablitacao_motorista,tel_residencial_motorista,salario_motorista;
     Spinner estado_motorista,sexo_motorista,categoria_motorista;
-
+    String EstadoHolder;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
-    String perfil;
+    String perfil,catHolder;
 
-    private int idUsuario;
+    private static String URL_MONITORA = "https://sistemagte.xyz/android/editar/editarMonitora";
+    private static String URL_MOTORISTA = "https://sistemagte.xyz/android/editar/editarMotorista";
+    private int idUsuario,idEmpresa;
     AlertDialog alerta;
+    boolean vMotorista = false, vMonitora = false;
 
+    LinearLayout telaGen,telaMotorista,telaMonitora;
     private static String JSON_URL = "https://sistemagte.xyz/json/listagem.php";
 
     @Override
@@ -54,13 +61,18 @@ public class EditarFunc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_func);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        GlobalUser global =(GlobalUser)getApplication();
+        idEmpresa = global.getGlobalUserIdEmpresa();
 
         Intent i = getIntent();
         perfil = i.getStringExtra("id");
         System.out.println("ENVIANDO: " +perfil);
         requestQueue = Volley.newRequestQueue(this);
-
         progressDialog = new ProgressDialog(EditarFunc.this);
+
+        telaGen = findViewById(R.id.telaGenerico);
+        telaMonitora = findViewById(R.id.telaMonitora);
+        telaMotorista = findViewById(R.id.telaMotorista);
 
         //Campos Genericos
         Nome             = findViewById(R.id.cad_nome);
@@ -380,8 +392,7 @@ public class EditarFunc extends AppCompatActivity {
                 }
             }
         });
-            PuxarDados();
-
+        PuxarDados();
     }
 
     private void PuxarDados(){
@@ -395,13 +406,13 @@ public class EditarFunc extends AppCompatActivity {
                         System.out.println(response);
                         // Hiding the progress dialog after all task complete.
                         progressDialog.dismiss();
-                        System.out.println(response);
+                        System.out.println("RECEBIDO: " + response);
                         try {
                             JSONObject obj = new JSONObject(response);
 
                             JSONArray funcArray = obj.getJSONArray("motorista");
                             JSONObject funcObject = funcArray.getJSONObject(0);
-
+                            vMotorista = true;
 
                             String dia = funcObject.getString("dt_nasc");
                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -450,7 +461,7 @@ public class EditarFunc extends AppCompatActivity {
 
                             JSONArray funcArray = obj.getJSONArray("monitora");
                             JSONObject funcObject = funcArray.getJSONObject(0);
-
+                            vMonitora = true;
 
                             String dia = funcObject.getString("dt_nasc");
                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -520,14 +531,358 @@ public class EditarFunc extends AppCompatActivity {
         requestQueue.getCache().clear();
         requestQueue.add(stringRequest);
     }
+
     public void TrocarTela(View view) {
-        //TODO: Pegar por Intent o tipo do usuario para trocar o layout
+        if(vMotorista){
+            telaGen.setVisibility(View.GONE);
+            telaMotorista.setVisibility(View.VISIBLE);
+        }
+        if(vMonitora){
+            telaGen.setVisibility(View.GONE);
+            telaMonitora.setVisibility(View.VISIBLE);
+        }
     }
 
     public void editar_motorista(View view) {
+        if(PegarCategoria()){
+            PegarEstadoMotorista();
+            progressDialog.setMessage(getResources().getString(R.string.loadingDados));
+            progressDialog.show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_MOTORISTA,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String ServerResponse) {
+                            System.out.println(ServerResponse);
+                            progressDialog.dismiss();
 
+                            if(ServerResponse.trim().equals("EmailCadastrado")){
+                                Toast.makeText(EditarFunc.this, R.string.emailCadastrado, Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(EditarFunc.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+                                Intent tela = new Intent(EditarFunc.this, Funcionario_adm.class);
+                                startActivity(tela);
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            progressDialog.dismiss();
+                            Toast.makeText(EditarFunc.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+
+                    Map<String, String> params = new HashMap<>();
+                    params.put("nome", Nome.getText().toString());
+                    params.put("sobrenome", Sobrenome.getText().toString());
+                    params.put("email", Email.getText().toString());
+                    params.put("telefone", Telefone.getText().toString());
+                    params.put("rg", Rg.getText().toString());
+                    params.put("cpf", Cpf.getText().toString());
+                    params.put("nascimento", DataNasc.getText().toString());
+
+                    params.put("cep", cep_motorista.getText().toString());
+                    params.put("cidade", cidade_motorista.getText().toString());
+                    params.put("rua", rua_motorista.getText().toString());
+                    params.put("numero", num_motorista.getText().toString());
+                    params.put("complemento", complemento_motorista.getText().toString());
+                    params.put("cng", cnh_motorista.getText().toString());
+                    params.put("validadeCNH", validade_cnh_motorista.getText().toString());
+                    params.put("dtHab", data_hablitacao_motorista.getText().toString());
+                    params.put("categoria", catHolder);
+                    params.put("sexo", sexo_motorista.getSelectedItem().toString().toLowerCase());
+                    params.put("estado",EstadoHolder);
+                    params.put("telR", tel_residencial_motorista.getText().toString());
+                    params.put("salario", salario_motorista.getText().toString());
+                    params.put("idE", String.valueOf(idEmpresa));
+
+                    return params;
+                }
+
+            };
+
+            requestQueue.getCache().clear();
+            requestQueue.add(stringRequest);
+        }
+
+    }
+
+    public boolean PegarCategoria(){
+        if(categoria_motorista.getSelectedItemPosition() == 0){
+            Toast.makeText(this, R.string.verificarCNH, Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            if(categoria_motorista.getSelectedItemPosition() == 1){
+                catHolder = "cat_d";
+                return true;
+            }else{
+                catHolder = "cat_e";
+                return true;
+            }
+        }
     }
 
     public void EditarMonitora(View view) {
+        PegarEstadoMonitora();
+        progressDialog.setMessage(getResources().getString(R.string.loadingDados));
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_MONITORA,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        System.out.println(ServerResponse);
+                        // Hiding the progress dialog after all task complete.
+                        progressDialog.dismiss();
+
+                        if(ServerResponse.trim().equals("EmailCadastrado")){
+                            Toast.makeText(EditarFunc.this, R.string.emailCadastrado, Toast.LENGTH_SHORT).show();
+                        }else{
+                            // Showing response message coming from server.
+                            Toast.makeText(EditarFunc.this, getResources().getString(R.string.informacoesSalvasSucesso), Toast.LENGTH_SHORT).show();
+                            Intent tela = new Intent(EditarFunc.this, Funcionario_adm.class);
+                            startActivity(tela);
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(EditarFunc.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("nome", Nome.getText().toString());
+                params.put("sobrenome", Sobrenome.getText().toString());
+                params.put("email", Email.getText().toString());
+                params.put("telefone", Telefone.getText().toString());
+                params.put("rg", Rg.getText().toString());
+                params.put("cpf", Cpf.getText().toString());
+                params.put("nascimento", DataNasc.getText().toString());
+
+                params.put("cep", cep_monitora.getText().toString());
+                params.put("cidade", cidade_monitora.getText().toString());
+                params.put("rua", rua_monitora.getText().toString());
+                params.put("numero", num_monitora.getText().toString());
+                params.put("complemento", complemento_monitora.getText().toString());
+                params.put("horaE", hora_entrada_monitora.getText().toString());
+                params.put("horaS", hora_saida_monitora.getText().toString());
+                params.put("dataA", data_admissao_monitora.getText().toString());
+                params.put("sexo", sexo_monitora.getSelectedItem().toString().toLowerCase());
+                params.put("estado",EstadoHolder);
+                params.put("telR", tel_residencia_monitora.getText().toString());
+                params.put("salario", salario_monitora.getText().toString());
+                params.put("idE", String.valueOf(idEmpresa));
+
+                return params;
+            }
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
     }
+
+    private void PegarEstadoMonitora(){
+        EstadoHolder = estado_monitora.getSelectedItem().toString();
+
+        switch (estado_monitora.getSelectedItem().toString()) {//pega o nome do item ali em cima
+            case "Acre":
+                EstadoHolder = "AC";
+                break;
+            case "Alagoas":
+                EstadoHolder = "AL";
+                break;
+            case "Amapá":
+                EstadoHolder = "AP";
+                break;
+            case "Amazonas":
+                EstadoHolder = "AM";
+                break;
+            case "Bahia":
+                EstadoHolder = "BA";
+                break;
+            case "Ceará":
+                EstadoHolder = "CE";
+                break;
+            case "Distrito Federal":
+                EstadoHolder = "DF";
+                break;
+            case "Espírito Santo":
+                EstadoHolder = "ES";
+                break;
+            case "Goiás":
+                EstadoHolder = "GO";
+                break;
+            case "Maranhão":
+                EstadoHolder = "MA";
+                break;
+            case "Mato Grosso":
+                EstadoHolder = "MT";
+                break;
+            case "Mato Grosso do Sul":
+                EstadoHolder = "MS";
+                break;
+            case "Minas Gerais":
+                EstadoHolder = "MG";
+                break;
+            case "Pará":
+                EstadoHolder = "PA";
+                break;
+            case "Paraiba":
+                EstadoHolder = "PB";
+                break;
+            case "Paraná":
+                EstadoHolder = "PR";
+                break;
+            case "Pernambuco":
+                EstadoHolder = "PE";
+                break;
+            case "Piauí":
+                EstadoHolder = "PI";
+                break;
+            case "Rio de Janeiro":
+                EstadoHolder = "RJ";
+                break;
+            case "Rio Grande do Norte":
+                EstadoHolder = "RN";
+                break;
+            case "Rio Grande do Sul":
+                EstadoHolder = "RS";
+                break;
+            case "Rondônia":
+                EstadoHolder = "RO";
+                break;
+            case "Roraima":
+                EstadoHolder = "RR";
+                break;
+            case "Santa Catarina":
+                EstadoHolder = "SC";
+                break;
+            case "São Paulo":
+                EstadoHolder = "SP";
+                break;
+            case "Sergipe":
+                EstadoHolder = "SE";
+                break;
+            case "Tocantinss":
+                EstadoHolder = "TO";
+                break;
+        }
+    }
+
+    private void PegarEstadoMotorista(){
+        EstadoHolder = estado_motorista.getSelectedItem().toString();
+
+        switch (estado_motorista.getSelectedItem().toString()) {//pega o nome do item ali em cima
+            case "Acre":
+                EstadoHolder = "AC";
+                break;
+            case "Alagoas":
+                EstadoHolder = "AL";
+                break;
+            case "Amapá":
+                EstadoHolder = "AP";
+                break;
+            case "Amazonas":
+                EstadoHolder = "AM";
+                break;
+            case "Bahia":
+                EstadoHolder = "BA";
+                break;
+            case "Ceará":
+                EstadoHolder = "CE";
+                break;
+            case "Distrito Federal":
+                EstadoHolder = "DF";
+                break;
+            case "Espírito Santo":
+                EstadoHolder = "ES";
+                break;
+            case "Goiás":
+                EstadoHolder = "GO";
+                break;
+            case "Maranhão":
+                EstadoHolder = "MA";
+                break;
+            case "Mato Grosso":
+                EstadoHolder = "MT";
+                break;
+            case "Mato Grosso do Sul":
+                EstadoHolder = "MS";
+                break;
+            case "Minas Gerais":
+                EstadoHolder = "MG";
+                break;
+            case "Pará":
+                EstadoHolder = "PA";
+                break;
+            case "Paraiba":
+                EstadoHolder = "PB";
+                break;
+            case "Paraná":
+                EstadoHolder = "PR";
+                break;
+            case "Pernambuco":
+                EstadoHolder = "PE";
+                break;
+            case "Piauí":
+                EstadoHolder = "PI";
+                break;
+            case "Rio de Janeiro":
+                EstadoHolder = "RJ";
+                break;
+            case "Rio Grande do Norte":
+                EstadoHolder = "RN";
+                break;
+            case "Rio Grande do Sul":
+                EstadoHolder = "RS";
+                break;
+            case "Rondônia":
+                EstadoHolder = "RO";
+                break;
+            case "Roraima":
+                EstadoHolder = "RR";
+                break;
+            case "Santa Catarina":
+                EstadoHolder = "SC";
+                break;
+            case "São Paulo":
+                EstadoHolder = "SP";
+                break;
+            case "Sergipe":
+                EstadoHolder = "SE";
+                break;
+            case "Tocantinss":
+                EstadoHolder = "TO";
+                break;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+                startActivity(new Intent(this, Funcionario_adm.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+    //O botao padrao do android
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(this, Funcionario_adm.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        return;
+    }
+
 }

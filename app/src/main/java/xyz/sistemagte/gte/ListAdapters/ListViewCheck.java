@@ -37,7 +37,7 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
     //String idWebService;
 
     DefinicoesPresenca volley;
-    //TODO: Pesquisar https://pt.stackoverflow.com/questions/83510/como-inflar-um-bot%C3%A3o-dentro-de-um-item-de-listview
+    // Pesquisar https://pt.stackoverflow.com/questions/83510/como-inflar-um-bot%C3%A3o-dentro-de-um-item-de-listview
     /**
      * Sua classe é o construtor
      * */
@@ -76,7 +76,6 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
 
         if(check.getHoraCasaCheck() != "null"){
             if(ValidaDatas(FormataData(check.getHoraCasaCheck()))){
-                //TODO: Desativar BTN
                 btn.setEnabled(false);
                 //btn.setText(R.string.monitoraCheckChegouCasa);
             }
@@ -101,7 +100,6 @@ public class ListViewCheck extends ArrayAdapter<CheckStatusConstr> {
                 String btnText = String.valueOf(btn.getText());
 
                 if(btnText.equals(mCtx.getString(R.string.monitoraCheckChegouCasa))){
-                    //TODO: Desativar btn
                     volley.ChegouCasa(String.valueOf(id.getText()),mCtx);
                 }else{
                     if(btnText.equals(mCtx.getString(R.string.monitoraCheckSaiuEscola))){

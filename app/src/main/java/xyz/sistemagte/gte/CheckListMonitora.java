@@ -89,12 +89,12 @@ public class CheckListMonitora extends AppCompatActivity{
 
     }
 
-   // @Override
-   // public boolean dispatchTouchEvent(MotionEvent ev) {
-   //     // Your code here
-   //     webViewChecklist.reload();
-   //     return super.dispatchTouchEvent(ev);
-   // }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        // Your code here
+        webViewChecklist.reload();
+        return super.dispatchTouchEvent(ev);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

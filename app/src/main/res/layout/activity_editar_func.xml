@@ -101,7 +101,7 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/salvar"
+                        android:text="@string/proximo"
                         android:textColor="@color/branco"
                         android:id="@+id/cadastro"
                         android:onClick="TrocarTela"

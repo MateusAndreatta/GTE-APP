@@ -1,5 +1,4 @@
 <resources>
-    <!-- TODO: traduzir as strings-->
     <string name="facebook_app_id" translatable="false">994366434064633</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb994366434064633</string>
 
@@ -321,5 +320,10 @@
     <string name="status">Status</string>
     <string name="recarregar">Recarregar</string>
     <string name="att">Atualizado</string>
+    <string name="StatusNaoDefinido">Não definido</string>
+    <string name="StatusIndoEscola">Indo para a escola</string>
+    <string name="StatusNaEscola">Na Escola</string>
+    <string name="StatusRetornandoCasa">Retornando para casa</string>
+    <string name="StatusEmCasa">Chegou em casa</string>
 
 </resources>

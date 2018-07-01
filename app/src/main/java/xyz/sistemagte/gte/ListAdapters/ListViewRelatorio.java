@@ -55,29 +55,29 @@ public class ListViewRelatorio extends ArrayAdapter<RelatorioRespConstr> {
         TextView txtCpf = listViewItem.findViewById(R.id.Status);
 
         RelatorioRespConstr respCostr = respList.get(position);
-        txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + "Não definido");
+        txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + mCtx.getString(R.string.StatusNaoDefinido));
         if(respCostr.getHora_entrada() != "null"){
             if(ValidaDatas(FormataData(respCostr.getHora_entrada()))){
                 vEntrouVan = true;
-                txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + "Indo para a escola");
+                txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + mCtx.getString(R.string.StatusIndoEscola));
             }
         }
         if(respCostr.getHora_escola() != "null"){
             if(ValidaDatas(FormataData(respCostr.getHora_escola()))){
                vChegouEscola = true;
-                txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + "Na Escola");
+                txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + mCtx.getString(R.string.StatusNaEscola));
             }
         }
         if(respCostr.getHora_saida() != "null"){
             if(ValidaDatas(FormataData(respCostr.getHora_saida()))){
                 vSaiuEscola = true;
-                txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + "Retornando para casa");
+                txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + mCtx.getString(R.string.StatusRetornandoCasa));
             }
         }
         if(respCostr.getHora_casa() != "null"){
             if(ValidaDatas(FormataData(respCostr.getHora_casa()))){
                 vChegouCasa = true;
-                txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + "Chegou em casa");
+                txtCpf.setText(mCtx.getResources().getString(R.string.status) +": " + mCtx.getString(R.string.StatusEmCasa));
             }
         }
 

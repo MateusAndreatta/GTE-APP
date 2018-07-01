@@ -40,7 +40,6 @@ public class Contato extends AppCompatActivity {
 
     String HttpUrl = "https://sistemagte.xyz/PagProcessamento/RecebeContato.php";
 
-    //TODO: Personalizar o Spinner com a seta e um "escolha o assunto"
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
