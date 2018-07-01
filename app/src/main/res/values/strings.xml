@@ -213,8 +213,10 @@
     <string name="validadeCnh">Validade da CNH</string>
     <string name="data_habilitacao">Data da 1ª habilitação</string>
     <string name="complemento">Complemento</string>
-    <string name="horaEntrada">Hora de Entrada</string>
+    <string name="horaEntrada">Hora de </string>
     <string name="horaSaida">Hora da Saída</string>
+    <string name="horaEscola">Hora Escola</string>
+    <string name="horaCasa">Hora Escola</string>
 
 
     <string-array name="estados">
