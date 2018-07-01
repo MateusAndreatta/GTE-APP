@@ -327,6 +327,6 @@
     <string name="StatusEmCasa">Chegou em casa</string>
     <string name="fechar">fechar</string>
     <string name="horarios">Horários</string>
-    <string name="hj">Hoje às: </string>
+    <string name="hj">hoje às: </string>
 
 </resources>
