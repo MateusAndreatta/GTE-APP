@@ -331,5 +331,9 @@
     <string name="horarios">Horários</string>
     <string name="hj">hoje às: </string>
     <string name="mensalidadeJaPaga">Está mensalidade já foi paga!</string>
+    <string name="dtEmitida">Data emitida:</string>
+    <string name="dtVencimento">Data de vencimento:</string>
+    <string name="valorde">Valor:</string>
+    <string name="informacoes">Informações</string>
 
 </resources>

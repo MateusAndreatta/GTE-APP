@@ -31,7 +31,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +61,7 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     Boolean VerificModal = false;
+    String txtMensagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +91,14 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
                 MensalidadeConst mensalidadeConst = listaQuery.get(position);
                 idmensalidade = mensalidadeConst.getMensalidadeID();
                 final int status = Integer.parseInt(mensalidadeConst.getStatus());
-                //Alert de confirmação do excluir
+
+                String txtMensagem = getResources().getString(R.string.dtEmitida) + " " + FormataData(mensalidadeConst.getDataEmitida())
+                        + "\n" +  getString(R.string.dtVencimento) + " " + FormataData(mensalidadeConst.getDataVencimento())
+                        + "\n" +  getString(R.string.valorde) + " " + mensalidadeConst.getValor();
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListagemMensalidadeResp.this);
-                builder.setTitle(getResources().getString(R.string.opcoesDialog));
-                builder.setMessage(getResources().getString(R.string.textoDialog));
+                builder.setTitle(getResources().getString(R.string.informacoes));
+                builder.setMessage(txtMensagem);
                 builder.setPositiveButton(getResources().getString(R.string.GerarBoleto), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
                         if(status == 1){
@@ -113,6 +121,16 @@ public class ListagemMensalidadeResp extends AppCompatActivity implements Search
 
         listView.setTextFilterEnabled(true);
         setupSearchView();
+    }
+
+    private String FormataData(String dt){
+        String dia2= dt;
+        SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+        ParsePosition position2 = new ParsePosition(0);
+        Date data2 = format2.parse(dia2,position2);
+        format2 = new SimpleDateFormat("dd/MM/yyyy");
+        String date2 = format2.format(data2);
+        return date2;
     }
 
     private void setupSearchView() {
