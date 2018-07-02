@@ -319,7 +319,7 @@
     <string name="graficoAnual">Gráfico Anual (Ano atual)</string>
     <string name="selecioneUmMes">Selecione um mês</string>
     <string name="relatorio">Relatório de presença</string>
-    <string name="status">Status</string>
+    <string name="status" translatable="false">Status</string>
     <string name="recarregar">Recarregar</string>
     <string name="att">Atualizado</string>
     <string name="StatusNaoDefinido">Não definido</string>
