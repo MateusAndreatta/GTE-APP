@@ -30,8 +30,29 @@
                 android:text="@string/cadastro_van"
                 android:textSize="40sp" />
 
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="@string/motorista"
+            android:textSize="20sp" />
+
             <Spinner
                 android:id="@+id/morotistaSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_style"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/monitora"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/monitoraSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_style"

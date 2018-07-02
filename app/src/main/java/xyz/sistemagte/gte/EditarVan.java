@@ -33,6 +33,7 @@ import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
+import xyz.sistemagte.gte.Construtoras.MonitoraConstr;
 import xyz.sistemagte.gte.Construtoras.MotoristaConstr;
 
 public class EditarVan extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class EditarVan extends AppCompatActivity {
     EditText capacidade, modelo, placa,ano,marca;
     private int idVan;
     private int idVanJson;
-    Spinner spinner;
+    Spinner spinner,spinnerMonitora;
 
     RequestQueue requestQueue,requestQueue2;
     ProgressDialog progressDialog;
@@ -48,12 +49,13 @@ public class EditarVan extends AppCompatActivity {
     private static String JsonVan = "https://sistemagte.xyz/json/motorista/ListarDadosVan.php";
     private static String UrlSpinner = "https://sistemagte.xyz/json/adm/ListarMotoristaEmp.php";
     private static String URLUpdate = "https://sistemagte.xyz/android/editar/editarVan.php";
-
+    String UrlSpinner2 = "https://sistemagte.xyz/json/adm/ListarMonitoraEmp.php";
     Integer idEmpresa,idUsuario;
 
     ArrayAdapter<String> MotoristaListSpinner;
     ArrayList<MotoristaConstr> MotoristaConstrList;
-
+    ArrayAdapter<String> MonitoraListSpinner;
+    ArrayList<MonitoraConstr> MonitoraConstrList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +64,7 @@ public class EditarVan extends AppCompatActivity {
         GlobalUser global =(GlobalUser)getApplication();
         idUsuario = global.getGlobalUserID();
         idEmpresa = global.getGlobalUserIdEmpresa();
-
+        spinnerMonitora = findViewById(R.id.monitoraSpinner);
 
         spinner = findViewById(R.id.morotistaSpinner);
         progressDialog = new ProgressDialog(EditarVan.this);
@@ -70,6 +72,9 @@ public class EditarVan extends AppCompatActivity {
 
         MotoristaConstrList = new ArrayList<>();
         MotoristaListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
+
+        MonitoraConstrList = new ArrayList<>();
+        MonitoraListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
 
         requestQueue = Volley.newRequestQueue(this);
         requestQueue2 = Volley.newRequestQueue(this);
@@ -98,6 +103,7 @@ public class EditarVan extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.EditarVan));
         LoadMotoristas();
+        LoadMonitoras();
         PuxarDadosVans();
     }
 
@@ -123,6 +129,51 @@ public class EditarVan extends AppCompatActivity {
         return;
     }
 
+    private void LoadMonitoras() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlSpinner2,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(ServerResponse);
+                            JSONArray jsonArray = jsonObject.getJSONArray("nome");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                String monitora = jsonObject1.getString("nome") + " " + jsonObject1.getString("sobrenome");
+                                MonitoraListSpinner.add(monitora);
+                                MonitoraConstr moni = new MonitoraConstr(jsonObject1.getString("nome"),jsonObject1.getString("sobrenome"),Integer.parseInt(jsonObject1.getString("id_usuario")));
+                                MonitoraConstrList.add(moni);
+                            }
+                            spinnerMonitora.setAdapter(MonitoraListSpinner);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(EditarVan.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<>();
+
+                // Adding All values to Params.
+                params.put("id", String.valueOf(idEmpresa));
+
+                return params;
+            }
+
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
 
     public void editarVan(View view) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLUpdate,
@@ -171,6 +222,7 @@ public class EditarVan extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
+                        System.out.println(ServerResponse);
                         try{
                             JSONObject obj = new JSONObject(ServerResponse);
 

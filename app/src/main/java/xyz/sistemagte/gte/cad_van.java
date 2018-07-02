@@ -31,6 +31,7 @@ import java.util.Map;
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import xyz.sistemagte.gte.Auxiliares.GlobalUser;
 import xyz.sistemagte.gte.Construtoras.EscolasConstr;
+import xyz.sistemagte.gte.Construtoras.MonitoraConstr;
 import xyz.sistemagte.gte.Construtoras.MotoristaConstr;
 import xyz.sistemagte.gte.Construtoras.ResponsavelConstr;
 import xyz.sistemagte.gte.Construtoras.VansConstr;
@@ -38,19 +39,21 @@ import xyz.sistemagte.gte.Construtoras.VansConstr;
 public class cad_van extends AppCompatActivity {
 
     EditText capacidade, modelo, placa,ano,marca;
-    Spinner spinner;
+    Spinner spinner, spinnerMonitora;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
     String HTTP_Cad = "https://sistemagte.xyz/android/cadastros/cadVan.php";
     String UrlSpinner = "https://sistemagte.xyz/json/adm/ListarMotoristaEmp.php";
+    String UrlSpinner2 = "https://sistemagte.xyz/json/adm/ListarMonitoraEmp.php";
 
     Integer idEmpresa,idUsuario;
 
     ArrayAdapter<String> MotoristaListSpinner;
+    ArrayAdapter<String> MonitoraListSpinner;
     ArrayList<MotoristaConstr> MotoristaConstrList;
+    ArrayList<MonitoraConstr> MonitoraConstrList;
 
-    //TODO: COLOCAR UM SELECT PARA A MONITORA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,13 +72,16 @@ public class cad_van extends AppCompatActivity {
 
         //Filtro para que todos os caracteres sejam maiusculos
         placa.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-
+        spinnerMonitora = findViewById(R.id.monitoraSpinner);
         spinner = findViewById(R.id.morotistaSpinner);
         progressDialog = new ProgressDialog(cad_van.this);
         requestQueue = Volley.newRequestQueue(this);
 
         MotoristaConstrList = new ArrayList<>();
         MotoristaListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
+
+        MonitoraConstrList = new ArrayList<>();
+        MonitoraListSpinner = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
 
         MaskEditTextChangedListener mascaraPlaca = new MaskEditTextChangedListener("###-####",placa);
         MaskEditTextChangedListener mascaraCapacidade = new MaskEditTextChangedListener("##",capacidade);
@@ -89,6 +95,7 @@ public class cad_van extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getResources().getString(R.string.cadastro_van));
         LoadMotoristas();
+        LoadMonitoras();
     }
 
     //este é para o da navbar (seta)
@@ -137,7 +144,12 @@ public class cad_van extends AppCompatActivity {
                 int spinnerPos2 = spinner.getSelectedItemPosition();
                 MotoristaConstr motorista = MotoristaConstrList.get(spinnerPos2);
 
+                int spinnerPos3 = spinner.getSelectedItemPosition();
+                MotoristaConstr monitora = MotoristaConstrList.get(spinnerPos3);
+
+
                 params.put("id", String.valueOf(motorista.getId_motorista()));
+                params.put("idM", String.valueOf(monitora.getId_motorista()));
                 params.put("capacidade", capacidade.getText().toString());
                 params.put("modelo", modelo.getText().toString());
                 params.put("placa", placa.getText().toString());
@@ -170,6 +182,49 @@ public class cad_van extends AppCompatActivity {
                                 MotoristaConstrList.add(motoristaConstr);
                             }
                             spinner.setAdapter(MotoristaListSpinner);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(cad_van.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("id", String.valueOf(idEmpresa));
+
+                return params;
+            }
+
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
+    private void LoadMonitoras() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlSpinner2,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(ServerResponse);
+                            JSONArray jsonArray = jsonObject.getJSONArray("nome");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                String monitora = jsonObject1.getString("nome") + " " + jsonObject1.getString("sobrenome");
+                                MonitoraListSpinner.add(monitora);
+                                MonitoraConstr moni = new MonitoraConstr(jsonObject1.getString("nome"),jsonObject1.getString("sobrenome"),Integer.parseInt(jsonObject1.getString("id_usuario")));
+                                MonitoraConstrList.add(moni);
+                            }
+                            spinnerMonitora.setAdapter(MonitoraListSpinner);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
