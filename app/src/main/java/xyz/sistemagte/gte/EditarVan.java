@@ -46,7 +46,7 @@ public class EditarVan extends AppCompatActivity {
     RequestQueue requestQueue,requestQueue2;
     ProgressDialog progressDialog;
 
-    private static String JsonVan = "https://sistemagte.xyz/json/motorista/ListarDadosVan.php";
+    private static String JsonVan = "https://sistemagte.xyz/json/motorista/editarVanDados.php";
     private static String UrlSpinner = "https://sistemagte.xyz/json/adm/ListarMotoristaEmp.php";
     private static String URLUpdate = "https://sistemagte.xyz/android/editar/editarVan.php";
     String UrlSpinner2 = "https://sistemagte.xyz/json/adm/ListarMonitoraEmp.php";
