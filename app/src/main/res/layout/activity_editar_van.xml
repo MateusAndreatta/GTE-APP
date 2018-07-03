@@ -103,7 +103,7 @@
                 android:background="@drawable/input_style"
                 android:ems="10"
                 android:hint="@string/marca"
-                android:inputType="time" />
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/editarVan"
